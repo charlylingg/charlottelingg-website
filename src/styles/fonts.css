@@ -1,0 +1,14 @@
+/*
+ * Schriften lokal über Fontsource (keine Verbindung zu Google).
+ * Nur die benötigten Schnitte, nur latin und latin-ext. font-display: swap ist in Fontsource gesetzt.
+ */
+@import "@fontsource/barlow-condensed/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-ext-600.css";
+@import "@fontsource/barlow-condensed/latin-700.css";
+@import "@fontsource/barlow-condensed/latin-ext-700.css";
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-ext-400.css";
+@import "@fontsource/barlow/latin-500.css";
+@import "@fontsource/barlow/latin-ext-500.css";
+@import "@fontsource/barlow/latin-700.css";
+@import "@fontsource/barlow/latin-ext-700.css";

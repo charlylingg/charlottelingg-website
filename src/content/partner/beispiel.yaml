@@ -1,0 +1,9 @@
+# BEISPIEL – kein echter Partner. Vorlage für Partner-Einträge.
+beispiel: true
+name: "[PARTNER]"
+kategorie: "[KATEGORIE]"
+logo: /partner/beispiel.svg
+url: https://example.com/
+pflicht_logo: false
+pflicht_link: false
+reihenfolge: 999

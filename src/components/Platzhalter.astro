@@ -1,0 +1,48 @@
+---
+/** Temporäre Startseite, bis die echten Sektionen gebaut sind. Gleich für DE und FR. */
+import Torflagge from './Torflagge.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="platzhalter container">
+  <div class="platzhalter__flaggen">
+    <Torflagge farbe="red" />
+    <Torflagge farbe="navy" />
+  </div>
+  <p class="t-kicker platzhalter__kicker">{t(locale, 'home.kicker')}</p>
+  <h1 class="t-mega">{t(locale, 'site.name')}</h1>
+  <p class="t-lead platzhalter__hinweis">{t(locale, 'home.hinweis')}</p>
+</section>
+
+<style>
+  .platzhalter {
+    padding-block: var(--space-4);
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .platzhalter__flaggen {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-2);
+  }
+
+  .platzhalter__kicker {
+    color: var(--color-ink-soft);
+  }
+
+  .platzhalter__hinweis {
+    color: var(--color-ink-soft);
+    max-width: 40ch;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+/**
+ * Torflagge mit der Schräge (skewX) – Erkennungszeichen des Designsystems.
+ * Farbe: navy oder red. Rein dekorativ.
+ */
+interface Props {
+  farbe?: 'navy' | 'red';
+  class?: string;
+}
+
+const { farbe = 'red', class: className } = Astro.props;
+---
+
+<span class:list={['torflagge', `torflagge--${farbe}`, className]} aria-hidden="true"></span>
+
+<style>
+  .torflagge {
+    display: inline-block;
+    width: 48px;
+    height: 72px;
+    transform: skewX(var(--schraege));
+    transform-origin: bottom left;
+  }
+
+  .torflagge--red {
+    background: var(--color-red);
+  }
+
+  .torflagge--navy {
+    background: var(--color-navy);
+  }
+</style>

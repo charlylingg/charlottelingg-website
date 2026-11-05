@@ -1,0 +1,8 @@
+# BEISPIEL – kein echtes Rennen. Vorlage für den Rennkalender.
+beispiel: true
+datum: 2000-01-01
+stufe: FIS
+disziplin: Riesenslalom
+ort: "[ORT]"
+land: "[LAND]"
+status: geplant
