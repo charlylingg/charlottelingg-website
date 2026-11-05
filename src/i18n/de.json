@@ -1,0 +1,23 @@
+{
+  "site.name": "Charlotte Lingg",
+  "site.description": "Charlotte Lingg, Skirennfahrerin aus Liechtenstein – Slalom und Riesenslalom.",
+  "skip.link": "Zum Inhalt springen",
+  "nav.label": "Hauptnavigation",
+  "nav.home": "Start",
+  "nav.resultate": "Resultate",
+  "nav.rennkalender": "Rennkalender",
+  "nav.partner": "Partner",
+  "nav.kontakt": "Kontakt",
+  "lang.label": "Sprache wählen",
+  "lang.de": "Deutsch",
+  "lang.fr": "Français",
+  "button.mehr": "Mehr erfahren",
+  "button.alle_resultate": "Alle Resultate",
+  "label.datum": "Datum",
+  "label.ort": "Ort",
+  "label.disziplin": "Disziplin",
+  "label.rang": "Rang",
+  "label.quelle": "Quelle: FIS",
+  "home.kicker": "Ski Alpin · Liechtenstein",
+  "home.hinweis": "Neuer Auftritt in Arbeit"
+}

@@ -1,0 +1,165 @@
+/* Reset, Basis-Typografie, Fokus, reduzierte Bewegung */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  border-radius: var(--radius);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-text);
+  font-size: var(--type-text-size);
+  line-height: var(--type-text-line);
+  font-weight: var(--type-text-weight);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Fokus: immer sichtbar, navy */
+:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+/* Auf dunklen Flächen bleibt der Fokus sichtbar */
+.flaeche-navy :focus-visible,
+.flaeche-nacht :focus-visible,
+.flaeche-red :focus-visible {
+  outline-color: var(--color-paper);
+}
+
+::selection {
+  background: var(--color-navy);
+  color: var(--color-paper);
+}
+
+/* Nur für Screenreader sichtbar */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-Link */
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-navy);
+  color: var(--color-paper);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  outline-color: var(--color-paper);
+}
+
+/* Seitenrand */
+.container {
+  padding-inline: var(--seitenrand);
+}
+
+/* Flächen mit den erlaubten Textfarben */
+.flaeche-paper { background: var(--color-paper); color: var(--color-ink); }
+.flaeche-eis   { background: var(--color-eis);   color: var(--color-ink); }
+.flaeche-navy  { background: var(--color-navy);  color: var(--color-paper); }
+.flaeche-nacht { background: var(--color-nacht); color: var(--color-paper); }
+.flaeche-red   { background: var(--color-red);   color: var(--color-paper); }
+.flaeche-navy a,
+.flaeche-nacht a,
+.flaeche-red a {
+  color: var(--color-paper);
+}
+
+/* Bewegung reduzieren, wenn gewünscht */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

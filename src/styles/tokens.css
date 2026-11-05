@@ -1,0 +1,168 @@
+/*
+ * Designsystem «Charlotte Lingg» v2 «Torlauf»
+ * Quelle der Werte: design/tokens.json – beide Dateien immer gemeinsam ändern.
+ *
+ * Farbregeln:
+ * - Text immer ink oder ink-soft auf paper/eis.
+ * - Text immer paper auf navy/nacht/red.
+ * - red nie für Fliesstext.
+ * - line und line-soft nie als Textfarbe.
+ *
+ * Typo: Werte in Klammern = Desktop. Auf schmalen Bildschirmen wird fluid
+ * zwischen 375px und 1280px Viewport-Breite skaliert. Fliesstext bleibt immer 15px.
+ */
+
+:root {
+  /* Farben */
+  --color-paper: #ffffff;
+  --color-eis: #eef3f8;
+  --color-ink: #0b1220;
+  --color-ink-soft: #41464c;
+  --color-navy: #002b7f;
+  --color-red: #ce1126;
+  --color-nacht: #041434;
+  --color-line: #c9cdd3;
+  --color-line-soft: #dcdfe2;
+  --color-link: var(--color-navy);
+
+  /* Schriften */
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-text: "Barlow", system-ui, sans-serif;
+
+  /* Typo-Stufen: Grösse / Zeilenhöhe / Gewicht (Desktop-Wert im Kommentar) */
+  --type-mega-size: clamp(2.75rem, 1.8177rem + 3.9779vw, 5rem); /* 80px */
+  --type-mega-line: 0.92;
+  --type-mega-weight: 700;
+
+  --type-titel-size: clamp(2.25rem, 1.732rem + 2.2099vw, 3.5rem); /* 56px */
+  --type-titel-line: 0.95;
+  --type-titel-weight: 700;
+
+  --type-zahl-size: clamp(3rem, 2.3785rem + 2.6519vw, 4.5rem); /* 72px */
+  --type-zahl-line: 0.9;
+  --type-zahl-weight: 700;
+
+  --type-abschnitt-size: clamp(1.5rem, 1.2928rem + 0.884vw, 2rem); /* 32px */
+  --type-abschnitt-line: 1;
+  --type-abschnitt-weight: 700;
+
+  --type-zitat-size: clamp(1.625rem, 1.366rem + 1.105vw, 2.25rem); /* 36px */
+  --type-zitat-line: 1.12;
+  --type-zitat-weight: 600;
+
+  --type-kicker-size: clamp(0.875rem, 0.8491rem + 0.1105vw, 0.9375rem); /* 15px */
+  --type-kicker-line: 1.2;
+  --type-kicker-weight: 600;
+  --type-kicker-tracking: 0.14em;
+
+  --type-lead-size: clamp(1.0625rem, 1.0107rem + 0.221vw, 1.1875rem); /* 19px */
+  --type-lead-line: 1.45;
+  --type-lead-weight: 500;
+
+  --type-text-size: 0.9375rem; /* 15px, nie kleiner */
+  --type-text-line: 1.55;
+  --type-text-weight: 400;
+
+  --type-text-fett-size: 0.9375rem; /* 15px */
+  --type-text-fett-line: 1.55;
+  --type-text-fett-weight: 700;
+
+  --type-label-size: 0.75rem; /* 12px */
+  --type-label-line: 1.3;
+  --type-label-weight: 700;
+  --type-label-tracking: 0.08em;
+
+  --type-klein-size: 0.8125rem; /* 13px */
+  --type-klein-line: 1.4;
+  --type-klein-weight: 400;
+
+  /* Abstände */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 48px;
+  --seitenrand: clamp(1rem, -0.4503rem + 6.1878vw, 4.5rem); /* 16px Handy … 72px Desktop */
+
+  /* Radius: überall 0. Einzige Ausnahme: Punkt im Zielbogen. */
+  --radius: 0;
+  --radius-punkt: 50%;
+
+  /* Form: die Schräge ist das Erkennungszeichen (Torflaggen, Schnittkanten) */
+  --schraege: -12deg;
+}
+
+/* Typo-Klassen */
+.t-mega {
+  font-family: var(--font-display);
+  font-size: var(--type-mega-size);
+  line-height: var(--type-mega-line);
+  font-weight: var(--type-mega-weight);
+  text-transform: uppercase;
+}
+.t-titel {
+  font-family: var(--font-display);
+  font-size: var(--type-titel-size);
+  line-height: var(--type-titel-line);
+  font-weight: var(--type-titel-weight);
+  text-transform: uppercase;
+}
+.t-zahl {
+  font-family: var(--font-display);
+  font-size: var(--type-zahl-size);
+  line-height: var(--type-zahl-line);
+  font-weight: var(--type-zahl-weight);
+  font-variant-numeric: tabular-nums;
+}
+.t-abschnitt {
+  font-family: var(--font-display);
+  font-size: var(--type-abschnitt-size);
+  line-height: var(--type-abschnitt-line);
+  font-weight: var(--type-abschnitt-weight);
+  text-transform: uppercase;
+}
+.t-zitat {
+  font-family: var(--font-display);
+  font-size: var(--type-zitat-size);
+  line-height: var(--type-zitat-line);
+  font-weight: var(--type-zitat-weight);
+}
+.t-kicker {
+  font-family: var(--font-text);
+  font-size: var(--type-kicker-size);
+  line-height: var(--type-kicker-line);
+  font-weight: var(--type-kicker-weight);
+  letter-spacing: var(--type-kicker-tracking);
+  text-transform: uppercase;
+}
+.t-lead {
+  font-family: var(--font-text);
+  font-size: var(--type-lead-size);
+  line-height: var(--type-lead-line);
+  font-weight: var(--type-lead-weight);
+}
+.t-text {
+  font-family: var(--font-text);
+  font-size: var(--type-text-size);
+  line-height: var(--type-text-line);
+  font-weight: var(--type-text-weight);
+}
+.t-text-fett {
+  font-family: var(--font-text);
+  font-size: var(--type-text-fett-size);
+  line-height: var(--type-text-fett-line);
+  font-weight: var(--type-text-fett-weight);
+}
+.t-label {
+  font-family: var(--font-text);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+.t-klein {
+  font-family: var(--font-text);
+  font-size: var(--type-klein-size);
+  line-height: var(--type-klein-line);
+  font-weight: var(--type-klein-weight);
+}
