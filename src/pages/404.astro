@@ -1,0 +1,89 @@
+---
+/**
+ * 404-Seite, zweisprachig auf einer Seite (Cloudflare liefert sie für jede unbekannte Adresse aus).
+ */
+import Base from '../layouts/Base.astro';
+import Torflagge from '../components/Torflagge.astro';
+import { localizePath, t, type Locale } from '../i18n';
+
+const sprachen: Locale[] = ['de', 'fr'];
+---
+
+<Base title={`404 – ${t('de', '404.titel')}`} hasTranslation={false} noindex>
+  <section class="fehler container">
+    <div class="fehler__kopf">
+      <Torflagge farbe="red" />
+      <p class="t-zahl" aria-hidden="true">404</p>
+    </div>
+    <div class="fehler__sprachen">
+      {
+        sprachen.map((l) => (
+          <div lang={l} class="fehler__block">
+            {l === 'de' ? (
+              <h1 class="t-titel">{t(l, '404.titel')}</h1>
+            ) : (
+              <h2 class="t-titel">{t(l, '404.titel')}</h2>
+            )}
+            <p class="t-lead fehler__text">{t(l, '404.text')}</p>
+            <a class="fehler__link t-text-fett" href={localizePath('/', l)}>
+              {t(l, '404.link')}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .fehler {
+    padding-block: var(--space-4);
+    min-height: 70vh;
+    display: grid;
+    align-content: center;
+    gap: var(--space-4);
+  }
+
+  .fehler__kopf {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-3);
+    padding-left: var(--space-2);
+  }
+
+  .fehler__sprachen {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 900px) {
+    .fehler__sprachen {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .fehler__block {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .fehler__text {
+    color: var(--color-ink-soft);
+    max-width: 40ch;
+  }
+
+  .fehler__link {
+    display: inline-block;
+    padding: 12px var(--space-3);
+    background: var(--color-navy);
+    color: var(--color-paper);
+    text-decoration: none;
+  }
+
+  .fehler__link:hover {
+    background: var(--color-nacht);
+  }
+</style>

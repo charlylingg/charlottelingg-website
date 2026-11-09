@@ -19,5 +19,8 @@
   "label.rang": "Rang",
   "label.quelle": "Source : FIS",
   "home.kicker": "Ski alpin · Liechtenstein",
-  "home.hinweis": "Nouveau site en construction"
+  "home.hinweis": "Nouveau site en construction",
+  "404.titel": "Page introuvable",
+  "404.text": "Cette page n’existe pas ou plus.",
+  "404.link": "Retour à l’accueil"
 }

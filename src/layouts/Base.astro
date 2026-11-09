@@ -5,6 +5,7 @@ import '../styles/global.css';
 
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { getLocale, locales, localizePath, t } from '../i18n';
+import { SITE_INDEXABLE } from '../config';
 
 interface Props {
   /** Seitentitel ohne Namen; leer = nur «Charlotte Lingg» */
@@ -25,6 +26,7 @@ const {
   noindex = false,
 } = Astro.props;
 
+const robotsNoindex = noindex || !SITE_INDEXABLE;
 const fullTitle = title ? `${title} – ${siteName}` : siteName;
 const site = Astro.site ?? new URL('https://charlottelingg.com');
 const canonical = new URL(Astro.url.pathname, site);
@@ -41,7 +43,7 @@ const ogLocale = locale === 'fr' ? 'fr_CH' : 'de_CH';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {robotsNoindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical.href} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.locale} href={a.href} />)}
     {

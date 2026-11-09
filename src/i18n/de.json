@@ -19,5 +19,8 @@
   "label.rang": "Rang",
   "label.quelle": "Quelle: FIS",
   "home.kicker": "Ski Alpin · Liechtenstein",
-  "home.hinweis": "Neuer Auftritt in Arbeit"
+  "home.hinweis": "Neuer Auftritt in Arbeit",
+  "404.titel": "Seite nicht gefunden",
+  "404.text": "Diese Seite gibt es nicht oder nicht mehr.",
+  "404.link": "Zur Startseite"
 }

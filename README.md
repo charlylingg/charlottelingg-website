@@ -8,7 +8,7 @@ Gebaut mit [Astro](https://astro.build) als statische Website. Keine Datenbank, 
 
 1. **Auftrag an Claude Code** – in normaler Sprache beschreiben, was sich ändern soll.
 2. **Pull Request** – Claude Code macht die Änderung auf einem eigenen Branch und eröffnet einen Pull Request auf GitHub.
-3. **Vorschau** – zum Pull Request gibt es eine Vorschau-Adresse. Dort prüfen, auf Laptop und Handy.
+3. **Vorschau** – Cloudflare erstellt zu jedem Branch und Pull Request automatisch eine Vorschau-Adresse. Dort prüfen, auf Laptop und Handy.
 4. **Merge** – passt alles, wird der Pull Request von euch gemergt. Danach ist die Änderung live.
 
 Claude Code mergt nie selbst.
@@ -21,6 +21,7 @@ Claude Code mergt nie selbst.
 | Resultate | `src/content/resultate/` (eine Datei pro Rennen, FIS-Link ist Pflicht) |
 | Rennkalender | `src/content/rennen/` |
 | Partner | `src/content/partner/`, Logos in `public/partner/` |
+| Bilder | `public/bilder/` (jedes Bild mit Eintrag in `LIZENZEN.md`) |
 | Feste Wörter (Navigation, Buttons) | `src/i18n/de.json` und `src/i18n/fr.json` |
 | Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` |
 | Bildrechte | `LIZENZEN.md` |
@@ -37,4 +38,13 @@ npm run build  # statische Ausgabe nach dist/
 npm run check  # Typen und Astro-Dateien prüfen
 ```
 
-Hosting: `netlify.toml` (Netlify) bzw. `public/_headers` (Cloudflare Pages). Sonst ist nichts hosting-spezifisch.
+Hosting: Cloudflare Workers mit statischen Assets (Workers Builds). Konfiguration in `wrangler.jsonc`, Header in `public/_headers`. Produktion ist der Branch `main`.
+
+## Go-live-Merkliste
+
+Bis zum Go-live ist die Website für Suchmaschinen gesperrt. Beim Go-live genau diese Stellen ändern:
+
+1. `src/config.ts`: `SITE_INDEXABLE` auf `true` setzen (entfernt `<meta name="robots" content="noindex">`).
+2. `public/_headers`: die Zeile `X-Robots-Tag: noindex` löschen.
+3. `public/robots.txt`: `Disallow: /` ersetzen durch `Allow: /`.
+4. Die Stilprobe löschen: `src/pages/stilprobe.astro`.
