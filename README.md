@@ -24,7 +24,7 @@ Claude Code mergt nie selbst.
 | Partner | `src/content/partner/`, Logos in `public/partner/` |
 | Bilder | `public/bilder/` (jedes Bild mit Eintrag in `LIZENZEN.md`) |
 | Feste Wörter (Navigation, Buttons) | `src/i18n/de.json` und `src/i18n/fr.json` |
-| Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` |
+| Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` (Website: Thema «Beere») |
 | Bildrechte | `LIZENZEN.md` |
 
 Einträge mit `beispiel: true` sind Vorlagen und erscheinen nicht auf der Website.

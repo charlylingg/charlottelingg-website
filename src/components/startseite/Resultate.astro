@@ -42,53 +42,54 @@ const hoehepunkte = resultate
   }));
 
 const disziplinName = (d: string) => (istPlatzhalter(d) ? undefined : tSchluessel(locale, `disziplin.${d}`, d));
-const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' };
+const medaille: Record<number, string> = { 1: 'gold', 2: 'silber', 3: 'bronze' };
 ---
 
 {
   text && (
     <section
       id="resultate"
-      class="resultate flaeche-paper sektion"
+      class="resultate flaeche-papier sektion"
       aria-labelledby="resultate-titel"
       lang={text.lang !== locale ? text.lang : undefined}
     >
       <div class="resultate__innen inhalt">
         <div class="resultate__kopf">
-          <div class="resultate__intro">
+          <div class="resultate__intro sektion-kopf">
             {text.entwurf && <EntwurfLabel locale={locale} />}
-            <p class="kicker-flagge kicker-flagge--rot t-kicker">{text.data.kicker}</p>
+            <p class="kicker-flagge kicker-flagge--rosa t-kicker">{text.data.kicker}</p>
             <h2 id="resultate-titel" class="t-titel">
               {text.data.titel}
             </h2>
             <p class="resultate__lead">{text.data.lead}</p>
           </div>
           <div class="resultate__links">
-            <a class="textlink t-display-s" href={text.data.fis_profil.url} target="_blank" rel="noopener">
+            <a class="textlink t-knopf" href={text.data.fis_profil.url} target="_blank" rel="noopener">
               {text.data.fis_profil.text}
               <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
             </a>
-            <a class="kalender-link flaeche-eis" href="#rennen">
+            <a class="kalender-link" href="#rennen">
               <span class="t-label kalender-link__label">{text.data.kalender.label}</span>
-              <span class="t-display-s">{text.data.kalender.text}</span>
+              <span class="kalender-link__text">{text.data.kalender.text}</span>
             </a>
           </div>
         </div>
 
         <div class="podium-block">
-          <h3 class="podium-titel t-display-l">
-            <Torflagge farbe="navy" groesse="klein" />
+          <h3 class="podium-titel">
+            <Torflagge farbe="beere" breite={12} hoehe={32} />
             {text.data.podium_titel}
-            <Torflagge farbe="red" groesse="klein" />
+            <Torflagge farbe="rosa" breite={12} hoehe={32} />
           </h3>
           <ul role="list" class="podium">
             {podest.map((stufe) => (
               <li class:list={['podium__platz', `podium__platz--${stufe.rang}`]}>
                 <svg class="medaille" aria-hidden="true" viewBox="0 0 100 150">
-                  <path d="M28 0 L50 58 L38 62 L14 0 Z" fill="var(--color-navy)" />
-                  <path d="M72 0 L50 58 L62 62 L86 0 Z" fill="var(--color-red)" />
-                  <circle cx="50" cy="100" r="40" fill="var(--color-eis)" stroke={`var(--color-${farbeVonRang[stufe.rang]})`} stroke-width="4" />
-                  <circle cx="50" cy="100" r="30" fill="none" stroke="var(--color-line)" stroke-width="2" />
+                  <path d="M28 0 L50 58 L38 62 L14 0 Z" fill="var(--color-beere)" />
+                  <path d="M72 0 L50 58 L62 62 L86 0 Z" fill="var(--color-rosa)" />
+                  <circle cx="50" cy="100" r="40" fill={`var(--color-${medaille[stufe.rang]})`} stroke={`var(--color-${medaille[stufe.rang]}-rand)`} stroke-width="3" />
+                  <circle cx="50" cy="100" r="30" fill="none" stroke={`var(--color-${medaille[stufe.rang]}-hell)`} stroke-width="2" />
+                  <path d="M30 82 A30 30 0 0 1 60 72" fill="none" stroke="var(--color-papier)" stroke-width="3" stroke-linecap="round" opacity="var(--deckkraft-55)" />
                   <text
                     x="50"
                     y="112"
@@ -96,7 +97,7 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
                     font-family="Barlow Condensed, Arial Narrow, sans-serif"
                     font-weight="700"
                     font-size="34"
-                    fill={`var(--color-${farbeVonRang[stufe.rang]})`}
+                    fill={`var(--color-${medaille[stufe.rang]}-rand)`}
                   >
                     {stufe.rang}
                   </text>
@@ -107,13 +108,13 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
                 <ul role="list" class="podium__rennen">
                   {stufe.rennen.map((r) => (
                     <li>
-                      <strong class="t-display-s">{r.data.ort}</strong>{' '}
-                      {disziplinName(r.data.disziplin) && <span class="t-klein">{disziplinName(r.data.disziplin)}</span>}
+                      <strong class="podium__ort">{r.data.ort}</strong>{' '}
+                      {disziplinName(r.data.disziplin) && <span class="podium__disziplin">{disziplinName(r.data.disziplin)}</span>}
                     </li>
                   ))}
                 </ul>
                 <div class="podium__sockel" aria-hidden="true">
-                  <span class="t-zahl">{stufe.rang}</span>
+                  <span class="podium__zahl">{stufe.rang}</span>
                 </div>
               </li>
             ))}
@@ -123,8 +124,8 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
         <ul role="list" class="hoehepunkte">
           {hoehepunkte.map((h, i) => (
             <li class="hoehepunkt">
-              <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rot']}>{h.rang}</span>
-              <span class="t-display-s hoehepunkt__text">
+              <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rosa']}>{h.rang}</span>
+              <span class="hoehepunkt__text">
                 {h.zeile1}
                 <br />
                 {h.zeile2}
@@ -133,7 +134,7 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
           ))}
           <li class="hoehepunkt">
             <span class="hoehepunkt__zahl">{text.data.fis_zusatz.wert}</span>
-            <span class="t-display-s hoehepunkt__text">
+            <span class="hoehepunkt__text">
               {text.data.fis_zusatz.zeilen.map((zeile, i) => (
                 <>
                   {i > 0 && <br />}
@@ -152,7 +153,7 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
   .resultate__innen {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-56);
   }
 
   .resultate__kopf {
@@ -160,43 +161,47 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-end;
-    gap: var(--space-3);
+    gap: var(--space-24);
   }
 
   .resultate__intro {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    max-width: 640px;
+    max-width: var(--mass-640);
   }
 
   .resultate__lead {
-    color: var(--color-ink-soft);
+    color: var(--color-tinte-soft);
   }
 
   .resultate__links {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    flex: 0 1 320px;
+    gap: var(--space-8);
+    min-width: min(100%, var(--mass-280));
   }
 
   .kalender-link {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    padding: var(--space-3);
-    color: var(--color-ink);
+    gap: var(--space-8);
+    padding: var(--space-24);
+    background: var(--color-hauch);
+    color: var(--color-tinte);
     text-decoration: none;
   }
 
-  .kalender-link:hover .t-display-s {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+  .kalender-link:hover {
+    color: var(--color-beere);
   }
 
   .kalender-link__label {
-    color: var(--color-ink-soft);
+    color: var(--color-tinte-soft);
+  }
+
+  .kalender-link__text {
+    font-family: var(--font-display);
+    font-size: var(--size-24);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
   }
 
   /* Podest */
@@ -204,13 +209,17 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-28);
   }
 
   .podium-titel {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-12);
+    font-size: var(--size-40);
+    line-height: var(--line-100);
+    letter-spacing: var(--track-04);
+    text-transform: uppercase;
   }
 
   .podium {
@@ -218,8 +227,8 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: end;
     width: 100%;
-    max-width: 900px;
-    border-bottom: var(--space-1) solid var(--color-nacht);
+    max-width: var(--mass-900);
+    border-bottom: var(--linie-6) solid var(--color-aubergine);
   }
 
   .podium__platz {
@@ -227,75 +236,78 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--space-2);
+    gap: var(--space-14);
     min-width: 0;
-    padding-inline: var(--space-1);
+    padding-inline: var(--space-8);
   }
 
   .medaille {
-    width: calc(var(--space-4) + var(--space-3));
-    height: auto;
+    width: var(--mass-84);
+    height: var(--mass-126);
     overflow: visible;
   }
 
   .podium__rennen {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--space-1) / 2);
+    gap: var(--space-4);
     text-align: center;
+    line-height: var(--line-120);
   }
 
-  .podium__rennen strong {
-    display: block;
+  .podium__ort {
+    font-family: var(--font-display);
+    font-size: var(--size-20);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
   }
 
-  .podium__rennen .t-klein {
-    color: var(--color-ink-soft);
+  .podium__disziplin {
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
   }
 
   .podium__sockel {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     width: 100%;
-    padding-top: var(--space-2);
-    color: var(--color-paper);
+    margin-top: var(--space-6);
+    padding-top: var(--space-14);
+    color: var(--color-papier);
     clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
   }
 
+  .podium__zahl {
+    font-family: var(--font-display);
+    font-size: var(--size-72);
+    font-weight: var(--weight-700);
+    line-height: var(--line-100);
+  }
+
   .podium__platz--1 .podium__sockel {
-    height: 220px;
-    background: var(--color-red);
+    height: var(--mass-220);
+    background: var(--color-rosa);
   }
 
   .podium__platz--2 .podium__sockel {
-    height: 150px;
-    background: var(--color-navy);
+    height: var(--mass-150);
+    background: var(--color-beere);
   }
 
   .podium__platz--3 .podium__sockel {
-    height: 100px;
-    background: var(--color-nacht);
+    height: var(--mass-100);
+    background: var(--color-aubergine);
   }
 
   @media (max-width: 640px) {
-    .podium__platz--1 .podium__sockel {
-      height: 160px;
-    }
-
-    .podium__platz--2 .podium__sockel {
-      height: 110px;
-    }
-
-    .podium__platz--3 .podium__sockel {
-      height: 80px;
-    }
-
-    .podium__sockel .t-zahl {
-      font-size: var(--type-titel-size);
-    }
-
     .medaille {
-      width: var(--space-4);
+      width: var(--mass-58);
+      height: var(--mass-87);
+    }
+
+    .podium__zahl {
+      font-size: var(--size-48);
     }
   }
 
@@ -332,25 +344,33 @@ const farbeVonRang: Record<number, string> = { 1: 'red', 2: 'navy', 3: 'nacht' }
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-3) calc(var(--space-4) + var(--space-3));
-    padding-top: var(--space-1);
+    gap: var(--space-24) var(--space-72);
+    padding-top: var(--space-8);
   }
 
   .hoehepunkt {
     display: flex;
     align-items: baseline;
-    gap: var(--space-2);
+    gap: var(--space-14);
   }
 
   .hoehepunkt__zahl {
     font-family: var(--font-display);
-    font-size: var(--type-titel-size);
-    line-height: var(--type-abschnitt-line);
-    font-weight: 700;
-    color: var(--color-navy);
+    font-size: var(--size-56);
+    line-height: var(--line-100);
+    font-weight: var(--weight-700);
+    color: var(--color-beere);
   }
 
-  .hoehepunkt__zahl--rot {
-    color: var(--color-red);
+  .hoehepunkt__zahl--rosa {
+    color: var(--color-rosa);
+  }
+
+  .hoehepunkt__text {
+    font-family: var(--font-display);
+    font-size: var(--size-22);
+    line-height: var(--line-110);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
   }
 </style>

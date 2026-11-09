@@ -33,9 +33,9 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
   <div class="kopf__zeile inhalt">
     <a class="marke" href={start}>
       <svg class="marke__flagge" role="img" aria-label={t(locale, 'kopf.flagge')} viewBox="0 0 500 300">
-        <rect width="500" height="150" fill="#002b7f"></rect>
-        <rect y="150" width="500" height="150" fill="#ce1126"></rect>
-        <g fill="#ffd83d" stroke="#000000" stroke-width="3" stroke-linejoin="round">
+        <rect width="500" height="150" fill="var(--color-flagge-blau)"></rect>
+        <rect y="150" width="500" height="150" fill="var(--color-flagge-rot)"></rect>
+        <g fill="var(--color-flagge-krone)" stroke="var(--color-flagge-kontur)" stroke-width="3" stroke-linejoin="round">
           <path d="M78 108 L80 72 Q96 84 104 66 Q114 48 124 66 Q132 84 148 72 L150 108 Z"></path>
           <path d="M84 72 Q92 40 114 36 Q136 40 144 72" fill="none"></path>
           <path d="M114 36 L114 72" fill="none"></path>
@@ -44,7 +44,7 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
           <rect x="76" y="108" width="76" height="12"></rect>
         </g>
       </svg>
-      <span class="marke__name t-abschnitt">{t(locale, 'site.name')}</span>
+      <span class="marke__name">{t(locale, 'site.name')}</span>
       <span class="marke__zusatz">{t(locale, 'kopf.zusatz')}</span>
     </a>
 
@@ -70,8 +70,8 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     <details class="menue">
       <summary class="menue__knopf ohne-marker">
         <span class="menue__balken" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="t-label wenn-zu">{t(locale, 'menue.oeffnen')}</span>
-        <span class="t-label wenn-offen">{t(locale, 'menue.schliessen')}</span>
+        <span class="wenn-zu menue__wort">{t(locale, 'menue.oeffnen')}</span>
+        <span class="wenn-offen menue__wort">{t(locale, 'menue.schliessen')}</span>
       </summary>
       <div class="menue__panel">
         <nav aria-label={t(locale, 'nav.label')}>
@@ -113,8 +113,9 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--color-paper);
-    border-bottom: 1px solid var(--color-line-soft);
+    background: var(--color-papier);
+    border-bottom: var(--linie-1) solid var(--color-linie-soft);
+    box-shadow: var(--schatten-kopf);
   }
 
   .kopf__zeile {
@@ -122,14 +123,13 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-1) var(--space-2);
-    padding-block: var(--space-2);
+    gap: var(--space-16);
+    padding-block: var(--space-18);
   }
 
   @media (min-width: 1100px) {
     .kopf__zeile {
       flex-wrap: wrap;
-      column-gap: var(--space-3);
     }
   }
 
@@ -137,43 +137,55 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
   .marke {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: var(--space-12);
     min-width: 0;
-    min-height: 44px;
-    color: var(--color-ink);
+    color: var(--color-tinte);
     text-decoration: none;
+  }
+
+  .marke:hover {
+    color: var(--color-tinte);
   }
 
   .marke__flagge {
     flex: 0 0 auto;
-    width: calc(var(--space-4) - var(--space-1));
-    height: auto;
-    aspect-ratio: 5 / 3;
-    outline: 1px solid var(--color-line-soft);
+    width: var(--mass-50);
+    height: var(--mass-30);
+    box-shadow: var(--schatten-flagge);
   }
 
   .marke__name {
+    min-width: 0;
+    font-family: var(--font-display);
+    font-size: var(--size-28);
+    font-weight: var(--weight-700);
+    letter-spacing: var(--track-02);
+    text-transform: uppercase;
     white-space: nowrap;
   }
 
   .marke__zusatz {
     display: none;
-    padding-left: var(--space-2);
-    border-left: 2px solid var(--color-red);
+    padding-left: var(--space-12);
+    border-left: var(--linie-2) solid var(--color-rosa);
     font-family: var(--font-display);
-    font-size: var(--type-lead-size);
-    font-weight: 600;
-    letter-spacing: var(--type-label-tracking);
+    font-size: var(--size-22);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
     text-transform: uppercase;
-    color: var(--color-navy);
+    color: var(--color-beere);
     white-space: nowrap;
   }
 
-  @media (min-width: 560px) {
-    .marke {
-      gap: var(--space-2);
+  /* Sehr schmale Handys: Name zweizeilig, damit er den Menü-Knopf nicht überdeckt */
+  @media (max-width: 400px) {
+    .marke__name {
+      white-space: normal;
+      line-height: var(--line-100);
     }
+  }
 
+  @media (min-width: 560px) {
     .marke__zusatz {
       display: inline;
     }
@@ -188,47 +200,41 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0 var(--space-3);
+    gap: var(--space-4) var(--space-24);
   }
 
   .hauptnav__link,
   .menue__link {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    padding-block: var(--space-10);
     font-family: var(--font-display);
-    font-size: var(--type-lead-size);
-    font-weight: 600;
-    letter-spacing: var(--type-label-tracking);
+    font-size: var(--size-18);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
     text-transform: uppercase;
-    color: var(--color-ink);
+    color: var(--color-tinte);
     text-decoration: none;
   }
 
   .hauptnav__link:hover,
   .menue__link:hover {
-    color: var(--color-navy);
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+    color: var(--color-beere);
   }
 
   .hauptnav__link--kontakt {
-    padding-inline: var(--space-2);
-    background: var(--color-red);
-    color: var(--color-paper);
+    padding-inline: var(--space-18);
+    background: var(--color-rosa);
+    color: var(--color-papier);
   }
 
   .hauptnav__link--kontakt:hover {
-    color: var(--color-paper);
-  }
-
-  .hauptnav__link--kontakt:focus-visible {
-    outline-color: var(--color-navy);
+    color: var(--color-papier);
   }
 
   .kopf__sprache {
-    padding-left: var(--space-2);
-    border-left: 1px solid var(--color-line);
+    padding-left: var(--space-12);
+    border-left: var(--linie-1) solid var(--color-linie);
   }
 
   @media (min-width: 1100px) {
@@ -236,8 +242,7 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: flex-end;
-      gap: 0 var(--space-3);
+      gap: var(--space-4) var(--space-24);
     }
 
     .menue {
@@ -253,28 +258,45 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
   .menue__knopf {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1);
-    min-width: 44px;
-    min-height: 44px;
-    padding-inline: var(--space-1);
-    color: var(--color-ink);
+    gap: var(--space-8);
+    min-width: var(--space-44);
+    min-height: var(--space-44);
+    padding-inline: var(--space-8);
+    font-family: var(--font-display);
+    font-size: var(--size-15);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
+    text-transform: uppercase;
+    color: var(--color-tinte);
+  }
+
+  /* Auf schmalen Handys nur die Balken zeigen; das Wort bleibt für Screenreader */
+  @media (max-width: 559px) {
+    .menue__wort {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
   }
 
   .menue__balken {
     display: inline-flex;
-    gap: calc(var(--space-1) / 2);
+    gap: var(--space-4);
   }
 
   .menue__balken span {
     display: block;
-    width: calc(var(--space-1) / 2);
-    height: var(--space-3);
-    background: var(--color-navy);
+    width: var(--space-4);
+    height: var(--space-24);
+    background: var(--color-beere);
     transform: skewX(var(--schraege));
   }
 
   .menue__balken span:nth-child(2) {
-    background: var(--color-red);
+    background: var(--color-rosa);
   }
 
   .menue__panel {
@@ -282,23 +304,24 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     top: 100%;
     left: 0;
     right: 0;
-    max-height: calc(100vh - 100%);
+    max-height: calc(var(--mass-bildschirm) - 100%);
     overflow-y: auto;
-    padding: var(--space-1) var(--seitenrand) var(--space-3);
-    background: var(--color-paper);
-    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-8) var(--space-32) var(--space-24);
+    background: var(--color-papier);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+    box-shadow: var(--schatten-kopf);
   }
 
   .menue__panel ul {
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-16);
   }
 
   .menue__panel li + li {
-    border-top: 1px solid var(--color-line-soft);
+    border-top: var(--linie-1) solid var(--color-linie-soft);
   }
 
   .menue__link {
     width: 100%;
-    min-height: var(--space-4);
+    min-height: var(--space-48);
   }
 </style>

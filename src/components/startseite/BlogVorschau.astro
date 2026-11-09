@@ -31,14 +31,14 @@ const beitraege = (await getBlog(locale)).map((b) => {
   text && beitraege.length > 0 && (
     <section
       id="blog"
-      class="blog flaeche-paper sektion"
+      class="blog flaeche-papier sektion"
       aria-labelledby="blog-titel"
       lang={text.lang !== locale ? text.lang : undefined}
     >
       <div class="blog__innen inhalt">
         {text.entwurf && <EntwurfLabel locale={locale} />}
-        <h2 id="blog-titel" class="blog__titel t-display-l">
-          <Torflagge farbe="red" groesse="klein" />
+        <h2 id="blog-titel" class="blog__titel">
+          <Torflagge farbe="rosa" breite={12} hoehe={34} />
           {text.data.titel}
         </h2>
         <ul role="list" class="blog__liste">
@@ -48,14 +48,14 @@ const beitraege = (await getBlog(locale)).map((b) => {
                 {b.data.bild ? (
                   <Bildplatzhalter stelle={`Blog «${b.data.titel}»`} format="Querformat 16:10" verhaeltnis="16 / 10" alt={b.data.bild_alt} />
                 ) : (
-                  <div class="karte__grafik flaeche-nacht" aria-hidden="true">
-                    <span class="karte__flagge karte__flagge--navy" />
-                    <span class="karte__flagge karte__flagge--rot" />
+                  <div class="karte__grafik" aria-hidden="true">
+                    <span class="karte__flagge karte__flagge--beere" />
+                    <span class="karte__flagge karte__flagge--rosa" />
                   </div>
                 )}
                 {b.entwurf && <EntwurfLabel locale={locale} />}
-                <p class="t-kicker karte__zeile">{b.zeile}</p>
-                <h3 class="t-abschnitt">
+                <p class="karte__zeile">{b.zeile}</p>
+                <h3 class="karte__titel">
                   {b.data.status === 'veroeffentlicht' ? (
                     <a class="karte__link" href={b.href}>
                       {b.data.titel}
@@ -66,12 +66,12 @@ const beitraege = (await getBlog(locale)).map((b) => {
                 </h3>
                 <p class="karte__teaser">{b.data.teaser}</p>
                 {b.data.status === 'veroeffentlicht' ? (
-                  <span class="karte__weiter t-display-s" aria-hidden="true">
+                  <span class="karte__weiter t-mehr" aria-hidden="true">
                     {t(locale, 'blog.weiterlesen')}
-                    <span class="aufklapp-zeichen karte__plus">→</span>
+                    <span class="aufklapp-zeichen">→</span>
                   </span>
                 ) : (
-                  <p class="karte__folgt t-display-s">{t(locale, 'blog.folgt')}</p>
+                  <p class="karte__folgt">{t(locale, 'blog.folgt')}</p>
                 )}
               </article>
             </li>
@@ -84,25 +84,27 @@ const beitraege = (await getBlog(locale)).map((b) => {
 
 <style>
   .blog {
-    padding-top: 0;
+    padding-top: var(--space-72);
   }
 
   .blog__innen {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-32);
   }
 
   .blog__titel {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-12);
+    font-size: var(--size-44);
+    text-transform: uppercase;
   }
 
   .blog__liste {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: var(--space-4) var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-280)), 1fr));
+    gap: var(--space-40) var(--space-32);
   }
 
   .karte {
@@ -110,40 +112,52 @@ const beitraege = (await getBlog(locale)).map((b) => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-2);
+    gap: var(--space-14);
   }
 
   .karte__grafik {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2);
+    gap: var(--space-14);
     width: 100%;
     aspect-ratio: 16 / 10;
+    background: var(--color-aubergine);
   }
 
   .karte__flagge {
     display: block;
-    width: var(--space-3);
-    height: calc(var(--space-4) + var(--space-2));
+    width: var(--space-22);
+    height: var(--space-64);
     transform: skewX(var(--schraege));
   }
 
-  .karte__flagge--navy {
-    background: var(--color-navy);
-    outline: 2px solid var(--color-paper);
+  .karte__flagge--beere {
+    background: var(--color-beere);
+    outline: var(--linie-2) solid var(--color-papier);
   }
 
-  .karte__flagge--rot {
-    background: var(--color-red);
+  .karte__flagge--rosa {
+    background: var(--color-rosa);
   }
 
   .karte__zeile {
-    color: var(--color-red);
+    font-family: var(--font-display);
+    font-size: var(--size-14);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-14);
+    text-transform: uppercase;
+    color: var(--color-rosa);
+  }
+
+  .karte__titel {
+    font-size: var(--size-28);
+    line-height: var(--line-105);
+    text-transform: uppercase;
   }
 
   .karte__link {
-    color: var(--color-ink);
+    color: var(--color-tinte);
     text-decoration: none;
   }
 
@@ -156,28 +170,29 @@ const beitraege = (await getBlog(locale)).map((b) => {
 
   .karte__link:hover,
   .karte__link:focus-visible {
+    color: var(--color-tinte);
     text-decoration: underline;
-    text-decoration-thickness: 2px;
   }
 
   .karte__teaser {
-    color: var(--color-ink-soft);
+    color: var(--color-tinte-soft);
   }
 
   .karte__weiter {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1);
-    padding-block: var(--space-1);
-    color: var(--color-navy);
-  }
-
-  .karte__plus {
-    font-size: var(--type-lead-size);
+    gap: var(--space-10);
+    padding-block: var(--space-8);
+    color: var(--color-beere);
   }
 
   .karte__folgt {
-    padding-block: var(--space-1);
-    color: var(--color-ink-soft);
+    padding-block: var(--space-8);
+    font-family: var(--font-display);
+    font-size: var(--size-16);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-06);
+    text-transform: uppercase;
+    color: var(--color-tinte-soft);
   }
 </style>

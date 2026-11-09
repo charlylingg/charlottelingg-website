@@ -4,4 +4,6 @@ kategorie: heimat
 url: https://www.hotelalbanareal.com
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 104
 reihenfolge: 1

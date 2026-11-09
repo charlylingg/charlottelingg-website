@@ -14,9 +14,9 @@ const text = await getText(locale, 'hero');
 
 {
   text && (
-    <section id="top" class="hero flaeche-nacht" lang={text.lang !== locale ? text.lang : undefined}>
-      <span class="wisch wisch--rot" aria-hidden="true" />
-      <span class="wisch wisch--navy" aria-hidden="true" />
+    <section id="top" class="hero flaeche-aubergine" lang={text.lang !== locale ? text.lang : undefined}>
+      <span class="wisch wisch--rosa" aria-hidden="true" />
+      <span class="wisch wisch--beere" aria-hidden="true" />
       <div class="hero__bild">
         <Bildplatzhalter
           stelle="Hero"
@@ -28,8 +28,8 @@ const text = await getText(locale, 'hero');
       </div>
       <div class="hero__panel">
         {text.entwurf && <EntwurfLabel locale={locale} />}
-        <p class="kicker-flagge kicker-flagge--rot t-kicker">{text.data.kicker}</p>
-        <h1 class="t-mega">
+        <p class="kicker-flagge kicker-flagge--rosa t-kicker hero__kicker">{text.data.kicker}</p>
+        <h1 class="t-hero">
           {text.data.titel_zeilen.map((zeile, i) => (
             <>
               {i > 0 && <br />}
@@ -37,10 +37,10 @@ const text = await getText(locale, 'hero');
             </>
           ))}
         </h1>
-        <p class="t-lead hero__lead">{text.data.lead}</p>
+        <p class="hero__lead">{text.data.lead}</p>
         <div class="hero__knoepfe">
           {text.data.buttons.map((b, i) => (
-            <a class:list={['knopf t-display-s', i === 0 ? 'knopf--hell' : 'knopf--rot']} href={b.ziel}>
+            <a class:list={['knopf t-knopf', i === 0 ? 'knopf--hell knopf--dunkel-text' : 'knopf--rosa']} href={b.ziel}>
               {b.text}
             </a>
           ))}
@@ -56,30 +56,58 @@ const text = await getText(locale, 'hero');
     overflow: hidden;
   }
 
+  .hero__bild :global(.bildplatzhalter) {
+    height: var(--mass-hero-handy);
+    aspect-ratio: auto;
+  }
+
   .hero__panel {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--seitenrand);
+    gap: var(--space-22);
+    padding: var(--space-40) var(--space-24);
+    background: var(--color-aubergine);
+  }
+
+  .hero__kicker {
+    padding: var(--space-8) var(--space-18);
   }
 
   .hero__lead {
-    max-width: 30rem;
+    max-width: var(--mass-30rem);
+    font-size: var(--size-19);
+    line-height: var(--line-150);
   }
 
   .hero__knoepfe {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
+    gap: var(--space-14);
+    padding-top: var(--space-6);
   }
 
   .wisch {
-    display: none;
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    left: 0;
+    z-index: 3;
+    width: 38%;
+    pointer-events: none;
+    transform: translateX(-160%) skewX(var(--schraege));
+  }
+
+  .wisch--rosa {
+    background: var(--color-rosa);
+  }
+
+  .wisch--beere {
+    background: var(--color-beere);
   }
 
   @media (min-width: 821px) {
     .hero {
-      height: 760px;
+      height: var(--mass-760);
     }
 
     .hero__bild {
@@ -89,22 +117,20 @@ const text = await getText(locale, 'hero');
 
     .hero__bild :global(.bildplatzhalter) {
       height: 100%;
-      aspect-ratio: auto;
     }
 
     .hero__panel {
       position: absolute;
       right: 0;
       bottom: 0;
-      width: min(620px, 50%);
-      padding: var(--space-4) var(--space-4) var(--space-4) calc(2 * var(--space-4));
-      background: var(--color-nacht);
-      clip-path: polygon(calc(var(--space-4) + var(--space-2)) 0, 100% 0, 100% 100%, 0 100%);
+      width: min(var(--mass-620), 50%);
+      padding: var(--space-56) var(--space-56) var(--space-56) var(--space-96);
+      clip-path: polygon(var(--space-64) 0, 100% 0, 100% 100%, 0 100%);
     }
   }
 
   /* Auftritt wie im Design, nur ohne Wunsch nach reduzierter Bewegung */
-  @media (min-width: 821px) and (prefers-reduced-motion: no-preference) {
+  @media (prefers-reduced-motion: no-preference) {
     @keyframes bild-rein {
       0% {
         opacity: 0;
@@ -140,7 +166,7 @@ const text = await getText(locale, 'hero');
     @keyframes aufsteigen {
       from {
         opacity: 0;
-        transform: translateY(var(--space-3));
+        transform: translateY(var(--space-24));
       }
       to {
         opacity: 1;
@@ -148,26 +174,12 @@ const text = await getText(locale, 'hero');
       }
     }
 
-    .wisch {
-      display: block;
-      position: absolute;
-      top: -10%;
-      bottom: -10%;
-      left: 0;
-      z-index: 3;
-      width: 38%;
-      pointer-events: none;
-      transform: translateX(-160%) skewX(var(--schraege));
-    }
-
-    .wisch--rot {
-      background: var(--color-red);
-      animation: wischen 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.12s both;
-    }
-
-    .wisch--navy {
-      background: var(--color-navy);
+    .wisch--beere {
       animation: wischen 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0s both;
+    }
+
+    .wisch--rosa {
+      animation: wischen 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.12s both;
     }
 
     .hero__bild {
@@ -200,6 +212,12 @@ const text = await getText(locale, 'hero');
 
     .hero__panel > :nth-child(5) {
       animation-delay: 1.5s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wisch {
+      display: none;
     }
   }
 </style>

@@ -4,4 +4,6 @@ kategorie: mobilitaetspartner
 url: https://www.monnier-immo.ch
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 120
 reihenfolge: 1

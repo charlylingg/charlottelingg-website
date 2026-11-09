@@ -3,7 +3,7 @@
  * Kontakt mit Formular – nur die Oberfläche. Der Versand folgt in einem eigenen Auftrag.
  * Bis dahin ist der Senden-Knopf deaktiviert. Das Formular wird nirgends hingeschickt.
  * Fehlermeldungen erscheinen ohne JavaScript, sobald ein Feld nach der Eingabe ungültig ist (:user-invalid).
- * Honeypot-Feld «website» ist für Menschen unsichtbar (Spam-Schutz für später).
+ * Honeypot-Feld «website» ist für Menschen unsichtbar (visually-hidden, Spam-Schutz für später).
  */
 import EntwurfLabel from '../EntwurfLabel.astro';
 import { getText } from '../../lib/inhalte';
@@ -22,7 +22,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
   text && (
     <section
       id="kontakt"
-      class="kontakt flaeche-nacht sektion"
+      class="kontakt flaeche-aubergine"
       aria-labelledby="kontakt-titel"
       lang={text.lang !== locale ? text.lang : undefined}
     >
@@ -32,11 +32,11 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
           <h2 id="kontakt-titel" class="t-titel">
             {text.data.titel}
           </h2>
-          <p class="t-lead">{text.data.text}</p>
+          <p class="kontakt__einleitung">{text.data.text}</p>
         </div>
 
         <form class="formular" aria-label={t(locale, 'form.label')} lang={locale}>
-          <p class="t-klein formular__legende">{t(locale, 'form.pflicht_legende')}</p>
+          <p class="formular__legende">{t(locale, 'form.pflicht_legende')}</p>
           <div class="formular__reihe">
             <div class="feld">
               <label for="kontakt-name">
@@ -50,7 +50,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
                 required
                 aria-describedby="kontakt-name-fehler"
               />
-              <p id="kontakt-name-fehler" class="feld__fehler t-klein">
+              <p id="kontakt-name-fehler" class="feld__fehler">
                 {t(locale, 'form.fehler.name')}
               </p>
             </div>
@@ -67,7 +67,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
                 required
                 aria-describedby="kontakt-email-fehler"
               />
-              <p id="kontakt-email-fehler" class="feld__fehler t-klein">
+              <p id="kontakt-email-fehler" class="feld__fehler">
                 {t(locale, 'form.fehler.email')}
               </p>
             </div>
@@ -87,18 +87,18 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
               {t(locale, 'form.nachricht')} <span aria-hidden="true">*</span>
             </label>
             <textarea id="kontakt-nachricht" name="nachricht" rows="4" required aria-describedby="kontakt-nachricht-fehler" />
-            <p id="kontakt-nachricht-fehler" class="feld__fehler t-klein">
+            <p id="kontakt-nachricht-fehler" class="feld__fehler">
               {t(locale, 'form.fehler.nachricht')}
             </p>
           </div>
 
-          <div class="feld feld--honig" aria-hidden="true">
+          <div class="feld visually-hidden" aria-hidden="true">
             <label for="kontakt-website">{t(locale, 'form.honeypot')}</label>
             <input id="kontakt-website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
 
           <div class="formular__senden">
-            <button class="knopf knopf--rot t-display-s" type="submit" disabled aria-describedby="kontakt-inaktiv">
+            <button class="knopf knopf--rosa t-knopf formular__knopf" type="submit" disabled aria-describedby="kontakt-inaktiv">
               {t(locale, 'form.senden')}
             </button>
             <p id="kontakt-inaktiv" class="formular__hinweis">
@@ -113,76 +113,84 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
 
 <style>
   .kontakt {
-    padding-bottom: var(--space-4);
+    padding-block: var(--space-88) var(--space-40);
   }
 
   .kontakt__innen {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-4);
+    gap: var(--space-56);
   }
 
   .kontakt__text {
-    flex: 1 1 320px;
+    flex: 1 1 var(--mass-320);
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-20);
   }
 
-  .kontakt__text .t-lead {
-    max-width: 26rem;
+  .kontakt__einleitung {
+    max-width: var(--mass-26rem);
+    font-size: var(--size-18);
+    line-height: var(--line-150);
   }
 
   .formular {
-    flex: 1.4 1 420px;
+    flex: 1.4 1 var(--mass-420);
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-16);
+  }
+
+  .formular__legende {
+    font-size: var(--size-14);
   }
 
   .formular__reihe {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    gap: var(--space-2);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-200)), 1fr));
+    gap: var(--space-16);
   }
 
   .feld {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: var(--space-6);
+    font-size: var(--size-14);
   }
 
+  /* 17px wie im Design (mind. 16px, sonst zoomt das iPhone beim Antippen) */
   .feld input,
   .feld select,
   .feld textarea {
     width: 100%;
-    min-height: var(--space-4);
-    padding: var(--space-1) var(--space-2);
-    border: 1px solid var(--color-line);
-    background: var(--color-paper);
-    color: var(--color-ink);
-    /* mind. 16px, sonst zoomt iOS beim Antippen */
-    font-size: var(--type-lead-size);
+    min-height: var(--space-48);
+    padding: 0 var(--space-14);
+    border: var(--linie-1) solid var(--color-linie);
+    background: var(--color-papier);
+    color: var(--color-tinte);
+    font-size: var(--size-17);
   }
 
   .feld textarea {
+    padding-block: var(--space-12);
     resize: vertical;
   }
 
   .feld input:focus-visible,
   .feld select:focus-visible,
   .feld textarea:focus-visible {
-    outline: 3px solid var(--color-paper);
-    outline-offset: 2px;
+    outline: var(--fokus) solid var(--color-rosa);
+    outline-offset: var(--space-2);
   }
 
   /* Fehlermeldung erst nach einer ungültigen Eingabe zeigen */
   .feld__fehler {
     display: none;
-    padding-left: var(--space-1);
-    border-left: var(--space-1) solid var(--color-red);
+    padding-left: var(--space-8);
+    border-left: var(--linie-6) solid var(--color-rosa);
   }
 
   .feld:has(:user-invalid) .feld__fehler {
@@ -190,32 +198,30 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
   }
 
   .feld:has(:user-invalid) :is(input, textarea) {
-    border-color: var(--color-red);
-    outline: 2px solid var(--color-red);
+    border-color: var(--color-rosa);
+    outline: var(--linie-2) solid var(--color-rosa);
     outline-offset: 0;
-  }
-
-  /* Honeypot: für Menschen unsichtbar, für Bots ein normales Feld */
-  .feld--honig {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
   }
 
   .formular__senden {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-2) var(--space-3);
-    padding-top: var(--space-1);
+    gap: var(--space-12) var(--space-24);
   }
 
-  .formular__senden .knopf:disabled {
-    background: var(--color-line-soft);
-    color: var(--color-ink-soft);
+  .formular__knopf {
+    align-self: flex-start;
+    padding-inline: var(--space-28);
+  }
+
+  /* Deaktiviert, bis der Versand gebaut ist */
+  .formular__knopf:disabled {
+    opacity: var(--deckkraft-55);
     cursor: not-allowed;
-    text-decoration: none;
+  }
+
+  .formular__hinweis {
+    font-size: var(--size-14);
   }
 </style>

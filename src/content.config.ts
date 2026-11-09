@@ -117,6 +117,8 @@ const partner = defineCollection({
       url: z.url().optional(),
       /** logo = Logo bzw. Logo-Platzhalter, text = nur der Name in Schrift (wie im Design) */
       darstellung: z.enum(['logo', 'text']).default('logo'),
+      /** Höhe des Logos in px wie im Design (muss als Token existieren, z. B. 56, 110, 150) */
+      logo_hoehe: z.number().int().positive().default(110),
       /** Vertraglich vorgeschrieben: Logo muss gezeigt werden */
       pflicht_logo: z.boolean(),
       /** Vertraglich vorgeschrieben: Logo muss verlinkt sein */

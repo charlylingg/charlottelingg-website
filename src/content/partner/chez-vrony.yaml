@@ -4,4 +4,6 @@ kategorie: unterstuetzer
 url: https://www.chezvrony.ch
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 104
 reihenfolge: 2

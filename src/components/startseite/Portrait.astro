@@ -16,7 +16,7 @@ const text = await getText(locale, 'portrait');
   text && (
     <section
       id="portrait"
-      class="portrait flaeche-eis sektion"
+      class="portrait flaeche-hauch sektion"
       aria-labelledby="portrait-titel"
       lang={text.lang !== locale ? text.lang : undefined}
     >
@@ -39,7 +39,7 @@ const text = await getText(locale, 'portrait');
               </div>
             ))}
           </dl>
-          <a class="textlink t-display-s" href={text.data.link.ziel}>
+          <a class="textlink t-knopf" href={text.data.link.ziel}>
             {text.data.link.text}
           </a>
         </div>
@@ -53,12 +53,12 @@ const text = await getText(locale, 'portrait');
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-56);
   }
 
   .portrait__bild {
-    flex: 1 1 340px;
-    max-width: 440px;
+    flex: 1 1 var(--mass-340);
+    max-width: var(--mass-440);
   }
 
   .portrait__bild :global(.bildplatzhalter) {
@@ -66,24 +66,29 @@ const text = await getText(locale, 'portrait');
   }
 
   .portrait__text {
-    flex: 1 1 420px;
+    flex: 1 1 var(--mass-420);
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-20);
   }
 
   .steckbrief {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    padding-block: var(--space-2);
-    border-top: 1px solid var(--color-line);
-    border-bottom: 1px solid var(--color-line);
+    gap: var(--space-12) var(--space-32);
+    padding-block: var(--space-14);
+    border-top: var(--linie-1) solid var(--color-linie);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+  }
+
+  .steckbrief > div {
+    display: flex;
+    flex-direction: column;
   }
 
   .steckbrief dt {
-    color: var(--color-ink-soft);
+    color: var(--color-tinte-soft);
   }
 
   .steckbrief dd {
@@ -92,8 +97,7 @@ const text = await getText(locale, 'portrait');
 
   .steckbrief__wert {
     font-family: var(--font-display);
-    font-size: var(--type-abschnitt-size);
-    line-height: var(--type-abschnitt-line);
-    font-weight: 700;
+    font-size: var(--size-26);
+    font-weight: var(--weight-700);
   }
 </style>

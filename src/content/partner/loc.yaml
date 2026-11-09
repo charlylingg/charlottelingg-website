@@ -4,4 +4,6 @@ kategorie: anstellung
 url: https://www.olympic.li
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 110
 reihenfolge: 1

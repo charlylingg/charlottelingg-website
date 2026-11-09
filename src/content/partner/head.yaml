@@ -4,4 +4,6 @@ kategorie: ausruester
 url: https://www.head.com
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 36
 reihenfolge: 1

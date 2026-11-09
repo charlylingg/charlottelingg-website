@@ -5,4 +5,6 @@ url: https://www.mbpi.li/de/
 # Vertraglich: Logo zeigen. Nie entfernen.
 pflicht_logo: true
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 110
 reihenfolge: 1

@@ -28,7 +28,7 @@ const gruppen = (['Weltcup', 'Europacup'] as const).map((stufe, i) => {
   return {
     stufe,
     titel: tSchluessel(locale, `stufe.${stufe}`, stufe),
-    farbe: i === 0 ? ('red' as const) : ('navy' as const),
+    farbe: i === 0 ? ('rosa' as const) : ('beere' as const),
     sichtbar: liste.slice(0, SICHTBAR),
     weitere: liste.slice(SICHTBAR),
   };
@@ -49,12 +49,12 @@ const zeile = (r: Rennen) => ({
   text && (
     <section
       id="rennen"
-      class="rennkalender flaeche-eis sektion"
+      class="rennkalender flaeche-hauch sektion"
       aria-labelledby="rennen-titel"
       lang={text.lang !== locale ? text.lang : undefined}
     >
       <div class="rennkalender__innen inhalt">
-        <div class="rennkalender__intro">
+        <div class="rennkalender__intro sektion-kopf">
           {text.entwurf && <EntwurfLabel locale={locale} />}
           <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
           <h2 id="rennen-titel" class="t-titel">
@@ -66,8 +66,8 @@ const zeile = (r: Rennen) => ({
         <div class="rennkalender__gruppen">
           {gruppen.map((g) => (
             <div class="gruppe">
-              <h3 class="gruppe__titel t-abschnitt">
-                <Torflagge farbe={g.farbe} groesse="klein" />
+              <h3 class="gruppe__titel">
+                <Torflagge farbe={g.farbe} breite={12} hoehe={28} />
                 {g.titel}
               </h3>
               <ol role="list" class="rennliste">
@@ -77,11 +77,11 @@ const zeile = (r: Rennen) => ({
                     <li class="renn-zeile">
                       <span class="renn-zeile__datum">{z.datum}</span>
                       <span class="renn-zeile__ort">
-                        <strong class="t-display-s">{z.ort}</strong>
-                        {z.land && <span class="t-klein renn-zeile__land">{z.land}</span>}
+                        <strong class="renn-zeile__name">{z.ort}</strong>
+                        {z.land && <span class="renn-zeile__land">{z.land}</span>}
                         {z.hinweis && (
-                          <span class="t-klein renn-zeile__hinweis">
-                            <Torflagge farbe="red" groesse="klein" />
+                          <span class="renn-zeile__hinweis">
+                            <Torflagge farbe="rosa" breite={6} hoehe={12} />
                             {z.hinweis}
                           </span>
                         )}
@@ -93,10 +93,10 @@ const zeile = (r: Rennen) => ({
               </ol>
               {g.weitere.length > 0 && (
                 <details class="rennliste-mehr">
-                  <summary class="rennliste-mehr__knopf ohne-marker t-display-s">
+                  <summary class="rennliste-mehr__knopf ohne-marker t-mehr">
                     <span class="wenn-zu">{tf(locale, 'rennen.weitere', { n: g.weitere.length })}</span>
                     <span class="wenn-offen">{t(locale, 'rennen.weniger')}</span>
-                    <span class="aufklapp-zeichen rennliste-mehr__plus" aria-hidden="true">
+                    <span class="aufklapp-zeichen" aria-hidden="true">
                       +
                     </span>
                   </summary>
@@ -107,11 +107,11 @@ const zeile = (r: Rennen) => ({
                         <li class="renn-zeile">
                           <span class="renn-zeile__datum">{z.datum}</span>
                           <span class="renn-zeile__ort">
-                            <strong class="t-display-s">{z.ort}</strong>
-                            {z.land && <span class="t-klein renn-zeile__land">{z.land}</span>}
+                            <strong class="renn-zeile__name">{z.ort}</strong>
+                            {z.land && <span class="renn-zeile__land">{z.land}</span>}
                             {z.hinweis && (
-                              <span class="t-klein renn-zeile__hinweis">
-                                <Torflagge farbe="red" groesse="klein" />
+                              <span class="renn-zeile__hinweis">
+                                <Torflagge farbe="rosa" breite={6} hoehe={12} />
                                 {z.hinweis}
                               </span>
                             )}
@@ -129,7 +129,7 @@ const zeile = (r: Rennen) => ({
           ))}
         </div>
 
-        <p class="t-klein rennkalender__quelle">{text.data.quelle}</p>
+        <p class="rennkalender__quelle">{text.data.quelle}</p>
       </div>
     </section>
   )
@@ -139,96 +139,101 @@ const zeile = (r: Rennen) => ({
   .rennkalender__innen {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-40);
   }
 
   .rennkalender__intro {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    max-width: 760px;
+    max-width: var(--mass-760);
   }
 
   .rennkalender__gruppen {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
-    gap: var(--space-4) calc(var(--space-4) + var(--space-2));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-440)), 1fr));
+    gap: var(--space-48) var(--space-64);
   }
 
   .gruppe {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: var(--space-8);
     min-width: 0;
   }
 
   .gruppe__titel {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-1);
+    gap: var(--space-12);
+    margin-bottom: var(--space-8);
+    font-size: var(--size-34);
+    text-transform: uppercase;
   }
 
   .rennliste {
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: var(--linie-1) solid var(--color-linie-soft);
   }
 
   .renn-zeile {
     display: grid;
-    grid-template-columns: 150px minmax(0, 1fr) auto;
+    grid-template-columns: var(--mass-150) minmax(0, 1fr) auto;
     align-items: center;
-    gap: var(--space-1) var(--space-3);
-    padding-block: var(--space-2);
-    border-top: 1px solid var(--color-line);
+    gap: var(--space-8) var(--space-20);
+    padding-block: var(--space-16);
+    border-top: var(--linie-1) solid var(--color-linie-soft);
   }
 
   .renn-zeile__datum {
     font-family: var(--font-display);
-    font-size: var(--type-lead-size);
-    font-weight: 600;
-    color: var(--color-ink-soft);
-    font-variant-numeric: tabular-nums;
+    font-size: var(--size-19);
+    font-weight: var(--weight-600);
+    color: var(--color-tinte-soft);
   }
 
   .renn-zeile__ort {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--space-1) / 4);
+    gap: var(--space-2);
+  }
+
+  .renn-zeile__name {
+    font-family: var(--font-display);
+    font-size: var(--size-24);
+    font-weight: var(--weight-700);
+    line-height: var(--line-105);
+    text-transform: uppercase;
   }
 
   .renn-zeile__land {
-    color: var(--color-ink-soft);
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
   }
 
+  /* Im Design rosa; als Fliesstext in beere wegen Kontrast (rosa auf hauch 3.5:1) */
   .renn-zeile__hinweis {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1);
-    font-weight: var(--type-lead-weight);
-    color: var(--color-navy);
-  }
-
-  .renn-zeile__hinweis :global(.torflagge) {
-    height: var(--space-2);
+    gap: var(--space-6);
+    font-size: var(--size-13);
+    font-weight: var(--weight-500);
+    color: var(--color-beere);
   }
 
   .renn-zeile__kuerzel {
     justify-self: end;
-    padding: calc(var(--space-1) / 2) var(--space-2);
-    color: var(--color-paper);
+    padding: var(--space-4) var(--space-12);
+    color: var(--color-papier);
     font-family: var(--font-display);
-    font-size: var(--type-kicker-size);
-    font-weight: 600;
-    letter-spacing: var(--type-label-tracking);
+    font-size: var(--size-15);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-06);
     white-space: nowrap;
   }
 
-  .renn-zeile__kuerzel--red {
-    --flagge: var(--color-red);
+  .renn-zeile__kuerzel--rosa {
+    --flagge: var(--color-rosa);
   }
 
-  .renn-zeile__kuerzel--navy {
-    --flagge: var(--color-navy);
+  .renn-zeile__kuerzel--beere {
+    --flagge: var(--color-beere);
   }
 
   @media (max-width: 560px) {
@@ -241,17 +246,29 @@ const zeile = (r: Rennen) => ({
     }
   }
 
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes zeile-rein {
+        from {
+          opacity: 0;
+          transform: translateX(calc(-1 * var(--space-40)));
+        }
+      }
+
+      .renn-zeile {
+        animation: zeile-rein linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 20%;
+      }
+    }
+  }
+
   .rennliste-mehr__knopf {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1);
-    min-height: 44px;
-    padding-block: var(--space-1);
-    color: var(--color-navy);
-  }
-
-  .rennliste-mehr__plus {
-    font-size: var(--type-abschnitt-size);
+    gap: var(--space-10);
+    padding-block: var(--space-14);
+    color: var(--color-beere);
   }
 
   .rennliste-mehr > .rennliste {
@@ -259,6 +276,7 @@ const zeile = (r: Rennen) => ({
   }
 
   .rennkalender__quelle {
-    color: var(--color-ink-soft);
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
   }
 </style>

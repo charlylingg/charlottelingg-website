@@ -10,13 +10,15 @@ interface Props {
 const { locale, class: className } = Astro.props;
 ---
 
-<span class:list={['entwurf-label t-label flaeche-red', className]}>{t(locale, 'entwurf.label')}</span>
+<span class:list={['entwurf-label t-label', className]}>{t(locale, 'entwurf.label')}</span>
 
 <style>
   .entwurf-label {
     align-self: flex-start;
     justify-self: start;
     display: inline-block;
-    padding: calc(var(--space-1) / 2) var(--space-1);
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-aubergine);
+    color: var(--color-papier);
   }
 </style>

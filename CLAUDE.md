@@ -13,7 +13,8 @@ Website von Charlotte Lingg, Skirennfahrerin im Nationalkader des Liechtensteini
 - Vor jedem Pull Request: npm run build und npm run check fehlerfrei, Mobilansicht 375px ohne horizontales Scrollen, alle geänderten Links funktionieren.
 
 ## Struktur
-- design/tokens.json, src/styles/tokens.css: Designsystem. Einzige Quelle für Farben, Schriften, Abstände, Formen.
+- design/tokens.json, src/styles/tokens.css: Designsystem (Website: Thema «Beere»; Dossier: Thema «Torlauf»). Einzige Quelle für Farben, Schriften, Abstände, Formen.
+- design/referenz/startseite.dc.html: freigegebenes Design der Startseite, massgebend für die Website.
 - src/content/texte/de und src/content/texte/fr: Texte der Sektionen.
 - src/content/resultate, src/content/rennen, src/content/partner: strukturierte Daten. Länder als ISO-Alpha-3 wie bei der FIS (LIE, SUI, AUT).
 - src/i18n/de.json, src/i18n/fr.json: feste Oberflächentexte.
@@ -21,10 +22,15 @@ Website von Charlotte Lingg, Skirennfahrerin im Nationalkader des Liechtensteini
 - public/bilder: Bilder. LIZENZEN.md: Nachweis für jedes Bild.
 
 ## Design
-- Nur Werte aus den Tokens verwenden. Keine neuen Farben, keine neuen Schriften, keine Schatten, keine Verläufe.
-- Radius überall 0. Erkennungszeichen ist die Schräge -12deg (Torflaggen, Schnittkanten).
-- Display-Schrift Barlow Condensed nur für Titel, Zahlen, Kicker. Fliesstext Barlow.
-- Kontrast mindestens 4.5:1. red nie für Fliesstext.
+- Massgebend für die Website ist das Design in design/referenz/startseite.dc.html.
+- Die Website nutzt das Thema «Beere» aus design/tokens.json (themen.beere), gespiegelt in src/styles/tokens.css. Keine Werte ausserhalb der Tokens: Farben, Schriften, Schriftgrössen, Abstände, Masse, Schatten und Deckkraft immer über var(--…). Fehlt ein Wert, zuerst in beiden Token-Dateien ergänzen. Breakpoints stehen in tokens.json und werden in Media Queries wörtlich geschrieben. Ausnahme: technische Hilfen für Screenreader (visually-hidden, 1px).
+- Das Thema «Torlauf» (themen.torlauf) gilt nur für das Dossier und wird auf der Website nicht verwendet.
+- Schriften: Barlow Condensed für Titel, Zahlen, Kicker, Navigation, Buttons und Labels; Barlow für Fliesstext (17px). Schriften lokal (Fontsource).
+- Radius 0. Rund sind nur Medaillen und das Instagram-Zeichen. Erkennungszeichen ist die Schräge -12deg (Flaggen, Kicker, Schnittkanten).
+- Text in schrägen Flächen steht gerade (keine Kursivschrift): nur die Fläche wird schräg gestellt (Klassen kicker-flagge, schraeg-flaeche).
+- Fliesstext mit Kontrast mindestens 4.5:1. rosa nie für Fliesstext, kein Fliesstext in papier auf rosa.
+- Formularfelder mindestens 16px Schrift (Design: 17px).
+- Landesflagge in der Kopfzeile bleibt (Farben flagge-* in den Tokens).
 
 ## Sprache und Ton
 - Schweizer Rechtschreibung: ss statt ß, Datum TT.MM.JJJJ, CHF mit Apostroph (CHF 15'000).

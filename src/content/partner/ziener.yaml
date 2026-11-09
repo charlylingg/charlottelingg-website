@@ -4,4 +4,6 @@ kategorie: ausruester
 url: https://ziener.com
 pflicht_logo: false
 pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 46
 reihenfolge: 2
