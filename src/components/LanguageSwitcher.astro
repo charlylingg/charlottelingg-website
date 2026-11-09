@@ -1,0 +1,74 @@
+---
+/**
+ * Sprachumschalter: wechselt auf die gleiche Seite in der anderen Sprache.
+ * Gibt es eine Seite nur in einer Sprache (hasTranslation = false),
+ * führt der Link zur Startseite der anderen Sprache.
+ */
+import { locales, localizePath, t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  hasTranslation?: boolean;
+}
+
+const { locale, hasTranslation = true } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<nav class="lang" aria-label={t(locale, 'lang.label')}>
+  <ul role="list">
+    {
+      locales.map((l) => (
+        <li>
+          {l === locale ? (
+            <span class="lang__item t-label" aria-current="true" title={t(l, `lang.${l}`)}>
+              {l.toUpperCase()}
+            </span>
+          ) : (
+            <a
+              class="lang__item t-label"
+              href={hasTranslation ? localizePath(path, l) : localizePath('/', l)}
+              hreflang={l}
+              lang={l}
+              title={t(l, `lang.${l}`)}
+            >
+              <span aria-hidden="true">{l.toUpperCase()}</span>
+              <span class="visually-hidden">{t(l, `lang.${l}`)}</span>
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .lang ul {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .lang__item {
+    display: inline-block;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 14px var(--space-1);
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .lang__item[aria-current] {
+    background: var(--color-navy);
+    color: var(--color-paper);
+  }
+
+  a.lang__item {
+    color: var(--color-navy);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  a.lang__item:hover {
+    box-shadow: inset 0 0 0 2px var(--color-navy);
+  }
+</style>

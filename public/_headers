@@ -1,0 +1,18 @@
+# Sicherheits-Header für Cloudflare Workers (statische Assets).
+# X-Robots-Tag: noindex gilt bis zum Go-live und wird dann entfernt (siehe README, «Go-live-Merkliste»).
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  X-Frame-Options: DENY
+  X-Robots-Tag: noindex
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable

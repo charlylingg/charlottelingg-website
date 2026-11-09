@@ -1,0 +1,14 @@
+// Einzige hosting-spezifische Datei: Cloudflare Workers mit statischen Assets (Workers Builds).
+// Ausgeliefert wird der Ordner dist. Sicherheits-Header stehen in public/_headers.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "charlottelingg",
+  "compatibility_date": "2026-11-09",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "previews": {}
+}

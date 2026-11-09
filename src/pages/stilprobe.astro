@@ -1,0 +1,232 @@
+---
+/**
+ * TEMPORÄR – Stilprobe des Designsystems «Torlauf».
+ * Dient zur Prüfung in der Vorschau. Vor dem Go-live löschen.
+ */
+import Base from '../layouts/Base.astro';
+import Torflagge from '../components/Torflagge.astro';
+import tokens from '../../design/tokens.json';
+
+const farben = Object.entries(tokens.color).map(([name, wert]) => ({
+  name,
+  wert: wert.startsWith('{') ? 'navy' : wert,
+  css: `var(--color-${name})`,
+}));
+const dunkel = new Set(['navy', 'red', 'nacht', 'ink', 'ink-soft', 'link']);
+
+const stufen = [
+  { name: 'mega', text: 'Charlotte Lingg' },
+  { name: 'titel', text: 'Saison 2026/27' },
+  { name: 'zahl', text: '1:52.34' },
+  { name: 'abschnitt', text: 'Resultate' },
+  { name: 'zitat', text: '«Jeder Lauf beginnt im Kopf.» (Beispielzitat)' },
+  { name: 'kicker', text: 'Ski Alpin · Liechtenstein' },
+  { name: 'lead', text: 'Ein Einleitungssatz für eine Sektion, etwas grösser und kräftiger als der Fliesstext.' },
+  {
+    name: 'text',
+    text: 'Fliesstext mit Umlauten und Sonderzeichen: Ä Ö Ü ä ö ü ß é è à ç – Grösse, Zürich, Malbun, Val-d’Isère. Er bleibt auf allen Bildschirmen mindestens 15 Pixel gross.',
+  },
+  { name: 'text-fett', text: 'Fliesstext fett für Hervorhebungen.' },
+  { name: 'label', text: 'Riesenslalom · Rang' },
+  { name: 'klein', text: 'Kleiner Text für Bildnachweise und Fussnoten. Foto: [FOTOGRAF]' },
+];
+---
+
+<Base title="Stilprobe" hasTranslation={false} noindex>
+  <div class="container stilprobe">
+    <p class="t-label hinweis flaeche-red">Temporär · wird vor dem Go-live entfernt</p>
+    <h1 class="t-titel">Stilprobe «Torlauf»</h1>
+
+    <section aria-labelledby="farben">
+      <h2 id="farben" class="t-abschnitt">Farben</h2>
+      <ul role="list" class="farben">
+        {
+          farben.map((f) => (
+            <li class="farbe">
+              <span
+                class="farbe__flaeche"
+                style={`background:${f.css};color:${dunkel.has(f.name) ? 'var(--color-paper)' : 'var(--color-ink)'}`}
+              >
+                <span class="t-label">{f.name}</span>
+              </span>
+              <span class="t-klein farbe__wert">{f.wert}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="t-klein regeln">
+        {tokens.colorRules.map((r) => <li>{r}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="typo">
+      <h2 id="typo" class="t-abschnitt">Typo-Stufen</h2>
+      <dl class="stufen">
+        {
+          stufen.map((s) => {
+            const def = tokens.type[s.name as keyof typeof tokens.type];
+            return (
+              <div class="stufe">
+                <dt class="t-label stufe__name">
+                  {s.name}
+                  <span class="t-klein stufe__werte">
+                    {def.size} / {def.lineHeight} / {def.weight}
+                  </span>
+                </dt>
+                <dd class={`t-${s.name}`}>{s.text}</dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </section>
+
+    <section aria-labelledby="form">
+      <h2 id="form" class="t-abschnitt">Form: die Schräge</h2>
+      <p class="t-text">Schräge {tokens.shape.schraege}. Radius überall 0, einzige Ausnahme der Punkt im Zielbogen.</p>
+      <div class="form-beispiele">
+        <Torflagge farbe="red" />
+        <Torflagge farbe="navy" />
+        <span class="punkt" aria-hidden="true"></span>
+      </div>
+      <div class="schnittkante flaeche-navy">
+        <p class="t-abschnitt">Schnittkante</p>
+        <p class="t-text">Text in paper auf navy. <a href="#form">Link auf dunkler Fläche</a></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="abstaende">
+      <h2 id="abstaende" class="t-abschnitt">Abstände</h2>
+      <ul role="list" class="abstaende">
+        {
+          ['space-1', 'space-2', 'space-3', 'space-4'].map((s) => (
+            <li>
+              <span class="abstand" style={`width:var(--${s})`} />
+              <span class="t-klein">
+                {s} · {tokens.space[s as 'space-1']}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="t-text">
+        Seitenrand: 72px auf dem Desktop, 16–24px auf dem Handy. <a href="/">Beispiel-Link zur Startseite</a>
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .stilprobe {
+    padding-block: var(--space-4);
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .stilprobe section {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .stilprobe h2 {
+    padding-bottom: var(--space-1);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .hinweis {
+    justify-self: start;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .farben {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-2);
+  }
+
+  .farbe {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .farbe__flaeche {
+    display: flex;
+    align-items: flex-end;
+    height: 96px;
+    padding: var(--space-1);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  .farbe__wert {
+    color: var(--color-ink-soft);
+  }
+
+  .regeln {
+    color: var(--color-ink-soft);
+    padding-left: var(--space-3);
+  }
+
+  .stufen {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .stufe {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-line-soft);
+  }
+
+  .stufe__name {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    color: var(--color-ink-soft);
+  }
+
+  .stufe__werte {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .form-beispiele {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-4);
+    padding-left: var(--space-3);
+  }
+
+  .punkt {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: var(--color-red);
+    border-radius: var(--radius-punkt);
+  }
+
+  .schnittkante {
+    padding: var(--space-4) calc(var(--space-3) + 40px) var(--space-4) var(--space-3);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%);
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .abstaende {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .abstaende li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .abstand {
+    display: inline-block;
+    height: var(--space-2);
+    background: var(--color-navy);
+  }
+</style>
