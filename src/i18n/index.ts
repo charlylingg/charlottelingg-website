@@ -27,6 +27,21 @@ export function t(locale: Locale, key: UiKey): string {
   return dictionaries[locale][key] ?? dictionaries[defaultLocale][key];
 }
 
+/** Text mit Platzhaltern: t(locale, 'rennen.weitere', { n: 11 }) -> «Alle 11 weiteren Rennen» */
+export function tf(locale: Locale, key: UiKey, werte: Record<string, string | number>): string {
+  return t(locale, key).replace(/\{(\w+)\}/g, (_, name: string) => String(werte[name] ?? `{${name}}`));
+}
+
+/**
+ * Text zu einem zusammengesetzten Schlüssel, z. B. `land.${code}`.
+ * Fehlt der Schlüssel, kommt der Ersatzwert zurück (z. B. der Ländercode selbst).
+ */
+export function tSchluessel(locale: Locale, key: string, ersatz: string): string {
+  const dict = dictionaries[locale] as Record<string, string>;
+  const ref = dictionaries[defaultLocale] as Record<string, string>;
+  return dict[key] ?? ref[key] ?? ersatz;
+}
+
 /** Gibt eine Funktion zurück, die an eine Sprache gebunden ist: const tr = useT('fr'); tr('nav.home') */
 export function useT(locale: Locale) {
   return (key: UiKey) => t(locale, key);

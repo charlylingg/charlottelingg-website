@@ -1,0 +1,49 @@
+---
+/** Gerüst für Impressum und Datenschutz. Inhalt folgt in einem eigenen Auftrag. */
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import EntwurfLabel from './EntwurfLabel.astro';
+import { getText } from '../lib/inhalte';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  seite: 'impressum' | 'datenschutz';
+}
+
+const { locale, seite } = Astro.props;
+const text = await getText(locale, seite);
+const Inhalt = text ? (await render(text.eintrag)).Content : undefined;
+---
+
+<Base title={text?.data.titel} description={text?.data.seo_beschreibung}>
+  {
+    text && Inhalt && (
+      <section class="rechtsseite sektion" lang={text.lang !== locale ? text.lang : undefined}>
+        <div class="rechtsseite__innen inhalt">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <h1 class="t-titel">{text.data.titel}</h1>
+          <div class="rechtsseite__text">
+            <Inhalt />
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>
+
+<style>
+  .rechtsseite__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-height: 50vh;
+  }
+
+  .rechtsseite__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 760px;
+  }
+</style>

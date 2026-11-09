@@ -1,0 +1,124 @@
+---
+/** Unterwegs: Hinweis auf Instagram. Nur ein Link, kein eingebetteter Feed, keine externen Skripte. */
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { t, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'unterwegs');
+const kacheln = ['eis', 'line-soft', 'eis', 'line-soft', 'eis', 'line-soft'];
+---
+
+<svg width="0" height="0" class="visually-hidden" aria-hidden="true">
+  <symbol id="instagram-zeichen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+    <circle cx="12" cy="12" r="4"></circle>
+    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle>
+  </symbol>
+</svg>
+
+{
+  text && (
+    <section
+      id="unterwegs"
+      class="unterwegs flaeche-paper sektion"
+      aria-labelledby="unterwegs-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="unterwegs__innen inhalt">
+        <div class="unterwegs__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="unterwegs-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.text}</p>
+          <a class="knopf knopf--rot t-display-s unterwegs__knopf" href={text.data.instagram.url} target="_blank" rel="noopener">
+            <svg class="unterwegs__zeichen" aria-hidden="true">
+              <use href="#instagram-zeichen" />
+            </svg>
+            {text.data.instagram.text}
+            <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
+          </a>
+        </div>
+        <a
+          class="kacheln"
+          href={text.data.instagram.url}
+          target="_blank"
+          rel="noopener"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          {kacheln.map((flaeche, i) => (
+            <span class="kachel" style={`background: var(--color-${flaeche}); color: var(--color-${i % 3 === 2 ? 'red' : 'navy'})`}>
+              <svg class="kachel__zeichen">
+                <use href="#instagram-zeichen" />
+              </svg>
+            </span>
+          ))}
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .unterwegs__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) calc(var(--space-4) + var(--space-2));
+  }
+
+  .unterwegs__text {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .unterwegs__knopf {
+    align-self: flex-start;
+    gap: var(--space-2);
+  }
+
+  .unterwegs__zeichen {
+    width: var(--space-3);
+    height: var(--space-3);
+  }
+
+  .kacheln {
+    flex: 1.4 1 420px;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  .kachel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+  }
+
+  .kachel__zeichen {
+    width: calc(var(--space-3) + var(--space-1) / 2);
+    height: calc(var(--space-3) + var(--space-1) / 2);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .kachel {
+      transition: opacity 0.2s;
+    }
+  }
+
+  .kacheln:hover .kachel {
+    opacity: 0.75;
+  }
+</style>

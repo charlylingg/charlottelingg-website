@@ -1,0 +1,221 @@
+---
+/**
+ * Kontakt mit Formular – nur die Oberfläche. Der Versand folgt in einem eigenen Auftrag.
+ * Bis dahin ist der Senden-Knopf deaktiviert. Das Formular wird nirgends hingeschickt.
+ * Fehlermeldungen erscheinen ohne JavaScript, sobald ein Feld nach der Eingabe ungültig ist (:user-invalid).
+ * Honeypot-Feld «website» ist für Menschen unsichtbar (Spam-Schutz für später).
+ */
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { t, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'kontakt');
+const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map((a) => t(locale, `form.anliegen.${a}`));
+---
+
+{
+  text && (
+    <section
+      id="kontakt"
+      class="kontakt flaeche-nacht sektion"
+      aria-labelledby="kontakt-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="kontakt__innen inhalt">
+        <div class="kontakt__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <h2 id="kontakt-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p class="t-lead">{text.data.text}</p>
+        </div>
+
+        <form class="formular" aria-label={t(locale, 'form.label')} lang={locale}>
+          <p class="t-klein formular__legende">{t(locale, 'form.pflicht_legende')}</p>
+          <div class="formular__reihe">
+            <div class="feld">
+              <label for="kontakt-name">
+                {t(locale, 'form.name')} <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="kontakt-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="kontakt-name-fehler"
+              />
+              <p id="kontakt-name-fehler" class="feld__fehler t-klein">
+                {t(locale, 'form.fehler.name')}
+              </p>
+            </div>
+            <div class="feld">
+              <label for="kontakt-email">
+                {t(locale, 'form.email')} <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="kontakt-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                required
+                aria-describedby="kontakt-email-fehler"
+              />
+              <p id="kontakt-email-fehler" class="feld__fehler t-klein">
+                {t(locale, 'form.fehler.email')}
+              </p>
+            </div>
+          </div>
+          <div class="feld">
+            <label for="kontakt-anliegen">
+              {t(locale, 'form.anliegen')} <span aria-hidden="true">*</span>
+            </label>
+            <select id="kontakt-anliegen" name="anliegen" required>
+              {anliegen.map((a) => (
+                <option>{a}</option>
+              ))}
+            </select>
+          </div>
+          <div class="feld">
+            <label for="kontakt-nachricht">
+              {t(locale, 'form.nachricht')} <span aria-hidden="true">*</span>
+            </label>
+            <textarea id="kontakt-nachricht" name="nachricht" rows="4" required aria-describedby="kontakt-nachricht-fehler" />
+            <p id="kontakt-nachricht-fehler" class="feld__fehler t-klein">
+              {t(locale, 'form.fehler.nachricht')}
+            </p>
+          </div>
+
+          <div class="feld feld--honig" aria-hidden="true">
+            <label for="kontakt-website">{t(locale, 'form.honeypot')}</label>
+            <input id="kontakt-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="formular__senden">
+            <button class="knopf knopf--rot t-display-s" type="submit" disabled aria-describedby="kontakt-inaktiv">
+              {t(locale, 'form.senden')}
+            </button>
+            <p id="kontakt-inaktiv" class="formular__hinweis">
+              {t(locale, 'form.inaktiv')}
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .kontakt {
+    padding-bottom: var(--space-4);
+  }
+
+  .kontakt__innen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .kontakt__text {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .kontakt__text .t-lead {
+    max-width: 26rem;
+  }
+
+  .formular {
+    flex: 1.4 1 420px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .formular__reihe {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: var(--space-2);
+  }
+
+  .feld {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .feld input,
+  .feld select,
+  .feld textarea {
+    width: 100%;
+    min-height: var(--space-4);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-line);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    /* mind. 16px, sonst zoomt iOS beim Antippen */
+    font-size: var(--type-lead-size);
+  }
+
+  .feld textarea {
+    resize: vertical;
+  }
+
+  .feld input:focus-visible,
+  .feld select:focus-visible,
+  .feld textarea:focus-visible {
+    outline: 3px solid var(--color-paper);
+    outline-offset: 2px;
+  }
+
+  /* Fehlermeldung erst nach einer ungültigen Eingabe zeigen */
+  .feld__fehler {
+    display: none;
+    padding-left: var(--space-1);
+    border-left: var(--space-1) solid var(--color-red);
+  }
+
+  .feld:has(:user-invalid) .feld__fehler {
+    display: block;
+  }
+
+  .feld:has(:user-invalid) :is(input, textarea) {
+    border-color: var(--color-red);
+    outline: 2px solid var(--color-red);
+    outline-offset: 0;
+  }
+
+  /* Honeypot: für Menschen unsichtbar, für Bots ein normales Feld */
+  .feld--honig {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .formular__senden {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    padding-top: var(--space-1);
+  }
+
+  .formular__senden .knopf:disabled {
+    background: var(--color-line-soft);
+    color: var(--color-ink-soft);
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+</style>

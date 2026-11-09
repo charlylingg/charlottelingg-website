@@ -1,0 +1,99 @@
+---
+/** Eigene Seite eines Blogbeitrags: /blog/<slug> bzw. /fr/blog/<slug> */
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Bildplatzhalter from './Bildplatzhalter.astro';
+import EntwurfLabel from './EntwurfLabel.astro';
+import Torflagge from './Torflagge.astro';
+import type { BlogAufgeloest } from '../lib/inhalte';
+import { blogDatum } from '../lib/format';
+import { localizePath, t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  beitrag: BlogAufgeloest;
+  /** Gibt es den Beitrag auch in der anderen Sprache? */
+  hasTranslation: boolean;
+}
+
+const { locale, beitrag, hasTranslation } = Astro.props;
+const { Content } = await render(beitrag.eintrag);
+const datum = blogDatum(beitrag.data.datum, beitrag.lang);
+const zeile = [beitrag.data.kategorie, [beitrag.data.ort, datum].filter(Boolean).join(', ')]
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<Base title={beitrag.data.titel} description={beitrag.data.teaser} hasTranslation={hasTranslation}>
+  <article class="beitrag sektion" lang={beitrag.lang !== locale ? beitrag.lang : undefined}>
+    <div class="beitrag__innen inhalt">
+      <a class="textlink t-display-s beitrag__zurueck" href={`${localizePath('/', locale)}#blog`} lang={locale}>
+        ← {t(locale, 'blog.zurueck')}
+      </a>
+      {beitrag.entwurf && <EntwurfLabel locale={locale} />}
+      <p class="t-kicker beitrag__zeile">{zeile}</p>
+      <h1 class="t-titel beitrag__titel">
+        {beitrag.data.titel}
+      </h1>
+      <p class="t-lead beitrag__teaser">{beitrag.data.teaser}</p>
+      {
+        beitrag.data.bild && (
+          <Bildplatzhalter
+            stelle={`Blog «${beitrag.data.titel}»`}
+            format="Querformat 16:10"
+            verhaeltnis="16 / 10"
+            alt={beitrag.data.bild_alt}
+          />
+        )
+      }
+      <div class="beitrag__text">
+        <Content />
+      </div>
+      <Torflagge farbe="red" groesse="klein" />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .beitrag__innen {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    max-width: calc(760px + 2 * var(--seitenrand));
+  }
+
+  .beitrag__zeile {
+    color: var(--color-red);
+  }
+
+  .beitrag__teaser {
+    color: var(--color-ink-soft);
+  }
+
+  .beitrag__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .beitrag__text :global(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: 0;
+    list-style: none;
+  }
+
+  .beitrag__text :global(li) {
+    display: grid;
+    grid-template-columns: var(--space-4) minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .beitrag__text :global(li strong) {
+    font-family: var(--font-display);
+    font-size: var(--type-lead-size);
+    color: var(--color-navy);
+  }
+</style>

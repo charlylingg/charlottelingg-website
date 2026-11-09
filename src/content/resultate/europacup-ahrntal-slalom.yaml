@@ -1,0 +1,10 @@
+# Aus dem Design übernommen, noch NICHT gegen die FIS-Resultatliste geprüft.
+geprueft: false
+datum: "[DATUM]"
+saison: "[SAISON]"
+stufe: Europacup
+disziplin: Slalom
+ort: "Ahrntal"
+land: ITA
+rang: 3
+fis_link: "[FIS-LINK]"

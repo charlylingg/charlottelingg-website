@@ -1,0 +1,8 @@
+# Logo folgt (bis dahin Platzhalter mit dem Namen).
+name: "Kaiser AG"
+kategorie: kopfsponsoren
+url: https://www.kaiser.li
+# Vertraglich: Logo zeigen und verlinken. Nie entfernen.
+pflicht_logo: true
+pflicht_link: true
+reihenfolge: 2

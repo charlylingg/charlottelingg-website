@@ -1,0 +1,16 @@
+---
+import BlogBeitrag from '../../components/BlogBeitrag.astro';
+import { getBlogSeiten } from '../../lib/inhalte';
+
+export async function getStaticPaths() {
+  const fr = new Set((await getBlogSeiten('fr')).map((b) => b.slug));
+  return (await getBlogSeiten('de')).map((beitrag) => ({
+    params: { slug: beitrag.slug },
+    props: { beitrag, hasTranslation: fr.has(beitrag.slug) },
+  }));
+}
+
+const { beitrag, hasTranslation } = Astro.props;
+---
+
+<BlogBeitrag locale="de" beitrag={beitrag} hasTranslation={hasTranslation} />

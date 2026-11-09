@@ -14,6 +14,20 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Anker-Sprünge landen unter dem fixierten Kopf */
+  scroll-padding-top: calc(var(--space-4) + var(--space-4));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (min-width: 1100px) {
+  html {
+    scroll-padding-top: calc(var(--space-4) * 3);
+  }
 }
 
 body {
@@ -134,6 +148,194 @@ a:hover {
 /* Seitenrand */
 .container {
   padding-inline: var(--seitenrand);
+}
+
+/* Inhaltsbreite wie im Design: max. 1280px plus Seitenrand */
+.inhalt {
+  width: 100%;
+  max-width: calc(1280px + 2 * var(--seitenrand));
+  margin-inline: auto;
+  padding-inline: var(--seitenrand);
+}
+
+/* Vertikaler Abstand einer Sektion: 48px Handy, 96px Desktop */
+.sektion {
+  padding-block: var(--space-4);
+}
+
+@media (min-width: 821px) {
+  .sektion {
+    padding-block: calc(2 * var(--space-4));
+  }
+}
+
+/*
+ * Schräge Flagge (Erkennungszeichen): nur die Fläche ist schräg, der Text bleibt gerade
+ * (keine Kursivschrift). Farbe über --flagge.
+ */
+.schraeg-flaeche {
+  position: relative;
+  isolation: isolate;
+}
+
+.schraeg-flaeche::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--flagge, var(--color-navy));
+  transform: skewX(var(--schraege));
+}
+
+/* Kicker als schräge Flagge */
+.kicker-flagge {
+  align-self: flex-start;
+  justify-self: start;
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  position: relative;
+  isolation: isolate;
+  color: var(--color-paper);
+}
+
+.kicker-flagge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--flagge, var(--color-navy));
+  transform: skewX(var(--schraege));
+}
+
+.kicker-flagge--rot {
+  --flagge: var(--color-red);
+}
+
+/* Display-Schrift klein (Buttons, Ortsnamen, Zwischentitel) */
+.t-display-s {
+  font-family: var(--font-display);
+  font-size: var(--type-lead-size);
+  line-height: var(--type-kicker-line);
+  font-weight: 700;
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+
+/* Display-Schrift gross (Kachel- und Untertitel) */
+.t-display-l {
+  font-family: var(--font-display);
+  font-size: var(--type-zitat-size);
+  line-height: var(--type-abschnitt-line);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Buttons */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--space-4);
+  padding-inline: var(--space-3);
+  text-decoration: none;
+  border: 0;
+}
+
+.knopf:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.knopf--hell {
+  background: var(--color-paper);
+  color: var(--color-navy);
+}
+
+.flaeche-nacht .knopf--hell {
+  color: var(--color-nacht);
+}
+
+.knopf--rot {
+  background: var(--color-red);
+  color: var(--color-paper);
+}
+
+.knopf--navy {
+  background: var(--color-navy);
+  color: var(--color-paper);
+}
+
+/* Auf dunklen Flächen erbt ein Link sonst paper: Buttons behalten ihre Farbe */
+.flaeche-navy a.knopf--hell,
+.flaeche-red a.knopf--hell {
+  color: var(--color-navy);
+}
+
+.flaeche-nacht a.knopf--hell {
+  color: var(--color-nacht);
+}
+
+/* Textlink in Display-Schrift */
+.textlink {
+  align-self: flex-start;
+  justify-self: start;
+  display: inline-block;
+  padding-block: var(--space-1);
+  color: var(--color-link);
+}
+
+/* «+» für Aufklapp-Elemente (details/summary), dreht sich beim Öffnen */
+.aufklapp-zeichen {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-red);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aufklapp-zeichen {
+    transition: transform 0.3s ease;
+  }
+}
+
+details[open] > summary .aufklapp-zeichen {
+  transform: rotate(45deg);
+}
+
+summary {
+  cursor: pointer;
+}
+
+summary.ohne-marker {
+  list-style: none;
+}
+
+summary.ohne-marker::-webkit-details-marker {
+  display: none;
+}
+
+/* Wechseltext in summary: «Alle 11 weiteren Rennen» / «Weniger anzeigen» */
+details:not([open]) > summary .wenn-offen,
+details[open] > summary .wenn-zu {
+  display: none;
+}
+
+@keyframes einblenden {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-3));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .aufklapp-inhalt {
+    animation: einblenden 0.4s ease-out both;
+  }
 }
 
 /* Flächen mit den erlaubten Textfarben */

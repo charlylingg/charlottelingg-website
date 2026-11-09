@@ -1,0 +1,10 @@
+# Aus dem Design übernommen, noch NICHT gegen die FIS-Resultatliste geprüft.
+geprueft: false
+datum: "[DATUM]"
+saison: "[SAISON]"
+stufe: Europacup
+disziplin: Riesenslalom
+ort: "Mayrhofen"
+land: AUT
+rang: 1
+fis_link: "[FIS-LINK]"

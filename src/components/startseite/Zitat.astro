@@ -1,0 +1,53 @@
+---
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { t, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'zitat');
+---
+
+{
+  text && (
+    <section
+      class="zitat flaeche-nacht sektion"
+      aria-label={t(locale, 'zitat.label')}
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="zitat__innen inhalt">
+        <Torflagge farbe="red" groesse="mittel" />
+        <figure class="zitat__figur">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <blockquote class="t-zitat zitat__text">
+            <p>{text.data.zitat}</p>
+          </blockquote>
+          <figcaption class="t-label">{text.data.autor}</figcaption>
+        </figure>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .zitat__innen {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .zitat__figur {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .zitat__text {
+    max-width: 900px;
+  }
+</style>

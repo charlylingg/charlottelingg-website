@@ -1,0 +1,121 @@
+---
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'partner-werden');
+---
+
+{
+  text && (
+    <section
+      id="partner-werden"
+      class="partner-werden flaeche-navy sektion"
+      aria-labelledby="partner-werden-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="partner-werden__innen inhalt">
+        <div class="partner-werden__intro">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge kicker-flagge--rot t-kicker">{text.data.kicker}</p>
+          <h2 id="partner-werden-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p class="t-lead">{text.data.lead}</p>
+        </div>
+        <ul role="list" class="angebote">
+          <li class="angebot angebot--haupt flaeche-red">
+            <p class="t-kicker">{text.data.hauptangebot.kicker}</p>
+            <h3 class="t-display-l">{text.data.hauptangebot.titel}</h3>
+            <p class="angebot__text">{text.data.hauptangebot.text}</p>
+            <h4 class="t-display-s angebot__zwischentitel">{text.data.hauptangebot.zwischentitel}</h4>
+            <ul role="list" class="moeglichkeiten">
+              {text.data.hauptangebot.moeglichkeiten.map((m) => (
+                <li class="moeglichkeit schraeg-flaeche">{m}</li>
+              ))}
+            </ul>
+            <p class="angebot__text">{text.data.hauptangebot.schluss}</p>
+          </li>
+          {text.data.angebote.map((a) => (
+            <li class="angebot flaeche-nacht">
+              <p class="t-kicker">{a.kicker}</p>
+              <h3 class="t-abschnitt">{a.titel}</h3>
+              <p class="angebot__text">{a.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p>{text.data.schluss}</p>
+        <a class="knopf knopf--hell t-display-s partner-werden__knopf" href={text.data.button.ziel}>
+          {text.data.button.text}
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .partner-werden__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .partner-werden__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 780px;
+  }
+
+  .angebote {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: var(--space-3);
+  }
+
+  .angebot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+
+  .angebot--haupt {
+    grid-column: 1 / -1;
+  }
+
+  .angebot__text {
+    max-width: 46rem;
+  }
+
+  .angebot__zwischentitel {
+    padding-top: var(--space-1);
+  }
+
+  .moeglichkeiten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    padding-left: calc(var(--space-1) / 2);
+  }
+
+  .moeglichkeit {
+    padding: calc(var(--space-1) / 2) var(--space-2);
+    --flagge: var(--color-paper);
+    color: var(--color-nacht);
+    font-family: var(--font-display);
+    font-size: var(--type-lead-size);
+    font-weight: 600;
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+  }
+
+  .partner-werden__knopf {
+    align-self: flex-start;
+  }
+</style>

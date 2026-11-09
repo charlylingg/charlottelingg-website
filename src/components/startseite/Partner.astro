@@ -1,0 +1,187 @@
+---
+/**
+ * 04 Partner, gruppiert nach Kategorien. Daten aus src/content/partner.
+ * Ohne Logodatei erscheint ein Platzhalter mit dem Partnernamen.
+ * Pflichtlogos und Pflichtlinks (pflicht_logo, pflicht_link) werden immer gezeigt bzw. verlinkt.
+ */
+import { getCollection } from 'astro:content';
+import { partnerKategorien } from '../../content.config';
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { t, tSchluessel, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'partner');
+const partner = await getCollection('partner', (p) => !p.data.beispiel);
+const gruppen = partnerKategorien
+  .map((kategorie) => ({
+    kategorie,
+    titel: tSchluessel(locale, `partner.kategorie.${kategorie}`, kategorie),
+    partner: partner.filter((p) => p.data.kategorie === kategorie).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge),
+  }))
+  .filter((g) => g.partner.length > 0);
+---
+
+{
+  text && (
+    <section
+      id="partner"
+      class="partner flaeche-paper sektion"
+      aria-labelledby="partner-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="partner__innen inhalt">
+        <div class="partner__intro">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge kicker-flagge--rot t-kicker">{text.data.kicker}</p>
+          <h2 id="partner-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.lead}</p>
+        </div>
+        <div>
+          {gruppen.map((g) => (
+            <div class="kategorie">
+              <h3 class="kategorie__titel t-abschnitt">
+                <Torflagge farbe="red" groesse="klein" />
+                {g.titel}
+              </h3>
+              <ul role="list" class:list={['kategorie__logos', `kategorie__logos--${g.kategorie}`]}>
+                {g.partner.map((p) => {
+                  const inhalt =
+                    p.data.darstellung === 'text' ? (
+                      <span class="partner-text t-abschnitt">{p.data.name}</span>
+                    ) : p.data.logo ? (
+                      <img class="partner-logo" src={p.data.logo} alt={p.data.name} loading="lazy" decoding="async" />
+                    ) : (
+                      <span class="logo-platzhalter" title={t(locale, 'partner.logo_folgt')}>
+                        <span class="t-label">{p.data.name}</span>
+                      </span>
+                    );
+                  return (
+                    <li>
+                      {p.data.url ? (
+                        <a class="partner-link" href={p.data.url} target="_blank" rel="noopener">
+                          {inhalt}
+                          <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
+                        </a>
+                      ) : (
+                        inhalt
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .partner {
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .partner__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .partner__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 760px;
+  }
+
+  .kategorie {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .kategorie__titel {
+    flex: 0 0 260px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .kategorie__logos {
+    flex: 1 1 480px;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) calc(var(--space-4) + var(--space-2));
+  }
+
+  .partner-link {
+    display: inline-flex;
+    align-items: center;
+    padding-block: var(--space-1);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .partner-link:hover .logo-platzhalter {
+    outline-width: 2px;
+    outline-color: var(--color-navy);
+  }
+
+  .partner-logo {
+    height: calc(2 * var(--space-4));
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .logo-platzhalter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(3 * var(--space-4) + var(--space-3));
+    max-width: 100%;
+    height: calc(2 * var(--space-4));
+    padding-inline: var(--space-3);
+    background: var(--color-eis);
+    color: var(--color-ink-soft);
+    outline: 1px solid var(--color-line);
+    outline-offset: -1px;
+    text-align: center;
+  }
+
+  .kategorie__logos--kopfsponsoren .logo-platzhalter,
+  .kategorie__logos--kopfsponsoren .partner-logo {
+    height: calc(3 * var(--space-4));
+  }
+
+  .partner-text {
+    display: inline-block;
+    width: min-content;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 560px) {
+    .kategorie__titel {
+      flex-basis: 100%;
+    }
+
+    .kategorie__logos {
+      flex-basis: 100%;
+      gap: var(--space-3);
+    }
+  }
+</style>

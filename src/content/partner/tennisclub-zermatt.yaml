@@ -1,0 +1,7 @@
+# Im Design ohne Logo und ohne Link, nur als Name in Schrift.
+name: "Tennisclub Zermatt"
+kategorie: unterstuetzer
+darstellung: text
+pflicht_logo: false
+pflicht_link: false
+reihenfolge: 3

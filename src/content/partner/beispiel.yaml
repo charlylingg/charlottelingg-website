@@ -1,7 +1,9 @@
 # BEISPIEL – kein echter Partner. Vorlage für Partner-Einträge.
+# kategorie: kopfsponsoren, mobilitaetspartner, trinkflaschenpartner, anstellung, ausruester, unterstuetzer, heimat
+# logo weglassen, solange keine Logodatei da ist: dann erscheint ein Platzhalter mit dem Namen.
 beispiel: true
 name: "[PARTNER]"
-kategorie: "[KATEGORIE]"
+kategorie: unterstuetzer
 logo: /partner/beispiel.svg
 url: https://example.com/
 pflicht_logo: false

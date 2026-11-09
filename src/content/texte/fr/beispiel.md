@@ -1,6 +1,8 @@
 ---
 beispiel: true
 sektion: beispiel
+freigabe: false
+uebersetzt: true
 titel: "[TITRE]"
 ---
 

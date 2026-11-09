@@ -1,0 +1,8 @@
+# Logo folgt (bis dahin Platzhalter mit dem Namen).
+name: "MBPI"
+kategorie: trinkflaschenpartner
+url: https://www.mbpi.li/de/
+# Vertraglich: Logo zeigen. Nie entfernen.
+pflicht_logo: true
+pflicht_link: false
+reihenfolge: 1

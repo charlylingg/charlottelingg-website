@@ -1,0 +1,54 @@
+---
+/**
+ * Platzhalter für ein Bild, bis das echte Bild da ist (siehe BILDER.md).
+ * Fläche eis, Beschriftung im Stil «label», festes Seitenverhältnis, damit beim Austausch nichts springt.
+ *
+ * alt: späterer Alt-Text. Leer lassen, wenn das Bild rein schmückend ist.
+ */
+interface Props {
+  /** z. B. «Hero» */
+  stelle: string;
+  /** z. B. «Querformat 3:2» */
+  format: string;
+  /** CSS-Seitenverhältnis, z. B. «3 / 2» */
+  verhaeltnis: string;
+  alt?: string;
+  /** mitte (Standard) oder oben-links */
+  ausrichtung?: 'mitte' | 'oben-links';
+  class?: string;
+}
+
+const { stelle, format, verhaeltnis, alt, ausrichtung = 'mitte', class: className } = Astro.props;
+---
+
+<div
+  class:list={['bildplatzhalter', `bildplatzhalter--${ausrichtung}`, className]}
+  style={`--verhaeltnis: ${verhaeltnis}`}
+  role={alt ? 'img' : undefined}
+  aria-label={alt || undefined}
+  aria-hidden={alt ? undefined : 'true'}
+>
+  <span class="t-label bildplatzhalter__text" aria-hidden="true">[BILD: {stelle}, {format}]</span>
+</div>
+
+<style>
+  .bildplatzhalter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: var(--verhaeltnis);
+    padding: var(--space-3);
+    background: var(--color-eis);
+    color: var(--color-ink-soft);
+    outline: 1px solid var(--color-line);
+    outline-offset: -1px;
+    text-align: center;
+  }
+
+  .bildplatzhalter--oben-links {
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+  }
+</style>

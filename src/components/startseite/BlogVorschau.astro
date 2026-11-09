@@ -1,0 +1,183 @@
+---
+/**
+ * Blog: Vorschau der Beiträge. Jeder veröffentlichte Beitrag hat eine eigene Seite /blog/<slug>.
+ * Beiträge mit Status «folgt» erscheinen nur als Vorschau mit «Beitrag folgt».
+ */
+import Torflagge from '../Torflagge.astro';
+import Bildplatzhalter from '../Bildplatzhalter.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getBlog, getText } from '../../lib/inhalte';
+import { blogDatum } from '../../lib/format';
+import { localizePath, t, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'blog');
+const beitraege = (await getBlog(locale)).map((b) => {
+  const datum = blogDatum(b.data.datum, b.lang);
+  const ortUndDatum = [b.data.ort, datum].filter(Boolean).join(', ');
+  return {
+    ...b,
+    zeile: [b.data.kategorie, ortUndDatum].filter(Boolean).join(' · '),
+    href: localizePath(`/blog/${b.slug}/`, locale),
+  };
+});
+---
+
+{
+  text && beitraege.length > 0 && (
+    <section
+      id="blog"
+      class="blog flaeche-paper sektion"
+      aria-labelledby="blog-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="blog__innen inhalt">
+        {text.entwurf && <EntwurfLabel locale={locale} />}
+        <h2 id="blog-titel" class="blog__titel t-display-l">
+          <Torflagge farbe="red" groesse="klein" />
+          {text.data.titel}
+        </h2>
+        <ul role="list" class="blog__liste">
+          {beitraege.map((b) => (
+            <li>
+              <article class="karte" lang={b.lang !== locale ? b.lang : undefined}>
+                {b.data.bild ? (
+                  <Bildplatzhalter stelle={`Blog «${b.data.titel}»`} format="Querformat 16:10" verhaeltnis="16 / 10" alt={b.data.bild_alt} />
+                ) : (
+                  <div class="karte__grafik flaeche-nacht" aria-hidden="true">
+                    <span class="karte__flagge karte__flagge--navy" />
+                    <span class="karte__flagge karte__flagge--rot" />
+                  </div>
+                )}
+                {b.entwurf && <EntwurfLabel locale={locale} />}
+                <p class="t-kicker karte__zeile">{b.zeile}</p>
+                <h3 class="t-abschnitt">
+                  {b.data.status === 'veroeffentlicht' ? (
+                    <a class="karte__link" href={b.href}>
+                      {b.data.titel}
+                    </a>
+                  ) : (
+                    b.data.titel
+                  )}
+                </h3>
+                <p class="karte__teaser">{b.data.teaser}</p>
+                {b.data.status === 'veroeffentlicht' ? (
+                  <span class="karte__weiter t-display-s" aria-hidden="true">
+                    {t(locale, 'blog.weiterlesen')}
+                    <span class="aufklapp-zeichen karte__plus">→</span>
+                  </span>
+                ) : (
+                  <p class="karte__folgt t-display-s">{t(locale, 'blog.folgt')}</p>
+                )}
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .blog {
+    padding-top: 0;
+  }
+
+  .blog__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .blog__titel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .blog__liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: var(--space-4) var(--space-4);
+  }
+
+  .karte {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .karte__grafik {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+
+  .karte__flagge {
+    display: block;
+    width: var(--space-3);
+    height: calc(var(--space-4) + var(--space-2));
+    transform: skewX(var(--schraege));
+  }
+
+  .karte__flagge--navy {
+    background: var(--color-navy);
+    outline: 2px solid var(--color-paper);
+  }
+
+  .karte__flagge--rot {
+    background: var(--color-red);
+  }
+
+  .karte__zeile {
+    color: var(--color-red);
+  }
+
+  .karte__link {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  /* Ganze Karte klickbar, Link bleibt der Titel */
+  .karte__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .karte__link:hover,
+  .karte__link:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  .karte__teaser {
+    color: var(--color-ink-soft);
+  }
+
+  .karte__weiter {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding-block: var(--space-1);
+    color: var(--color-navy);
+  }
+
+  .karte__plus {
+    font-size: var(--type-lead-size);
+  }
+
+  .karte__folgt {
+    padding-block: var(--space-1);
+    color: var(--color-ink-soft);
+  }
+</style>

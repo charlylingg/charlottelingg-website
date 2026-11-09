@@ -1,0 +1,11 @@
+# Aus dem Design übernommen, noch NICHT gegen die FIS-Resultatliste geprüft.
+geprueft: false
+datum: "[DATUM]"
+saison: "[SAISON]"
+stufe: Europacup
+disziplin: Riesenslalom
+ort: "Aal"
+# Land im Design nicht angegeben
+land: "[LAND]"
+rang: 2
+fis_link: "[FIS-LINK]"

@@ -1,0 +1,54 @@
+---
+/** Fusszeile mit Copyright und Links auf Impressum und Datenschutz. */
+import { localizePath, t, tf, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const jahr = new Date().getFullYear();
+---
+
+<footer class="fuss flaeche-nacht">
+  <div class="inhalt">
+    <div class="fuss__zeile t-klein">
+    <span>{tf(locale, 'fuss.copyright', { jahr })}</span>
+    <nav aria-label={t(locale, 'fuss.label')}>
+      <ul role="list">
+        <li><a href={localizePath('/impressum/', locale)}>{t(locale, 'fuss.impressum')}</a></li>
+        <li><a href={localizePath('/datenschutz/', locale)}>{t(locale, 'fuss.datenschutz')}</a></li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .fuss {
+    padding-top: var(--space-3);
+  }
+
+  .fuss__zeile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-2) var(--space-4);
+    border-top: 1px solid var(--color-ink-soft);
+  }
+
+  .fuss ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-3);
+  }
+
+  .fuss a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: var(--type-text-size);
+  }
+</style>

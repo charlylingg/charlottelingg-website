@@ -1,0 +1,11 @@
+# Aus dem Design übernommen, noch NICHT gegen die FIS-Resultatliste geprüft.
+geprueft: false
+datum: "[DATUM]"
+saison: "[SAISON]"
+stufe: WM
+# Disziplin im Design nicht angegeben
+disziplin: "[DISZIPLIN]"
+ort: "Cortina d’Ampezzo"
+land: ITA
+rang: 27
+fis_link: "[FIS-LINK]"

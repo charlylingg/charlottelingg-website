@@ -1,0 +1,264 @@
+---
+/**
+ * Rennkalender: Weltcup und Europacup getrennt, je die ersten zwei Rennen sichtbar,
+ * der Rest aufklappbar (details/summary, ohne JavaScript).
+ * Daten aus src/content/rennen, Texte aus src/content/texte/<sprache>/rennkalender.md.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { datumsbereich, landName, rennenKuerzel } from '../../lib/format';
+import { t, tf, tSchluessel, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const SICHTBAR = 2;
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'rennkalender');
+const rennen = (await getCollection('rennen', (r) => !r.data.beispiel)).sort(
+  (a, b) => a.data.datum.getTime() - b.data.datum.getTime(),
+);
+
+const gruppen = (['Weltcup', 'Europacup'] as const).map((stufe, i) => {
+  const liste = rennen.filter((r) => r.data.stufe === stufe);
+  return {
+    stufe,
+    titel: tSchluessel(locale, `stufe.${stufe}`, stufe),
+    farbe: i === 0 ? ('red' as const) : ('navy' as const),
+    sichtbar: liste.slice(0, SICHTBAR),
+    weitere: liste.slice(SICHTBAR),
+  };
+});
+
+type Rennen = CollectionEntry<'rennen'>;
+const zeile = (r: Rennen) => ({
+  datum: datumsbereich(r.data.datum, r.data.datum_bis),
+  ort: r.data.ort,
+  land: landName(r.data.land, locale),
+  hinweis: r.data.hinweis ? tSchluessel(locale, `rennen.hinweis.${r.data.hinweis}`, '') : undefined,
+  kuerzel: rennenKuerzel(r.data.disziplinen, r.data.finale, locale),
+  abgesagt: r.data.status === 'abgesagt',
+});
+---
+
+{
+  text && (
+    <section
+      id="rennen"
+      class="rennkalender flaeche-eis sektion"
+      aria-labelledby="rennen-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="rennkalender__innen inhalt">
+        <div class="rennkalender__intro">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="rennen-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.lead}</p>
+        </div>
+
+        <div class="rennkalender__gruppen">
+          {gruppen.map((g) => (
+            <div class="gruppe">
+              <h3 class="gruppe__titel t-abschnitt">
+                <Torflagge farbe={g.farbe} groesse="klein" />
+                {g.titel}
+              </h3>
+              <ol role="list" class="rennliste">
+                {g.sichtbar.map((r) => {
+                  const z = zeile(r);
+                  return (
+                    <li class="renn-zeile">
+                      <span class="renn-zeile__datum">{z.datum}</span>
+                      <span class="renn-zeile__ort">
+                        <strong class="t-display-s">{z.ort}</strong>
+                        {z.land && <span class="t-klein renn-zeile__land">{z.land}</span>}
+                        {z.hinweis && (
+                          <span class="t-klein renn-zeile__hinweis">
+                            <Torflagge farbe="red" groesse="klein" />
+                            {z.hinweis}
+                          </span>
+                        )}
+                      </span>
+                      <span class:list={['renn-zeile__kuerzel schraeg-flaeche', `renn-zeile__kuerzel--${g.farbe}`]}>{z.kuerzel}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+              {g.weitere.length > 0 && (
+                <details class="rennliste-mehr">
+                  <summary class="rennliste-mehr__knopf ohne-marker t-display-s">
+                    <span class="wenn-zu">{tf(locale, 'rennen.weitere', { n: g.weitere.length })}</span>
+                    <span class="wenn-offen">{t(locale, 'rennen.weniger')}</span>
+                    <span class="aufklapp-zeichen rennliste-mehr__plus" aria-hidden="true">
+                      +
+                    </span>
+                  </summary>
+                  <ol role="list" class="rennliste aufklapp-inhalt">
+                    {g.weitere.map((r) => {
+                      const z = zeile(r);
+                      return (
+                        <li class="renn-zeile">
+                          <span class="renn-zeile__datum">{z.datum}</span>
+                          <span class="renn-zeile__ort">
+                            <strong class="t-display-s">{z.ort}</strong>
+                            {z.land && <span class="t-klein renn-zeile__land">{z.land}</span>}
+                            {z.hinweis && (
+                              <span class="t-klein renn-zeile__hinweis">
+                                <Torflagge farbe="red" groesse="klein" />
+                                {z.hinweis}
+                              </span>
+                            )}
+                          </span>
+                          <span class:list={['renn-zeile__kuerzel schraeg-flaeche', `renn-zeile__kuerzel--${g.farbe}`]}>
+                            {z.kuerzel}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </details>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p class="t-klein rennkalender__quelle">{text.data.quelle}</p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .rennkalender__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .rennkalender__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 760px;
+  }
+
+  .rennkalender__gruppen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    gap: var(--space-4) calc(var(--space-4) + var(--space-2));
+  }
+
+  .gruppe {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .gruppe__titel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .rennliste {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .renn-zeile {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-2);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .renn-zeile__datum {
+    font-family: var(--font-display);
+    font-size: var(--type-lead-size);
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .renn-zeile__ort {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space-1) / 4);
+  }
+
+  .renn-zeile__land {
+    color: var(--color-ink-soft);
+  }
+
+  .renn-zeile__hinweis {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-weight: var(--type-lead-weight);
+    color: var(--color-navy);
+  }
+
+  .renn-zeile__hinweis :global(.torflagge) {
+    height: var(--space-2);
+  }
+
+  .renn-zeile__kuerzel {
+    justify-self: end;
+    padding: calc(var(--space-1) / 2) var(--space-2);
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: var(--type-kicker-size);
+    font-weight: 600;
+    letter-spacing: var(--type-label-tracking);
+    white-space: nowrap;
+  }
+
+  .renn-zeile__kuerzel--red {
+    --flagge: var(--color-red);
+  }
+
+  .renn-zeile__kuerzel--navy {
+    --flagge: var(--color-navy);
+  }
+
+  @media (max-width: 560px) {
+    .renn-zeile {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .renn-zeile__datum {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .rennliste-mehr__knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 44px;
+    padding-block: var(--space-1);
+    color: var(--color-navy);
+  }
+
+  .rennliste-mehr__plus {
+    font-size: var(--type-abschnitt-size);
+  }
+
+  .rennliste-mehr > .rennliste {
+    border-top: 0;
+  }
+
+  .rennkalender__quelle {
+    color: var(--color-ink-soft);
+  }
+</style>

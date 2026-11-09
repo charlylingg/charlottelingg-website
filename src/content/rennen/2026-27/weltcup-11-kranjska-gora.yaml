@@ -1,0 +1,10 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2027-01-29
+datum_bis: 2027-01-30
+stufe: Weltcup
+disziplinen: [Riesenslalom, Slalom]
+ort: "Kranjska Gora"
+land: SLO
+status: geplant
+fis_link: "[FIS-LINK]"

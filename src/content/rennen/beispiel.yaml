@@ -1,8 +1,13 @@
 # BEISPIEL – kein echtes Rennen. Vorlage für den Rennkalender.
+# disziplinen: ein Eintrag pro Rennen, z. B. [Slalom, Slalom] wird als «2× SL» angezeigt.
+# datum_bis nur bei mehrtägigen Rennen. finale: true zeigt «Finale» statt der Disziplinen.
+# hinweis (optional): weltcuppunkte oder sieg
 beispiel: true
+geprueft: false
 datum: 2000-01-01
 stufe: FIS
-disziplin: Riesenslalom
+disziplinen: [Riesenslalom]
 ort: "[ORT]"
 land: "[LAND]"
 status: geplant
+fis_link: "[FIS-LINK]"

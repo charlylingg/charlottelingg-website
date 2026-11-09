@@ -1,0 +1,304 @@
+---
+/**
+ * Kopfzeile: Name, Navigation (Anker auf die Sektionen der Startseite) und Sprachumschalter.
+ * Ab 1100px Breite steht die Navigation in der Zeile. Darunter ist sie ein aufklappbares Menü
+ * (details/summary: funktioniert ohne JavaScript und mit der Tastatur).
+ * Ein kleines Skript schliesst das Menü nach einem Klick auf einen Link oder mit Escape.
+ */
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localizePath, t, type Locale, type UiKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  hasTranslation?: boolean;
+}
+
+const { locale, hasTranslation = true } = Astro.props;
+const start = localizePath('/', locale);
+
+const eintraege: { key: UiKey; anker: string; hervorgehoben?: boolean }[] = [
+  { key: 'nav.portrait', anker: 'portrait' },
+  { key: 'nav.resultate', anker: 'resultate' },
+  { key: 'nav.weg', anker: 'weg' },
+  { key: 'nav.rennen', anker: 'rennen' },
+  { key: 'nav.blog', anker: 'blog' },
+  { key: 'nav.partner', anker: 'partner' },
+  { key: 'nav.partner_werden', anker: 'partner-werden' },
+  { key: 'nav.kontakt', anker: 'kontakt', hervorgehoben: true },
+];
+const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t(locale, e.key) }));
+---
+
+<header class="kopf">
+  <div class="kopf__zeile inhalt">
+    <a class="marke" href={start}>
+      <svg class="marke__flagge" role="img" aria-label={t(locale, 'kopf.flagge')} viewBox="0 0 500 300">
+        <rect width="500" height="150" fill="#002b7f"></rect>
+        <rect y="150" width="500" height="150" fill="#ce1126"></rect>
+        <g fill="#ffd83d" stroke="#000000" stroke-width="3" stroke-linejoin="round">
+          <path d="M78 108 L80 72 Q96 84 104 66 Q114 48 124 66 Q132 84 148 72 L150 108 Z"></path>
+          <path d="M84 72 Q92 40 114 36 Q136 40 144 72" fill="none"></path>
+          <path d="M114 36 L114 72" fill="none"></path>
+          <circle cx="114" cy="28" r="8"></circle>
+          <path d="M114 10 L114 20 M109 14 L119 14" fill="none"></path>
+          <rect x="76" y="108" width="76" height="12"></rect>
+        </g>
+      </svg>
+      <span class="marke__name t-abschnitt">{t(locale, 'site.name')}</span>
+      <span class="marke__zusatz">{t(locale, 'kopf.zusatz')}</span>
+    </a>
+
+    <div class="kopf__breit">
+      <nav class="hauptnav" aria-label={t(locale, 'nav.label')}>
+        <ul role="list">
+          {
+            links.map((l) => (
+              <li>
+                <a class:list={['hauptnav__link', { 'hauptnav__link--kontakt': l.hervorgehoben }]} href={l.href}>
+                  {l.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="kopf__sprache">
+        <LanguageSwitcher locale={locale} hasTranslation={hasTranslation} />
+      </div>
+    </div>
+
+    <details class="menue">
+      <summary class="menue__knopf ohne-marker">
+        <span class="menue__balken" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="t-label wenn-zu">{t(locale, 'menue.oeffnen')}</span>
+        <span class="t-label wenn-offen">{t(locale, 'menue.schliessen')}</span>
+      </summary>
+      <div class="menue__panel">
+        <nav aria-label={t(locale, 'nav.label')}>
+          <ul role="list">
+            {
+              links.map((l) => (
+                <li>
+                  <a class="menue__link" href={l.href}>
+                    {l.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <LanguageSwitcher locale={locale} hasTranslation={hasTranslation} />
+      </div>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Fortschreitende Verbesserung: Menü nach Klick auf einen Link oder mit Escape schliessen.
+  for (const menue of document.querySelectorAll<HTMLDetailsElement>('details.menue')) {
+    menue.addEventListener('click', (e) => {
+      if (e.target instanceof Element && e.target.closest('a')) menue.open = false;
+    });
+    menue.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menue.open) {
+        menue.open = false;
+        menue.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .kopf {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-line-soft);
+  }
+
+  .kopf__zeile {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-2);
+    padding-block: var(--space-2);
+  }
+
+  @media (min-width: 1100px) {
+    .kopf__zeile {
+      flex-wrap: wrap;
+      column-gap: var(--space-3);
+    }
+  }
+
+  /* Marke */
+  .marke {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 0;
+    min-height: 44px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .marke__flagge {
+    flex: 0 0 auto;
+    width: calc(var(--space-4) - var(--space-1));
+    height: auto;
+    aspect-ratio: 5 / 3;
+    outline: 1px solid var(--color-line-soft);
+  }
+
+  .marke__name {
+    white-space: nowrap;
+  }
+
+  .marke__zusatz {
+    display: none;
+    padding-left: var(--space-2);
+    border-left: 2px solid var(--color-red);
+    font-family: var(--font-display);
+    font-size: var(--type-lead-size);
+    font-weight: 600;
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+    color: var(--color-navy);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 560px) {
+    .marke {
+      gap: var(--space-2);
+    }
+
+    .marke__zusatz {
+      display: inline;
+    }
+  }
+
+  /* Breite Navigation (ab 1100px) */
+  .kopf__breit {
+    display: none;
+  }
+
+  .hauptnav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-3);
+  }
+
+  .hauptnav__link,
+  .menue__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-display);
+    font-size: var(--type-lead-size);
+    font-weight: 600;
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .hauptnav__link:hover,
+  .menue__link:hover {
+    color: var(--color-navy);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  .hauptnav__link--kontakt {
+    padding-inline: var(--space-2);
+    background: var(--color-red);
+    color: var(--color-paper);
+  }
+
+  .hauptnav__link--kontakt:hover {
+    color: var(--color-paper);
+  }
+
+  .hauptnav__link--kontakt:focus-visible {
+    outline-color: var(--color-navy);
+  }
+
+  .kopf__sprache {
+    padding-left: var(--space-2);
+    border-left: 1px solid var(--color-line);
+  }
+
+  @media (min-width: 1100px) {
+    .kopf__breit {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0 var(--space-3);
+    }
+
+    .menue {
+      display: none;
+    }
+  }
+
+  /* Aufklappbares Menü (unter 1100px) */
+  .menue {
+    flex: 0 0 auto;
+  }
+
+  .menue__knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: var(--space-1);
+    color: var(--color-ink);
+  }
+
+  .menue__balken {
+    display: inline-flex;
+    gap: calc(var(--space-1) / 2);
+  }
+
+  .menue__balken span {
+    display: block;
+    width: calc(var(--space-1) / 2);
+    height: var(--space-3);
+    background: var(--color-navy);
+    transform: skewX(var(--schraege));
+  }
+
+  .menue__balken span:nth-child(2) {
+    background: var(--color-red);
+  }
+
+  .menue__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 100%);
+    overflow-y: auto;
+    padding: var(--space-1) var(--seitenrand) var(--space-3);
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .menue__panel ul {
+    margin-bottom: var(--space-2);
+  }
+
+  .menue__panel li + li {
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .menue__link {
+    width: 100%;
+    min-height: var(--space-4);
+  }
+</style>

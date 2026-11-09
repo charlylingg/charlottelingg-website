@@ -1,0 +1,22 @@
+---
+/** Kleines Label für Inhalte mit freigabe: false (nur in der Vorschau mit Entwürfen sichtbar). */
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className } = Astro.props;
+---
+
+<span class:list={['entwurf-label t-label flaeche-red', className]}>{t(locale, 'entwurf.label')}</span>
+
+<style>
+  .entwurf-label {
+    align-self: flex-start;
+    justify-self: start;
+    display: inline-block;
+    padding: calc(var(--space-1) / 2) var(--space-1);
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 beispiel: true
 sektion: beispiel
+freigabe: false
 titel: "[TITEL]"
 ---
 

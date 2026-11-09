@@ -1,0 +1,92 @@
+---
+/** Fanpost: Text immer, Postadresse separat (fanpost-adresse.md, eigene Freigabe). */
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'fanpost');
+const adresse = await getText(locale, 'fanpost-adresse');
+---
+
+{
+  text && (
+    <section
+      id="fanpost"
+      class="fanpost flaeche-eis sektion"
+      aria-labelledby="fanpost-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="fanpost__innen inhalt">
+        <div class="fanpost__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge kicker-flagge--rot t-kicker">{text.data.kicker}</p>
+          <h2 id="fanpost-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.text}</p>
+        </div>
+        {adresse && (
+          <div class="fanpost__adresse" lang={adresse.lang !== locale ? adresse.lang : undefined}>
+            <Torflagge farbe="navy" groesse="klein" class="fanpost__balken" />
+            <div class="fanpost__adressblock">
+              {adresse.entwurf && <EntwurfLabel locale={locale} />}
+              <address class="t-lead">
+                <strong class="t-abschnitt">{adresse.data.name}</strong>
+                {adresse.data.zeilen.map((z) => (
+                  <span>{z}</span>
+                ))}
+              </address>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .fanpost__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) calc(var(--space-4) + var(--space-2));
+  }
+
+  .fanpost__text {
+    flex: 1 1 380px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 760px;
+  }
+
+  .fanpost__adresse {
+    flex: 1 1 320px;
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .fanpost__adresse :global(.fanpost__balken) {
+    height: auto;
+  }
+
+  .fanpost__adressblock {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  address {
+    display: flex;
+    flex-direction: column;
+    font-style: normal;
+  }
+</style>

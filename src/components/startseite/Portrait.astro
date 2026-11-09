@@ -1,0 +1,99 @@
+---
+import Bildplatzhalter from '../Bildplatzhalter.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'portrait');
+---
+
+{
+  text && (
+    <section
+      id="portrait"
+      class="portrait flaeche-eis sektion"
+      aria-labelledby="portrait-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="portrait__innen inhalt">
+        <div class="portrait__bild">
+          <Bildplatzhalter stelle="Portrait" format="Hochformat 3:4" verhaeltnis="3 / 4" alt={text.data.bild_alt} />
+        </div>
+        <div class="portrait__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="portrait-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p class="t-lead">{text.data.lead}</p>
+          <dl class="steckbrief">
+            {text.data.steckbrief.map((s) => (
+              <div>
+                <dt class="t-label">{s.label}</dt>
+                <dd class="steckbrief__wert">{s.wert}</dd>
+              </div>
+            ))}
+          </dl>
+          <a class="textlink t-display-s" href={text.data.link.ziel}>
+            {text.data.link.text}
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .portrait__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .portrait__bild {
+    flex: 1 1 340px;
+    max-width: 440px;
+  }
+
+  .portrait__bild :global(.bildplatzhalter) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+  }
+
+  .portrait__text {
+    flex: 1 1 420px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .steckbrief {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding-block: var(--space-2);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .steckbrief dt {
+    color: var(--color-ink-soft);
+  }
+
+  .steckbrief dd {
+    margin: 0;
+  }
+
+  .steckbrief__wert {
+    font-family: var(--font-display);
+    font-size: var(--type-abschnitt-size);
+    line-height: var(--type-abschnitt-line);
+    font-weight: 700;
+  }
+</style>
