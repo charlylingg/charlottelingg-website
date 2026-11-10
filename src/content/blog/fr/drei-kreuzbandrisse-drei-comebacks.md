@@ -1,27 +1,26 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # ENTWURF: ganzer Beitrag mit Angaben zu den Verletzungen. Braucht Charlottes Freigabe.
-titel: "Drei Kreuzbandrisse, drei Comebacks"
+titel: "Trois ruptures du ligament croisé, trois retours"
 datum: "[DATUM]"
-kategorie: "Persönlich"
-teaser: "Was mich die langen Wege zurück gelehrt haben und warum mich diese Zeit stärker gemacht hat."
+kategorie: "Personnel"
+teaser: "Ce que les longs chemins du retour m’ont appris et pourquoi cette période m’a rendue plus forte."
 status: veroeffentlicht
 freigabe: false
-uebersetzt: false
+uebersetzt: true
 reihenfolge: 2
 bild: true
 ---
 
-Dreimal habe ich mir das Kreuzband gerissen:
+Je me suis rompu le ligament croisé à trois reprises :
 
-- **2019** Riesenslalom-Training im Val di Fassa (IT). Ich bin nicht gestürzt, es ist einfach passiert.
-- **2022** Sturz im Super-G in Deutschland.
-- **2025** Riesenslalom-Training in Norwegen. Beim Abbremsen habe ich die Ski gekreuzt und bin gestürzt.
+- **2019** Entraînement de slalom géant dans le Val di Fassa (IT). Je ne suis pas tombée, c’est arrivé comme ça.
+- **2022** Chute en super-G en Allemagne.
+- **2025** Entraînement de slalom géant en Norvège. En freinant, j’ai croisé les skis et je suis tombée.
 
-Aus diesen Verletzungen habe ich viel gelernt. Die wichtigste Erkenntnis: Um Leistung zu bringen, muss ich auch mental erholt sein.
+Ces blessures m’ont beaucoup appris. La leçon la plus importante : pour être performante, je dois aussi être reposée mentalement.
 
-Wenn ich zurückschaue, erkenne ich ein Muster. Vor allen drei Verletzungen hatte ich eine mental schwierige Zeit. Druck und Stress wurden zu viel, und jedes Mal war mein Energielevel am Ende. Das ist meine persönliche Einschätzung, aber für mich ist sie klar. Es hat drei Verletzungen gebraucht, bis ich das verstanden habe.
+Avec le recul, je reconnais un schéma. Avant chacune des trois blessures, j’ai traversé une période difficile sur le plan mental. La pression et le stress étaient devenus trop lourds, et chaque fois, j’étais à bout d’énergie. C’est mon appréciation personnelle, mais pour moi, elle est claire. Il m’a fallu trois blessures pour le comprendre.
 
-Heute nutze ich dieses Wissen als Stärke. Ich verstehe mich besser als je zuvor, und darauf bin ich stolz.
+Aujourd’hui, je fais de ce savoir une force. Je me comprends mieux que jamais, et j’en suis fière.
 
-Eine Verletzung ist nie etwas Gutes. Und doch hat diese Zeit auch etwas Wertvolles. Man ist auf sich allein gestellt, muss die Motivation in sich selbst finden und sich ehrlich fragen, ob man das alles noch will und warum man es macht.
+Une blessure n’est jamais une bonne chose. Et pourtant, cette période a aussi quelque chose de précieux. On se retrouve seule face à soi-même, on doit trouver la motivation en soi et se demander honnêtement si l’on veut encore tout cela, et pourquoi on le fait.

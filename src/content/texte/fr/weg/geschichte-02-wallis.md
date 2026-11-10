@@ -1,12 +1,11 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: weg-geschichte
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 position: 2
-titel: "Meine Jahre im Wallis"
+titel: "Mes années en Valais"
 ---
 
-Vom Skiclub ging es zum Walliser Skiverband. Meine ersten FIS-Jahre habe ich an der Sportschule im Kollegium Brig verbracht, wo Schule und Training zusammenpassten. Danach folgte ein Jahr im Nationalen Leistungszentrum West und dann der Schritt ins C-Kader von Swiss-Ski.
+Du ski-club, je suis passée à Ski Valais. J’ai passé mes premières années FIS à l’école de sport du collège de Brigue, où les études et l’entraînement allaient de pair. Ont suivi une année au Centre national de performance Ouest, puis l’entrée dans le cadre C de Swiss-Ski.
 
-In dieser Zeit habe ich gelernt, was es heisst, jeden Tag alles zu geben. Das begleitet mich bis heute.
+C’est à cette période que j’ai appris ce que signifie tout donner, chaque jour. Cela m’accompagne encore aujourd’hui.

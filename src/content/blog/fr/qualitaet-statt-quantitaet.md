@@ -1,12 +1,11 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # Status «folgt»: erscheint auf der Startseite nur als Vorschau mit «Beitrag folgt», ohne eigene Seite.
-titel: "Qualität statt Quantität"
+titel: "La qualité plutôt que la quantité"
 datum: "[DATUM]"
-kategorie: "Training"
-teaser: "Jeder Tag zählt. Wie ich mein Training heute aufbaue und warum weniger manchmal mehr ist."
+kategorie: "Entraînement"
+teaser: "Chaque jour compte. Comment je construis mon entraînement aujourd’hui et pourquoi moins, c’est parfois plus."
 status: folgt
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 reihenfolge: 3
 ---

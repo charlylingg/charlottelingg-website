@@ -1,11 +1,10 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # Die einzelnen Rennen stehen in src/content/rennen (eine Datei pro Rennen).
 sektion: rennkalender
 freigabe: true
-uebersetzt: false
-kicker: "Rennkalender 2026/27"
-titel: "Hier bin ich am Start"
-lead: "Slalom und Riesenslalom der Frauen im Weltcup und im Europacup. Welche Rennen ich fahre, entscheidet sich laufend mit meinem Trainer und dem Verband."
-quelle: "RS = Riesenslalom, SL = Slalom. Quelle: FIS-Kalender, Stand 10.11.2026. Änderungen vorbehalten."
+uebersetzt: true
+kicker: "Calendrier 2026/27"
+titel: "Où je serai au départ"
+lead: "Slalom et slalom géant dames en Coupe du monde et en Coupe d’Europe. Les courses auxquelles je participe se décident au fur et à mesure avec mon entraîneur et la fédération."
+quelle: "GS = slalom géant, SL = slalom. Source : calendrier FIS, état au 10.11.2026. Sous réserve de modifications."
 ---

@@ -1,13 +1,12 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # Kacheln: neueste Instagram-Beiträge, Bilder von der Website selbst ausgeliefert (siehe CLAUDE.md, Technik). Keine externen Skripte.
 sektion: unterwegs
 freigabe: true
-uebersetzt: false
-kicker: "Unterwegs"
-titel: "Komm mit auf meine Reise"
-text: "Training, Rennen und alles dazwischen: Auf Instagram nehme ich dich mit durch die Saison."
+uebersetzt: true
+kicker: "En route"
+titel: "Suis-moi dans mon aventure"
+text: "Entraînements, courses et tout ce qui se passe entre les deux : sur Instagram, je t’emmène avec moi tout au long de la saison."
 instagram:
-  text: "@charlotte_lingg folgen"
+  text: "Suivre @charlotte_lingg"
   url: "https://www.instagram.com/charlotte_lingg/"
 ---

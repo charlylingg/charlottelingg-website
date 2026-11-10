@@ -1,9 +1,8 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: datenschutz
 freigabe: true
-uebersetzt: false
-titel: "Datenschutz"
+uebersetzt: true
+titel: "Protection des données"
 ---
 
-Inhalt folgt.
+Contenu à venir.

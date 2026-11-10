@@ -1,10 +1,9 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: weg-station
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 position: 2
 nummer: "02"
 titel: "Liechtenstein"
-text: "Seit 2020 fahre ich für das Land meines Vaters. Hier kamen meine ersten grossen Erfolge."
+text: "Depuis 2020, je cours pour le pays de mon père. C’est là que sont venus mes premiers grands succès."
 ---
