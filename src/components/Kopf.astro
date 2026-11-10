@@ -1,0 +1,330 @@
+---
+/**
+ * Kopfzeile: Name, Navigation (Anker auf die Sektionen der Startseite) und Sprachumschalter.
+ * Ab 1100px Breite steht die Navigation in der Zeile. Darunter ist sie ein aufklappbares Menü
+ * (details/summary: funktioniert ohne JavaScript und mit der Tastatur).
+ * Ein kleines Skript schliesst das Menü nach einem Klick auf einen Link oder mit Escape.
+ */
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localizePath, t, type Locale, type UiKey } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  hasTranslation?: boolean;
+}
+
+const { locale, hasTranslation = true } = Astro.props;
+const start = localizePath('/', locale);
+
+const eintraege: { key: UiKey; anker: string; hervorgehoben?: boolean }[] = [
+  { key: 'nav.portrait', anker: 'portrait' },
+  { key: 'nav.resultate', anker: 'resultate' },
+  { key: 'nav.weg', anker: 'weg' },
+  { key: 'nav.rennen', anker: 'rennen' },
+  { key: 'nav.blog', anker: 'blog' },
+  { key: 'nav.partner', anker: 'partner' },
+  { key: 'nav.partner_werden', anker: 'partner-werden' },
+  { key: 'nav.kontakt', anker: 'kontakt', hervorgehoben: true },
+];
+const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t(locale, e.key) }));
+---
+
+<header class="kopf">
+  <div class="kopf__zeile inhalt">
+    <a class="marke" href={start}>
+      <svg class="marke__flagge" role="img" aria-label={t(locale, 'kopf.flagge')} viewBox="0 0 500 300">
+        <rect width="500" height="150" fill="var(--color-flagge-blau)"></rect>
+        <rect y="150" width="500" height="150" fill="var(--color-flagge-rot)"></rect>
+        <g fill="var(--color-flagge-krone)" stroke="var(--color-flagge-kontur)" stroke-width="3" stroke-linejoin="round">
+          <path d="M78 108 L80 72 Q96 84 104 66 Q114 48 124 66 Q132 84 148 72 L150 108 Z"></path>
+          <path d="M84 72 Q92 40 114 36 Q136 40 144 72" fill="none"></path>
+          <path d="M114 36 L114 72" fill="none"></path>
+          <circle cx="114" cy="28" r="8"></circle>
+          <path d="M114 10 L114 20 M109 14 L119 14" fill="none"></path>
+          <rect x="76" y="108" width="76" height="12"></rect>
+        </g>
+      </svg>
+      <span class="marke__name">{t(locale, 'site.name')}</span>
+      <span class="marke__zusatz">{t(locale, 'kopf.zusatz')}</span>
+    </a>
+
+    <div class="kopf__breit">
+      <nav class="hauptnav" aria-label={t(locale, 'nav.label')}>
+        <ul role="list">
+          {
+            links.map((l) => (
+              <li>
+                <a class:list={['hauptnav__link', { 'hauptnav__link--kontakt': l.hervorgehoben }]} href={l.href}>
+                  {l.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="kopf__sprache">
+        <LanguageSwitcher locale={locale} hasTranslation={hasTranslation} />
+      </div>
+    </div>
+
+    <details class="menue">
+      <summary class="menue__knopf ohne-marker">
+        <span class="menue__balken" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="wenn-zu menue__wort">{t(locale, 'menue.oeffnen')}</span>
+        <span class="wenn-offen menue__wort">{t(locale, 'menue.schliessen')}</span>
+      </summary>
+      <div class="menue__panel">
+        <nav aria-label={t(locale, 'nav.label')}>
+          <ul role="list">
+            {
+              links.map((l) => (
+                <li>
+                  <a class="menue__link" href={l.href}>
+                    {l.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <LanguageSwitcher locale={locale} hasTranslation={hasTranslation} />
+      </div>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Fortschreitende Verbesserung: Menü nach Klick auf einen Link oder mit Escape schliessen.
+  for (const menue of document.querySelectorAll<HTMLDetailsElement>('details.menue')) {
+    menue.addEventListener('click', (e) => {
+      if (e.target instanceof Element && e.target.closest('a')) menue.open = false;
+    });
+    menue.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menue.open) {
+        menue.open = false;
+        menue.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .kopf {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-papier);
+    border-bottom: var(--linie-1) solid var(--color-linie-soft);
+    box-shadow: var(--schatten-kopf);
+  }
+
+  .kopf__zeile {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+    padding-block: var(--space-18);
+  }
+
+  @media (min-width: 1100px) {
+    .kopf__zeile {
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Marke */
+  .marke {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    min-width: 0;
+    color: var(--color-tinte);
+    text-decoration: none;
+  }
+
+  .marke:hover {
+    color: var(--color-tinte);
+  }
+
+  .marke__flagge {
+    flex: 0 0 auto;
+    width: var(--mass-50);
+    height: var(--mass-30);
+    box-shadow: var(--schatten-flagge);
+  }
+
+  .marke__name {
+    min-width: 0;
+    font-family: var(--font-display);
+    font-size: var(--size-28);
+    font-weight: var(--weight-700);
+    letter-spacing: var(--track-02);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .marke__zusatz {
+    display: none;
+    padding-left: var(--space-12);
+    border-left: var(--linie-2) solid var(--color-rosa);
+    font-family: var(--font-display);
+    font-size: var(--size-22);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
+    text-transform: uppercase;
+    color: var(--color-beere);
+    white-space: nowrap;
+  }
+
+  /* Sehr schmale Handys: Name zweizeilig, damit er den Menü-Knopf nicht überdeckt */
+  @media (max-width: 400px) {
+    .marke__name {
+      white-space: normal;
+      line-height: var(--line-100);
+    }
+  }
+
+  @media (min-width: 560px) {
+    .marke__zusatz {
+      display: inline;
+    }
+  }
+
+  /* Breite Navigation (ab 1100px) */
+  .kopf__breit {
+    display: none;
+  }
+
+  .hauptnav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-24);
+  }
+
+  .hauptnav__link,
+  .menue__link {
+    display: inline-flex;
+    align-items: center;
+    padding-block: var(--space-10);
+    font-family: var(--font-display);
+    font-size: var(--size-18);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
+    text-transform: uppercase;
+    color: var(--color-tinte);
+    text-decoration: none;
+  }
+
+  .hauptnav__link:hover,
+  .menue__link:hover {
+    color: var(--color-beere);
+  }
+
+  /* Im Design rosa; weisse Schrift auf rosa hat nur 3.9:1, deshalb beere (Hover aubergine) */
+  .hauptnav__link--kontakt {
+    padding-inline: var(--space-18);
+    background: var(--color-beere);
+    color: var(--color-papier);
+  }
+
+  .hauptnav__link--kontakt:hover,
+  .hauptnav__link--kontakt:focus-visible {
+    background: var(--color-aubergine);
+    color: var(--color-papier);
+  }
+
+  .kopf__sprache {
+    padding-left: var(--space-12);
+    border-left: var(--linie-1) solid var(--color-linie);
+  }
+
+  @media (min-width: 1100px) {
+    .kopf__breit {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4) var(--space-24);
+    }
+
+    .menue {
+      display: none;
+    }
+  }
+
+  /* Aufklappbares Menü (unter 1100px) */
+  .menue {
+    flex: 0 0 auto;
+  }
+
+  .menue__knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    min-width: var(--space-44);
+    min-height: var(--space-44);
+    padding-inline: var(--space-8);
+    font-family: var(--font-display);
+    font-size: var(--size-15);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
+    text-transform: uppercase;
+    color: var(--color-tinte);
+  }
+
+  /* Auf schmalen Handys nur die Balken zeigen; das Wort bleibt für Screenreader */
+  @media (max-width: 559px) {
+    .menue__wort {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  }
+
+  .menue__balken {
+    display: inline-flex;
+    gap: var(--space-4);
+  }
+
+  .menue__balken span {
+    display: block;
+    width: var(--space-4);
+    height: var(--space-24);
+    background: var(--color-beere);
+    transform: skewX(var(--schraege));
+  }
+
+  .menue__balken span:nth-child(2) {
+    background: var(--color-rosa);
+  }
+
+  .menue__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(var(--mass-bildschirm) - 100%);
+    overflow-y: auto;
+    padding: var(--space-8) var(--space-32) var(--space-24);
+    background: var(--color-papier);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+    box-shadow: var(--schatten-kopf);
+  }
+
+  .menue__panel ul {
+    margin-bottom: var(--space-16);
+  }
+
+  .menue__panel li + li {
+    border-top: var(--linie-1) solid var(--color-linie-soft);
+  }
+
+  .menue__link {
+    width: 100%;
+    min-height: var(--space-48);
+  }
+</style>

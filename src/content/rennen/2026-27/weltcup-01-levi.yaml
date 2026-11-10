@@ -1,0 +1,11 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2026-11-14
+datum_bis: 2026-11-15
+stufe: Weltcup
+disziplinen: [Slalom, Slalom]
+ort: "Levi"
+land: FIN
+hinweis: weltcuppunkte
+status: geplant
+fis_link: "[FIS-LINK]"

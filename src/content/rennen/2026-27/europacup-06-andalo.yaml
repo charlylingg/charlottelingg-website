@@ -1,0 +1,10 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2027-02-01
+datum_bis: 2027-02-02
+stufe: Europacup
+disziplinen: [Riesenslalom, Riesenslalom]
+ort: "Andalo"
+land: ITA
+status: geplant
+fis_link: "[FIS-LINK]"

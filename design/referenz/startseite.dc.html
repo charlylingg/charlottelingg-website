@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Charlotte Lingg – Startseite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Barlow:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#8e3557}a:hover{color:#3d1a2b}
+*{box-sizing:border-box}
+@media (max-width: 820px){.hero{height:auto !important}.hero-img{position:static !important;display:block;height:62vw !important}.hero-panel{position:static !important;width:100% !important;clip-path:none !important;padding:40px 24px !important}}
+.pl img{transition:transform .25s ease}
+.pl:hover img{transform:translateY(-4px) scale(1.04)}
+@keyframes plRise{from{opacity:0;transform:translateY(36px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes plFlag{from{opacity:0;transform:translateX(-40px) skewX(-12deg)}to{opacity:1;transform:skewX(-12deg)}}
+@keyframes plLine{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){
+@media (prefers-reduced-motion: no-preference){
+.pl{animation:plRise linear both;animation-timeline:view();animation-range:entry 0% cover 28%}
+.pl-d2{animation-range:entry 12% cover 34%}
+.pl-d3{animation-range:entry 24% cover 40%}
+.pl-label{animation:plLine linear both;animation-timeline:view();animation-range:entry 0% cover 22%}
+.pl-flag{animation:plFlag linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
+}}
+
+.wipe{position:absolute;top:-10%;bottom:-10%;width:38%;left:0;z-index:3;transform:translateX(-160%) skewX(-12deg);pointer-events:none}
+.wipe-r{background:#d0587d}.wipe-b{background:#8e3557}
+@media (prefers-reduced-motion: no-preference){
+@keyframes heroIn{0%{opacity:0;transform:translateX(-35%) scale(1.12)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes wipe{0%{transform:translateX(-160%) skewX(-12deg)}100%{transform:translateX(420%) skewX(-12deg)}}
+@keyframes panelIn{from{transform:translateX(105%)}to{transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero-img{animation:heroIn 1.1s cubic-bezier(.16,1,.3,1) .15s both}
+.wipe-b{animation:wipe .8s cubic-bezier(.65,0,.35,1) 0s both}
+.wipe-r{animation:wipe .8s cubic-bezier(.65,0,.35,1) .12s both}
+.hero-panel{animation:panelIn .8s cubic-bezier(.16,1,.3,1) .7s both}
+.hero-panel > *{animation:riseIn .6s ease-out both}
+.hero-panel > *:nth-child(1){animation-delay:1.1s}.hero-panel > *:nth-child(2){animation-delay:1.2s}.hero-panel > *:nth-child(3){animation-delay:1.3s}.hero-panel > *:nth-child(4){animation-delay:1.4s}
+}
+header{box-shadow:0 1px 0 #f0dde3}
+
+.more summary::-webkit-details-marker{display:none}
+.more .plus{transition:transform .3s ease}
+.more[open] .plus{transform:rotate(45deg)}
+.more summary:hover .plus{color:#8e3557}
+@media (prefers-reduced-motion: no-preference){.more[open] .more-body{animation:riseIn .5s ease-out both}}
+
+.stn{padding-top:var(--pt)}
+.stn .gate{transform-origin:50% 100%}
+@media (max-width: 820px){.course-line{display:none}.course ol{grid-template-columns:1fr !important;gap:36px !important}.stn{padding-top:0 !important;align-items:flex-start !important;text-align:left !important}.stn .gate{margin:0 !important}.stn span[style*="padding-top: 22px"]{padding-top:0 !important}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes gateUp{from{opacity:0;transform:scaleY(.2)}to{opacity:1;transform:none}}
+.course-line path{stroke-dasharray:1;animation:draw linear both;animation-timeline:view();animation-range:entry 10% cover 45%}
+.stn .gate{animation:gateUp linear both;animation-timeline:view();animation-range:entry 20% cover 40%}
+.stn:nth-child(2) .gate{animation-range:entry 25% cover 44%}.stn:nth-child(3) .gate{animation-range:entry 30% cover 48%}.stn:nth-child(4) .gate{animation-range:entry 35% cover 52%}.stn:nth-child(5) .gate{animation-range:entry 40% cover 56%}
+}}
+
+section[id],footer[id]{scroll-margin-top:92px}
+.srow{height:220px}
+@media (max-width: 820px){.slalom-line{display:none}.srow{grid-template-columns:56px minmax(0,1fr) !important;height:auto !important;min-height:0 !important;gap:16px !important;padding:16px 0}.srow .se{display:none}.srow .sm{order:-1;height:56px !important}.srow .sm > div{position:static !important}.srow .sc{text-align:left !important;align-items:flex-start !important}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+@keyframes inL{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:none}}
+@keyframes inR{from{opacity:0;transform:translateX(120px)}to{opacity:1;transform:none}}
+@keyframes sgUp{from{opacity:0;transform:scale(.3) rotate(-20deg)}to{opacity:1;transform:none}}
+.sc-l{animation:inL linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+.sc-r{animation:inR linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+.sg{transform-origin:50% 100%;animation:sgUp linear both;animation-timeline:view();animation-range:entry 15% cover 40%}
+.slalom-line path{stroke-dasharray:1;animation:draw linear both;animation-timeline:view();animation-range:entry 15% exit 60%}
+}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+@media (max-width: 700px){.tri{grid-template-columns:1fr !important;gap:48px !important}.tri-lines{display:none}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+@keyframes kzDrop{from{opacity:0;transform:translateY(-70px) scale(.85)}to{opacity:1;transform:none}}
+@keyframes kzL{from{opacity:0;transform:translate(-140px,40px) rotate(-6deg)}to{opacity:1;transform:none}}
+@keyframes kzR{from{opacity:0;transform:translate(140px,40px) rotate(6deg)}to{opacity:1;transform:none}}
+.kz-top{animation:kzDrop linear both;animation-timeline:view();animation-range:entry 5% cover 35%}
+.kz-l{animation:kzL linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+.kz-r{animation:kzR linear both;animation-timeline:view();animation-range:entry 10% cover 42%}
+.tri-lines path{stroke-dasharray:1;animation:draw linear both;animation-timeline:view();animation-range:entry 20% cover 55%}
+}}
+
+@media (max-width: 560px){.rk{grid-template-columns:minmax(0,1fr) auto !important}.rk > span:first-child{grid-column:1 / -1}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+@keyframes rkIn{from{opacity:0;transform:translateX(-40px)}}
+.rk{animation:rkIn linear both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}}
+
+@media (max-width: 640px){.medal{width:58px !important;height:87px !important}.pod-block span{font-size:48px !important}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+@keyframes podUp{from{transform:scaleY(0)}to{transform:none}}
+@keyframes medalDrop{0%{opacity:0;transform:translateY(-120px) rotate(-18deg)}60%{opacity:1;transform:translateY(0) rotate(8deg)}80%{transform:rotate(-4deg)}100%{opacity:1;transform:none}}
+@keyframes hlIn{from{opacity:0;transform:translateY(30px)}}
+.pod-block{transform-origin:50% 100%;animation:podUp linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+.pod-1 .pod-block{animation-range:entry 10% cover 38%}.pod-3 .pod-block{animation-range:entry 20% cover 44%}
+}}
+.igt{transition:opacity .2s}.igt:hover{opacity:.75}
+
+.bl summary::-webkit-details-marker{display:none}
+.bl .bl-close{display:none}.bl[open] .bl-close{display:inline}.bl[open] .bl-open{display:none}
+.bl .bl-plus{transition:transform .3s ease}.bl[open] .bl-plus{transform:rotate(45deg)}
+@media (prefers-reduced-motion: no-preference){.bl[open] .bl-body{animation:riseIn .4s ease-out both}}
+.blogc{align-self:start}
+
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+}}
+
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+.sc-l,.sc-r{animation-range:entry 0% entry 100% !important}
+.sg{animation-range:entry 10% entry 100% !important}
+}}
+
+.slalom{view-timeline-name:--course}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){
+.slalom-line path{animation-timeline:--course !important;animation-range:entry 10% cover 55% !important}
+}}
+
+.rkmore summary::-webkit-details-marker{display:none}
+.rkmore .bl-close{display:none}.rkmore[open] .bl-close{display:inline}.rkmore[open] .bl-open{display:none}
+.rkmore .bl-plus{transition:transform .3s ease}.rkmore[open] .bl-plus{transform:rotate(45deg)}
+.rkmore[open] > ol{animation:riseIn .4s ease-out both}
+</style>
+</helmet>
+<div style="font-family: Barlow, 'Segoe UI', system-ui, sans-serif; color: #2b1520; background: #ffffff; font-size: 17px; line-height: 1.55">
+
+<header style="position: sticky; top: 0; z-index: 50; background: #ffffff; border-bottom: 1px solid #f0dde3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 18px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #2b1520">
+<svg role="img" aria-label="Flagge Liechtenstein" viewBox="0 0 500 300" style="display: block; width: 50px; height: 30px; flex: 0 0 auto; box-shadow: 0 0 0 1px #dcdfe2"><rect width="500" height="150" fill="#002b7f"></rect><rect y="150" width="500" height="150" fill="#ce1126"></rect><g fill="#ffd83d" stroke="#000000" stroke-width="3" stroke-linejoin="round"><path d="M78 108 L80 72 Q96 84 104 66 Q114 48 124 66 Q132 84 148 72 L150 108 Z"></path><path d="M84 72 Q92 40 114 36 Q136 40 144 72" fill="none"></path><path d="M114 36 L114 72" fill="none"></path><circle cx="114" cy="28" r="8"></circle><path d="M114 10 L114 20 M109 14 L119 14" fill="none"></path><rect x="76" y="108" width="76" height="12"></rect></g></svg>
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: 0.02em; text-transform: uppercase">Charlotte Lingg</span>
+<span style="padding-left: 12px; border-left: 2px solid #d0587d; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: 0.08em; text-transform: uppercase; color: #8e3557">Ski Alpin</span>
+</a>
+<nav aria-label="Hauptnavigation" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase">
+<a href="#portrait" style="color: #2b1520; text-decoration: none; padding: 10px 0">Portrait</a>
+<a href="#resultate" style="color: #2b1520; text-decoration: none; padding: 10px 0">Resultate</a>
+<a href="#weg" style="color: #2b1520; text-decoration: none; padding: 10px 0">Mein Weg</a>
+<a href="#rennen" style="color: #2b1520; text-decoration: none; padding: 10px 0">Rennen</a>
+<a href="#unterwegs" style="color: #2b1520; text-decoration: none; padding: 10px 0">Blog</a>
+<a href="#partner" style="color: #2b1520; text-decoration: none; padding: 10px 0">Sponsoren</a>
+<a href="#partner-werden" style="color: #2b1520; text-decoration: none; padding: 10px 0">Partner werden</a>
+<a href="#kontakt" style="color: #ffffff; background: #d0587d; text-decoration: none; padding: 10px 18px">Kontakt</a>
+<span style="display: flex; gap: 10px; padding-left: 12px; border-left: 1px solid #e8c9d2; font-size: 15px">
+<a href="#top" aria-current="true" style="color: #2b1520; text-decoration: underline; padding: 10px 2px">DE</a>
+<a href="#top" style="color: #6b4d5a; text-decoration: none; padding: 10px 2px">FR</a>
+<a href="#top" style="color: #6b4d5a; text-decoration: none; padding: 10px 2px">EN</a>
+</span>
+</nav>
+</div>
+</header>
+
+<section id="top" class="hero" style="position: relative; height: 760px; overflow: hidden; background: #3d1a2b; color: #ffffff">
+<span class="wipe wipe-r" aria-hidden="true"></span>
+<span class="wipe wipe-b" aria-hidden="true"></span>
+<img class="hero-img" src="/_blob/b85dab7d6f96e902be1afc29f024430a" alt="Charlotte Lingg im Riesenslalom in Sölden" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 32%">
+<div class="hero-panel" style="position: absolute; right: 0; bottom: 0; width: min(620px, 50%); background: #3d1a2b; padding: 56px 56px 56px 96px; clip-path: polygon(64px 0, 100% 0, 100% 100%, 0 100%); display: flex; flex-direction: column; gap: 22px">
+<span style="align-self: flex-start; background: #d0587d; color: #ffffff; padding: 8px 18px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Ski Alpin · Saison 2026/27</span>
+<h1 class="hero-h1" style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(48px, 6vw, 84px); line-height: 0.92; text-transform: uppercase">Zurück<br>im Weltcup.</h1>
+<p style="margin: 0; max-width: 30rem; font-size: 19px; line-height: 1.5">Slalom und Riesenslalom für Liechtenstein. Nach meiner dritten Verletzung fahre ich wieder Rennen. Fit und mit einem klaren Ziel.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; padding-top: 6px">
+<a href="#weg" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; text-decoration: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; color: #3d1a2b">Mein Weg</a>
+<a href="#partner-werden" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; text-decoration: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase; background: #d0587d; color: #ffffff">Sponsor werden</a>
+</div>
+</div>
+</section>
+
+<section id="portrait" style="background: #fcf0f3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 340px; max-width: 440px; aspect-ratio: 3 / 4; overflow: hidden">
+<img src="/_blob/337b28041277664dfc8a8744838eb782" alt="Porträt Charlotte Lingg" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%)">
+</div>
+<div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 20px">
+<span style="align-self: flex-start; background: #8e3557; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">01 Portrait</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Jeden Tag alles geben</h2>
+<p style="margin: 0; font-size: 20px; line-height: 1.45">Geboren in Lausanne, aufgewachsen in Zermatt, am Start für Liechtenstein.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 32px; padding: 14px 0; border-top: 1px solid #e8c9d2; border-bottom: 1px solid #e8c9d2">
+<span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6b4d5a">Jahrgang</span><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 26px">1999</strong></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6b4d5a">Skiclub</span><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 26px">SC Schaan</strong></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6b4d5a">Kader</span><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 26px">LSV National Team</strong></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6b4d5a">Disziplinen</span><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 26px">Slalom, Riesenslalom</strong></span>
+</div>
+<a href="#weg" style="align-self: flex-start; padding: 12px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase">Mein Weg ansehen</a>
+</div>
+</div>
+</section>
+
+<section aria-label="Zitat" style="background: #3d1a2b; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 96px 32px; display: flex; gap: 32px; align-items: flex-start">
+<span aria-hidden="true" style="flex: 0 0 auto; width: 28px; height: 88px; background: #d0587d; transform: skewX(-12deg)"></span>
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 20px">
+<blockquote style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: clamp(32px, 4vw, 48px); line-height: 1.12; max-width: 900px">«In all den Jahren habe ich vor allem eines gelernt: Jeder Tag zählt. Wer mit Qualität statt Quantität arbeitet, kommt besser und schneller vorwärts.»</blockquote>
+<figcaption style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase">Charlotte Lingg</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="resultate" style="background: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 640px">
+<span style="align-self: flex-start; background: #d0587d; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">02 Resultate</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Was ich erreicht habe</h2>
+<p style="margin: 0; color: #6b4d5a">Fünf Podestplätze im Europacup, davon zwei Siege.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; min-width: 280px">
+<a href="https://www.fis-ski.com/DB/general/athlete-biography.html?sectorcode=AL&amp;competitorid=203810" target="_blank" rel="noopener" style="align-self: flex-start; padding: 12px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase">Profil auf fis-ski.com</a>
+<a href="#rennen" style="background: #fcf0f3; padding: 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #2b1520">
+<span style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6b4d5a">Nächste Rennen</span>
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase">Zum Rennkalender 2026/27 →</span>
+</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 28px">
+<h3 style="margin: 0; display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase"><span aria-hidden="true" style="width: 12px; height: 32px; background: #8e3557; transform: skewX(-12deg)"></span>Europacup<span aria-hidden="true" style="width: 12px; height: 32px; background: #d0587d; transform: skewX(-12deg)"></span></h3>
+<div class="podium" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; max-width: 900px; width: 100%; border-bottom: 6px solid #3d1a2b">
+<div class="pod pod-2" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 14px; min-width: 0; padding: 0 8px">
+<svg class="medal" role="img" aria-label="Silbermedaille, zweimal 2. Platz" viewBox="0 0 100 150" style="display: block; width: 84px; height: 126px; overflow: visible">
+<path d="M28 0 L50 58 L38 62 L14 0 Z" fill="#8e3557"></path><path d="M72 0 L50 58 L62 62 L86 0 Z" fill="#d0587d"></path>
+<circle cx="50" cy="100" r="40" fill="#b9bec5" stroke="#8f959d" stroke-width="3"></circle>
+<circle cx="50" cy="100" r="30" fill="none" stroke="#e3e6ea" stroke-width="2"></circle>
+<path d="M30 82 A30 30 0 0 1 60 72" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.55"></path>
+<text x="50" y="112" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="34" fill="#8f959d">2</text>
+</svg>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; text-align: center; line-height: 1.2"><li><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">Aal</strong> <span style="font-size: 14px; color: #6b4d5a">Riesenslalom</span></li><li><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">Zell am See</strong> <span style="font-size: 14px; color: #6b4d5a">Slalom</span></li></ul>
+<div class="pod-block" style="width: 100%; height: 150px; margin-top: 6px; background: #8e3557; display: flex; align-items: flex-start; justify-content: center; padding-top: 14px; clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%)">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 72px; line-height: 1; color: #ffffff">2</span>
+</div>
+</div>
+<div class="pod pod-1" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 14px; min-width: 0; padding: 0 8px">
+<svg class="medal" role="img" aria-label="Goldmedaille, zwei Siege" viewBox="0 0 100 150" style="display: block; width: 84px; height: 126px; overflow: visible">
+<path d="M28 0 L50 58 L38 62 L14 0 Z" fill="#8e3557"></path><path d="M72 0 L50 58 L62 62 L86 0 Z" fill="#d0587d"></path>
+<circle cx="50" cy="100" r="40" fill="#d4a72c" stroke="#b8891a" stroke-width="3"></circle>
+<circle cx="50" cy="100" r="30" fill="none" stroke="#f3d77a" stroke-width="2"></circle>
+<path d="M30 82 A30 30 0 0 1 60 72" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.55"></path>
+<text x="50" y="112" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="34" fill="#b8891a">1</text>
+</svg>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; text-align: center; line-height: 1.2"><li><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">Mayrhofen</strong> <span style="font-size: 14px; color: #6b4d5a">Riesenslalom</span></li><li><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">Oberjoch</strong> <span style="font-size: 14px; color: #6b4d5a">Riesenslalom</span></li></ul>
+<div class="pod-block" style="width: 100%; height: 220px; margin-top: 6px; background: #d0587d; display: flex; align-items: flex-start; justify-content: center; padding-top: 14px; clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%)">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 72px; line-height: 1; color: #ffffff">1</span>
+</div>
+</div>
+<div class="pod pod-3" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 14px; min-width: 0; padding: 0 8px">
+<svg class="medal" role="img" aria-label="Bronzemedaille, 3. Platz" viewBox="0 0 100 150" style="display: block; width: 84px; height: 126px; overflow: visible">
+<path d="M28 0 L50 58 L38 62 L14 0 Z" fill="#8e3557"></path><path d="M72 0 L50 58 L62 62 L86 0 Z" fill="#d0587d"></path>
+<circle cx="50" cy="100" r="40" fill="#c07a45" stroke="#9a5b2e" stroke-width="3"></circle>
+<circle cx="50" cy="100" r="30" fill="none" stroke="#e2a77a" stroke-width="2"></circle>
+<path d="M30 82 A30 30 0 0 1 60 72" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.55"></path>
+<text x="50" y="112" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="34" fill="#9a5b2e">3</text>
+</svg>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; text-align: center; line-height: 1.2"><li><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">Ahrntal</strong> <span style="font-size: 14px; color: #6b4d5a">Slalom</span></li></ul>
+<div class="pod-block" style="width: 100%; height: 100px; margin-top: 6px; background: #3d1a2b; display: flex; align-items: flex-start; justify-content: center; padding-top: 14px; clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%)">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 72px; line-height: 1; color: #ffffff">3</span>
+</div>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 72px; padding-top: 8px">
+<div class="hl" style="display: flex; align-items: baseline; gap: 14px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: #8e3557">29.</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; text-transform: uppercase">Weltcup Slalom<br>Levi</span></div>
+<div class="hl" style="display: flex; align-items: baseline; gap: 14px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: #d0587d">27.</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; text-transform: uppercase">Weltmeisterschaft<br>Cortina d’Ampezzo</span></div>
+<div class="hl" style="display: flex; align-items: baseline; gap: 14px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: #8e3557">FIS</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; text-transform: uppercase">Podestplätze in<br>FIS-Rennen</span></div>
+</div>
+</div>
+</section>
+
+<section id="rennen" style="background: #fcf0f3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 760px">
+<span style="align-self: flex-start; background: #8e3557; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Rennkalender 2026/27</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Hier bin ich am Start</h2>
+<p style="margin: 0">Slalom und Riesenslalom der Frauen im Weltcup und im Europacup. Welche Rennen ich fahre, entscheidet sich laufend mit meinem Trainer und dem Verband.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 48px 64px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0 0 8px; display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; text-transform: uppercase"><span aria-hidden="true" style="width: 12px; height: 28px; background: #d0587d; transform: skewX(-12deg)"></span>Weltcup</h3>
+<ol style="list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #f0dde3">
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">14.–15.11.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Levi</strong><span style="font-size: 14px; color: #6b4d5a">Finnland</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #d0587d"><span aria-hidden="true" style="width: 6px; height: 12px; background: #d0587d; transform: skewX(-12deg)"></span>Hier habe ich Weltcuppunkte geholt</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">21.–22.11.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Gurgl</strong><span style="font-size: 14px; color: #6b4d5a">Österreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+</ol>
+<details class="rkmore">
+<summary style="list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 14px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8e3557"><span class="bl-open">Alle 11 weiteren Rennen</span><span class="bl-close">Weniger anzeigen</span><span class="bl-plus" aria-hidden="true" style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 26px; line-height: 1; color: #d0587d">+</span></summary>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 0; border-bottom: 1px solid #f0dde3">
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">28.–29.11.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Killington</strong><span style="font-size: 14px; color: #6b4d5a">USA</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">05.–06.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Tremblant</strong><span style="font-size: 14px; color: #6b4d5a">Kanada</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">18.–20.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">St. Moritz</strong><span style="font-size: 14px; color: #6b4d5a">Schweiz</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">22.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Courchevel</strong><span style="font-size: 14px; color: #6b4d5a">Frankreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">28.–29.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Dachstein West / Gosau</strong><span style="font-size: 14px; color: #6b4d5a">Österreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">04.–05.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Flachau</strong><span style="font-size: 14px; color: #6b4d5a">Österreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">19.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Kronplatz</strong><span style="font-size: 14px; color: #6b4d5a">Italien</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">23.–24.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Jasna</strong><span style="font-size: 14px; color: #6b4d5a">Slowakei</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">29.–30.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Kranjska Gora</strong><span style="font-size: 14px; color: #6b4d5a">Slowenien</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">06.–07.03.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Soldeu</strong><span style="font-size: 14px; color: #6b4d5a">Andorra</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">18.–25.03.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Sun Valley</strong><span style="font-size: 14px; color: #6b4d5a">USA</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #d0587d; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">Finale</span>
+</li>
+</ol>
+</details>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0 0 8px; display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; text-transform: uppercase"><span aria-hidden="true" style="width: 12px; height: 28px; background: #8e3557; transform: skewX(-12deg)"></span>Europacup</h3>
+<ol style="list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #f0dde3">
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">21.–22.11.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Levi</strong><span style="font-size: 14px; color: #6b4d5a">Finnland</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">30.11.–01.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Zinal</strong><span style="font-size: 14px; color: #6b4d5a">Schweiz</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× RS</span>
+</li>
+</ol>
+<details class="rkmore">
+<summary style="list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 14px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8e3557"><span class="bl-open">Alle 8 weiteren Rennen</span><span class="bl-close">Weniger anzeigen</span><span class="bl-plus" aria-hidden="true" style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 26px; line-height: 1; color: #d0587d">+</span></summary>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 0; border-bottom: 1px solid #f0dde3">
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">05.–06.12.2026</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Mayrhofen</strong><span style="font-size: 14px; color: #6b4d5a">Österreich</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #d0587d"><span aria-hidden="true" style="width: 6px; height: 12px; background: #d0587d; transform: skewX(-12deg)"></span>Hier habe ich gewonnen</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">RS, SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">05.–06.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Val Cenis</strong><span style="font-size: 14px; color: #6b4d5a">Frankreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">08.–09.01.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Sestriere</strong><span style="font-size: 14px; color: #6b4d5a">Italien</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">01.–02.02.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Andalo</strong><span style="font-size: 14px; color: #6b4d5a">Italien</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">06.–07.02.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Shahdag</strong><span style="font-size: 14px; color: #6b4d5a">Aserbaidschan</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">22.–23.02.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Hasliberg</strong><span style="font-size: 14px; color: #6b4d5a">Schweiz</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× SL</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">25.–26.02.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">Oberjoch</strong><span style="font-size: 14px; color: #6b4d5a">Deutschland</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #d0587d"><span aria-hidden="true" style="width: 6px; height: 12px; background: #d0587d; transform: skewX(-12deg)"></span>Hier habe ich gewonnen</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">2× RS</span>
+</li>
+<li class="rk" style="display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-top: 1px solid #f0dde3;">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 19px; color: #6b4d5a">23.–24.03.2027</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase">St. Anton</strong><span style="font-size: 14px; color: #6b4d5a">Österreich</span></span>
+<span style="justify-self: end; padding: 4px 12px; background: #8e3557; color: #ffffff; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; white-space: nowrap">Finale</span>
+</li>
+</ol>
+</details>
+</div>
+</div>
+<p style="margin: 0; font-size: 14px; color: #6b4d5a">RS = Riesenslalom, SL = Slalom. Quelle: FIS-Kalender, Stand 26.10.2026. Änderungen vorbehalten.</p>
+</div>
+</section>
+
+<section id="weg" style="background: #fcf0f3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+<span style="align-self: flex-start; background: #8e3557; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">03 Mein Weg</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Tor für Tor nach vorne</h2>
+</div>
+<div class="slalom" style="position: relative">
+<svg class="slalom-line" aria-hidden="true" viewBox="0 0 200 1100" preserveAspectRatio="none" style="position: absolute; top: 0; left: 50%; width: 200px; height: 1100px; margin-left: -100px; overflow: visible">
+<path d="M100 0 C100 60 40 60 40 110 S160 270 160 330 S40 490 40 550 S160 710 160 770 S40 930 40 990 S100 1060 100 1100" fill="none" stroke="#8e3557" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1"></path>
+<path d="M110 0 C110 60 50 62 50 118 S170 278 170 338 S50 498 50 558 S170 718 170 778 S50 938 50 998 S110 1064 110 1100" fill="none" stroke="#eab3c4" stroke-width="1.5" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1"></path>
+</svg>
+<ol style="position: relative; list-style: none; margin: 0; padding: 0">
+<li class="srow" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 32px; align-items: center; min-height: 220px">
+<div class="sc sc-l" style="display: flex; flex-direction: column; gap: 8px; text-align: right; align-items: flex-end">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">01</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1; text-transform: uppercase">Zermatt und Wallis</strong>
+<span style="max-width: 24rem; color: #6b4d5a">Skiclub Zermatt, Walliser Skiverband, Kollegium Brig, NLZ West und Swiss-Ski C-Kader.</span>
+</div>
+<div class="sm" style="position: relative; height: 220px"><div style="position: absolute; top: 60px; left: 20px"><svg class="sg" aria-hidden="true" viewBox="0 0 48 60" style="display: block; width: 40px; height: 50px"><line x1="6" y1="2" x2="6" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><line x1="42" y1="2" x2="42" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><path d="M6 6 L42 6 L42 30 L6 30 Z" fill="#d0587d"></path></svg></div></div>
+<div class="se" aria-hidden="true"></div>
+</li>
+<li class="srow" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 32px; align-items: center; min-height: 220px">
+<div class="se" aria-hidden="true"></div>
+<div class="sm" style="position: relative; height: 220px"><div style="position: absolute; top: 60px; left: 140px"><svg class="sg" aria-hidden="true" viewBox="0 0 48 60" style="display: block; width: 40px; height: 50px"><line x1="6" y1="2" x2="6" y2="60" stroke="#8e3557" stroke-width="3" stroke-linecap="round"></line><line x1="42" y1="2" x2="42" y2="60" stroke="#8e3557" stroke-width="3" stroke-linecap="round"></line><path d="M6 6 L42 6 L42 30 L6 30 Z" fill="#8e3557"></path></svg></div></div>
+<div class="sc sc-r" style="display: flex; flex-direction: column; gap: 8px; text-align: left; align-items: flex-start">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #8e3557">02</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1; text-transform: uppercase">Liechtenstein</strong>
+<span style="max-width: 24rem; color: #6b4d5a">Seit 2020 fahre ich für das Land meines Vaters. Hier kamen meine ersten grossen Erfolge.</span>
+</div>
+</li>
+<li class="srow" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 32px; align-items: center; min-height: 220px">
+<div class="sc sc-l" style="display: flex; flex-direction: column; gap: 8px; text-align: right; align-items: flex-end">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">03</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1; text-transform: uppercase">Europacup und WM</strong>
+<span style="max-width: 24rem; color: #6b4d5a">Zwei Siege und drei weitere Podestplätze im Europacup, Weltcuppunkte in Levi, WM in Cortina.</span>
+</div>
+<div class="sm" style="position: relative; height: 220px"><div style="position: absolute; top: 60px; left: 20px"><svg class="sg" aria-hidden="true" viewBox="0 0 48 60" style="display: block; width: 40px; height: 50px"><line x1="6" y1="2" x2="6" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><line x1="42" y1="2" x2="42" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><path d="M6 6 L42 6 L42 30 L6 30 Z" fill="#d0587d"></path></svg></div></div>
+<div class="se" aria-hidden="true"></div>
+</li>
+<li class="srow" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 32px; align-items: center; min-height: 220px">
+<div class="se" aria-hidden="true"></div>
+<div class="sm" style="position: relative; height: 220px"><div style="position: absolute; top: 60px; left: 140px"><svg class="sg" aria-hidden="true" viewBox="0 0 48 60" style="display: block; width: 40px; height: 50px"><line x1="6" y1="2" x2="6" y2="60" stroke="#8e3557" stroke-width="3" stroke-linecap="round"></line><line x1="42" y1="2" x2="42" y2="60" stroke="#8e3557" stroke-width="3" stroke-linecap="round"></line><path d="M6 6 L42 6 L42 30 L6 30 Z" fill="#8e3557"></path></svg></div></div>
+<div class="sc sc-r" style="display: flex; flex-direction: column; gap: 8px; text-align: left; align-items: flex-start">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #8e3557">04</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1; text-transform: uppercase">Comeback</strong>
+<span style="max-width: 24rem; color: #6b4d5a">Drei Kreuzbandrisse, dreimal zurück. Jetzt fit und gesund für die neue Saison.</span>
+</div>
+</li>
+<li class="srow" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px minmax(0, 1fr); gap: 32px; align-items: center; min-height: 220px">
+<div class="sc sc-l" style="display: flex; flex-direction: column; gap: 8px; text-align: right; align-items: flex-end">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">Ziel</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1; text-transform: uppercase">Olympia 2030</strong>
+<span style="max-width: 24rem; color: #6b4d5a">Regelmässig in die Top 15 im Weltcup und an die nächsten Olympischen Winterspiele.</span>
+</div>
+<div class="sm" style="position: relative; height: 220px"><div style="position: absolute; top: 60px; left: 20px"><svg class="sg" aria-hidden="true" viewBox="0 0 48 60" style="display: block; width: 40px; height: 50px"><line x1="6" y1="2" x2="6" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><line x1="42" y1="2" x2="42" y2="60" stroke="#d0587d" stroke-width="3" stroke-linecap="round"></line><path d="M6 6 L42 6 L42 30 L6 30 Z" fill="#d0587d"></path></svg></div></div>
+<div class="se" aria-hidden="true"></div>
+</li>
+</ol>
+</div>
+<details class="more" style="border-top: 1px solid #e8c9d2; border-bottom: 1px solid #e8c9d2">
+<summary style="list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; padding: 16px 0">
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 30px; line-height: 1; text-transform: uppercase; color: #2b1520">Meine ganze Geschichte</span><span style="color: #6b4d5a">Wer ich bin, woher ich komme und wohin ich will.</span></span>
+<span class="plus" aria-hidden="true" style="flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #d0587d; font-family: 'Barlow', 'Segoe UI', sans-serif; font-weight: 400; font-size: 44px; line-height: 1">+</span>
+</summary>
+<div class="more-body" style="padding: 24px 0 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 44px 64px; max-width: 1140px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #d0587d; transform: skewX(-12deg)"></span>Wo alles begann</h3>
+<p style="margin: 0">Geboren bin ich in Lausanne, zu Hause war ich in Zermatt. Ich bin mit dem Matterhorn vor dem Fenster aufgewachsen, die Piste fast vor der Haustür. Im Skiclub Zermatt bin ich meine ersten Rennen gefahren, und schon damals war klar: Das ist meine Welt.</p>
+<p style="margin: 0">Meine Mutter stammt aus Pully, mein Vater aus Liechtenstein. So habe ich Deutsch und Französisch von klein auf gelernt, beide Sprachen sind meine Muttersprachen.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #8e3557; transform: skewX(-12deg)"></span>Meine Jahre im Wallis</h3>
+<p style="margin: 0">Vom Skiclub ging es zum Walliser Skiverband. Meine ersten FIS-Jahre habe ich an der Sportschule im Kollegium Brig verbracht, wo Schule und Training zusammenpassten. Danach folgte ein Jahr im Nationalen Leistungszentrum West und dann der Schritt ins C-Kader von Swiss-Ski.</p>
+<p style="margin: 0">In dieser Zeit habe ich gelernt, was es heisst, jeden Tag alles zu geben. Das begleitet mich bis heute.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #d0587d; transform: skewX(-12deg)"></span>Ein neuer Anfang</h3>
+<p style="margin: 0">2020 habe ich gespürt, dass ich einen Neuanfang brauche. Ich habe mich entschieden, für Liechtenstein zu fahren, das Land meines Vaters. Es war die richtige Entscheidung.</p>
+<p style="margin: 0">Beim Liechtensteinischen Skiverband habe ich mich enorm weiterentwickelt, mit meinem eigenen Trainer und meinem eigenen Servicemann an meiner Seite. Hier kamen auch meine ersten grossen Erfolge, und mit ihnen das Gefühl, angekommen zu sein.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #8e3557; transform: skewX(-12deg)"></span>Meine schönsten Resultate</h3>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #d0587d">1.</span><span><strong>Riesenslalom</strong>, Europacup Mayrhofen (AT)</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #d0587d">1.</span><span><strong>Riesenslalom</strong>, Europacup Oberjoch (DE)</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #8e3557">2.</span><span><strong>Riesenslalom</strong>, Europacup Aal</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #8e3557">2.</span><span><strong>Slalom</strong>, Europacup Zell am See (AT)</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #8e3557">3.</span><span><strong>Slalom</strong>, Europacup Ahrntal (IT)</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #8e3557">29.</span><span><strong>Slalom</strong>, Weltcup Levi (FIN)</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid #f0dde3"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #8e3557">27.</span><span><strong>WM</strong>, Cortina d’Ampezzo (IT)</span></li>
+</ul>
+<p style="margin: 0">Dazu kommen Podestplätze in FIS-Rennen und sieben nationale Titel.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #d0587d; transform: skewX(-12deg)"></span>Rückschläge, die mich stärker gemacht haben</h3>
+<p style="margin: 0">Zum Skirennsport gehören leider auch Verletzungen. Dreimal habe ich mir das Kreuzband gerissen:</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1; color: #6b4d5a">2019</span><span>Kreuzbandriss im Riesenslalom-Training im Val di Fassa. Ich bin nicht einmal gestürzt, es ist einfach passiert.</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1; color: #6b4d5a">2022</span><span>Kreuzbandriss nach einem Sturz im Super-G in Deutschland.</span></li>
+<li style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: baseline"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; line-height: 1; color: #6b4d5a">2025</span><span>Kreuzbandriss im Riesenslalom-Training in Norwegen. Ich wollte abbremsen, habe die Ski gekreuzt und bin gestürzt.</span></li>
+</ul>
+<p style="margin: 0">Jedes Mal war es ein langer Weg zurück, und keiner davon war einfach. Es brauchte Geduld, Vertrauen und viele kleine Schritte. Aus jeder Verletzung habe ich viel gelernt: über meinen Körper, über Geduld und darüber, wie sehr ich diesen Sport liebe. Heute weiss ich, dass mich diese Zeiten stärker gemacht haben.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase; margin: 0"><span aria-hidden="true" style="display: inline-block; width: 9px; height: 22px; margin-right: 12px; vertical-align: -2px; background: #8e3557; transform: skewX(-12deg)"></span>Bereit für diese Saison</h3>
+<p style="margin: 0">Jetzt bin ich wieder fit und gesund. Seit August 2026 stehe ich voll im Schneetraining, und ich freue mich riesig auf diesen Winter. Ich lebe in Wangen am Zürichsee und bin beim Liechtenstein Olympic Committee als Spitzensportlerin angestellt.</p>
+<p style="margin: 0">Mein Ziel: zuerst zurück auf mein früheres Niveau, dann Schritt für Schritt weiter nach vorne. Regelmässig in die Top 15 im Weltcup und an die Olympischen Winterspiele 2030.</p>
+<p style="margin: 0">Dass ich diesen Weg gehen kann, verdanke ich meiner Familie, meinem Team und meinen Partnern. Danke, dass ihr an mich glaubt.</p>
+</div>
+</div>
+</details>
+</div>
+</section>
+
+<section id="unterwegs" style="background: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 72px">
+<div style="display: flex; flex-wrap: wrap; gap: 40px 64px; align-items: center">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 20px">
+<span style="align-self: flex-start; background: #8e3557; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Unterwegs</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Komm mit auf meine Reise</h2>
+<p style="margin: 0">Training, Rennen und alles dazwischen: Auf Instagram nehme ich dich mit durch die Saison.</p>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 24px; background: #d0587d; color: #ffffff; text-decoration: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg>@charlotte_lingg folgen</a>
+</div>
+<div style="flex: 1.4 1 420px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #fcf0f3; display: flex; align-items: center; justify-content: center; color: #8e3557; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #f7dfe6; display: flex; align-items: center; justify-content: center; color: #8e3557; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #fcf0f3; display: flex; align-items: center; justify-content: center; color: #d0587d; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #f7dfe6; display: flex; align-items: center; justify-content: center; color: #d0587d; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #fcf0f3; display: flex; align-items: center; justify-content: center; color: #8e3557; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+<a href="https://www.instagram.com/charlotte_lingg/" target="_blank" rel="noopener" class="igt" style="aspect-ratio: 1 / 1; background: #f7dfe6; display: flex; align-items: center; justify-content: center; color: #8e3557; text-decoration: none"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"></circle></svg></a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<h2 style="margin: 0; display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; text-transform: uppercase"><span aria-hidden="true" style="width: 12px; height: 34px; background: #d0587d; transform: skewX(-12deg)"></span>Blog</h2>
+<a href="#unterwegs" style="padding: 8px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase">Alle Beiträge</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px 32px">
+<article class="blogc" style="display: flex; flex-direction: column; gap: 14px">
+<img src="/_blob/44e797065e8bd0281a9af4117d48e561" alt="" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 30%">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">Saisonstart · Sölden, Oktober 2026</span>
+<h3 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase">Zurück im Weltcup</h3>
+<p style="margin: 0; color: #6b4d5a">Meine Comeback-Saison beginnt. Was ich mir für diesen Winter vornehme und worauf ich mich am meisten freue.</p>
+<details class="bl">
+<summary style="list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 8px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8e3557"><span class="bl-open">Weiterlesen</span><span class="bl-close">Schliessen</span><span class="bl-plus" aria-hidden="true" style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 26px; line-height: 1; color: #d0587d">+</span></summary>
+<div class="bl-body" style="display: flex; flex-direction: column; gap: 14px; padding: 12px 0 8px; border-top: 1px solid #f0dde3; font-size: 16px; line-height: 1.6">
+<p style="margin: 0">Nach eineinhalb Jahren stand ich in Sölden wieder am Start eines Weltcuprennens. Es war ein unglaublich schöner und emotionaler Moment.</p>
+<p style="margin: 0">Mit dem Tag selbst bin ich sehr zufrieden. Nervosität, Besichtigung, das ganze Umfeld: Ich habe alles gut gemeistert und konnte befreit Ski fahren. Genau das war mein Ziel für dieses erste Rennen.</p>
+<p style="margin: 0">Umso mehr hat mich das Resultat überrascht. Auf die Top 30 und damit auf den zweiten Lauf haben mir nur zwölf Hundertstel gefehlt. Im oberen und im unteren Teil konnte ich zeigen, dass ich schnell bin. Im Steilhang bin ich stabil gefahren. Dort hätte ich die Ski früher in die Falllinie bringen und eine direktere Linie wählen können. Genau daran arbeite ich jetzt.</p>
+<p style="margin: 0">Ich nehme aus Sölden sehr viel Positives mit und freue mich auf alles, was in diesem Winter noch kommt.</p>
+<p style="margin: 0">Ein grosses Dankeschön an die Organisatoren: Die Piste war in einem hervorragenden Zustand.</p>
+</div>
+</details>
+</article>
+<article class="blogc" style="display: flex; flex-direction: column; gap: 14px">
+<img src="/_blob/337b28041277664dfc8a8744838eb782" alt="" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 30%">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">Persönlich</span>
+<h3 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase">Drei Kreuzbandrisse, drei Comebacks</h3>
+<p style="margin: 0; color: #6b4d5a">Was mich die langen Wege zurück gelehrt haben und warum mich diese Zeit stärker gemacht hat.</p>
+<details class="bl">
+<summary style="list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 8px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: #8e3557"><span class="bl-open">Weiterlesen</span><span class="bl-close">Schliessen</span><span class="bl-plus" aria-hidden="true" style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 26px; line-height: 1; color: #d0587d">+</span></summary>
+<div class="bl-body" style="display: flex; flex-direction: column; gap: 14px; padding: 12px 0 8px; border-top: 1px solid #f0dde3; font-size: 16px; line-height: 1.6">
+<p style="margin: 0">Dreimal habe ich mir das Kreuzband gerissen:</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px"><li style="display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 20px; color: #d0587d">2019</strong><span>Riesenslalom-Training im Val di Fassa (IT). Ich bin nicht gestürzt, es ist einfach passiert.</span></li><li style="display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 20px; color: #d0587d">2022</strong><span>Sturz im Super-G in Deutschland.</span></li><li style="display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px"><strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 20px; color: #d0587d">2025</strong><span>Riesenslalom-Training in Norwegen. Beim Abbremsen habe ich die Ski gekreuzt und bin gestürzt.</span></li></ul>
+<p style="margin: 0">Aus diesen Verletzungen habe ich viel gelernt. Die wichtigste Erkenntnis: Um Leistung zu bringen, muss ich auch mental erholt sein.</p>
+<p style="margin: 0">Wenn ich zurückschaue, erkenne ich ein Muster. Vor allen drei Verletzungen hatte ich eine mental schwierige Zeit. Druck und Stress wurden zu viel, und jedes Mal war mein Energielevel am Ende. Das ist meine persönliche Einschätzung, aber für mich ist sie klar. Es hat drei Verletzungen gebraucht, bis ich das verstanden habe.</p>
+<p style="margin: 0">Heute nutze ich dieses Wissen als Stärke. Ich verstehe mich besser als je zuvor, und darauf bin ich stolz.</p>
+<p style="margin: 0">Eine Verletzung ist nie etwas Gutes. Und doch hat diese Zeit auch etwas Wertvolles. Man ist auf sich allein gestellt, muss die Motivation in sich selbst finden und sich ehrlich fragen, ob man das alles noch will und warum man es macht.</p>
+</div>
+</details>
+</article>
+<article class="blogc" style="display: flex; flex-direction: column; gap: 14px">
+<div aria-hidden="true" style="aspect-ratio: 16 / 10; background: #3d1a2b; display: flex; align-items: center; justify-content: center; gap: 14px"><span style="width: 22px; height: 64px; background: #8e3557; transform: skewX(-12deg); outline: 2px solid #ffffff"></span><span style="width: 22px; height: 64px; background: #d0587d; transform: skewX(-12deg)"></span></div>
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: #d0587d">Training</span>
+<h3 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.05; text-transform: uppercase">Qualität statt Quantität</h3>
+<p style="margin: 0; color: #6b4d5a">Jeder Tag zählt. Wie ich mein Training heute aufbaue und warum weniger manchmal mehr ist.</p>
+<span style="padding: 8px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b4d5a">Beitrag folgt</span>
+</article>
+</div>
+</div>
+</div>
+</section>
+
+<section id="partner" style="background: #ffffff; border-top: 1px solid #f0dde3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 760px">
+<span class="pl-flag" style="align-self: flex-start; background: #d0587d; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">04 Partner</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Wer mit mir unterwegs ist</h2>
+<p style="margin: 0">Skirennsport ist Teamarbeit. Hinter jedem Lauf stehen mein Trainer, mein Servicemann, meine Familie und Partner, die mich auch in schwierigen Zeiten begleitet haben. Nach meiner dritten Verletzung bin ich diese Saison zurück im Weltcup. Dass ich diesen Weg Schritt für Schritt gehen kann, verdanke ich auch ihnen.</p>
+</div>
+<div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Kopfsponsoren</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 96px">
+<a class="pl pl-d1" href="https://www.lgt.li/de" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/63107cdd5d89f48474463501b819cf68" alt="LGT" style="display: block; height: 150px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+<a class="pl pl-d2" href="https://www.kaiser.li" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/3318341470492892f267590bc6339fbb" alt="Kaiser AG" style="display: block; height: 56px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Mobilitätspartner</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d1" href="https://www.monnier-immo.ch" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/55b8716098a2c3a84b92c37d69e6ce92" alt="Monnier Immo" style="display: block; height: 120px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Trinkflaschenpartner</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d2" href="https://www.mbpi.li/de/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/18d3a43aed87cc73239f224d0567ba83" alt="MBPI" style="display: block; height: 110px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Anstellung</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d3" href="https://www.olympic.li" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/0f4fb63cd558fc3fd10bc452e487f110" alt="Liechtenstein Olympic Committee (LOC)" style="display: block; height: 110px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Ausrüster</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d1" href="https://www.head.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/37e6f2db17037606401fcbe0193ed6f1" alt="Head" style="display: block; height: 36px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+<a class="pl pl-d2" href="https://ziener.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/533c2116b489be2d1001fb94dafdb36a" alt="Ziener" style="display: block; height: 46px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+<a class="pl pl-d3" href="https://www.leki.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/aa4451f7d55ca1411349a4be6c2c71db" alt="Leki" style="display: block; height: 54px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Unterstützer</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d1" href="https://www.adler-hitta.ch" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/0355b63b6a8e767c80e38ab379c94007" alt="Adler Hitta" style="display: block; height: 84px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+<a class="pl pl-d2" href="https://www.chezvrony.ch" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/0bf6a04defe249f405cc517e6c9a409d" alt="Chez Vrony" style="display: block; height: 104px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+<span class="pl pl-d3" style="display: inline-flex; align-items: center; height: 80px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 30px; line-height: 1; text-transform: uppercase; color: #2b1520">Tennisclub<br>Zermatt</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; padding: 40px 0; border-top: 1px solid #f0dde3">
+<span class="pl-label" style="flex: 0 0 260px; display: inline-flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; color: #2b1520"><span aria-hidden="true" style="display: inline-block; width: 10px; height: 24px; background: #d0587d; transform: skewX(-12deg)"></span>Heimat</span>
+<div style="flex: 1 1 480px; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 64px">
+<a class="pl pl-d1" href="https://www.hotelalbanareal.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 8px 0"><img src="/_blob/1546bbc90c0b54dfbc9892106231bf83" alt="Hotel Albana Real" style="display: block; height: 104px; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply"></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="partner-werden" style="background: #8e3557; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 780px">
+<span style="align-self: flex-start; background: #d0587d; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Für Unternehmen und Private</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Sponsor werden</h2>
+<p style="margin: 0; font-size: 20px; line-height: 1.45">Begleiten Sie mich durch die Comeback-Saison und auf dem Weg zu den Olympischen Winterspielen 2030. Sichtbar in Liechtenstein, im Wallis, in der Romandie und am Zürichsee, auf Deutsch, Französisch und Englisch.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<div style="background: #d0587d; padding: 28px; display: flex; flex-direction: column; gap: 12px; grid-column: 1 / -1">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85">Sponsoring</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 36px; line-height: 1; text-transform: uppercase">Finanzielle Unterstützung</strong>
+<span style="max-width: 46rem">Spitzensport kostet: Training, Material, Reisen, Betreuung. Mit einem Sponsoringbeitrag tragen Sie direkt dazu bei, dass ich mich voll auf den Sport konzentrieren kann. Gemeinsam legen wir fest, wie Sie dafür sichtbar werden, zum Beispiel mit Ihrem Logo hier auf der Website, auf Social Media oder an Anlässen.</span>
+<span style="padding-top: 8px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.06em; text-transform: uppercase">Viele Möglichkeiten</span>
+<span style="display: flex; flex-wrap: wrap; gap: 10px 12px; padding-left: 4px"><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Helm und Kopfbedeckung</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Trinkflasche</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Auto</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Freizeit- und Trainingsbekleidung</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Website</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Social Media</span><span style="padding: 6px 14px; background: #ffffff; color: #3d1a2b; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase">Anlässe und Referate</span></span>
+<span style="max-width: 46rem">Welche Flächen und Plätze gerade frei sind, finden wir gemeinsam heraus. Fragen Sie mich, ich zeige Ihnen die aktuellen Möglichkeiten.</span>
+</div>
+<div style="background: #3d1a2b; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85">Unterstützer</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 28px; line-height: 1; text-transform: uppercase">Jeder Beitrag zählt</strong>
+<span style="max-width: 46rem">Auch als kleineres Unternehmen oder als Privatperson können Sie mich unterstützen und werden Teil meines Teams.</span>
+</div>
+<div style="background: #3d1a2b; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85">Mobilität</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 28px; line-height: 1; text-transform: uppercase">Logo auf meinem Auto</strong>
+<span style="max-width: 46rem">Ihr Logo begleitet mich zwischen Trainings und Rennen durch ganz Europa.</span>
+</div>
+<div style="background: #3d1a2b; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85">Anlässe</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 28px; line-height: 1; text-transform: uppercase">Referate und Skitage</strong>
+<span style="max-width: 46rem">Ich erzähle von Comeback, Druck und Leistung, oder fahre mit Ihren Kunden einen Tag Ski. Vor allem im Frühling und Herbst.</span>
+</div>
+<div style="background: #3d1a2b; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85">Inhalte</span>
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 28px; line-height: 1; text-transform: uppercase">Social Media</strong>
+<span style="max-width: 46rem">Beiträge auf Instagram und Bilder aus Training und Rennalltag für Ihre Kanäle.</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 17px">Jede Partnerschaft stelle ich individuell zusammen. Melden Sie sich, ich schicke Ihnen gerne mein Sponsoringdossier.</p>
+<a href="#kontakt" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; background: #ffffff; color: #8e3557; text-decoration: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase">Sponsoringdossier anfordern</a>
+</div>
+</section>
+
+<section id="fanpost" style="background: #fcf0f3">
+<div style="max-width: 1280px; margin: 0 auto; padding: 72px 32px; display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: center">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px">
+<span style="align-self: flex-start; background: #d0587d; color: #ffffff; padding: 6px 16px; transform: skewX(-12deg); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Fanpost</span>
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 48px; line-height: 0.95; text-transform: uppercase">Schreib mir</h2>
+<p style="margin: 0">Ich freue mich über jede Karte und jeden Brief. Wer eine Autogrammkarte möchte, legt ein frankiertes und adressiertes Rückantwortcouvert bei.</p>
+</div>
+<div style="flex: 1 1 320px; display: flex; gap: 20px; align-items: stretch">
+<span aria-hidden="true" style="flex: 0 0 auto; width: 10px; background: #8e3557; transform: skewX(-12deg)"></span>
+<address style="font-style: normal; display: flex; flex-direction: column; gap: 2px; font-size: 20px; line-height: 1.4">
+<strong style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase">Charlotte Lingg</strong>
+<span>c/o Liechtensteinischer Skiverband</span>
+<span>Landstrasse 81</span>
+<span>9494 Schaan</span>
+<span>Liechtenstein</span>
+</address>
+</div>
+</div>
+</section>
+
+<footer id="kontakt" style="background: #3d1a2b; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 32px 40px; display: flex; flex-wrap: wrap; gap: 56px">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 56px; line-height: 0.95; text-transform: uppercase">Kontakt</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.5; max-width: 26rem">Sponsoring, Anlass, Referat oder einfach eine Frage: Schreib mir über das Formular, ich melde mich so schnell wie möglich.</p>
+</div>
+<div style="flex: 1.4 1 420px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px">Name<input type="text" style="min-height: 48px; padding: 0 14px; border: 1px solid #e8c9d2; background: #ffffff; color: #2b1520; font: inherit; font-size: 17px; border-radius: 0"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px">E-Mail<input type="email" style="min-height: 48px; padding: 0 14px; border: 1px solid #e8c9d2; background: #ffffff; color: #2b1520; font: inherit; font-size: 17px; border-radius: 0"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px">Anliegen<select style="min-height: 48px; padding: 0 14px; border: 1px solid #e8c9d2; background: #ffffff; color: #2b1520; font: inherit; font-size: 17px; border-radius: 0"><option>Sponsoring und Partnerschaft</option><option>Medienanfrage</option><option>Anlass oder Referat</option><option>Autogrammkarte und Allgemeines</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px">Nachricht<textarea rows="4" style="padding: 12px 14px; border: 1px solid #e8c9d2; background: #ffffff; color: #2b1520; font: inherit; font-size: 17px; border-radius: 0; resize: vertical"></textarea></label>
+<button type="button" style="align-self: flex-start; min-height: 52px; padding: 0 28px; border: 0; border-radius: 0; background: #d0587d; color: #ffffff; cursor: pointer; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase">Senden</button>
+</div>
+</div>
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px 32px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid #6b4d5a; font-size: 14px">
+<span>© 2026 Charlotte Lingg</span>
+<span style="display: flex; gap: 24px"><a href="#kontakt" style="color: #ffffff">Impressum</a><a href="#kontakt" style="color: #ffffff">Datenschutz</a></span>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

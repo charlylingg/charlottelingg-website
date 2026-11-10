@@ -1,0 +1,9 @@
+# Logo folgt (bis dahin Platzhalter mit dem Namen).
+name: "Adler Hitta"
+kategorie: unterstuetzer
+url: https://www.adler-hitta.ch
+pflicht_logo: false
+pflicht_link: false
+# Höhe wie im Design
+logo_hoehe: 84
+reihenfolge: 1

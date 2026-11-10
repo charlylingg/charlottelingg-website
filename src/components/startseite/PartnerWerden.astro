@@ -1,0 +1,140 @@
+---
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'partner-werden');
+---
+
+{
+  text && (
+    <section
+      id="partner-werden"
+      class="partner-werden flaeche-beere sektion"
+      aria-labelledby="partner-werden-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="partner-werden__innen inhalt">
+        <div class="partner-werden__intro sektion-kopf">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge kicker-flagge--aubergine t-kicker">{text.data.kicker}</p>
+          <h2 id="partner-werden-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p class="t-lead">{text.data.lead}</p>
+        </div>
+        <ul role="list" class="angebote">
+          <li class="angebot angebot--haupt flaeche-aubergine">
+            <p class="t-kicker angebot__kicker">{text.data.hauptangebot.kicker}</p>
+            <h3 class="angebot__titel angebot__titel--gross">{text.data.hauptangebot.titel}</h3>
+            <p class="angebot__text">{text.data.hauptangebot.text}</p>
+            <h4 class="angebot__zwischentitel">{text.data.hauptangebot.zwischentitel}</h4>
+            <ul role="list" class="moeglichkeiten">
+              {text.data.hauptangebot.moeglichkeiten.map((m) => (
+                <li class="moeglichkeit schraeg-flaeche">{m}</li>
+              ))}
+            </ul>
+            <p class="angebot__text">{text.data.hauptangebot.schluss}</p>
+          </li>
+          {text.data.angebote.map((a) => (
+            <li class="angebot flaeche-aubergine">
+              <p class="t-kicker angebot__kicker">{a.kicker}</p>
+              <h3 class="angebot__titel">{a.titel}</h3>
+              <p class="angebot__text">{a.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p>{text.data.schluss}</p>
+        <a class="knopf knopf--hell t-knopf partner-werden__knopf" href={text.data.button.ziel}>
+          {text.data.button.text}
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .partner-werden__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-40);
+  }
+
+  .partner-werden__intro {
+    max-width: var(--mass-780);
+  }
+
+  .angebote {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-260)), 1fr));
+    gap: var(--space-20);
+  }
+
+  .angebot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding: var(--space-28);
+  }
+
+  /*
+   * Im Design rosa. Weisser Fliesstext auf rosa hat nur 3.9:1 Kontrast,
+   * deshalb aubergine mit rosa Balken oben.
+   */
+  .angebot--haupt {
+    grid-column: 1 / -1;
+    border-top: var(--linie-6) solid var(--color-rosa);
+  }
+
+  .angebot__kicker {
+    opacity: var(--deckkraft-85);
+  }
+
+  .angebot__titel {
+    font-size: var(--size-28);
+    line-height: var(--line-100);
+    text-transform: uppercase;
+  }
+
+  .angebot__titel--gross {
+    font-size: var(--size-36);
+  }
+
+  .angebot__text {
+    max-width: var(--mass-46rem);
+  }
+
+  .angebot__zwischentitel {
+    padding-top: var(--space-8);
+    font-size: var(--size-20);
+    letter-spacing: var(--track-06);
+    text-transform: uppercase;
+  }
+
+  .moeglichkeiten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-10) var(--space-12);
+    padding-left: var(--space-4);
+  }
+
+  .moeglichkeit {
+    --flagge: var(--color-papier);
+    padding: var(--space-6) var(--space-14);
+    color: var(--color-aubergine);
+    font-family: var(--font-display);
+    font-size: var(--size-17);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-04);
+    text-transform: uppercase;
+  }
+
+  .partner-werden__knopf {
+    align-self: flex-start;
+  }
+</style>

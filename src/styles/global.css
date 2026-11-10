@@ -1,4 +1,4 @@
-/* Reset, Basis-Typografie, Fokus, reduzierte Bewegung */
+/* Reset, Basis-Typografie, Fokus, gemeinsame Bausteine. Nur Werte aus tokens.css (Thema «Beere»). */
 
 *,
 *::before,
@@ -16,14 +16,20 @@ html {
   text-size-adjust: 100%;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
-  min-height: 100vh;
-  background: var(--color-paper);
-  color: var(--color-ink);
+  min-height: var(--mass-bildschirm);
+  background: var(--color-papier);
+  color: var(--color-tinte);
   font-family: var(--font-text);
-  font-size: var(--type-text-size);
-  line-height: var(--type-text-line);
-  font-weight: var(--type-text-weight);
+  font-size: var(--size-17);
+  line-height: var(--line-155);
+  font-weight: var(--weight-400);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-wrap: break-word;
@@ -56,9 +62,11 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1;
+  font-weight: var(--weight-700);
+  line-height: var(--line-100);
   text-wrap: balance;
+  /* Lange Wörter sauber trennen statt mitten im Wort umbrechen (Sprache aus lang="de"/"fr") */
+  hyphens: auto;
 }
 
 p {
@@ -73,30 +81,33 @@ ol[role="list"] {
 
 a {
   color: var(--color-link);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
 }
 
 a:hover {
-  text-decoration-thickness: 2px;
+  color: var(--color-link-hover);
 }
 
-/* Fokus: immer sichtbar, navy */
+/* Anker-Sprünge landen unter dem fixierten Kopf */
+section[id],
+footer[id] {
+  scroll-margin-top: var(--space-92);
+}
+
+/* Fokus: immer sichtbar */
 :focus-visible {
-  outline: 3px solid var(--color-navy);
-  outline-offset: 3px;
+  outline: var(--fokus) solid var(--color-beere);
+  outline-offset: var(--fokus);
 }
 
 /* Auf dunklen Flächen bleibt der Fokus sichtbar */
-.flaeche-navy :focus-visible,
-.flaeche-nacht :focus-visible,
-.flaeche-red :focus-visible {
-  outline-color: var(--color-paper);
+.flaeche-beere :focus-visible,
+.flaeche-aubergine :focus-visible {
+  outline-color: var(--color-papier);
 }
 
 ::selection {
-  background: var(--color-navy);
-  color: var(--color-paper);
+  background: var(--color-beere);
+  color: var(--color-papier);
 }
 
 /* Nur für Screenreader sichtbar */
@@ -115,37 +126,200 @@ a:hover {
 /* Skip-Link */
 .skip-link {
   position: absolute;
-  left: var(--space-2);
-  top: var(--space-2);
+  left: var(--space-16);
+  top: var(--space-16);
   z-index: 100;
-  padding: var(--space-1) var(--space-2);
-  background: var(--color-navy);
-  color: var(--color-paper);
-  font-weight: 700;
+  padding: var(--space-8) var(--space-16);
+  background: var(--color-beere);
+  color: var(--color-papier);
+  font-weight: var(--weight-700);
   text-decoration: none;
   transform: translateY(-200%);
 }
 
 .skip-link:focus {
   transform: none;
-  outline-color: var(--color-paper);
+  outline-color: var(--color-papier);
 }
 
-/* Seitenrand */
-.container {
-  padding-inline: var(--seitenrand);
+/* Inhaltsbreite wie im Design: max. 1280px inklusive Seitenrand 32px */
+.inhalt {
+  width: 100%;
+  max-width: var(--mass-1280);
+  margin-inline: auto;
+  padding-inline: var(--space-32);
+}
+
+/* Vertikaler Abstand einer Sektion wie im Design */
+.sektion {
+  padding-block: var(--space-88);
 }
 
 /* Flächen mit den erlaubten Textfarben */
-.flaeche-paper { background: var(--color-paper); color: var(--color-ink); }
-.flaeche-eis   { background: var(--color-eis);   color: var(--color-ink); }
-.flaeche-navy  { background: var(--color-navy);  color: var(--color-paper); }
-.flaeche-nacht { background: var(--color-nacht); color: var(--color-paper); }
-.flaeche-red   { background: var(--color-red);   color: var(--color-paper); }
-.flaeche-navy a,
-.flaeche-nacht a,
-.flaeche-red a {
-  color: var(--color-paper);
+.flaeche-papier    { background: var(--color-papier);    color: var(--color-tinte); }
+.flaeche-hauch     { background: var(--color-hauch);     color: var(--color-tinte); }
+.flaeche-beere     { background: var(--color-beere);     color: var(--color-papier); }
+.flaeche-aubergine { background: var(--color-aubergine); color: var(--color-papier); }
+.flaeche-beere a:not(.knopf),
+.flaeche-aubergine a:not(.knopf) {
+  color: var(--color-papier);
+}
+
+/* Titel einer Sektion */
+.sektion-kopf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+/*
+ * Schräge Flagge (Erkennungszeichen): die Fläche ist schräg, der Text steht gerade
+ * (keine Kursivschrift). Farbe über --flagge.
+ */
+.schraeg-flaeche {
+  position: relative;
+  isolation: isolate;
+}
+
+.schraeg-flaeche::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--flagge, var(--color-beere));
+  transform: skewX(var(--schraege));
+}
+
+/* Kicker als schräge Flagge, z. B. «01 Portrait» */
+.kicker-flagge {
+  --flagge: var(--color-beere);
+  align-self: flex-start;
+  justify-self: start;
+  display: inline-block;
+  padding: var(--space-6) var(--space-16);
+  position: relative;
+  isolation: isolate;
+  color: var(--color-papier);
+}
+
+.kicker-flagge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--flagge);
+  transform: skewX(var(--schraege));
+}
+
+/* Auf beere Flächen (z. B. «Sponsor werden») ist die Flagge aubergine */
+.kicker-flagge--aubergine {
+  --flagge: var(--color-aubergine);
+}
+
+/* Buttons */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  min-height: var(--mass-52);
+  padding-inline: var(--space-26);
+  text-decoration: none;
+  border: 0;
+}
+
+.knopf--hell {
+  background: var(--color-papier);
+  color: var(--color-beere);
+}
+
+.knopf--hell.knopf--dunkel-text {
+  color: var(--color-aubergine);
+}
+
+/* Weisse Schrift nie auf rosa (3.9:1): Akzent-Button ist beere, Hover/Fokus aubergine */
+.knopf--beere {
+  background: var(--color-beere);
+  color: var(--color-papier);
+}
+
+a.knopf--beere:hover,
+a.knopf--beere:focus-visible {
+  background: var(--color-aubergine);
+  color: var(--color-papier);
+}
+
+/* Auf aubergine Flächen bleibt der Button beim Hover sichtbar: weisser Rahmen innen */
+.flaeche-aubergine a.knopf--beere:hover {
+  outline: var(--linie-2) solid var(--color-papier);
+  outline-offset: calc(-1 * var(--space-4));
+}
+
+a.knopf--hell:hover {
+  color: var(--color-aubergine);
+}
+
+/* Textlink in Display-Schrift, z. B. «Mein Weg ansehen» */
+.textlink {
+  align-self: flex-start;
+  justify-self: start;
+  display: inline-block;
+  padding-block: var(--space-12);
+}
+
+/* «+» für Aufklapp-Elemente (details/summary), dreht sich beim Öffnen */
+.aufklapp-zeichen {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-size: var(--size-26);
+  font-weight: var(--weight-400);
+  line-height: var(--line-100);
+  color: var(--color-rosa);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aufklapp-zeichen {
+    transition: transform 0.3s ease;
+  }
+}
+
+details[open] > summary .aufklapp-zeichen {
+  transform: rotate(45deg);
+}
+
+summary {
+  cursor: pointer;
+}
+
+summary.ohne-marker {
+  list-style: none;
+}
+
+summary.ohne-marker::-webkit-details-marker {
+  display: none;
+}
+
+/* Wechseltext in summary: «Alle 11 weiteren Rennen» / «Weniger anzeigen» */
+details:not([open]) > summary .wenn-offen,
+details[open] > summary .wenn-zu {
+  display: none;
+}
+
+@keyframes einblenden {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-24));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .aufklapp-inhalt {
+    animation: einblenden 0.4s ease-out both;
+  }
 }
 
 /* Bewegung reduzieren, wenn gewünscht */

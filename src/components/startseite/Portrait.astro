@@ -1,0 +1,103 @@
+---
+import Bildplatzhalter from '../Bildplatzhalter.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'portrait');
+---
+
+{
+  text && (
+    <section
+      id="portrait"
+      class="portrait flaeche-hauch sektion"
+      aria-labelledby="portrait-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="portrait__innen inhalt">
+        <div class="portrait__bild">
+          <Bildplatzhalter stelle="Portrait" format="Hochformat 3:4" verhaeltnis="3 / 4" alt={text.data.bild_alt} />
+        </div>
+        <div class="portrait__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="portrait-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p class="t-lead">{text.data.lead}</p>
+          <dl class="steckbrief">
+            {text.data.steckbrief.map((s) => (
+              <div>
+                <dt class="t-label">{s.label}</dt>
+                <dd class="steckbrief__wert">{s.wert}</dd>
+              </div>
+            ))}
+          </dl>
+          <a class="textlink t-knopf" href={text.data.link.ziel}>
+            {text.data.link.text}
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .portrait__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-56);
+  }
+
+  .portrait__bild {
+    flex: 1 1 var(--mass-340);
+    max-width: var(--mass-440);
+  }
+
+  .portrait__bild :global(.bildplatzhalter) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+  }
+
+  .portrait__text {
+    flex: 1 1 var(--mass-420);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+  }
+
+  .steckbrief {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12) var(--space-32);
+    padding-block: var(--space-14);
+    border-top: var(--linie-1) solid var(--color-linie);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+  }
+
+  .steckbrief > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .steckbrief dt {
+    color: var(--color-tinte-soft);
+  }
+
+  .steckbrief dd {
+    margin: 0;
+  }
+
+  .steckbrief__wert {
+    font-family: var(--font-display);
+    font-size: var(--size-26);
+    font-weight: var(--weight-700);
+  }
+</style>

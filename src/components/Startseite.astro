@@ -1,0 +1,63 @@
+---
+/**
+ * Startseite (gleich für DE und FR). Reihenfolge der Sektionen wie im Design
+ * (design/referenz/startseite.dc.html). Inhalte aus src/content, nicht aus dem Layout.
+ */
+import Base from '../layouts/Base.astro';
+import Hero from './startseite/Hero.astro';
+import Portrait from './startseite/Portrait.astro';
+import Zitat from './startseite/Zitat.astro';
+import Resultate from './startseite/Resultate.astro';
+import Rennkalender from './startseite/Rennkalender.astro';
+import Weg from './startseite/Weg.astro';
+import Unterwegs from './startseite/Unterwegs.astro';
+import BlogVorschau from './startseite/BlogVorschau.astro';
+import Partner from './startseite/Partner.astro';
+import PartnerWerden from './startseite/PartnerWerden.astro';
+import Fanpost from './startseite/Fanpost.astro';
+import Kontakt from './startseite/Kontakt.astro';
+import { getText } from '../lib/inhalte';
+import { localizePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const seite = await getText(locale, 'startseite');
+const site = Astro.site ?? new URL('https://charlottelingg.com');
+
+/** Strukturierte Daten (Typ Person), nur mit Angaben aus dem Design */
+const jsonLd = seite && {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: seite.data.person.name,
+  url: new URL(localizePath('/', locale), site).href,
+  sameAs: [seite.data.person.instagram],
+  knowsAbout: seite.data.person.sportart,
+  memberOf: {
+    '@type': 'SportsTeam',
+    name: seite.data.person.team,
+    sport: seite.data.person.sportart,
+    parentOrganization: {
+      '@type': 'SportsOrganization',
+      name: seite.data.person.verband,
+    },
+  },
+};
+---
+
+<Base title={seite?.data.seo_titel} description={seite?.data.seo_beschreibung} jsonLd={jsonLd || undefined}>
+  <Hero locale={locale} />
+  <Portrait locale={locale} />
+  <Zitat locale={locale} />
+  <Resultate locale={locale} />
+  <Rennkalender locale={locale} />
+  <Weg locale={locale} />
+  <Unterwegs locale={locale} />
+  <BlogVorschau locale={locale} />
+  <Partner locale={locale} />
+  <PartnerWerden locale={locale} />
+  <Fanpost locale={locale} />
+  <Kontakt locale={locale} />
+</Base>

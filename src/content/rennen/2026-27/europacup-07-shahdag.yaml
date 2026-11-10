@@ -1,0 +1,10 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2027-02-06
+datum_bis: 2027-02-07
+stufe: Europacup
+disziplinen: [Slalom, Slalom]
+ort: "Shahdag"
+land: AZE
+status: geplant
+fis_link: "[FIS-LINK]"

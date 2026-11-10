@@ -1,0 +1,515 @@
+---
+/**
+ * 03 Mein Weg: Stationen als Slalomkurs und aufklappbar «Meine ganze Geschichte».
+ * Texte aus src/content/texte/<sprache>/weg.md und dem Ordner weg/ (eine Datei pro Station bzw. Teil).
+ */
+import { getCollection, render } from 'astro:content';
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText, getTexteListe, istPlatzhalter } from '../../lib/inhalte';
+import { tSchluessel, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'weg');
+const stationen = await getTexteListe(locale, 'weg-station');
+const teile = await Promise.all(
+  (await getTexteListe(locale, 'weg-geschichte')).map(async (teil) => ({
+    ...teil,
+    Inhalt: (await render(teil.eintrag)).Content,
+  })),
+);
+
+/** Liste «Meine schönsten Resultate»: aus src/content/resultate (Europacup, dann Weltcup, dann WM; je nach Rang) */
+const stufenReihenfolge = ['Europacup', 'Weltcup', 'WM'];
+const resultate = (await getCollection('resultate', (r) => !r.data.beispiel))
+  .filter((r) => stufenReihenfolge.includes(r.data.stufe))
+  .sort(
+    (a, b) =>
+      stufenReihenfolge.indexOf(a.data.stufe) - stufenReihenfolge.indexOf(b.data.stufe) ||
+      Number(a.data.rang) - Number(b.data.rang) ||
+      a.data.ort.localeCompare(b.data.ort, 'de'),
+  )
+  .map((r) => {
+    // Wie im Design: bei der WM ohne Disziplin («WM, Cortina d’Ampezzo»)
+    const disziplin = istPlatzhalter(r.data.disziplin) || r.data.stufe === 'WM'
+      ? undefined
+      : tSchluessel(locale, `disziplin.${r.data.disziplin}`, r.data.disziplin);
+    const stufe = tSchluessel(locale, `stufe.${r.data.stufe}`, r.data.stufe);
+    const stufeKurz = tSchluessel(locale, `stufe_kurz.${r.data.stufe}`, stufe);
+    return {
+      rang: typeof r.data.rang === 'number' ? `${r.data.rang}.` : r.data.rang,
+      podest: typeof r.data.rang === 'number' && r.data.rang === 1,
+      fett: disziplin ?? stufeKurz,
+      rest: [disziplin ? stufe : undefined, r.data.ort].filter(Boolean).join(' '),
+      land: istPlatzhalter(r.data.land) ? undefined : r.data.land,
+    };
+  });
+
+/** Höhe einer Kurs-Reihe auf dem Desktop; die Kurslinie wird daran ausgerichtet */
+const REIHE = 220;
+const kursHoehe = stationen.length * REIHE;
+
+/** Slalomlinie wie im Design; dx/dy verschieben die zweite, hellere Linie leicht */
+const kursPfad = (dx: number, dy: number) => {
+  const x = (wert: number) => wert + dx;
+  const kurven = stationen
+    .slice(1)
+    .map((_, i) => {
+      const seite = i % 2 === 0 ? 160 : 40;
+      return `S${x(seite)} ${270 + i * REIHE + dy} ${x(seite)} ${330 + i * REIHE + dy}`;
+    })
+    .join(' ');
+  return `M${x(100)} 0 C${x(100)} 60 ${x(40)} ${60 + dy / 4} ${x(40)} ${110 + dy} ${kurven} S${x(100)} ${kursHoehe - 40 + dy / 2} ${x(100)} ${kursHoehe}`;
+};
+---
+
+{
+  text && (
+    <section
+      id="weg"
+      class="weg flaeche-hauch sektion"
+      aria-labelledby="weg-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="weg__innen inhalt">
+        <div class="weg__intro sektion-kopf">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="weg-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+        </div>
+
+        <div class="kurs" style={`--reihe: ${REIHE}px`}>
+          <svg
+            class="kurs__linie"
+            aria-hidden="true"
+            viewBox={`0 0 200 ${kursHoehe}`}
+            preserveAspectRatio="none"
+            style={`height: ${kursHoehe}px`}
+          >
+            {[
+              { dx: 0, dy: 0, farbe: 'beere', staerke: 2.5 },
+              { dx: 10, dy: 8, farbe: 'kurslinie', staerke: 1.5 },
+            ].map((linie) => (
+              <path
+                d={kursPfad(linie.dx, linie.dy)}
+                fill="none"
+                stroke={`var(--color-${linie.farbe})`}
+                stroke-width={linie.staerke}
+                stroke-linecap="round"
+                vector-effect="non-scaling-stroke"
+                pathLength="1"
+              />
+            ))}
+          </svg>
+          <ol role="list" class="kurs__stationen">
+            {stationen.map((s, i) => {
+              const links = i % 2 === 0;
+              const farbe = links ? 'rosa' : 'beere';
+              return (
+                <li class:list={['station', links ? 'station--links' : 'station--rechts']}>
+                  <div class:list={['station__text', links ? 'station__text--links' : 'station__text--rechts']} lang={s.lang !== locale ? s.lang : undefined}>
+                    {s.entwurf && <EntwurfLabel locale={locale} />}
+                    <span class="station__nummer t-kicker">{s.data.nummer}</span>
+                    <h3 class="station__titel">{s.data.titel}</h3>
+                    <p class="station__beschreibung">{s.data.text}</p>
+                  </div>
+                  <div class="station__mitte" aria-hidden="true">
+                    <svg class="station__tor" viewBox="0 0 48 60">
+                      <line x1="6" y1="2" x2="6" y2="60" stroke={`var(--color-${farbe})`} stroke-width="3" stroke-linecap="round" />
+                      <line x1="42" y1="2" x2="42" y2="60" stroke={`var(--color-${farbe})`} stroke-width="3" stroke-linecap="round" />
+                      <path d="M6 6 L42 6 L42 30 L6 30 Z" fill={`var(--color-${farbe})`} />
+                    </svg>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        <details class="geschichte">
+          <summary class="geschichte__knopf ohne-marker">
+            <span class="geschichte__titel">
+              <span class="geschichte__haupttitel">{text.data.geschichte_titel}</span>
+              <span class="geschichte__untertitel">{text.data.geschichte_untertitel}</span>
+            </span>
+            <span class="aufklapp-zeichen geschichte__plus" aria-hidden="true">
+              +
+            </span>
+          </summary>
+          <div class="geschichte__inhalt aufklapp-inhalt">
+            {teile.map((teil, i) => (
+              <div class="teil" lang={teil.lang !== locale ? teil.lang : undefined}>
+                {teil.entwurf && <EntwurfLabel locale={locale} />}
+                <h3 class="teil__titel">
+                  <Torflagge farbe={i % 2 === 0 ? 'rosa' : 'beere'} breite={9} hoehe={22} class="teil__flagge" />
+                  {teil.data.titel}
+                </h3>
+                {teil.data.einleitung && <p>{teil.data.einleitung}</p>}
+                {teil.data.resultate_liste && (
+                  <ul role="list" class="teil__liste teil__liste--linien">
+                    {resultate.map((r) => (
+                      <li>
+                        <span class:list={['teil__marke teil__marke--gross', r.podest && 'teil__marke--rosa']}>{r.rang}</span>
+                        <span>
+                          <strong>{r.fett}</strong>, {r.rest}
+                          {r.land && ` (${r.land})`}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {teil.data.liste && (
+                  <ul role="list" class="teil__liste">
+                    {teil.data.liste.map((eintrag) => (
+                      <li>
+                        <span class="teil__marke">{eintrag.marke}</span>
+                        <span>{eintrag.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div class="fliesstext">
+                  <teil.Inhalt />
+                </div>
+              </div>
+            ))}
+          </div>
+        </details>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .weg__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-48);
+  }
+
+  .weg__intro {
+    max-width: var(--mass-720);
+  }
+
+  /* Kurs: auf dem Handy eine Liste mit Tor links */
+  .kurs {
+    position: relative;
+  }
+
+  .kurs__linie {
+    display: none;
+  }
+
+  .kurs__stationen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-36);
+  }
+
+  .station {
+    display: grid;
+    grid-template-columns: var(--space-56) minmax(0, 1fr);
+    gap: var(--space-16);
+    align-items: start;
+    padding-block: var(--space-16);
+  }
+
+  .station__mitte {
+    order: -1;
+    height: var(--space-56);
+  }
+
+  .station__tor {
+    width: var(--space-40);
+    height: var(--mass-50);
+  }
+
+  .station__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+
+  /* Kleine Schrift: beere (rosa auf hauch hätte nur 3.5:1) */
+  .station__nummer {
+    color: var(--color-beere);
+  }
+
+  .station__titel {
+    font-size: var(--size-32);
+    line-height: var(--line-100);
+    text-transform: uppercase;
+  }
+
+  .station__beschreibung {
+    max-width: var(--mass-24rem);
+    color: var(--color-tinte-soft);
+  }
+
+  /* Desktop: Stationen abwechselnd links und rechts der Kurslinie */
+  @media (min-width: 821px) {
+    .kurs__linie {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: var(--mass-200);
+      margin-left: calc(-1 * var(--mass-100));
+      overflow: visible;
+    }
+
+    .kurs__stationen {
+      position: relative;
+      gap: 0;
+    }
+
+    .station {
+      grid-template-columns: minmax(0, 1fr) var(--mass-200) minmax(0, 1fr);
+      gap: var(--space-32);
+      align-items: center;
+      height: var(--reihe);
+      padding-block: 0;
+    }
+
+    .station__mitte {
+      order: 0;
+      position: relative;
+      align-self: stretch;
+      height: auto;
+    }
+
+    .station__tor {
+      position: absolute;
+      top: calc(var(--space-56) + var(--space-4));
+    }
+
+    .station--links .station__tor {
+      left: var(--space-20);
+    }
+
+    .station--rechts .station__tor {
+      left: calc(var(--mass-200) - var(--space-56) - var(--space-4));
+    }
+
+    .station--links .station__text {
+      grid-column: 1;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .station--links .station__mitte,
+    .station--rechts .station__mitte {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .station--rechts .station__text {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes linie-zeichnen {
+        from {
+          stroke-dashoffset: 1;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes tor-hoch {
+        from {
+          opacity: 0;
+          transform: scale(0.3) rotate(-20deg);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @keyframes von-links {
+        from {
+          opacity: 0;
+          transform: translateX(calc(-1 * var(--mass-120)));
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @keyframes von-rechts {
+        from {
+          opacity: 0;
+          transform: translateX(var(--mass-120));
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .kurs {
+        view-timeline-name: --kurs;
+      }
+
+      .kurs__linie path {
+        stroke-dasharray: 1;
+        animation: linie-zeichnen linear both;
+        animation-timeline: --kurs;
+        animation-range: entry 10% cover 55%;
+      }
+
+      .station__tor {
+        transform-origin: 50% 100%;
+        animation: tor-hoch linear both;
+        animation-timeline: view();
+        animation-range: entry 10% entry 100%;
+      }
+
+      .station__text--links {
+        animation: von-links linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+
+      .station__text--rechts {
+        animation: von-rechts linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+    }
+  }
+
+  /* Meine ganze Geschichte */
+  .geschichte {
+    border-top: var(--linie-1) solid var(--color-linie);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+  }
+
+  .geschichte__knopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+    min-height: var(--space-72);
+    padding-block: var(--space-16);
+  }
+
+  .geschichte__titel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .geschichte__haupttitel {
+    font-family: var(--font-display);
+    font-size: var(--size-30);
+    font-weight: var(--weight-700);
+    line-height: var(--line-100);
+    text-transform: uppercase;
+    color: var(--color-tinte);
+  }
+
+  .geschichte__untertitel {
+    color: var(--color-tinte-soft);
+  }
+
+  .geschichte__plus {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-44);
+    height: var(--space-44);
+    font-size: var(--size-44);
+  }
+
+  .geschichte__knopf:hover .geschichte__plus {
+    color: var(--color-beere);
+  }
+
+  .geschichte__inhalt {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-340)), 1fr));
+    gap: var(--space-44) var(--space-64);
+    max-width: var(--mass-1140);
+    padding-block: var(--space-24) var(--space-56);
+  }
+
+  .teil {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+    min-width: 0;
+  }
+
+  .teil__titel {
+    font-size: var(--size-28);
+    line-height: var(--line-105);
+    text-transform: uppercase;
+  }
+
+  .teil__titel :global(.teil__flagge) {
+    margin-right: var(--space-12);
+    vertical-align: calc(-1 * var(--space-2));
+  }
+
+  .teil__liste {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    width: 100%;
+  }
+
+  .teil__liste li {
+    display: grid;
+    grid-template-columns: var(--space-56) minmax(0, 1fr);
+    gap: var(--space-12);
+    align-items: baseline;
+  }
+
+  .teil__liste--linien {
+    gap: 0;
+  }
+
+  .teil__liste--linien li {
+    padding-block: var(--space-8);
+    border-top: var(--linie-1) solid var(--color-linie-soft);
+  }
+
+  .teil__marke {
+    font-family: var(--font-display);
+    font-size: var(--size-22);
+    line-height: var(--line-100);
+    font-weight: var(--weight-700);
+    color: var(--color-tinte-soft);
+  }
+
+  .teil__marke--gross {
+    font-size: var(--size-28);
+    color: var(--color-beere);
+  }
+
+  .teil__marke--rosa {
+    color: var(--color-rosa);
+  }
+
+  .fliesstext {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+</style>

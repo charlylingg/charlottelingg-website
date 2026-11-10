@@ -21,12 +21,12 @@ const path = Astro.url.pathname;
       locales.map((l) => (
         <li>
           {l === locale ? (
-            <span class="lang__item t-label" aria-current="true" title={t(l, `lang.${l}`)}>
+            <span class="lang__item" aria-current="true" title={t(l, `lang.${l}`)}>
               {l.toUpperCase()}
             </span>
           ) : (
             <a
-              class="lang__item t-label"
+              class="lang__item"
               href={hasTranslation ? localizePath(path, l) : localizePath('/', l)}
               hreflang={l}
               lang={l}
@@ -45,30 +45,32 @@ const path = Astro.url.pathname;
 <style>
   .lang ul {
     display: flex;
-    gap: var(--space-1);
+    gap: var(--space-10);
   }
 
   .lang__item {
-    display: inline-block;
-    min-width: 44px;
-    min-height: 44px;
-    padding: 14px var(--space-1);
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--space-44);
+    min-height: var(--space-44);
+    padding: var(--space-10) var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--size-15);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-08);
+    text-transform: uppercase;
+    color: var(--color-tinte-soft);
     text-decoration: none;
-    color: var(--color-ink);
   }
 
   .lang__item[aria-current] {
-    background: var(--color-navy);
-    color: var(--color-paper);
-  }
-
-  a.lang__item {
-    color: var(--color-navy);
-    box-shadow: inset 0 0 0 1px var(--color-line);
+    color: var(--color-tinte);
+    text-decoration: underline;
   }
 
   a.lang__item:hover {
-    box-shadow: inset 0 0 0 2px var(--color-navy);
+    color: var(--color-beere);
+    text-decoration: underline;
   }
 </style>

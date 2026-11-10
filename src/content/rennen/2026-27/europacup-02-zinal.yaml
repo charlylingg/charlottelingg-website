@@ -1,0 +1,10 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2026-11-30
+datum_bis: 2026-12-01
+stufe: Europacup
+disziplinen: [Riesenslalom, Riesenslalom]
+ort: "Zinal"
+land: SUI
+status: geplant
+fis_link: "[FIS-LINK]"

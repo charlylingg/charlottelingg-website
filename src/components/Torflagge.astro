@@ -1,32 +1,27 @@
 ---
 /**
- * Torflagge mit der Schräge (skewX) – Erkennungszeichen des Designsystems.
- * Farbe: navy oder red. Rein dekorativ.
+ * Torflagge mit der Schräge (skewX) – Erkennungszeichen des Designs. Rein dekorativ.
+ * breite/hoehe: Pixelwert eines Tokens (z. B. 12 und 32 = var(--space-12) / var(--space-32)).
+ * hoehe «voll» = so hoch wie das Elternelement.
  */
 interface Props {
-  farbe?: 'navy' | 'red';
+  farbe?: 'beere' | 'rosa' | 'papier';
+  breite?: number;
+  hoehe?: number | 'voll';
   class?: string;
 }
 
-const { farbe = 'red', class: className } = Astro.props;
+const { farbe = 'rosa', breite = 12, hoehe = 32, class: className } = Astro.props;
+const mass = (n: number) => `var(--space-${n}, var(--mass-${n}))`;
+const style = `width: ${mass(breite)}; height: ${hoehe === 'voll' ? 'auto' : mass(hoehe)}; background: var(--color-${farbe})`;
 ---
 
-<span class:list={['torflagge', `torflagge--${farbe}`, className]} aria-hidden="true"></span>
+<span class:list={['torflagge', className]} style={style} aria-hidden="true"></span>
 
 <style>
   .torflagge {
     display: inline-block;
-    width: 48px;
-    height: 72px;
+    flex: 0 0 auto;
     transform: skewX(var(--schraege));
-    transform-origin: bottom left;
-  }
-
-  .torflagge--red {
-    background: var(--color-red);
-  }
-
-  .torflagge--navy {
-    background: var(--color-navy);
   }
 </style>

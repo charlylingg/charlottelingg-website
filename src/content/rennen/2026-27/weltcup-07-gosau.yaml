@@ -1,0 +1,10 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2026-12-28
+datum_bis: 2026-12-29
+stufe: Weltcup
+disziplinen: [Riesenslalom, Slalom]
+ort: "Dachstein West / Gosau"
+land: AUT
+status: geplant
+fis_link: "[FIS-LINK]"

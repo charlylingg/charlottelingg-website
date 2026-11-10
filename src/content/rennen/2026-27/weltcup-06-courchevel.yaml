@@ -1,0 +1,9 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2026-12-22
+stufe: Weltcup
+disziplinen: [Slalom]
+ort: "Courchevel"
+land: FRA
+status: geplant
+fis_link: "[FIS-LINK]"

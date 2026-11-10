@@ -1,0 +1,378 @@
+---
+/**
+ * 02 Resultate: Podest Europacup (Ränge 1–3) und Höhepunkte aus Weltcup und WM.
+ * Daten aus src/content/resultate, Texte aus src/content/texte/<sprache>/resultate.md.
+ */
+import { getCollection } from 'astro:content';
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText, istPlatzhalter } from '../../lib/inhalte';
+import { t, tSchluessel, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'resultate');
+const resultate = await getCollection('resultate', (r) => !r.data.beispiel);
+
+const nachOrt = (a: (typeof resultate)[number], b: (typeof resultate)[number]) =>
+  a.data.ort.localeCompare(b.data.ort, 'de');
+
+/** Podest in der Reihenfolge des Designs: 2. links, 1. Mitte, 3. rechts */
+const podest = [2, 1, 3].map((rang) => ({
+  rang,
+  rennen: resultate.filter((r) => r.data.stufe === 'Europacup' && r.data.rang === rang).sort(nachOrt),
+}));
+
+const stufenReihenfolge = ['Weltcup', 'WM'];
+const hoehepunkte = resultate
+  .filter((r) => stufenReihenfolge.includes(r.data.stufe))
+  .sort((a, b) => stufenReihenfolge.indexOf(a.data.stufe) - stufenReihenfolge.indexOf(b.data.stufe) || nachOrt(a, b))
+  .map((r) => ({
+    rang: typeof r.data.rang === 'number' ? `${r.data.rang}.` : r.data.rang,
+    zeile1: [
+      tSchluessel(locale, `stufe.${r.data.stufe}`, r.data.stufe),
+      istPlatzhalter(r.data.disziplin) || r.data.stufe === 'WM' // wie im Design: WM ohne Disziplin
+        ? undefined
+        : tSchluessel(locale, `disziplin.${r.data.disziplin}`, r.data.disziplin),
+    ]
+      .filter(Boolean)
+      .join(' '),
+    zeile2: r.data.ort,
+  }));
+
+const disziplinName = (d: string) => (istPlatzhalter(d) ? undefined : tSchluessel(locale, `disziplin.${d}`, d));
+const medaille: Record<number, string> = { 1: 'gold', 2: 'silber', 3: 'bronze' };
+---
+
+{
+  text && (
+    <section
+      id="resultate"
+      class="resultate flaeche-papier sektion"
+      aria-labelledby="resultate-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="resultate__innen inhalt">
+        <div class="resultate__kopf">
+          <div class="resultate__intro sektion-kopf">
+            {text.entwurf && <EntwurfLabel locale={locale} />}
+            <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+            <h2 id="resultate-titel" class="t-titel">
+              {text.data.titel}
+            </h2>
+            <p class="resultate__lead">{text.data.lead}</p>
+          </div>
+          <div class="resultate__links">
+            <a class="textlink t-knopf" href={text.data.fis_profil.url} target="_blank" rel="noopener">
+              {text.data.fis_profil.text}
+              <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
+            </a>
+            <a class="kalender-link" href="#rennen">
+              <span class="t-label kalender-link__label">{text.data.kalender.label}</span>
+              <span class="kalender-link__text">{text.data.kalender.text}</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="podium-block">
+          <h3 class="podium-titel">
+            <Torflagge farbe="beere" breite={12} hoehe={32} />
+            {text.data.podium_titel}
+            <Torflagge farbe="rosa" breite={12} hoehe={32} />
+          </h3>
+          <ul role="list" class="podium">
+            {podest.map((stufe) => (
+              <li class:list={['podium__platz', `podium__platz--${stufe.rang}`]}>
+                <svg class="medaille" aria-hidden="true" viewBox="0 0 100 150">
+                  <path d="M28 0 L50 58 L38 62 L14 0 Z" fill="var(--color-beere)" />
+                  <path d="M72 0 L50 58 L62 62 L86 0 Z" fill="var(--color-rosa)" />
+                  <circle cx="50" cy="100" r="40" fill={`var(--color-${medaille[stufe.rang]})`} stroke={`var(--color-${medaille[stufe.rang]}-rand)`} stroke-width="3" />
+                  <circle cx="50" cy="100" r="30" fill="none" stroke={`var(--color-${medaille[stufe.rang]}-hell)`} stroke-width="2" />
+                  <path d="M30 82 A30 30 0 0 1 60 72" fill="none" stroke="var(--color-papier)" stroke-width="3" stroke-linecap="round" opacity="var(--deckkraft-55)" />
+                  <text
+                    x="50"
+                    y="112"
+                    text-anchor="middle"
+                    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+                    font-weight="700"
+                    font-size="34"
+                    fill={`var(--color-${medaille[stufe.rang]}-rand)`}
+                  >
+                    {stufe.rang}
+                  </text>
+                </svg>
+                <p class="visually-hidden">
+                  {t(locale, 'resultate.platz')} {stufe.rang}
+                </p>
+                <ul role="list" class="podium__rennen">
+                  {stufe.rennen.map((r) => (
+                    <li>
+                      <strong class="podium__ort">{r.data.ort}</strong>{' '}
+                      {disziplinName(r.data.disziplin) && <span class="podium__disziplin">{disziplinName(r.data.disziplin)}</span>}
+                    </li>
+                  ))}
+                </ul>
+                <div class="podium__sockel" aria-hidden="true">
+                  <span class="podium__zahl">{stufe.rang}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul role="list" class="hoehepunkte">
+          {hoehepunkte.map((h, i) => (
+            <li class="hoehepunkt">
+              <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rosa']}>{h.rang}</span>
+              <span class="hoehepunkt__text">
+                {h.zeile1}
+                <br />
+                {h.zeile2}
+              </span>
+            </li>
+          ))}
+          <li class="hoehepunkt">
+            <span class="hoehepunkt__zahl">{text.data.fis_zusatz.wert}</span>
+            <span class="hoehepunkt__text">
+              {text.data.fis_zusatz.zeilen.map((zeile, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {zeile}
+                </>
+              ))}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .resultate__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-56);
+  }
+
+  .resultate__kopf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-24);
+  }
+
+  .resultate__intro {
+    max-width: var(--mass-640);
+  }
+
+  .resultate__lead {
+    color: var(--color-tinte-soft);
+  }
+
+  .resultate__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    min-width: min(100%, var(--mass-280));
+  }
+
+  .kalender-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding: var(--space-24);
+    background: var(--color-hauch);
+    color: var(--color-tinte);
+    text-decoration: none;
+  }
+
+  .kalender-link:hover {
+    color: var(--color-beere);
+  }
+
+  .kalender-link__label {
+    color: var(--color-tinte-soft);
+  }
+
+  .kalender-link__text {
+    font-family: var(--font-display);
+    font-size: var(--size-24);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
+  }
+
+  /* Podest */
+  .podium-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-28);
+  }
+
+  .podium-titel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    font-size: var(--size-40);
+    line-height: var(--line-100);
+    letter-spacing: var(--track-04);
+    text-transform: uppercase;
+  }
+
+  .podium {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    width: 100%;
+    max-width: var(--mass-900);
+    border-bottom: var(--linie-6) solid var(--color-aubergine);
+  }
+
+  .podium__platz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-14);
+    min-width: 0;
+    padding-inline: var(--space-8);
+  }
+
+  .medaille {
+    width: var(--mass-84);
+    height: var(--mass-126);
+    overflow: visible;
+  }
+
+  .podium__rennen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+    line-height: var(--line-120);
+  }
+
+  .podium__ort {
+    font-family: var(--font-display);
+    font-size: var(--size-20);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
+  }
+
+  .podium__disziplin {
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
+  }
+
+  .podium__sockel {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--space-6);
+    padding-top: var(--space-14);
+    color: var(--color-papier);
+    clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+  }
+
+  .podium__zahl {
+    font-family: var(--font-display);
+    font-size: var(--size-72);
+    font-weight: var(--weight-700);
+    line-height: var(--line-100);
+  }
+
+  .podium__platz--1 .podium__sockel {
+    height: var(--mass-220);
+    background: var(--color-rosa);
+  }
+
+  .podium__platz--2 .podium__sockel {
+    height: var(--mass-150);
+    background: var(--color-beere);
+  }
+
+  .podium__platz--3 .podium__sockel {
+    height: var(--mass-100);
+    background: var(--color-aubergine);
+  }
+
+  @media (max-width: 640px) {
+    .medaille {
+      width: var(--mass-58);
+      height: var(--mass-87);
+    }
+
+    .podium__zahl {
+      font-size: var(--size-48);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes sockel-hoch {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: none;
+        }
+      }
+
+      .podium__sockel {
+        transform-origin: 50% 100%;
+        animation: sockel-hoch linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 30%;
+      }
+
+      .podium__platz--1 .podium__sockel {
+        animation-range: entry 10% cover 38%;
+      }
+
+      .podium__platz--3 .podium__sockel {
+        animation-range: entry 20% cover 44%;
+      }
+    }
+  }
+
+  /* Höhepunkte */
+  .hoehepunkte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-24) var(--space-72);
+    padding-top: var(--space-8);
+  }
+
+  .hoehepunkt {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-14);
+  }
+
+  .hoehepunkt__zahl {
+    font-family: var(--font-display);
+    font-size: var(--size-56);
+    line-height: var(--line-100);
+    font-weight: var(--weight-700);
+    color: var(--color-beere);
+  }
+
+  .hoehepunkt__zahl--rosa {
+    color: var(--color-rosa);
+  }
+
+  .hoehepunkt__text {
+    font-family: var(--font-display);
+    font-size: var(--size-22);
+    line-height: var(--line-110);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
+  }
+</style>

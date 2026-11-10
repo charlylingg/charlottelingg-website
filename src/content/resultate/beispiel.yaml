@@ -1,6 +1,9 @@
 # BEISPIEL – kein echtes Resultat. Vorlage für neue Einträge.
 # Pro Rennen eine Datei, Dateiname z. B. 2027-01-12-slalom-ort.yaml
+# geprueft: true erst, wenn der Eintrag mit der offiziellen FIS-Resultatliste verglichen ist.
+# Solange geprueft: false, sind Platzhalter wie [DATUM] oder [FIS-LINK] erlaubt.
 beispiel: true
+geprueft: false
 datum: 2000-01-01
 saison: 2000/01
 stufe: Europacup
@@ -8,4 +11,4 @@ disziplin: Slalom
 ort: "[ORT]"
 land: "[LAND]"
 rang: 99
-fis_link: https://www.fis-ski.com/
+fis_link: "[FIS-LINK]"

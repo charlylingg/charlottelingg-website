@@ -1,0 +1,11 @@
+# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
+geprueft: false
+datum: 2026-12-05
+datum_bis: 2026-12-06
+stufe: Europacup
+disziplinen: [Riesenslalom, Slalom]
+ort: "Mayrhofen"
+land: AUT
+hinweis: sieg
+status: geplant
+fis_link: "[FIS-LINK]"

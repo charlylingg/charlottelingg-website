@@ -3,9 +3,11 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 
-import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
 import { getLocale, locales, localizePath, t } from '../i18n';
 import { SITE_INDEXABLE } from '../config';
+import tokens from '../../design/tokens.json';
 
 interface Props {
   /** Seitentitel ohne Namen; leer = nur «Charlotte Lingg» */
@@ -15,6 +17,8 @@ interface Props {
   hasTranslation?: boolean;
   /** true = Suchmaschinen sollen die Seite nicht aufnehmen */
   noindex?: boolean;
+  /** Strukturierte Daten (JSON-LD), z. B. Typ Person auf der Startseite */
+  jsonLd?: Record<string, unknown>;
 }
 
 const locale = getLocale(Astro.currentLocale);
@@ -24,6 +28,7 @@ const {
   description = t(locale, 'site.description'),
   hasTranslation = true,
   noindex = false,
+  jsonLd,
 } = Astro.props;
 
 const robotsNoindex = noindex || !SITE_INDEXABLE;
@@ -54,7 +59,7 @@ const ogLocale = locale === 'fr' ? 'fr_CH' : 'de_CH';
 
     <!-- Favicon: Platzhalter, wird durch das finale Zeichen ersetzt -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#002b7f" />
+    <meta name="theme-color" content={tokens.themen.beere.color.beere} />
 
     <!-- Open Graph (Basis) -->
     <meta property="og:type" content="website" />
@@ -69,34 +74,19 @@ const ogLocale = locale === 'fr' ? 'fr_CH' : 'de_CH';
         .map((l) => <meta property="og:locale:alternate" content={l === 'fr' ? 'fr_CH' : 'de_CH'} />)
     }
     <!-- og:image folgt, sobald ein freigegebenes Bild vorliegt (siehe LIZENZEN.md) -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />}
   </head>
   <body>
     <a class="skip-link" href="#inhalt">{t(locale, 'skip.link')}</a>
-    <header class="kopf container">
-      <a class="kopf__name t-label" href={localizePath('/', locale)}>{siteName}</a>
-      <LanguageSwitcher locale={locale} hasTranslation={hasTranslation} />
-    </header>
+    <Kopf locale={locale} hasTranslation={hasTranslation} />
     <main id="inhalt" tabindex="-1">
       <slot />
     </main>
+    <Fuss locale={locale} />
   </body>
 </html>
 
 <style>
-  .kopf {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-    padding-block: var(--space-2);
-    border-bottom: 1px solid var(--color-line-soft);
-  }
-
-  .kopf__name {
-    color: var(--color-ink);
-    text-decoration: none;
-  }
-
   main:focus {
     outline: none;
   }

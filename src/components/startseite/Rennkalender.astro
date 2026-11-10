@@ -1,0 +1,275 @@
+---
+/**
+ * Rennkalender: Weltcup und Europacup getrennt, je die ersten zwei Rennen sichtbar,
+ * der Rest aufklappbar (details/summary, ohne JavaScript).
+ * Daten aus src/content/rennen, Texte aus src/content/texte/<sprache>/rennkalender.md.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import { datumsbereich, landName, rennenKuerzel } from '../../lib/format';
+import { t, tf, tSchluessel, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const SICHTBAR = 2;
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'rennkalender');
+const rennen = (await getCollection('rennen', (r) => !r.data.beispiel)).sort(
+  (a, b) => a.data.datum.getTime() - b.data.datum.getTime(),
+);
+
+const gruppen = (['Weltcup', 'Europacup'] as const).map((stufe, i) => {
+  const liste = rennen.filter((r) => r.data.stufe === stufe);
+  return {
+    stufe,
+    titel: tSchluessel(locale, `stufe.${stufe}`, stufe),
+    farbe: i === 0 ? ('rosa' as const) : ('beere' as const),
+    sichtbar: liste.slice(0, SICHTBAR),
+    weitere: liste.slice(SICHTBAR),
+  };
+});
+
+type Rennen = CollectionEntry<'rennen'>;
+const zeile = (r: Rennen) => ({
+  datum: datumsbereich(r.data.datum, r.data.datum_bis),
+  ort: r.data.ort,
+  land: landName(r.data.land, locale),
+  hinweis: r.data.hinweis ? tSchluessel(locale, `rennen.hinweis.${r.data.hinweis}`, '') : undefined,
+  kuerzel: rennenKuerzel(r.data.disziplinen, r.data.finale, locale),
+  abgesagt: r.data.status === 'abgesagt',
+});
+---
+
+{
+  text && (
+    <section
+      id="rennen"
+      class="rennkalender flaeche-hauch sektion"
+      aria-labelledby="rennen-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="rennkalender__innen inhalt">
+        <div class="rennkalender__intro sektion-kopf">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="rennen-titel" class="t-titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.lead}</p>
+        </div>
+
+        <div class="rennkalender__gruppen">
+          {gruppen.map((g) => (
+            <div class="gruppe">
+              <h3 class="gruppe__titel">
+                <Torflagge farbe={g.farbe} breite={12} hoehe={28} />
+                {g.titel}
+              </h3>
+              <ol role="list" class="rennliste">
+                {g.sichtbar.map((r) => {
+                  const z = zeile(r);
+                  return (
+                    <li class="renn-zeile">
+                      <span class="renn-zeile__datum">{z.datum}</span>
+                      <span class="renn-zeile__ort">
+                        <strong class="renn-zeile__name">{z.ort}</strong>
+                        {z.land && <span class="renn-zeile__land">{z.land}</span>}
+                        {z.hinweis && (
+                          <span class="renn-zeile__hinweis">
+                            <Torflagge farbe="rosa" breite={6} hoehe={12} />
+                            {z.hinweis}
+                          </span>
+                        )}
+                      </span>
+                      <span class="renn-zeile__kuerzel schraeg-flaeche">{z.kuerzel}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+              {g.weitere.length > 0 && (
+                <details class="rennliste-mehr">
+                  <summary class="rennliste-mehr__knopf ohne-marker t-mehr">
+                    <span class="wenn-zu">{tf(locale, 'rennen.weitere', { n: g.weitere.length })}</span>
+                    <span class="wenn-offen">{t(locale, 'rennen.weniger')}</span>
+                    <span class="aufklapp-zeichen" aria-hidden="true">
+                      +
+                    </span>
+                  </summary>
+                  <ol role="list" class="rennliste aufklapp-inhalt">
+                    {g.weitere.map((r) => {
+                      const z = zeile(r);
+                      return (
+                        <li class="renn-zeile">
+                          <span class="renn-zeile__datum">{z.datum}</span>
+                          <span class="renn-zeile__ort">
+                            <strong class="renn-zeile__name">{z.ort}</strong>
+                            {z.land && <span class="renn-zeile__land">{z.land}</span>}
+                            {z.hinweis && (
+                              <span class="renn-zeile__hinweis">
+                                <Torflagge farbe="rosa" breite={6} hoehe={12} />
+                                {z.hinweis}
+                              </span>
+                            )}
+                          </span>
+                          <span class="renn-zeile__kuerzel schraeg-flaeche">{z.kuerzel}</span>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </details>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p class="rennkalender__quelle">{text.data.quelle}</p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .rennkalender__innen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-40);
+  }
+
+  .rennkalender__intro {
+    max-width: var(--mass-760);
+  }
+
+  .rennkalender__gruppen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--mass-440)), 1fr));
+    gap: var(--space-48) var(--space-64);
+  }
+
+  .gruppe {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    min-width: 0;
+  }
+
+  .gruppe__titel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    margin-bottom: var(--space-8);
+    font-size: var(--size-34);
+    text-transform: uppercase;
+  }
+
+  .rennliste {
+    border-bottom: var(--linie-1) solid var(--color-linie-soft);
+  }
+
+  .renn-zeile {
+    display: grid;
+    grid-template-columns: var(--mass-150) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-8) var(--space-20);
+    padding-block: var(--space-16);
+    border-top: var(--linie-1) solid var(--color-linie-soft);
+  }
+
+  .renn-zeile__datum {
+    font-family: var(--font-display);
+    font-size: var(--size-19);
+    font-weight: var(--weight-600);
+    color: var(--color-tinte-soft);
+  }
+
+  .renn-zeile__ort {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .renn-zeile__name {
+    font-family: var(--font-display);
+    font-size: var(--size-24);
+    font-weight: var(--weight-700);
+    line-height: var(--line-105);
+    text-transform: uppercase;
+  }
+
+  .renn-zeile__land {
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
+  }
+
+  /* Im Design rosa; als Fliesstext in beere wegen Kontrast (rosa auf hauch 3.5:1) */
+  .renn-zeile__hinweis {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-6);
+    font-size: var(--size-13);
+    font-weight: var(--weight-500);
+    color: var(--color-beere);
+  }
+
+  /* Kürzel im Design beim Weltcup rosa; weisse Schrift auf rosa hat nur 3.9:1, deshalb überall beere */
+  .renn-zeile__kuerzel {
+    --flagge: var(--color-beere);
+    justify-self: end;
+    padding: var(--space-4) var(--space-12);
+    color: var(--color-papier);
+    font-family: var(--font-display);
+    font-size: var(--size-15);
+    font-weight: var(--weight-600);
+    letter-spacing: var(--track-06);
+    white-space: nowrap;
+  }
+
+
+  @media (max-width: 560px) {
+    .renn-zeile {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .renn-zeile__datum {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes zeile-rein {
+        from {
+          opacity: 0;
+          transform: translateX(calc(-1 * var(--space-40)));
+        }
+      }
+
+      .renn-zeile {
+        animation: zeile-rein linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 20%;
+      }
+    }
+  }
+
+  .rennliste-mehr__knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-10);
+    padding-block: var(--space-14);
+    color: var(--color-beere);
+  }
+
+  .rennliste-mehr > .rennliste {
+    border-top: 0;
+  }
+
+  .rennkalender__quelle {
+    font-size: var(--size-14);
+    color: var(--color-tinte-soft);
+  }
+</style>

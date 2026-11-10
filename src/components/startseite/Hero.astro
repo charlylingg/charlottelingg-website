@@ -1,0 +1,223 @@
+---
+import Bildplatzhalter from '../Bildplatzhalter.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'hero');
+---
+
+{
+  text && (
+    <section id="top" class="hero flaeche-aubergine" lang={text.lang !== locale ? text.lang : undefined}>
+      <span class="wisch wisch--rosa" aria-hidden="true" />
+      <span class="wisch wisch--beere" aria-hidden="true" />
+      <div class="hero__bild">
+        <Bildplatzhalter
+          stelle="Hero"
+          format="Querformat 3:2"
+          verhaeltnis="3 / 2"
+          alt={text.data.bild_alt}
+          ausrichtung="oben-links"
+        />
+      </div>
+      <div class="hero__panel">
+        {text.entwurf && <EntwurfLabel locale={locale} />}
+        <p class="kicker-flagge t-kicker hero__kicker">{text.data.kicker}</p>
+        <h1 class="t-hero">
+          {text.data.titel_zeilen.map((zeile, i) => (
+            <>
+              {i > 0 && <br />}
+              {zeile}
+            </>
+          ))}
+        </h1>
+        <p class="hero__lead">{text.data.lead}</p>
+        <div class="hero__knoepfe">
+          {text.data.buttons.map((b, i) => (
+            <a class:list={['knopf t-knopf', i === 0 ? 'knopf--hell knopf--dunkel-text' : 'knopf--beere']} href={b.ziel}>
+              {b.text}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__bild :global(.bildplatzhalter) {
+    height: var(--mass-hero-handy);
+    aspect-ratio: auto;
+  }
+
+  .hero__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-22);
+    padding: var(--space-40) var(--space-24);
+    background: var(--color-aubergine);
+  }
+
+  .hero__kicker {
+    padding: var(--space-8) var(--space-18);
+  }
+
+  .hero__lead {
+    max-width: var(--mass-30rem);
+    font-size: var(--size-19);
+    line-height: var(--line-150);
+  }
+
+  .hero__knoepfe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-14);
+    padding-top: var(--space-6);
+  }
+
+  .wisch {
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    left: 0;
+    z-index: 3;
+    width: 38%;
+    pointer-events: none;
+    transform: translateX(-160%) skewX(var(--schraege));
+  }
+
+  .wisch--rosa {
+    background: var(--color-rosa);
+  }
+
+  .wisch--beere {
+    background: var(--color-beere);
+  }
+
+  @media (min-width: 821px) {
+    .hero {
+      height: var(--mass-760);
+    }
+
+    .hero__bild {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero__bild :global(.bildplatzhalter) {
+      height: 100%;
+    }
+
+    .hero__panel {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(var(--mass-620), 50%);
+      padding: var(--space-56) var(--space-56) var(--space-56) var(--space-96);
+      clip-path: polygon(var(--space-64) 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  /* Auftritt wie im Design, nur ohne Wunsch nach reduzierter Bewegung */
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes bild-rein {
+      0% {
+        opacity: 0;
+        transform: translateX(-35%) scale(1.12);
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes wischen {
+      from {
+        transform: translateX(-160%) skewX(var(--schraege));
+      }
+      to {
+        transform: translateX(420%) skewX(var(--schraege));
+      }
+    }
+
+    @keyframes panel-rein {
+      from {
+        transform: translateX(105%);
+      }
+      to {
+        transform: none;
+      }
+    }
+
+    @keyframes aufsteigen {
+      from {
+        opacity: 0;
+        transform: translateY(var(--space-24));
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .wisch--beere {
+      animation: wischen 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0s both;
+    }
+
+    .wisch--rosa {
+      animation: wischen 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.12s both;
+    }
+
+    .hero__bild {
+      animation: bild-rein 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    }
+
+    .hero__panel {
+      animation: panel-rein 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+    }
+
+    .hero__panel > * {
+      animation: aufsteigen 0.6s ease-out both;
+    }
+
+    .hero__panel > :nth-child(1) {
+      animation-delay: 1.1s;
+    }
+
+    .hero__panel > :nth-child(2) {
+      animation-delay: 1.2s;
+    }
+
+    .hero__panel > :nth-child(3) {
+      animation-delay: 1.3s;
+    }
+
+    .hero__panel > :nth-child(4) {
+      animation-delay: 1.4s;
+    }
+
+    .hero__panel > :nth-child(5) {
+      animation-delay: 1.5s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wisch {
+      display: none;
+    }
+  }
+</style>

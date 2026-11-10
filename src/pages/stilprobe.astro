@@ -1,51 +1,60 @@
 ---
 /**
- * TEMPORÄR – Stilprobe des Designsystems «Torlauf».
+ * TEMPORÄR – Stilprobe des Website-Themas «Beere» (design/tokens.json, themen.beere).
  * Dient zur Prüfung in der Vorschau. Vor dem Go-live löschen.
+ * Das Thema «Torlauf» gilt nur für das Dossier und erscheint hier nicht.
  */
 import Base from '../layouts/Base.astro';
 import Torflagge from '../components/Torflagge.astro';
 import tokens from '../../design/tokens.json';
 
-const farben = Object.entries(tokens.color).map(([name, wert]) => ({
+const beere = tokens.themen.beere;
+
+const farben = Object.entries(beere.color).map(([name, wert]) => ({
   name,
-  wert: wert.startsWith('{') ? 'navy' : wert,
+  wert: wert.startsWith('{') ? wert.slice(7, -1) : wert,
   css: `var(--color-${name})`,
 }));
-const dunkel = new Set(['navy', 'red', 'nacht', 'ink', 'ink-soft', 'link']);
+const dunkel = new Set([
+  'tinte', 'tinte-soft', 'beere', 'rosa', 'aubergine', 'link', 'link-hover',
+  'flagge-blau', 'flagge-rot', 'flagge-kontur', 'gold-rand', 'silber-rand', 'bronze', 'bronze-rand',
+]);
 
-const stufen = [
-  { name: 'mega', text: 'Charlotte Lingg' },
-  { name: 'titel', text: 'Saison 2026/27' },
-  { name: 'zahl', text: '1:52.34' },
-  { name: 'abschnitt', text: 'Resultate' },
-  { name: 'zitat', text: '«Jeder Lauf beginnt im Kopf.» (Beispielzitat)' },
-  { name: 'kicker', text: 'Ski Alpin · Liechtenstein' },
-  { name: 'lead', text: 'Ein Einleitungssatz für eine Sektion, etwas grösser und kräftiger als der Fliesstext.' },
+const stufen: { name: keyof typeof beere.type; klasse?: string; text: string }[] = [
+  { name: 'hero', klasse: 't-hero', text: 'Zurück im Weltcup.' },
+  { name: 'titel', klasse: 't-titel', text: 'Jeden Tag alles geben' },
+  { name: 'zitat', klasse: 't-zitat', text: '«Jeder Tag zählt.»' },
+  { name: 'lead', klasse: 't-lead', text: 'Geboren in Lausanne, aufgewachsen in Zermatt, am Start für Liechtenstein.' },
   {
-    name: 'text',
-    text: 'Fliesstext mit Umlauten und Sonderzeichen: Ä Ö Ü ä ö ü ß é è à ç – Grösse, Zürich, Malbun, Val-d’Isère. Er bleibt auf allen Bildschirmen mindestens 15 Pixel gross.',
+    name: 'fliesstext',
+    text: 'Fliesstext 17px mit Umlauten und Sonderzeichen: Ä Ö Ü ä ö ü é è à ç – Grösse, Zürich, Malbun, Val-d’Isère.',
   },
-  { name: 'text-fett', text: 'Fliesstext fett für Hervorhebungen.' },
-  { name: 'label', text: 'Riesenslalom · Rang' },
-  { name: 'klein', text: 'Kleiner Text für Bildnachweise und Fussnoten. Foto: [FOTOGRAF]' },
+  { name: 'kicker', klasse: 't-kicker', text: 'Ski Alpin · Saison 2026/27' },
+  { name: 'knopf', klasse: 't-knopf', text: 'Mein Weg ansehen' },
+  { name: 'mehr', klasse: 't-mehr', text: 'Alle 11 weiteren Rennen' },
+  { name: 'label', klasse: 't-label', text: 'Jahrgang' },
+  { name: 'klein', klasse: 't-klein', text: 'RS = Riesenslalom, SL = Slalom. Quelle: FIS-Kalender.' },
 ];
+
+const groessen = Object.entries(beere.fontSize).filter(([name]) => /^size-\d+$/.test(name));
+const abstaende = Object.entries(beere.space);
 ---
 
 <Base title="Stilprobe" hasTranslation={false} noindex>
-  <div class="container stilprobe">
-    <p class="t-label hinweis flaeche-red">Temporär · wird vor dem Go-live entfernt</p>
-    <h1 class="t-titel">Stilprobe «Torlauf»</h1>
+  <div class="inhalt sektion stilprobe">
+    <p class="t-label hinweis">Temporär · wird vor dem Go-live entfernt</p>
+    <h1 class="t-titel">Stilprobe «Beere»</h1>
+    <p>{beere.verwendung}</p>
 
     <section aria-labelledby="farben">
-      <h2 id="farben" class="t-abschnitt">Farben</h2>
+      <h2 id="farben" class="unter">Farben</h2>
       <ul role="list" class="farben">
         {
           farben.map((f) => (
             <li class="farbe">
               <span
                 class="farbe__flaeche"
-                style={`background:${f.css};color:${dunkel.has(f.name) ? 'var(--color-paper)' : 'var(--color-ink)'}`}
+                style={`background:${f.css};color:${dunkel.has(f.name) ? 'var(--color-papier)' : 'var(--color-tinte)'}`}
               >
                 <span class="t-label">{f.name}</span>
               </span>
@@ -55,25 +64,27 @@ const stufen = [
         }
       </ul>
       <ul class="t-klein regeln">
-        {tokens.colorRules.map((r) => <li>{r}</li>)}
+        {beere.colorRules.map((r) => <li>{r}</li>)}
       </ul>
     </section>
 
     <section aria-labelledby="typo">
-      <h2 id="typo" class="t-abschnitt">Typo-Stufen</h2>
+      <h2 id="typo" class="unter">Typo-Stufen</h2>
       <dl class="stufen">
         {
           stufen.map((s) => {
-            const def = tokens.type[s.name as keyof typeof tokens.type];
+            const def = beere.type[s.name] as Record<string, string | number>;
             return (
               <div class="stufe">
                 <dt class="t-label stufe__name">
                   {s.name}
                   <span class="t-klein stufe__werte">
-                    {def.size} / {def.lineHeight} / {def.weight}
+                    {Object.entries(def)
+                      .map(([k, v]) => `${k}: ${v}`)
+                      .join(' · ')}
                   </span>
                 </dt>
-                <dd class={`t-${s.name}`}>{s.text}</dd>
+                <dd class={s.klasse}>{s.text}</dd>
               </div>
             );
           })
@@ -81,152 +92,215 @@ const stufen = [
       </dl>
     </section>
 
+    <section aria-labelledby="groessen">
+      <h2 id="groessen" class="unter">Schriftgrössen</h2>
+      <ul role="list" class="groessen">
+        {
+          groessen.map(([name, wert]) => (
+            <li style={`font-size: var(--${name})`}>
+              <span class="groesse__name">{wert}</span> Barlow{' '}
+              <span class="groesse__display">Barlow Condensed</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
     <section aria-labelledby="form">
-      <h2 id="form" class="t-abschnitt">Form: die Schräge</h2>
-      <p class="t-text">Schräge {tokens.shape.schraege}. Radius überall 0, einzige Ausnahme der Punkt im Zielbogen.</p>
+      <h2 id="form" class="unter">Form: Schräge, Schatten, Medaillen</h2>
+      <p>Schräge {beere.shape.schraege}. Text in schrägen Flächen steht gerade. Radius überall 0.</p>
       <div class="form-beispiele">
-        <Torflagge farbe="red" />
-        <Torflagge farbe="navy" />
-        <span class="punkt" aria-hidden="true"></span>
+        <Torflagge farbe="rosa" breite={28} hoehe={88} />
+        <Torflagge farbe="beere" breite={28} hoehe={88} />
+        <p class="kicker-flagge t-kicker">01 Portrait</p>
+        <p class="kicker-flagge kicker-flagge--rosa t-kicker">02 Resultate</p>
       </div>
-      <div class="schnittkante flaeche-navy">
-        <p class="t-abschnitt">Schnittkante</p>
-        <p class="t-text">Text in paper auf navy. <a href="#form">Link auf dunkler Fläche</a></p>
+      <div class="schatten">
+        <span style="box-shadow: var(--schatten-kopf)">schatten-kopf: {beere.shadow.kopf}</span>
+        <span style="box-shadow: var(--schatten-flagge)">schatten-flagge: {beere.shadow.flagge}</span>
+      </div>
+      <div class="medaillen">
+        {
+          ['gold', 'silber', 'bronze'].map((m) => (
+            <svg viewBox="0 0 100 100" class="medaille" aria-hidden="true">
+              <circle cx="50" cy="50" r="40" fill={`var(--color-${m})`} stroke={`var(--color-${m}-rand)`} stroke-width="3" />
+              <circle cx="50" cy="50" r="30" fill="none" stroke={`var(--color-${m}-hell)`} stroke-width="2" />
+            </svg>
+          ))
+        }
+      </div>
+      <div class="flaeche-beere schnittkante">
+        <p class="t-titel">Fläche beere</p>
+        <p>Text in papier auf beere. <a href="#form">Link auf dunkler Fläche</a></p>
       </div>
     </section>
 
     <section aria-labelledby="abstaende">
-      <h2 id="abstaende" class="t-abschnitt">Abstände</h2>
+      <h2 id="abstaende" class="unter">Abstände</h2>
       <ul role="list" class="abstaende">
         {
-          ['space-1', 'space-2', 'space-3', 'space-4'].map((s) => (
+          abstaende.map(([name, wert]) => (
             <li>
-              <span class="abstand" style={`width:var(--${s})`} />
+              <span class="abstand" style={`width:var(--${name})`} />
               <span class="t-klein">
-                {s} · {tokens.space[s as 'space-1']}
+                {name} · {wert}
               </span>
             </li>
           ))
         }
       </ul>
-      <p class="t-text">
-        Seitenrand: 72px auf dem Desktop, 16–24px auf dem Handy. <a href="/">Beispiel-Link zur Startseite</a>
-      </p>
+      <p>{beere.spaceNotes} <a href="/">Beispiel-Link zur Startseite</a></p>
     </section>
   </div>
 </Base>
 
 <style>
   .stilprobe {
-    padding-block: var(--space-4);
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-48);
+  }
+
+  .stilprobe > *,
+  .stufe dd {
+    min-width: 0;
   }
 
   .stilprobe section {
+    min-width: 0;
     display: grid;
-    gap: var(--space-3);
+    gap: var(--space-24);
   }
 
-  .stilprobe h2 {
-    padding-bottom: var(--space-1);
-    border-bottom: 1px solid var(--color-line);
+  .unter {
+    padding-bottom: var(--space-8);
+    border-bottom: var(--linie-1) solid var(--color-linie);
+    font-size: var(--size-32);
+    text-transform: uppercase;
   }
 
   .hinweis {
     justify-self: start;
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-8) var(--space-16);
+    background: var(--color-aubergine);
+    color: var(--color-papier);
   }
 
   .farben {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: var(--space-2);
+    grid-template-columns: repeat(auto-fill, minmax(var(--mass-150), 1fr));
+    gap: var(--space-16);
   }
 
   .farbe {
     display: grid;
-    gap: var(--space-1);
+    gap: var(--space-8);
   }
 
   .farbe__flaeche {
     display: flex;
     align-items: flex-end;
-    height: 96px;
-    padding: var(--space-1);
-    box-shadow: inset 0 0 0 1px var(--color-line);
+    height: var(--space-96);
+    padding: var(--space-8);
+    box-shadow: var(--schatten-flagge);
   }
 
-  .farbe__wert {
-    color: var(--color-ink-soft);
+  .farbe__wert,
+  .regeln,
+  .stufe__name {
+    color: var(--color-tinte-soft);
   }
 
   .regeln {
-    color: var(--color-ink-soft);
-    padding-left: var(--space-3);
+    padding-left: var(--space-24);
   }
 
   .stufen {
     display: grid;
-    gap: var(--space-3);
+    gap: var(--space-24);
   }
 
   .stufe {
     display: grid;
-    gap: var(--space-1);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--color-line-soft);
+    gap: var(--space-8);
+    padding-bottom: var(--space-24);
+    border-bottom: var(--linie-1) solid var(--color-linie-soft);
+  }
+
+  .stufe dd {
+    margin: 0;
   }
 
   .stufe__name {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1);
-    color: var(--color-ink-soft);
+    gap: var(--space-8);
   }
 
   .stufe__werte {
     text-transform: none;
     letter-spacing: 0;
-    font-weight: 400;
+    font-weight: var(--weight-400);
   }
 
-  .form-beispiele {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--space-4);
-    padding-left: var(--space-3);
+  .groessen {
+    display: grid;
+    gap: var(--space-8);
+    line-height: var(--line-120);
   }
 
-  .punkt {
+  .groessen li {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .groesse__name {
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: var(--color-red);
-    border-radius: var(--radius-punkt);
+    min-width: var(--space-96);
+  }
+
+  .groesse__display {
+    font-family: var(--font-display);
+    font-weight: var(--weight-700);
+  }
+
+  .form-beispiele,
+  .schatten,
+  .medaillen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-32);
+  }
+
+  .schatten span {
+    padding: var(--space-16);
+  }
+
+  .medaille {
+    width: var(--mass-84);
   }
 
   .schnittkante {
-    padding: var(--space-4) calc(var(--space-3) + 40px) var(--space-4) var(--space-3);
-    clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%);
+    padding: var(--space-48) var(--space-88) var(--space-48) var(--space-24);
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--space-40)) 100%, 0 100%);
     display: grid;
-    gap: var(--space-1);
+    gap: var(--space-8);
   }
 
   .abstaende {
     display: grid;
-    gap: var(--space-1);
+    gap: var(--space-8);
   }
 
   .abstaende li {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-16);
   }
 
   .abstand {
     display: inline-block;
-    height: var(--space-2);
-    background: var(--color-navy);
+    height: var(--space-16);
+    background: var(--color-beere);
   }
 </style>

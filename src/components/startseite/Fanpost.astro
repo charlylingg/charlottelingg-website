@@ -1,0 +1,105 @@
+---
+/** Fanpost: Text immer, Postadresse separat (fanpost-adresse.md, eigene Freigabe). */
+import Torflagge from '../Torflagge.astro';
+import EntwurfLabel from '../EntwurfLabel.astro';
+import { getText } from '../../lib/inhalte';
+import type { Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const text = await getText(locale, 'fanpost');
+const adresse = await getText(locale, 'fanpost-adresse');
+---
+
+{
+  text && (
+    <section
+      id="fanpost"
+      class="fanpost flaeche-hauch"
+      aria-labelledby="fanpost-titel"
+      lang={text.lang !== locale ? text.lang : undefined}
+    >
+      <div class="fanpost__innen inhalt">
+        <div class="fanpost__text">
+          {text.entwurf && <EntwurfLabel locale={locale} />}
+          <p class="kicker-flagge t-kicker">{text.data.kicker}</p>
+          <h2 id="fanpost-titel" class="t-titel fanpost__titel">
+            {text.data.titel}
+          </h2>
+          <p>{text.data.text}</p>
+        </div>
+        {adresse && (
+          <div class="fanpost__adresse" lang={adresse.lang !== locale ? adresse.lang : undefined}>
+            <Torflagge farbe="beere" breite={10} hoehe="voll" class="fanpost__balken" />
+            <div class="fanpost__adressblock">
+              {adresse.entwurf && <EntwurfLabel locale={locale} />}
+              <address>
+                <strong class="fanpost__name">{adresse.data.name}</strong>
+                {adresse.data.zeilen.map((z) => (
+                  <span>{z}</span>
+                ))}
+              </address>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .fanpost {
+    padding-block: var(--space-72);
+  }
+
+  .fanpost__innen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-32) var(--space-64);
+  }
+
+  .fanpost__text {
+    flex: 1 1 var(--mass-380);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .fanpost__titel {
+    font-size: var(--size-48);
+  }
+
+  .fanpost__adresse {
+    flex: 1 1 var(--mass-320);
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-20);
+  }
+
+  .fanpost__adressblock {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  address {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-style: normal;
+    font-size: var(--size-20);
+    line-height: var(--line-140);
+  }
+
+  .fanpost__name {
+    font-family: var(--font-display);
+    font-size: var(--size-26);
+    font-weight: var(--weight-700);
+    text-transform: uppercase;
+  }
+</style>

@@ -19,14 +19,17 @@ Claude Code mergt nie selbst.
 |-----|-----|
 | Texte der Sektionen (DE / FR) | `src/content/texte/de/` und `src/content/texte/fr/` |
 | Resultate | `src/content/resultate/` (eine Datei pro Rennen, FIS-Link ist Pflicht) |
-| Rennkalender | `src/content/rennen/` |
+| Rennkalender | `src/content/rennen/` (eine Datei pro Rennen, Ordner pro Saison) |
+| Blogbeiträge | `src/content/blog/de/` und `src/content/blog/fr/` (eigene Seite `/blog/<dateiname>`) |
 | Partner | `src/content/partner/`, Logos in `public/partner/` |
 | Bilder | `public/bilder/` (jedes Bild mit Eintrag in `LIZENZEN.md`) |
 | Feste Wörter (Navigation, Buttons) | `src/i18n/de.json` und `src/i18n/fr.json` |
-| Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` |
+| Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` (Website: Thema «Beere») |
 | Bildrechte | `LIZENZEN.md` |
 
 Einträge mit `beispiel: true` sind Vorlagen und erscheinen nicht auf der Website.
+
+Freigaben: Inhalte mit `freigabe: false` erscheinen nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` (als Entwurf markiert). Übersicht in `FREIGABEN.md`. Bildstellen und gesuchte Bilder: `BILDER.md`. Design-Referenz der Startseite: `design/referenz/startseite.dc.html`.
 
 ## Für Entwickler
 
@@ -36,6 +39,7 @@ npm install
 npm run dev    # lokale Vorschau
 npm run build  # statische Ausgabe nach dist/
 npm run check  # Typen und Astro-Dateien prüfen
+PUBLIC_SHOW_ENTWUERFE=true npm run build  # Build mit Entwürfen (nur für die Vorschau)
 ```
 
 Hosting: Cloudflare Workers mit statischen Assets (Workers Builds). Konfiguration in `wrangler.jsonc`, Header in `public/_headers`. Produktion ist der Branch `main`.
