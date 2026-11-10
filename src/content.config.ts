@@ -170,6 +170,8 @@ const bilder = defineCollection({
       lizenz_geklaert: z.boolean(),
       /** Bildausschnitt (CSS object-position), z. B. «60% 45%» = Motiv bei 60 % Breite und 45 % Höhe */
       ausschnitt: z.string().regex(/^\d{1,3}% \d{1,3}%$/, 'Ausschnitt wie «60% 45%»').optional(),
+      /** Bildausschnitt ab 1100 px Breite (Hero: Bild links, Textfeld rechts), z. B. «62% 45%». Fehlt er, gilt «ausschnitt». */
+      ausschnitt_breit: z.string().regex(/^\d{1,3}% \d{1,3}%$/, 'Ausschnitt wie «62% 45%»').optional(),
     })
     .superRefine((b, ctx) => {
       for (const feld of ['datei', 'fallback'] as const) {

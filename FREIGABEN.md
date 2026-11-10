@@ -60,8 +60,8 @@ Bilder funktionieren gleich wie Texte, nur heisst die Angabe `lizenz_geklaert`: 
 
 | Bild | Datei | lizenz_geklaert | Rechte bestätigt am | Freigegeben von Charlotte am |
 |------|-------|-----------------|---------------------|------------------------------|
-| Hero, Weltcup Sölden 2026 (Giovanni Maria Pizzato) | `hero-soelden-2026.yaml` | **false** (angefragt am 10.11.2026) | | |
-| Vorschaubild beim Teilen (Giovanni Maria Pizzato) | `og-charlotte-lingg.yaml` | **false** (angefragt am 10.11.2026) | | |
+| Hero, Weltcup Sölden 2026 (Giovanni Maria Pizzato) | `hero-soelden-2026.yaml` | true | 10.11.2026 (kommerzielle Lizenz, bestätigt durch Michel Gurnari) | |
+| Vorschaubild beim Teilen (Giovanni Maria Pizzato) | `og-charlotte-lingg.yaml` | true | 10.11.2026 (kommerzielle Lizenz, bestätigt durch Michel Gurnari) | |
 
 ## Daten (Freigabe durch Michel)
 
