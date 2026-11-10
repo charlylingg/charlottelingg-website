@@ -13,3 +13,17 @@ export const SITE_INDEXABLE = false;
  * Für die Produktion (Branch main) nie setzen.
  */
 export const SHOW_ENTWUERFE = import.meta.env.PUBLIC_SHOW_ENTWUERFE === 'true';
+
+/**
+ * Instagram-Feed in der Sektion «Unterwegs» (siehe CLAUDE.md, Abschnitt Technik).
+ * INSTAGRAM_FEED_URL: öffentlicher JSON-Feed von Behold. Wird nur vom Skript
+ * scripts/instagram-aktualisieren.mjs gelesen, nie von der Website selbst.
+ */
+export const INSTAGRAM_FEED_URL = 'https://feeds.behold.so/C9qcvHSJvE77P3SS85GS';
+
+/**
+ * INSTAGRAM_AUSBLENDEN: IDs von Instagram-Beiträgen, die nicht auf der Website erscheinen sollen,
+ * z. B. ['18012345678901234']. Die ID steht in src/data/instagram.json (Feld id).
+ * Nach der Änderung den Workflow «Instagram aktualisieren» manuell starten (siehe README).
+ */
+export const INSTAGRAM_AUSBLENDEN: string[] = [];

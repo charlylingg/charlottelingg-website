@@ -1,0 +1,63 @@
+# Instagram aktualisieren: holt zweimal täglich die neuesten Beiträge von @charlotte_lingg
+# (scripts/instagram-aktualisieren.mjs) und committet geänderte Bilder und Daten direkt auf main.
+# Der Push auf main löst den normalen Produktions-Build bei Cloudflare aus.
+# Einzige Ausnahme von «alles über Pull Requests» (siehe CLAUDE.md, Abschnitt Technik).
+name: Instagram aktualisieren
+
+on:
+  schedule:
+    - cron: '17 5,17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-aktualisieren
+  cancel-in-progress: false
+
+jobs:
+  aktualisieren:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Instagram-Feed holen
+        run: npm run instagram
+
+      - name: Änderungen prüfen
+        id: aenderung
+        run: |
+          if [ -n "$(git status --porcelain -- src/assets/instagram src/data/instagram.json)" ]; then
+            echo "geaendert=true" >> "$GITHUB_OUTPUT"
+            git status --short -- src/assets/instagram src/data/instagram.json
+          else
+            echo "geaendert=false" >> "$GITHUB_OUTPUT"
+            echo "Keine Änderung, nichts zu tun."
+          fi
+
+      - name: Build zur Kontrolle
+        if: steps.aenderung.outputs.geaendert == 'true'
+        run: npm run build
+
+      - name: Commit und Push auf main
+        if: steps.aenderung.outputs.geaendert == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- src/assets/instagram src/data/instagram.json
+          git commit -m 'Instagram-Feed aktualisiert'
+          git push origin HEAD:main
