@@ -1,9 +1,10 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Head"
 kategorie: ausruester
+# Logodatei: head.svg (Vektor, vom Partner geliefert, breites Querformat etwa 5.8 : 1)
+logo: /partner/head.svg
 url: https://www.head.com
 pflicht_logo: false
 pflicht_link: false
-# Höhe passend zu den anderen Ausrüstern
-logo_hoehe: 40
+# Niedriger als Ziener und Leki, damit die breite Wortmarke in ihrer Kategorie nicht dominiert
+logo_hoehe: 32
 reihenfolge: 1
