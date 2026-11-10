@@ -34,7 +34,8 @@ const resultate = (await getCollection('resultate', (r) => !r.data.beispiel))
       a.data.ort.localeCompare(b.data.ort, 'de'),
   )
   .map((r) => {
-    const disziplin = istPlatzhalter(r.data.disziplin)
+    // Wie im Design: bei der WM ohne Disziplin («WM, Cortina d’Ampezzo»)
+    const disziplin = istPlatzhalter(r.data.disziplin) || r.data.stufe === 'WM'
       ? undefined
       : tSchluessel(locale, `disziplin.${r.data.disziplin}`, r.data.disziplin);
     const stufe = tSchluessel(locale, `stufe.${r.data.stufe}`, r.data.stufe);
@@ -114,7 +115,7 @@ const kursPfad = (dx: number, dy: number) => {
                 <li class:list={['station', links ? 'station--links' : 'station--rechts']}>
                   <div class:list={['station__text', links ? 'station__text--links' : 'station__text--rechts']} lang={s.lang !== locale ? s.lang : undefined}>
                     {s.entwurf && <EntwurfLabel locale={locale} />}
-                    <span class:list={['station__nummer t-kicker', `station__nummer--${farbe}`]}>{s.data.nummer}</span>
+                    <span class="station__nummer t-kicker">{s.data.nummer}</span>
                     <h3 class="station__titel">{s.data.titel}</h3>
                     <p class="station__beschreibung">{s.data.text}</p>
                   </div>
@@ -236,11 +237,8 @@ const kursPfad = (dx: number, dy: number) => {
     gap: var(--space-8);
   }
 
-  .station__nummer--rosa {
-    color: var(--color-rosa);
-  }
-
-  .station__nummer--beere {
+  /* Kleine Schrift: beere (rosa auf hauch hätte nur 3.5:1) */
+  .station__nummer {
     color: var(--color-beere);
   }
 

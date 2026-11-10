@@ -65,6 +65,8 @@ h4 {
   font-weight: var(--weight-700);
   line-height: var(--line-100);
   text-wrap: balance;
+  /* Lange Wörter sauber trennen statt mitten im Wort umbrechen (Sprache aus lang="de"/"fr") */
+  hyphens: auto;
 }
 
 p {
@@ -99,8 +101,7 @@ footer[id] {
 
 /* Auf dunklen Flächen bleibt der Fokus sichtbar */
 .flaeche-beere :focus-visible,
-.flaeche-aubergine :focus-visible,
-.flaeche-rosa :focus-visible {
+.flaeche-aubergine :focus-visible {
   outline-color: var(--color-papier);
 }
 
@@ -159,7 +160,6 @@ footer[id] {
 .flaeche-hauch     { background: var(--color-hauch);     color: var(--color-tinte); }
 .flaeche-beere     { background: var(--color-beere);     color: var(--color-papier); }
 .flaeche-aubergine { background: var(--color-aubergine); color: var(--color-papier); }
-.flaeche-rosa      { background: var(--color-rosa);      color: var(--color-papier); }
 .flaeche-beere a:not(.knopf),
 .flaeche-aubergine a:not(.knopf) {
   color: var(--color-papier);
@@ -211,8 +211,9 @@ footer[id] {
   transform: skewX(var(--schraege));
 }
 
-.kicker-flagge--rosa {
-  --flagge: var(--color-rosa);
+/* Auf beere Flächen (z. B. «Sponsor werden») ist die Flagge aubergine */
+.kicker-flagge--aubergine {
+  --flagge: var(--color-aubergine);
 }
 
 /* Buttons */
@@ -236,13 +237,22 @@ footer[id] {
   color: var(--color-aubergine);
 }
 
-.knopf--rosa {
-  background: var(--color-rosa);
+/* Weisse Schrift nie auf rosa (3.9:1): Akzent-Button ist beere, Hover/Fokus aubergine */
+.knopf--beere {
+  background: var(--color-beere);
   color: var(--color-papier);
 }
 
-a.knopf--rosa:hover {
+a.knopf--beere:hover,
+a.knopf--beere:focus-visible {
+  background: var(--color-aubergine);
   color: var(--color-papier);
+}
+
+/* Auf aubergine Flächen bleibt der Button beim Hover sichtbar: weisser Rahmen innen */
+.flaeche-aubergine a.knopf--beere:hover {
+  outline: var(--linie-2) solid var(--color-papier);
+  outline-offset: calc(-1 * var(--space-4));
 }
 
 a.knopf--hell:hover {

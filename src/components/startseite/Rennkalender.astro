@@ -86,7 +86,7 @@ const zeile = (r: Rennen) => ({
                           </span>
                         )}
                       </span>
-                      <span class:list={['renn-zeile__kuerzel schraeg-flaeche', `renn-zeile__kuerzel--${g.farbe}`]}>{z.kuerzel}</span>
+                      <span class="renn-zeile__kuerzel schraeg-flaeche">{z.kuerzel}</span>
                     </li>
                   );
                 })}
@@ -116,9 +116,7 @@ const zeile = (r: Rennen) => ({
                               </span>
                             )}
                           </span>
-                          <span class:list={['renn-zeile__kuerzel schraeg-flaeche', `renn-zeile__kuerzel--${g.farbe}`]}>
-                            {z.kuerzel}
-                          </span>
+                          <span class="renn-zeile__kuerzel schraeg-flaeche">{z.kuerzel}</span>
                         </li>
                       );
                     })}
@@ -217,7 +215,9 @@ const zeile = (r: Rennen) => ({
     color: var(--color-beere);
   }
 
+  /* Kürzel im Design beim Weltcup rosa; weisse Schrift auf rosa hat nur 3.9:1, deshalb überall beere */
   .renn-zeile__kuerzel {
+    --flagge: var(--color-beere);
     justify-self: end;
     padding: var(--space-4) var(--space-12);
     color: var(--color-papier);
@@ -228,13 +228,6 @@ const zeile = (r: Rennen) => ({
     white-space: nowrap;
   }
 
-  .renn-zeile__kuerzel--rosa {
-    --flagge: var(--color-rosa);
-  }
-
-  .renn-zeile__kuerzel--beere {
-    --flagge: var(--color-beere);
-  }
 
   @media (max-width: 560px) {
     .renn-zeile {

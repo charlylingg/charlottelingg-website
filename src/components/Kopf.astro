@@ -222,13 +222,16 @@ const links = eintraege.map((e) => ({ ...e, href: `${start}#${e.anker}`, text: t
     color: var(--color-beere);
   }
 
+  /* Im Design rosa; weisse Schrift auf rosa hat nur 3.9:1, deshalb beere (Hover aubergine) */
   .hauptnav__link--kontakt {
     padding-inline: var(--space-18);
-    background: var(--color-rosa);
+    background: var(--color-beere);
     color: var(--color-papier);
   }
 
-  .hauptnav__link--kontakt:hover {
+  .hauptnav__link--kontakt:hover,
+  .hauptnav__link--kontakt:focus-visible {
+    background: var(--color-aubergine);
     color: var(--color-papier);
   }
 

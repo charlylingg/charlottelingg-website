@@ -5,8 +5,10 @@
  * Das Thema «Torlauf» (tokens.json, themen.torlauf) gilt nur für das Dossier.
  *
  * Farbregeln:
- * - Fliesstext immer tinte oder tinte-soft auf papier, hauch oder hauch-2; papier auf beere oder aubergine (Kontrast mind. 4.5:1).
- * - Fliesstext nie in rosa und nie papier auf rosa (Kontrast 3.9:1). rosa nur für Flächen, Titel, Zahlen, Kicker, Labels und Buttons.
+ * - Kontrast nach WCAG AA (Entscheid Michel, 10.11.2026): kleine Schrift mind. 4.5:1, grosse Schrift (ab 24px fett) mind. 3:1.
+ * - Schrift: tinte oder tinte-soft auf papier, hauch oder hauch-2; beere auf papier oder hauch; papier auf beere oder aubergine.
+ * - rosa nur für Flächen ohne Text, Linien, Flaggen, Torstangen, Kurslinien und grosse Zahlen (z. B. «29.», «27.», Podestziffern). Nie papier auf rosa bei kleiner Schrift (3.9:1).
+ * - Buttons und Flaggen mit Schrift: Fläche beere, Schrift papier; Hover/Fokus aubergine. Auf beere Flächen: Flagge aubergine.
  * - Flaggen- und Medaillenfarben nur für die Landesflagge und die Medaillen.
  * - linie, linie-soft und kurslinie nie als Textfarbe.
  *

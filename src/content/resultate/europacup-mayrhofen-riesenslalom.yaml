@@ -1,10 +1,10 @@
-# Aus dem Design übernommen, noch NICHT gegen die FIS-Resultatliste geprüft.
-geprueft: false
-datum: "[DATUM]"
-saison: "[SAISON]"
+# Geprüft gegen FIS-Athletenprofil Charlotte Lingg (competitorid 203810), abgerufen 10.11.2026.
+geprueft: true
+datum: 2021-11-29
+saison: 2021/22
 stufe: Europacup
 disziplin: Riesenslalom
 ort: "Mayrhofen"
 land: AUT
 rang: 1
-fis_link: "[FIS-LINK]"
+fis_link: https://www.fis-ski.com/DB/general/results.html?sectorcode=AL&raceid=109067

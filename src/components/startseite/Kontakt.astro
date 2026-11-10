@@ -98,7 +98,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
           </div>
 
           <div class="formular__senden">
-            <button class="knopf knopf--rosa t-knopf formular__knopf" type="submit" disabled aria-describedby="kontakt-inaktiv">
+            <button class="knopf knopf--beere t-knopf formular__knopf" type="submit" disabled aria-describedby="kontakt-inaktiv">
               {t(locale, 'form.senden')}
             </button>
             <p id="kontakt-inaktiv" class="formular__hinweis">
@@ -215,9 +215,10 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
     padding-inline: var(--space-28);
   }
 
-  /* Deaktiviert, bis der Versand gebaut ist */
+  /* Deaktiviert, bis der Versand gebaut ist: helle Fläche, Schrift bleibt lesbar (5.9:1) */
   .formular__knopf:disabled {
-    opacity: var(--deckkraft-55);
+    background: var(--color-hauch-2);
+    color: var(--color-tinte-soft);
     cursor: not-allowed;
   }
 

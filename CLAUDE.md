@@ -28,7 +28,7 @@ Website von Charlotte Lingg, Skirennfahrerin im Nationalkader des Liechtensteini
 - Schriften: Barlow Condensed für Titel, Zahlen, Kicker, Navigation, Buttons und Labels; Barlow für Fliesstext (17px). Schriften lokal (Fontsource).
 - Radius 0. Rund sind nur Medaillen und das Instagram-Zeichen. Erkennungszeichen ist die Schräge -12deg (Flaggen, Kicker, Schnittkanten).
 - Text in schrägen Flächen steht gerade (keine Kursivschrift): nur die Fläche wird schräg gestellt (Klassen kicker-flagge, schraeg-flaeche).
-- Fliesstext mit Kontrast mindestens 4.5:1. rosa nie für Fliesstext, kein Fliesstext in papier auf rosa.
+- Kontrast nach WCAG AA: kleine Schrift mindestens 4.5:1, grosse Schrift (ab 24px fett) mindestens 3:1. rosa nur für Flächen ohne Text, Linien, Flaggen, Torstangen, Kurslinien und grosse Zahlen. Kleine Schrift nie rosa (wird beere); Buttons und Flaggen mit Schrift haben eine beere Fläche mit weisser Schrift (Hover/Fokus aubergine).
 - Formularfelder mindestens 16px Schrift (Design: 17px).
 - Landesflagge in der Kopfzeile bleibt (Farben flagge-* in den Tokens).
 

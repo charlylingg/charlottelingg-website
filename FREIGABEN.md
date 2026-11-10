@@ -56,10 +56,14 @@ Zur Station 04: Es gibt zwei Fassungen mit derselben Position. Solange die Fassu
 
 ## Daten (Freigabe durch Michel)
 
-Resultate und Rennkalender sind aus dem Design übernommen und **noch nicht gegen die FIS geprüft**. Jeder Eintrag hat `geprueft: false` und als `fis_link` den Platzhalter `[FIS-LINK]`. Erst mit FIS-Link und `geprueft: true` gilt ein Eintrag als geprüft; dann sind keine Platzhalter mehr erlaubt (der Build bricht sonst ab).
+**Resultate:** Alle 7 Einträge sind gegen das FIS-Athletenprofil von Charlotte Lingg (competitorid 203810) geprüft, abgerufen am 10.11.2026. Sie haben `geprueft: true` und einen echten `fis_link`. Bei `geprueft: true` sind keine Platzhalter mehr erlaubt (der Build bricht sonst ab).
+
+**Rennkalender:** aus dem Design übernommen und **noch nicht gegen die FIS geprüft**. Jeder Eintrag hat `geprueft: false` und als `fis_link` den Platzhalter `[FIS-LINK]`.
 
 | Was | Ort | Einträge | geprueft | Geprüft von Michel am |
 |-----|-----|----------|----------|-----------------------|
-| Resultate | `src/content/resultate/` | 7 | false | |
+| Resultate | `src/content/resultate/` | 7 | true (Daten aus Auftrag 02b, FIS abgerufen 10.11.2026) | |
 | Rennkalender 2026/27 | `src/content/rennen/2026-27/` | 23 (13 Weltcup, 10 Europacup) | false | |
 | Partner (Freigabe Charlotte) | `src/content/partner/` | 12 | – | |
+
+Monnier Immo ist vorläufig ohne Link: https://www.monnier-immo.ch war nicht erreichbar. Michel bestätigt die richtige Adresse.
