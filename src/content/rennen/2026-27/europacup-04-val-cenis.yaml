@@ -1,5 +1,5 @@
-# Aus dem Design übernommen (Quelle laut Design: FIS-Kalender, Stand 26.10.2026), noch NICHT gegen die FIS geprüft.
-geprueft: false
+# Geprüft gegen FIS-Kalender Alpin Frauen, Saison 2027 (Weltcup und Europacup), abgerufen 10.11.2026.
+geprueft: true
 datum: 2027-01-05
 datum_bis: 2027-01-06
 stufe: Europacup
@@ -7,4 +7,4 @@ disziplinen: [Slalom, Slalom]
 ort: "Val Cenis"
 land: FRA
 status: geplant
-fis_link: "[FIS-LINK]"
+fis_link: https://www.fis-ski.com/DB/general/event-details.html?sectorcode=AL&eventid=62983
