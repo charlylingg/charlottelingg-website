@@ -74,5 +74,3 @@ Bilder funktionieren gleich wie Texte, nur heisst die Angabe `lizenz_geklaert`: 
 | Resultate | `src/content/resultate/` | 7 | true (Daten aus Auftrag 02b, FIS abgerufen 10.11.2026) | |
 | Rennkalender 2026/27 | `src/content/rennen/2026-27/` | 23 (13 Weltcup, 10 Europacup) | false | |
 | Partner (Freigabe Charlotte) | `src/content/partner/` | 12 | – | |
-
-Monnier Immo ist vorläufig ohne Link: https://www.monnier-immo.ch war nicht erreichbar. Michel bestätigt die richtige Adresse.

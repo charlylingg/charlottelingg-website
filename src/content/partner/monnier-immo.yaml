@@ -1,7 +1,7 @@
 # Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Monnier Immo"
 kategorie: mobilitaetspartner
-# Link entfernt: https://www.monnier-immo.ch war nicht erreichbar. Wieder eintragen, sobald Michel die richtige Adresse bestätigt.
+url: https://monnier-immo.ch/
 pflicht_logo: false
 pflicht_link: false
 # Höhe passend zu den anderen Kategorien (Kopfsponsoren dürfen grösser sein)
