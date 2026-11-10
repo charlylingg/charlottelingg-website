@@ -1,6 +1,5 @@
 # Hero (ganz oben): Weltcup-Riesenslalom Sölden, 24.10.2026
-# Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt (siehe LIZENZEN.md).
-# Erst auf true setzen, wenn die Bestätigung des Fotografen in LIZENZEN.md eingetragen ist.
+# Kommerzielle Lizenz vorhanden, bestätigt durch Michel Gurnari am 10.11.2026 (siehe LIZENZEN.md).
 datei: /bilder/hero-soelden-2026.webp
 fallback: /bilder/hero-soelden-2026.jpg
 breite: 1600
@@ -8,6 +7,8 @@ hoehe: 1067
 alt_de: "Charlotte Lingg im Riesenslalom beim Weltcup in Sölden 2026"
 alt_fr: "Charlotte Lingg en slalom géant lors de la Coupe du monde de Sölden 2026"
 fotograf: "Giovanni Maria Pizzato"
-lizenz_geklaert: false
+lizenz_geklaert: true
 # Charlotte liegt bei etwa 60 % Breite und 45 % Höhe: so bleiben sie und das Tor auf dem Handy sichtbar
 ausschnitt: "60% 45%"
+# Bildausschnitt ab 1100 px Breite (Bild links, Textfeld rechts): Charlotte und das Sölden-Tor ganz sichtbar
+ausschnitt_breit: "62% 45%"

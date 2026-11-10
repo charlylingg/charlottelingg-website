@@ -13,6 +13,16 @@ const { locale } = Astro.props;
 const text = await getText(locale, 'hero');
 /** Hero-Bild aus src/content/bilder. Ohne geklärte Lizenz (und ohne Entwürfe) bleibt der Platzhalter. */
 const bild = await getBild('hero-soelden-2026', locale);
+
+/** Bildausschnitt als CSS-Variablen: «ausschnitt» bis 1099 px, «ausschnitt_breit» ab 1100 px (x und y getrennt). */
+const [breitX, breitY] = (bild?.ausschnitt_breit ?? bild?.ausschnitt ?? '').split(' ');
+const ausschnittStil = [
+  bild?.ausschnitt && `--ausschnitt: ${bild.ausschnitt}`,
+  breitX && `--ausschnitt-breit-x: ${breitX}`,
+  breitY && `--ausschnitt-breit-y: ${breitY}`,
+]
+  .filter(Boolean)
+  .join('; ');
 ---
 
 {
@@ -33,7 +43,7 @@ const bild = await getBild('hero-soelden-2026', locale);
                 alt={bild.alt}
                 lang={text.lang !== locale ? locale : undefined}
                 fetchpriority="high"
-                style={bild.ausschnitt ? `object-position: ${bild.ausschnitt}` : undefined}
+                style={ausschnittStil || undefined}
               />
             </picture>
             {bild.entwurf && <EntwurfLabel locale={locale} class="hero__bild-entwurf" />}
@@ -102,6 +112,7 @@ const bild = await getBild('hero-soelden-2026', locale);
     display: block;
     width: 100%;
     object-fit: cover;
+    object-position: var(--ausschnitt);
   }
 
   .hero__bild :global(.hero__bild-entwurf) {
@@ -110,10 +121,10 @@ const bild = await getBild('hero-soelden-2026', locale);
     left: var(--space-16);
   }
 
-  /* Bildnachweis unten rechts: helle Schrift auf dunkler Fläche (Kontrast über 4.5:1) */
+  /* Bildnachweis unten links im Bild: papier auf aubergine (Kontrast 14:1, verlangt mind. 4.5:1) */
   .hero__nachweis {
     position: absolute;
-    right: 0;
+    left: 0;
     top: var(--mass-hero-handy);
     z-index: 2;
     transform: translateY(-100%);
@@ -195,6 +206,39 @@ const bild = await getBild('hero-soelden-2026', locale);
       width: min(var(--mass-620), 50%);
       padding: var(--space-56) var(--space-56) var(--space-56) var(--space-96);
       clip-path: polygon(var(--space-64) 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  /*
+   * Ab 1100 px: Das Bild liegt nicht mehr hinter dem Textfeld, sondern füllt den Bereich links davon
+   * über die volle Höhe. Das Textfeld (bisherige Breite) steht rechts, seine linke Kante ist schräg
+   * wie die Torflaggen (--schraege). Das Bild endet genau an dieser Kante (Überlappung 0 px).
+   */
+  @media (min-width: 1100px) {
+    .hero {
+      /* Waagrechte Ausdehnung der Schräge über die Hero-Höhe: 760 px × tan(12°) ≈ 162 px */
+      --hero-schraege: calc(-1 * var(--mass-760) * tan(var(--schraege)));
+    }
+
+    .hero__bild {
+      right: calc(min(var(--mass-620), 50%) - var(--hero-schraege));
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--hero-schraege)) 100%, 0 100%);
+    }
+
+    /*
+     * Ausschnitt gemäss «ausschnitt_breit». Bei schmaleren Bildschirmen wird das Bild höchstens so weit
+     * nach rechts geschoben, dass rechts nur 88 px unter dem Textfeld verschwinden: So bleibt Charlotte
+     * (rechts im Bild) auch zwischen 1100 und etwa 1370 px ganz sichtbar.
+     */
+    .hero__foto {
+      object-position: min(var(--ausschnitt-breit-x), calc(100% + var(--mass-88))) var(--ausschnitt-breit-y);
+    }
+
+    .hero__panel {
+      top: 0;
+      justify-content: flex-end;
+      padding-left: calc(var(--space-64) + var(--space-56));
+      clip-path: polygon(var(--hero-schraege) 0, 100% 0, 100% 100%, 0 100%);
     }
   }
 

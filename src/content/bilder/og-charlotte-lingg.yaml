@@ -1,10 +1,9 @@
 # Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Format 1200 × 630 px.
-# Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt (siehe LIZENZEN.md).
-# Erst auf true setzen, wenn die Bestätigung des Fotografen in LIZENZEN.md eingetragen ist.
+# Kommerzielle Lizenz vorhanden, bestätigt durch Michel Gurnari am 10.11.2026 (siehe LIZENZEN.md).
 datei: /bilder/og-charlotte-lingg.jpg
 breite: 1200
 hoehe: 630
 alt_de: "Charlotte Lingg im Riesenslalom beim Weltcup in Sölden 2026"
 alt_fr: "Charlotte Lingg en slalom géant lors de la Coupe du monde de Sölden 2026"
 fotograf: "Giovanni Maria Pizzato"
-lizenz_geklaert: false
+lizenz_geklaert: true

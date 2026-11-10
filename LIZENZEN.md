@@ -8,8 +8,8 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 
 | Datei | Fotograf/Quelle | Lizenz/Einwilligung | gültig bis | Bemerkung |
 |-------|-----------------|---------------------|------------|-----------|
-| `public/bilder/hero-soelden-2026.webp`, `public/bilder/hero-soelden-2026.jpg` | Giovanni Maria Pizzato | **offen**: Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt | – | Hero, Weltcup-Riesenslalom Sölden, 24.10.2026. Eintrag `src/content/bilder/hero-soelden-2026.yaml` mit `lizenz_geklaert: false`: erscheint nur in der Vorschau mit Entwürfen. |
-| `public/bilder/og-charlotte-lingg.jpg` | Giovanni Maria Pizzato | **offen**: Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt | – | Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Eintrag `src/content/bilder/og-charlotte-lingg.yaml` mit `lizenz_geklaert: false`: kein og:image auf der Website. |
+| `public/bilder/hero-soelden-2026.webp`, `public/bilder/hero-soelden-2026.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Hero, Weltcup-Riesenslalom Sölden, 24.10.2026. Eintrag `src/content/bilder/hero-soelden-2026.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/og-charlotte-lingg.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Eintrag `src/content/bilder/og-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
 
 Bilder mit `lizenz_geklaert: false` (in `src/content/bilder/`) werden nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` gezeigt. Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert. Sobald der Fotograf die Nutzung bestätigt: hier Lizenz und Datum eintragen und `lizenz_geklaert: true` setzen.
 
