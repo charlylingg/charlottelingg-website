@@ -2,7 +2,8 @@
 import Bildplatzhalter from '../Bildplatzhalter.astro';
 import EntwurfLabel from '../EntwurfLabel.astro';
 import { getText } from '../../lib/inhalte';
-import type { Locale } from '../../i18n';
+import { getBild } from '../../lib/bilder';
+import { tf, type Locale } from '../../i18n';
 
 interface Props {
   locale: Locale;
@@ -10,6 +11,8 @@ interface Props {
 
 const { locale } = Astro.props;
 const text = await getText(locale, 'hero');
+/** Hero-Bild aus src/content/bilder. Ohne geklärte Lizenz (und ohne Entwürfe) bleibt der Platzhalter. */
+const bild = await getBild('hero-soelden-2026', locale);
 ---
 
 {
@@ -18,13 +21,32 @@ const text = await getText(locale, 'hero');
       <span class="wisch wisch--rosa" aria-hidden="true" />
       <span class="wisch wisch--beere" aria-hidden="true" />
       <div class="hero__bild">
-        <Bildplatzhalter
-          stelle="Hero"
-          format="Querformat 3:2"
-          verhaeltnis="3 / 2"
-          alt={text.data.bild_alt}
-          ausrichtung="oben-links"
-        />
+        {bild ? (
+          <>
+            <picture>
+              <source type="image/webp" srcset={bild.datei} />
+              <img
+                class="hero__foto"
+                src={bild.fallback ?? bild.datei}
+                width={bild.breite}
+                height={bild.hoehe}
+                alt={bild.alt}
+                lang={text.lang !== locale ? locale : undefined}
+                fetchpriority="high"
+                style={bild.ausschnitt ? `object-position: ${bild.ausschnitt}` : undefined}
+              />
+            </picture>
+            {bild.entwurf && <EntwurfLabel locale={locale} class="hero__bild-entwurf" />}
+          </>
+        ) : (
+          <Bildplatzhalter
+            stelle="Hero"
+            format="Querformat 3:2"
+            verhaeltnis="3 / 2"
+            alt={text.data.bild_alt}
+            ausrichtung="oben-links"
+          />
+        )}
       </div>
       <div class="hero__panel">
         {text.entwurf && <EntwurfLabel locale={locale} />}
@@ -46,6 +68,11 @@ const text = await getText(locale, 'hero');
           ))}
         </div>
       </div>
+      {bild && (
+        <p class="hero__nachweis t-klein" lang={text.lang !== locale ? locale : undefined}>
+          {tf(locale, 'bild.nachweis', { name: bild.fotograf })}
+        </p>
+      )}
     </section>
   )
 }
@@ -56,9 +83,44 @@ const text = await getText(locale, 'hero');
     overflow: hidden;
   }
 
-  .hero__bild :global(.bildplatzhalter) {
+  .hero__bild {
+    position: relative;
+  }
+
+  .hero__bild :global(.bildplatzhalter),
+  .hero__foto {
     height: var(--mass-hero-handy);
     aspect-ratio: auto;
+  }
+
+  .hero__bild picture {
+    display: block;
+    height: 100%;
+  }
+
+  .hero__foto {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero__bild :global(.hero__bild-entwurf) {
+    position: absolute;
+    top: var(--space-16);
+    left: var(--space-16);
+  }
+
+  /* Bildnachweis unten rechts: helle Schrift auf dunkler Fläche (Kontrast über 4.5:1) */
+  .hero__nachweis {
+    position: absolute;
+    right: 0;
+    top: var(--mass-hero-handy);
+    z-index: 2;
+    transform: translateY(-100%);
+    padding: var(--space-4) var(--space-10);
+    background: var(--color-aubergine);
+    color: var(--color-papier);
+    line-height: var(--line-140);
   }
 
   .hero__panel {
@@ -115,8 +177,15 @@ const text = await getText(locale, 'hero');
       inset: 0;
     }
 
-    .hero__bild :global(.bildplatzhalter) {
+    .hero__bild :global(.bildplatzhalter),
+    .hero__foto {
       height: 100%;
+    }
+
+    .hero__nachweis {
+      top: auto;
+      bottom: 0;
+      transform: none;
     }
 
     .hero__panel {

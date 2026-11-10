@@ -3,6 +3,7 @@
  * Jede Datei unter src/content/<collection>/ wird beim Build gegen dieses Schema geprüft.
  * Fehlt ein Pflichtfeld oder stimmt ein Wert nicht, bricht der Build mit einer Meldung ab.
  */
+import { existsSync } from 'node:fs';
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
@@ -117,8 +118,10 @@ const partner = defineCollection({
       url: z.url().optional(),
       /** logo = Logo bzw. Logo-Platzhalter, text = nur der Name in Schrift (wie im Design) */
       darstellung: z.enum(['logo', 'text']).default('logo'),
-      /** Höhe des Logos in px wie im Design (muss als Token existieren, z. B. 56, 110, 150) */
+      /** Höhe des Logos in px (muss als Token existieren, z. B. 52, 80, 110) */
       logo_hoehe: z.number().int().positive().default(110),
+      /** Grösste Anzeigebreite in px, z. B. Breite einer kleinen Bilddatei, damit sie nie hochskaliert wird (muss als Token --mass-… existieren) */
+      logo_max_breite: z.number().int().positive().optional(),
       /** Vertraglich vorgeschrieben: Logo muss gezeigt werden */
       pflicht_logo: z.boolean(),
       /** Vertraglich vorgeschrieben: Logo muss verlinkt sein */
@@ -131,6 +134,49 @@ const partner = defineCollection({
       }
       if (p.pflicht_logo && p.darstellung !== 'logo') {
         ctx.addIssue({ code: 'custom', path: ['darstellung'], message: 'pflicht_logo: true verlangt darstellung: logo.' });
+      }
+      if (p.logo && !existsSync(`./public${p.logo}`)) {
+        ctx.addIssue({ code: 'custom', path: ['logo'], message: `Logodatei public${p.logo} fehlt.` });
+      }
+    }),
+});
+
+/* ------------------------------------------------------------------------------------------------
+ * Bilder: src/content/bilder/<name>.yaml, ein Eintrag pro Bild. Die Dateien liegen in public/bilder/.
+ *
+ * lizenz_geklaert: true = Nutzungsrechte bestätigt (Eintrag in LIZENZEN.md), das Bild erscheint.
+ *                  false = Bild erscheint nur, wenn beim Build PUBLIC_SHOW_ENTWUERFE=true gesetzt ist.
+ *                  Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert (siehe astro.config.mjs).
+ * ---------------------------------------------------------------------------------------------- */
+
+const bildDatei = z.string().regex(/^\/bilder\/[a-z0-9-]+\.(webp|jpg|png)$/, 'Pfad wie /bilder/name.webp (Datei in public/bilder/)');
+
+const bilder = defineCollection({
+  loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/bilder' }),
+  schema: z
+    .object({
+      beispiel,
+      /** Hauptdatei: WebP, z. B. /bilder/hero-soelden-2026.webp (Vorschaubild beim Teilen: JPG) */
+      datei: bildDatei,
+      /** Ersatzformat für alte Browser (JPG), optional */
+      fallback: bildDatei.optional(),
+      /** Grösse der Datei in px (längste Seite höchstens 1600) */
+      breite: z.number().int().positive().max(1600),
+      hoehe: z.number().int().positive().max(1600),
+      alt_de: z.string().min(1),
+      alt_fr: z.string().min(1),
+      fotograf: z.string().min(1),
+      /** true erst, wenn die Nutzungsrechte bestätigt und in LIZENZEN.md eingetragen sind */
+      lizenz_geklaert: z.boolean(),
+      /** Bildausschnitt (CSS object-position), z. B. «60% 45%» = Motiv bei 60 % Breite und 45 % Höhe */
+      ausschnitt: z.string().regex(/^\d{1,3}% \d{1,3}%$/, 'Ausschnitt wie «60% 45%»').optional(),
+    })
+    .superRefine((b, ctx) => {
+      for (const feld of ['datei', 'fallback'] as const) {
+        const pfad = b[feld];
+        if (pfad && !existsSync(`./public${pfad}`)) {
+          ctx.addIssue({ code: 'custom', path: [feld], message: `Bilddatei public${pfad} fehlt.` });
+        }
       }
     }),
 });
@@ -335,4 +381,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { resultate, rennen, partner, texte, blog };
+export const collections = { resultate, rennen, partner, bilder, texte, blog };

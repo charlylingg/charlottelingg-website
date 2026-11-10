@@ -8,7 +8,29 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 
 | Datei | Fotograf/Quelle | Lizenz/Einwilligung | gültig bis | Bemerkung |
 |-------|-----------------|---------------------|------------|-----------|
-|       |                 |                     |            |           |
+| `public/bilder/hero-soelden-2026.webp`, `public/bilder/hero-soelden-2026.jpg` | Giovanni Maria Pizzato | **offen**: Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt | – | Hero, Weltcup-Riesenslalom Sölden, 24.10.2026. Eintrag `src/content/bilder/hero-soelden-2026.yaml` mit `lizenz_geklaert: false`: erscheint nur in der Vorschau mit Entwürfen. |
+| `public/bilder/og-charlotte-lingg.jpg` | Giovanni Maria Pizzato | **offen**: Nutzungsrechte angefragt am 10.11.2026, noch nicht bestätigt | – | Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Eintrag `src/content/bilder/og-charlotte-lingg.yaml` mit `lizenz_geklaert: false`: kein og:image auf der Website. |
+
+Bilder mit `lizenz_geklaert: false` (in `src/content/bilder/`) werden nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` gezeigt. Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert. Sobald der Fotograf die Nutzung bestätigt: hier Lizenz und Datum eintragen und `lizenz_geklaert: true` setzen.
+
+## Partnerlogos
+
+Die Logos werden mit Zustimmung der Partner im Rahmen der Partnerschaft gezeigt. Dateien in `public/partner/`.
+
+| Datei | Partner | Quelle | Bemerkung |
+|-------|---------|--------|-----------|
+| `lgt.svg` | LGT | offizielle Website des Partners, 10.11.2026 | |
+| `kaiser.png` | Kaiser AG | offizielle Website des Partners, 10.11.2026 | Nur 238 × 52 px, Vektordatei von Kaiser angefragt |
+| `mbpi.png` | MBPI | vom Partner geliefert | |
+| `loc.png` | Liechtenstein Olympic Committee | offizielle Website des Partners, 10.11.2026 | |
+| `ziener.png` | Ziener | offizielle Website des Partners, 10.11.2026 | |
+| `leki.svg` | Leki | offizielle Website des Partners, 10.11.2026 | |
+| `adler-hitta.svg` | Adler Hitta | vom Partner geliefert | |
+| `chez-vrony.svg` | Chez Vrony | vom Partner geliefert | |
+| `tc-zermatt.svg` | Tennisclub Zermatt | vom Partner geliefert | |
+| `hotel-albana-real.svg` | Hotel Albana Real | vom Partner geliefert | |
+
+Noch ohne Logo (Platzhalter mit Namen): Monnier Immo, Head.
 
 ## Schriften
 

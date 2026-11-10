@@ -7,6 +7,7 @@ import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import { getLocale, locales, localizePath, t } from '../i18n';
 import { SITE_INDEXABLE } from '../config';
+import { getBild } from '../lib/bilder';
 import tokens from '../../design/tokens.json';
 
 interface Props {
@@ -39,6 +40,10 @@ const alternates = hasTranslation
   ? locales.map((l) => ({ locale: l, href: new URL(localizePath(Astro.url.pathname, l), site).href }))
   : [];
 const ogLocale = locale === 'fr' ? 'fr_CH' : 'de_CH';
+/** Vorschaubild beim Teilen. Ohne geklärte Lizenz (und ohne Entwürfe) gibt es kein og:image. */
+const ogBild = await getBild('og-charlotte-lingg', locale);
+const ogBildUrl = ogBild && new URL(ogBild.datei, site).href;
+const ogBildTyp = { webp: 'image/webp', png: 'image/png', jpg: 'image/jpeg' }[ogBild?.datei.split('.').pop() ?? 'jpg'];
 ---
 
 <!doctype html>
@@ -73,7 +78,20 @@ const ogLocale = locale === 'fr' ? 'fr_CH' : 'de_CH';
         .filter((l) => l !== locale && hasTranslation)
         .map((l) => <meta property="og:locale:alternate" content={l === 'fr' ? 'fr_CH' : 'de_CH'} />)
     }
-    <!-- og:image folgt, sobald ein freigegebenes Bild vorliegt (siehe LIZENZEN.md) -->
+    {
+      ogBild && ogBildUrl && (
+        <>
+          <meta property="og:image" content={ogBildUrl} />
+          <meta property="og:image:type" content={ogBildTyp} />
+          <meta property="og:image:width" content={String(ogBild.breite)} />
+          <meta property="og:image:height" content={String(ogBild.hoehe)} />
+          <meta property="og:image:alt" content={ogBild.alt} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content={ogBildUrl} />
+          <meta name="twitter:image:alt" content={ogBild.alt} />
+        </>
+      )
+    }
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />}
   </head>
   <body>

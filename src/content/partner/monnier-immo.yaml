@@ -4,6 +4,6 @@ kategorie: mobilitaetspartner
 # Link entfernt: https://www.monnier-immo.ch war nicht erreichbar. Wieder eintragen, sobald Michel die richtige Adresse bestätigt.
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 120
+# Höhe passend zu den anderen Kategorien (Kopfsponsoren dürfen grösser sein)
+logo_hoehe: 80
 reihenfolge: 1

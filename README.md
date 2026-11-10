@@ -22,7 +22,7 @@ Claude Code mergt nie selbst.
 | Rennkalender | `src/content/rennen/` (eine Datei pro Rennen, Ordner pro Saison) |
 | Blogbeiträge | `src/content/blog/de/` und `src/content/blog/fr/` (eigene Seite `/blog/<dateiname>`) |
 | Partner | `src/content/partner/`, Logos in `public/partner/` |
-| Bilder | `public/bilder/` (jedes Bild mit Eintrag in `LIZENZEN.md`) |
+| Bilder | Dateien in `public/bilder/`, Angaben (Alt-Text, Fotograf, Lizenz) in `src/content/bilder/`, jedes Bild mit Eintrag in `LIZENZEN.md` |
 | Feste Wörter (Navigation, Buttons) | `src/i18n/de.json` und `src/i18n/fr.json` |
 | Farben, Schriften, Abstände | `design/tokens.json` und `src/styles/tokens.css` (Website: Thema «Beere») |
 | Bildrechte | `LIZENZEN.md` |
