@@ -1,14 +1,13 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: weg-geschichte
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 position: 6
-titel: "Bereit für diese Saison"
+titel: "Prête pour cette saison"
 ---
 
-Jetzt bin ich wieder fit und gesund. Seit August 2026 stehe ich voll im Schneetraining, und ich freue mich riesig auf diesen Winter. Ich lebe in Wangen am Zürichsee und bin beim Liechtenstein Olympic Committee als Spitzensportlerin angestellt.
+Aujourd’hui, je suis de nouveau en forme et en bonne santé. Depuis août 2026, je m’entraîne à plein temps sur la neige, et je me réjouis énormément de cet hiver. Je vis à Wangen, au bord du lac de Zurich, et je suis employée comme sportive d’élite par le Comité olympique du Liechtenstein.
 
-Mein Ziel: zuerst zurück auf mein früheres Niveau, dann Schritt für Schritt weiter nach vorne. Regelmässig in die Top 15 im Weltcup und an die Olympischen Winterspiele 2030.
+Mon objectif : d’abord retrouver mon niveau d’avant, puis progresser pas à pas. Entrer régulièrement dans le top 15 en Coupe du monde et participer aux Jeux olympiques d’hiver 2030.
 
-Dass ich diesen Weg gehen kann, verdanke ich meiner Familie, meinem Team und meinen Partnern. Danke, dass ihr an mich glaubt.
+Si je peux suivre ce chemin, je le dois à ma famille, à mon équipe et à mes partenaires. Merci de croire en moi.

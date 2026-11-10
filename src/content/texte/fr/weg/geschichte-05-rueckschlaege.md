@@ -1,19 +1,18 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # ENTWURF: enthält Angaben zu den Verletzungen (Jahre, Orte, Hergang). Braucht Charlottes Freigabe.
 sektion: weg-geschichte
 freigabe: false
-uebersetzt: false
+uebersetzt: true
 position: 5
-titel: "Rückschläge, die mich stärker gemacht haben"
-einleitung: "Zum Skirennsport gehören leider auch Verletzungen. Dreimal habe ich mir das Kreuzband gerissen:"
+titel: "Des revers qui m’ont rendue plus forte"
+einleitung: "Les blessures font malheureusement partie du ski de compétition. Je me suis rompu le ligament croisé à trois reprises :"
 liste:
   - marke: "2019"
-    text: "Kreuzbandriss im Riesenslalom-Training im Val di Fassa. Ich bin nicht einmal gestürzt, es ist einfach passiert."
+    text: "Rupture du ligament croisé à l’entraînement de slalom géant dans le Val di Fassa. Je ne suis même pas tombée, c’est arrivé comme ça."
   - marke: "2022"
-    text: "Kreuzbandriss nach einem Sturz im Super-G in Deutschland."
+    text: "Rupture du ligament croisé après une chute en super-G en Allemagne."
   - marke: "2025"
-    text: "Kreuzbandriss im Riesenslalom-Training in Norwegen. Ich wollte abbremsen, habe die Ski gekreuzt und bin gestürzt."
+    text: "Rupture du ligament croisé à l’entraînement de slalom géant en Norvège. En voulant freiner, j’ai croisé les skis et je suis tombée."
 ---
 
-Jedes Mal war es ein langer Weg zurück, und keiner davon war einfach. Es brauchte Geduld, Vertrauen und viele kleine Schritte. Aus jeder Verletzung habe ich viel gelernt: über meinen Körper, über Geduld und darüber, wie sehr ich diesen Sport liebe. Heute weiss ich, dass mich diese Zeiten stärker gemacht haben.
+Chaque fois, le chemin du retour a été long, et aucun n’a été facile. Il a fallu de la patience, de la confiance et beaucoup de petits pas. Chaque blessure m’a beaucoup appris : sur mon corps, sur la patience et sur mon amour pour ce sport. Aujourd’hui, je sais que ces périodes m’ont rendue plus forte.

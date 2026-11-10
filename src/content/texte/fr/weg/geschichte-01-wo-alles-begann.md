@@ -1,12 +1,11 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: weg-geschichte
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 position: 1
-titel: "Wo alles begann"
+titel: "Là où tout a commencé"
 ---
 
-Geboren bin ich in Lausanne, zu Hause war ich in Zermatt. Ich bin mit dem Matterhorn vor dem Fenster aufgewachsen, die Piste fast vor der Haustür. Im Skiclub Zermatt bin ich meine ersten Rennen gefahren, und schon damals war klar: Das ist meine Welt.
+Je suis née à Lausanne, mais c’est à Zermatt que j’étais chez moi. J’ai grandi avec le Cervin devant la fenêtre et les pistes presque devant la porte. J’ai disputé mes premières courses avec le ski-club de Zermatt, et déjà à l’époque, c’était clair : c’est mon monde.
 
-Meine Mutter stammt aus Pully, mein Vater aus Liechtenstein. So habe ich Deutsch und Französisch von klein auf gelernt, beide Sprachen sind meine Muttersprachen.
+Ma mère vient de Pully, mon père du Liechtenstein. J’ai donc appris l’allemand et le français dès mon plus jeune âge : ce sont mes deux langues maternelles.

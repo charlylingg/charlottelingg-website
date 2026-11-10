@@ -1,22 +1,21 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: portrait
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 kicker: "01 Portrait"
-titel: "Jeden Tag alles geben"
-lead: "Geboren in Lausanne, aufgewachsen in Zermatt, am Start für Liechtenstein."
+titel: "Tout donner, chaque jour"
+lead: "Née à Lausanne, grandie à Zermatt, au départ pour le Liechtenstein."
 steckbrief:
-  - label: "Jahrgang"
+  - label: "Année de naissance"
     wert: "1999"
-  - label: "Skiclub"
+  - label: "Ski-club"
     wert: "SC Schaan"
-  - label: "Kader"
+  - label: "Cadre"
     wert: "LSV National Team"
-  - label: "Disziplinen"
-    wert: "Slalom, Riesenslalom"
+  - label: "Disciplines"
+    wert: "Slalom, slalom géant"
 link:
-  text: "Mein Weg ansehen"
+  text: "Voir mon parcours"
   ziel: "#weg"
-bild_alt: "Porträt Charlotte Lingg"
+bild_alt: "Portrait de Charlotte Lingg"
 ---

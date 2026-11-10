@@ -1,23 +1,22 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
-titel: "Zurück im Weltcup"
+titel: "De retour en Coupe du monde"
 datum: "2026-10"
-kategorie: "Saisonstart"
+kategorie: "Début de saison"
 ort: "Sölden"
-teaser: "Meine Comeback-Saison beginnt. Was ich mir für diesen Winter vornehme und worauf ich mich am meisten freue."
+teaser: "Ma saison du retour commence. Ce que je me suis fixé pour cet hiver et ce qui me réjouit le plus."
 status: veroeffentlicht
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 reihenfolge: 1
 bild: true
 ---
 
-Nach eineinhalb Jahren stand ich in Sölden wieder am Start eines Weltcuprennens. Es war ein unglaublich schöner und emotionaler Moment.
+Après un an et demi, je me suis de nouveau élancée en Coupe du monde, à Sölden. Un moment incroyablement beau et plein d’émotion.
 
-Mit dem Tag selbst bin ich sehr zufrieden. Nervosität, Besichtigung, das ganze Umfeld: Ich habe alles gut gemeistert und konnte befreit Ski fahren. Genau das war mein Ziel für dieses erste Rennen.
+Je suis très satisfaite de cette journée. Le stress, la reconnaissance, tout l’environnement : j’ai bien tout géré et j’ai pu skier libérée. C’était exactement mon objectif pour cette première course.
 
-Umso mehr hat mich das Resultat überrascht. Auf die Top 30 und damit auf den zweiten Lauf haben mir nur zwölf Hundertstel gefehlt. Im oberen und im unteren Teil konnte ich zeigen, dass ich schnell bin. Im Steilhang bin ich stabil gefahren. Dort hätte ich die Ski früher in die Falllinie bringen und eine direktere Linie wählen können. Genau daran arbeite ich jetzt.
+Le résultat m’a d’autant plus surprise. Il ne m’a manqué que douze centièmes pour entrer dans le top 30 et disputer la deuxième manche. Dans les parties haute et basse, j’ai pu montrer que j’étais rapide. Dans le mur, j’ai skié de manière stable. J’aurais pu y mettre les skis plus tôt dans la ligne de pente et choisir une trajectoire plus directe. C’est précisément là-dessus que je travaille maintenant.
 
-Ich nehme aus Sölden sehr viel Positives mit und freue mich auf alles, was in diesem Winter noch kommt.
+Je repars de Sölden avec beaucoup de positif et je me réjouis de tout ce que cet hiver me réserve encore.
 
-Ein grosses Dankeschön an die Organisatoren: Die Piste war in einem hervorragenden Zustand.
+Un grand merci aux organisateurs : la piste était dans un état remarquable.

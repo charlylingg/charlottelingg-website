@@ -1,9 +1,9 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # ENTWURF: Postadresse für Fanpost. Braucht Charlottes Freigabe.
+# Adresse bewusst gleich wie auf Deutsch (Postadresse).
 sektion: fanpost-adresse
 freigabe: false
-uebersetzt: false
+uebersetzt: true
 name: "Charlotte Lingg"
 zeilen:
   - "c/o Liechtensteinischer Skiverband"

@@ -1,12 +1,11 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 # Die Liste der Resultate kommt aus src/content/resultate. Hier steht nur der Satz darunter.
 sektion: weg-geschichte
 freigabe: true
-uebersetzt: false
+uebersetzt: true
 position: 4
-titel: "Meine schönsten Resultate"
+titel: "Mes plus beaux résultats"
 resultate_liste: true
 ---
 
-Dazu kommen Podestplätze in FIS-Rennen und sieben nationale Titel.
+S’y ajoutent des podiums en courses FIS et sept titres nationaux.

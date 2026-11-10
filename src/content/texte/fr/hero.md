@@ -1,17 +1,16 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: hero
 freigabe: true
-uebersetzt: false
-kicker: "Ski Alpin · Saison 2026/27"
+uebersetzt: true
+kicker: "Ski alpin · Saison 2026/27"
 titel_zeilen:
-  - "Zurück"
-  - "im Weltcup."
-lead: "Slalom und Riesenslalom für Liechtenstein. Nach meiner dritten Verletzung fahre ich wieder Rennen. Fit und mit einem klaren Ziel."
-bild_alt: "Charlotte Lingg im Riesenslalom in Sölden"
+  - "De retour"
+  - "en Coupe du monde."
+lead: "Slalom et slalom géant pour le Liechtenstein. Après ma troisième blessure, je suis de retour en course. En forme, avec un objectif clair."
+bild_alt: "Charlotte Lingg en slalom géant à Sölden"
 buttons:
-  - text: "Mein Weg"
+  - text: "Mon parcours"
     ziel: "#weg"
-  - text: "Sponsor werden"
+  - text: "Devenir sponsor"
     ziel: "#partner-werden"
 ---

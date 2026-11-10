@@ -1,8 +1,7 @@
 ---
-# NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
 sektion: zitat
 freigabe: true
-uebersetzt: false
-zitat: "«In all den Jahren habe ich vor allem eines gelernt: Jeder Tag zählt. Wer mit Qualität statt Quantität arbeitet, kommt besser und schneller vorwärts.»"
+uebersetzt: true
+zitat: "« Au fil des années, j’ai surtout appris une chose : chaque jour compte. En misant sur la qualité plutôt que sur la quantité, on progresse mieux et plus vite. »"
 autor: "Charlotte Lingg"
 ---

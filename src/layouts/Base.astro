@@ -33,7 +33,8 @@ const {
 } = Astro.props;
 
 const robotsNoindex = noindex || !SITE_INDEXABLE;
-const fullTitle = title ? `${title} – ${siteName}` : siteName;
+/** Beginnt der Titel bereits mit dem Namen (z. B. FR-Startseite), wird er unverändert übernommen. */
+const fullTitle = !title ? siteName : title.startsWith(siteName) ? title : `${title} – ${siteName}`;
 const site = Astro.site ?? new URL('https://charlottelingg.com');
 const canonical = new URL(Astro.url.pathname, site);
 const alternates = hasTranslation
