@@ -1,9 +1,10 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Ziener"
 kategorie: ausruester
+# Logodatei: ziener.png (316 × 68 px), angezeigt höchstens 316 px breit
+logo: /partner/ziener.png
 url: https://ziener.com
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 46
+logo_hoehe: 40
+logo_max_breite: 316
 reihenfolge: 2

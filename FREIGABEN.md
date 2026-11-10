@@ -54,6 +54,15 @@ Zur Station 04: Es gibt zwei Fassungen mit derselben Position. Solange die Fassu
 | **Drei Kreuzbandrisse, drei Comebacks** (ganzer Beitrag) | `drei-kreuzbandrisse-drei-comebacks.md` | veroeffentlicht | **false** | |
 | Qualität statt Quantität | `qualitaet-statt-quantitaet.md` | folgt | true | |
 
+## Bilder (`src/content/bilder/`)
+
+Bilder funktionieren gleich wie Texte, nur heisst die Angabe `lizenz_geklaert`: Bei `false` erscheint das Bild nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` (mit dem Label «Entwurf – nicht freigegeben»). Sonst bleibt der Platzhalter, beim Teilen gibt es kein Vorschaubild, und die Datei wird gar nicht ausgeliefert. Auf `true` erst, wenn die Nutzungsrechte bestätigt und in `LIZENZEN.md` eingetragen sind. Bilder von Charlotte gibt Charlotte frei.
+
+| Bild | Datei | lizenz_geklaert | Rechte bestätigt am | Freigegeben von Charlotte am |
+|------|-------|-----------------|---------------------|------------------------------|
+| Hero, Weltcup Sölden 2026 (Giovanni Maria Pizzato) | `hero-soelden-2026.yaml` | **false** (angefragt am 10.11.2026) | | |
+| Vorschaubild beim Teilen (Giovanni Maria Pizzato) | `og-charlotte-lingg.yaml` | **false** (angefragt am 10.11.2026) | | |
+
 ## Daten (Freigabe durch Michel)
 
 **Resultate:** Alle 7 Einträge sind gegen das FIS-Athletenprofil von Charlotte Lingg (competitorid 203810) geprüft, abgerufen am 10.11.2026. Sie haben `geprueft: true` und einen echten `fis_link`. Bei `geprueft: true` sind keine Platzhalter mehr erlaubt (der Build bricht sonst ab).

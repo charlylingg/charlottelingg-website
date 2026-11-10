@@ -1,9 +1,9 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Chez Vrony"
 kategorie: unterstuetzer
+# Logodatei: chez-vrony.svg (Vektor, Hochformat)
+logo: /partner/chez-vrony.svg
 url: https://www.chezvrony.ch
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 104
+logo_hoehe: 96
 reihenfolge: 2

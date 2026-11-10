@@ -1,10 +1,10 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "MBPI"
 kategorie: trinkflaschenpartner
+# Logodatei: mbpi.png
+logo: /partner/mbpi.png
 url: https://www.mbpi.li/de/
 # Vertraglich: Logo zeigen. Nie entfernen.
 pflicht_logo: true
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 110
+logo_hoehe: 80
 reihenfolge: 1

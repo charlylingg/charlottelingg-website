@@ -1,9 +1,9 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Adler Hitta"
 kategorie: unterstuetzer
+# Logodatei: adler-hitta.svg (Vektor, Querformat)
+logo: /partner/adler-hitta.svg
 url: https://www.adler-hitta.ch
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 84
+logo_hoehe: 56
 reihenfolge: 1

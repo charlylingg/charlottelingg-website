@@ -2,6 +2,7 @@
 /**
  * 04 Partner, gruppiert nach Kategorien. Daten aus src/content/partner.
  * Ohne Logodatei erscheint ein Platzhalter mit dem Partnernamen.
+ * Logos in Originalfarben auf weissem Grund, ohne Filter; nie grösser als die gelieferte Datei (logo_max_breite).
  * Pflichtlogos und Pflichtlinks (pflicht_logo, pflicht_link) werden immer gezeigt bzw. verlinkt.
  */
 import { getCollection } from 'astro:content';
@@ -54,11 +55,12 @@ const gruppen = partnerKategorien
               <ul role="list" class:list={['kategorie__logos', `kategorie__logos--${g.kategorie}`]}>
                 {g.partner.map((p, i) => {
                   const hoehe = `--logo-hoehe: var(--space-${p.data.logo_hoehe}, var(--mass-${p.data.logo_hoehe}))`;
+                  const masse = p.data.logo_max_breite ? `${hoehe}; --logo-max-breite: var(--mass-${p.data.logo_max_breite})` : hoehe;
                   const inhalt =
                     p.data.darstellung === 'text' ? (
                       <span class="partner-text" style={hoehe}>{p.data.name}</span>
                     ) : p.data.logo ? (
-                      <img class="partner-logo" src={p.data.logo} alt={p.data.name} style={hoehe} loading="lazy" decoding="async" />
+                      <img class="partner-logo" src={p.data.logo} alt={p.data.name} style={masse} loading="lazy" decoding="async" />
                     ) : (
                       <span class="logo-platzhalter" style={hoehe} title={t(locale, 'partner.logo_folgt')}>
                         <span class="t-label">{p.data.name}</span>
@@ -149,9 +151,8 @@ const gruppen = partnerKategorien
   .partner-logo {
     height: var(--logo-hoehe);
     width: auto;
-    max-width: 100%;
+    max-width: min(100%, var(--logo-max-breite, 100%));
     object-fit: contain;
-    mix-blend-mode: multiply;
   }
 
   .logo-platzhalter {
@@ -185,7 +186,11 @@ const gruppen = partnerKategorien
       transition: transform 0.25s ease;
     }
 
-    .partner-link:hover .partner-logo,
+    /* Logos beim Hover nur anheben, nicht vergrössern (kleine Bilddateien nie hochskalieren) */
+    .partner-link:hover .partner-logo {
+      transform: translateY(calc(-1 * var(--space-4)));
+    }
+
     .partner-link:hover .logo-platzhalter {
       transform: translateY(calc(-1 * var(--space-4))) scale(1.04);
     }

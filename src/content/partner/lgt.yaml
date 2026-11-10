@@ -1,9 +1,10 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "LGT"
 kategorie: kopfsponsoren
+# Logodatei: lgt.svg (Vektor, quadratisch)
+logo: /partner/lgt.svg
 url: https://www.lgt.li
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 150
+# Höhe so gewählt, dass LGT optisch nicht grösser wirkt als Kaiser
+logo_hoehe: 110
 reihenfolge: 1

@@ -1,9 +1,8 @@
-# Im Design ohne Logo und ohne Link, nur als Name in Schrift.
 name: "Tennisclub Zermatt"
 kategorie: unterstuetzer
-darstellung: text
+# Logodatei: tc-zermatt.svg (Vektor, quadratisch). Ohne Link.
+logo: /partner/tc-zermatt.svg
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 80
+logo_hoehe: 88
 reihenfolge: 3

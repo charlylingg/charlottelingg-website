@@ -1,9 +1,9 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Leki"
 kategorie: ausruester
+# Logodatei: leki.svg (Vektor)
+logo: /partner/leki.svg
 url: https://www.leki.com
 pflicht_logo: false
 pflicht_link: false
-# Höhe wie im Design
-logo_hoehe: 54
+logo_hoehe: 46
 reihenfolge: 3
