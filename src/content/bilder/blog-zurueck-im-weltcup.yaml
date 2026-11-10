@@ -1,0 +1,13 @@
+# Blogbeitrag «Zurück im Weltcup» (Querformat 16:10): Vorschaukarte auf der Startseite und Beitragsseite, DE und FR.
+# Zuordnung über den Namen: blog-<Dateiname des Beitrags>. Shooting Stefanie Frei, Aufnahme 28.10.2024.
+# Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe LIZENZEN.md).
+datei: /bilder/blog-zurueck-im-weltcup.webp
+fallback: /bilder/blog-zurueck-im-weltcup.jpg
+breite: 1600
+hoehe: 1000
+alt_de: "Charlotte Lingg in der Startposition, Schwarzweissaufnahme"
+alt_fr: "Charlotte Lingg en position de départ, photo en noir et blanc"
+fotograf: "Stefanie Frei"
+lizenz_geklaert: true
+# Gesicht und Helm bleiben sichtbar, falls das Bild im Layout zugeschnitten wird
+ausschnitt: "50% 30%"

@@ -1,0 +1,86 @@
+---
+/**
+ * Foto aus src/content/bilder mit Bildnachweis unten rechts (Portrait, Blog). Der Hero hat sein eigenes Markup.
+ * - <picture>: WebP zuerst, JPG als Ersatz für alte Browser. Lädt erst beim Scrollen (loading="lazy").
+ * - Füllt das vorgegebene Seitenverhältnis: object-fit: cover mit dem Bildausschnitt aus «ausschnitt».
+ * - Bildnachweis «Foto: …» im Stil «klein»: papier auf aubergine (Kontrast 14:1, verlangt mind. 4.5:1).
+ */
+import EntwurfLabel from './EntwurfLabel.astro';
+import type { Bild } from '../lib/bilder';
+import { tf, type Locale } from '../i18n';
+
+interface Props {
+  bild: Bild;
+  locale: Locale;
+  /** CSS-Seitenverhältnis der Fläche, z. B. «3 / 4» */
+  verhaeltnis: string;
+  /** Sprache von Alt-Text und Bildnachweis, falls der umgebende Text in einer anderen Sprache steht */
+  lang?: Locale;
+  class?: string;
+}
+
+const { bild, locale, verhaeltnis, lang, class: className } = Astro.props;
+const stil = `--verhaeltnis: ${verhaeltnis}; --ausschnitt: ${bild.ausschnitt ?? '50% 50%'}`;
+const webp = bild.datei.endsWith('.webp');
+---
+
+<figure class:list={['foto', className]} style={stil}>
+  <picture>
+    {webp && bild.fallback && <source type="image/webp" srcset={bild.datei} />}
+    <img
+      class="foto__bild"
+      src={webp && bild.fallback ? bild.fallback : bild.datei}
+      width={bild.breite}
+      height={bild.hoehe}
+      alt={bild.alt}
+      lang={lang}
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+  <figcaption class="foto__nachweis t-klein" lang={lang}>
+    {tf(locale, 'bild.nachweis', { name: bild.fotograf })}
+  </figcaption>
+  {bild.entwurf && <EntwurfLabel locale={locale} class="foto__entwurf" />}
+</figure>
+
+<style>
+  .foto {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    aspect-ratio: var(--verhaeltnis);
+    overflow: hidden;
+    background: var(--color-hauch-2);
+  }
+
+  .foto picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .foto__bild {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--ausschnitt);
+  }
+
+  .foto__nachweis {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: var(--space-4) var(--space-10);
+    background: var(--color-aubergine);
+    color: var(--color-papier);
+    line-height: var(--line-140);
+  }
+
+  .foto :global(.foto__entwurf) {
+    position: absolute;
+    top: var(--space-16);
+    left: var(--space-16);
+  }
+</style>

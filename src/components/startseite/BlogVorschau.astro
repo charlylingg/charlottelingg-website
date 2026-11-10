@@ -6,7 +6,9 @@
 import Torflagge from '../Torflagge.astro';
 import Bildplatzhalter from '../Bildplatzhalter.astro';
 import EntwurfLabel from '../EntwurfLabel.astro';
+import Foto from '../Foto.astro';
 import { getBlog, getText } from '../../lib/inhalte';
+import { getBlogBild } from '../../lib/bilder';
 import { blogDatum } from '../../lib/format';
 import { localizePath, t, type Locale } from '../../i18n';
 
@@ -16,15 +18,19 @@ interface Props {
 
 const { locale } = Astro.props;
 const text = await getText(locale, 'blog');
-const beitraege = (await getBlog(locale)).map((b) => {
-  const datum = blogDatum(b.data.datum, b.lang);
-  const ortUndDatum = [b.data.ort, datum].filter(Boolean).join(', ');
-  return {
-    ...b,
-    zeile: [b.data.kategorie, ortUndDatum].filter(Boolean).join(' · '),
-    href: localizePath(`/blog/${b.slug}/`, locale),
-  };
-});
+const beitraege = await Promise.all(
+  (await getBlog(locale)).map(async (b) => {
+    const datum = blogDatum(b.data.datum, b.lang);
+    const ortUndDatum = [b.data.ort, datum].filter(Boolean).join(', ');
+    return {
+      ...b,
+      zeile: [b.data.kategorie, ortUndDatum].filter(Boolean).join(' · '),
+      href: localizePath(`/blog/${b.slug}/`, locale),
+      /** Foto aus src/content/bilder (blog-<slug>). Fehlt es oder ist die Lizenz nicht geklärt, bleibt der Platzhalter. */
+      foto: b.data.bild ? await getBlogBild(b.slug, locale) : undefined,
+    };
+  }),
+);
 ---
 
 {
@@ -45,7 +51,9 @@ const beitraege = (await getBlog(locale)).map((b) => {
           {beitraege.map((b) => (
             <li>
               <article class="karte" lang={b.lang !== locale ? b.lang : undefined}>
-                {b.data.bild ? (
+                {b.foto ? (
+                  <Foto bild={b.foto} locale={locale} verhaeltnis="16 / 10" lang={b.lang !== locale ? locale : undefined} />
+                ) : b.data.bild ? (
                   <Bildplatzhalter stelle={`Blog «${b.data.titel}»`} format="Querformat 16:10" verhaeltnis="16 / 10" alt={b.data.bild_alt} />
                 ) : (
                   <div class="karte__grafik" aria-hidden="true">

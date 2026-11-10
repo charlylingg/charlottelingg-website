@@ -4,8 +4,10 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Bildplatzhalter from './Bildplatzhalter.astro';
 import EntwurfLabel from './EntwurfLabel.astro';
+import Foto from './Foto.astro';
 import Torflagge from './Torflagge.astro';
 import type { BlogAufgeloest } from '../lib/inhalte';
+import { getBlogBild } from '../lib/bilder';
 import { blogDatum } from '../lib/format';
 import { localizePath, t, type Locale } from '../i18n';
 
@@ -19,6 +21,8 @@ interface Props {
 const { locale, beitrag, hasTranslation } = Astro.props;
 const { Content } = await render(beitrag.eintrag);
 const datum = blogDatum(beitrag.data.datum, beitrag.lang);
+/** Foto aus src/content/bilder (blog-<slug>). Fehlt es oder ist die Lizenz nicht geklärt, bleibt der Platzhalter. */
+const foto = beitrag.data.bild ? await getBlogBild(beitrag.slug, locale) : undefined;
 const zeile = [beitrag.data.kategorie, [beitrag.data.ort, datum].filter(Boolean).join(', ')]
   .filter(Boolean)
   .join(' · ');
@@ -36,8 +40,9 @@ const zeile = [beitrag.data.kategorie, [beitrag.data.ort, datum].filter(Boolean)
         {beitrag.data.titel}
       </h1>
       <p class="t-lead beitrag__teaser">{beitrag.data.teaser}</p>
+      {foto && <Foto bild={foto} locale={locale} verhaeltnis="16 / 10" lang={beitrag.lang !== locale ? locale : undefined} />}
       {
-        beitrag.data.bild && (
+        beitrag.data.bild && !foto && (
           <Bildplatzhalter
             stelle={`Blog «${beitrag.data.titel}»`}
             format="Querformat 16:10"

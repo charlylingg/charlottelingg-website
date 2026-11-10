@@ -376,7 +376,7 @@ const blog = defineCollection({
     uebersetzt: z.boolean().optional(),
     /** Reihenfolge auf der Startseite (klein = zuerst) */
     reihenfolge: z.number().int(),
-    /** true = Beitrag hat ein Foto (bis es da ist: Platzhalter, siehe BILDER.md) */
+    /** true = Beitrag hat ein Foto: Eintrag src/content/bilder/blog-<slug>.yaml (bis es da ist: Platzhalter, siehe BILDER.md) */
     bild: z.boolean().default(false),
     /** Alt-Text des Fotos; leer lassen, wenn das Foto rein schmückend ist */
     bild_alt: z.string().optional(),

@@ -1,5 +1,7 @@
 # Freigaben
 
+> Freigaben erteilt Michel Gurnari im Auftrag von Charlotte Lingg (Vereinbarung vom 10.11.2026).
+
 Die Vorschau-Adresse ist öffentlich erreichbar. Deshalb hat jede Textdatei und jeder Blogbeitrag im Kopf (Frontmatter) die Angabe `freigabe`.
 
 - `freigabe: true`: erscheint auf der Website.
@@ -13,8 +15,8 @@ Wer freigibt (gemäss CLAUDE.md): Texte in Charlottes Namen, Bilder von ihr, Par
 
 ## Texte der Startseite (`src/content/texte/de/`)
 
-| Inhalt | Datei | freigabe | Freigegeben von Charlotte am |
-|--------|-------|----------|------------------------------|
+| Inhalt | Datei | freigabe | Freigegeben am (Michel) |
+|--------|-------|----------|-------------------------|
 | Titel und Beschreibung für Suchmaschinen, Angaben JSON-LD | `startseite.md` | true | |
 | Hero | `hero.md` | true | |
 | 01 Portrait mit Steckbrief | `portrait.md` | true | |
@@ -48,8 +50,8 @@ Zur Station 04: Es gibt zwei Fassungen mit derselben Position. Solange die Fassu
 
 ## Blogbeiträge (`src/content/blog/de/`)
 
-| Beitrag | Datei | Status | freigabe | Freigegeben von Charlotte am |
-|---------|-------|--------|----------|------------------------------|
+| Beitrag | Datei | Status | freigabe | Freigegeben am (Michel) |
+|---------|-------|--------|----------|-------------------------|
 | Zurück im Weltcup | `zurueck-im-weltcup.md` | veroeffentlicht | true | |
 | **Drei Kreuzbandrisse, drei Comebacks** (ganzer Beitrag) | `drei-kreuzbandrisse-drei-comebacks.md` | veroeffentlicht | **false** | |
 | Qualität statt Quantität | `qualitaet-statt-quantitaet.md` | folgt | true | |
@@ -58,10 +60,12 @@ Zur Station 04: Es gibt zwei Fassungen mit derselben Position. Solange die Fassu
 
 Bilder funktionieren gleich wie Texte, nur heisst die Angabe `lizenz_geklaert`: Bei `false` erscheint das Bild nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` (mit dem Label «Entwurf – nicht freigegeben»). Sonst bleibt der Platzhalter, beim Teilen gibt es kein Vorschaubild, und die Datei wird gar nicht ausgeliefert. Auf `true` erst, wenn die Nutzungsrechte bestätigt und in `LIZENZEN.md` eingetragen sind. Bilder von Charlotte gibt Charlotte frei.
 
-| Bild | Datei | lizenz_geklaert | Rechte bestätigt am | Freigegeben von Charlotte am |
-|------|-------|-----------------|---------------------|------------------------------|
+| Bild | Datei | lizenz_geklaert | Rechte bestätigt am | Freigegeben am (Michel) |
+|------|-------|-----------------|---------------------|-------------------------|
 | Hero, Weltcup Sölden 2026 (Giovanni Maria Pizzato) | `hero-soelden-2026.yaml` | true | 10.11.2026 (kommerzielle Lizenz, bestätigt durch Michel Gurnari) | |
 | Vorschaubild beim Teilen (Giovanni Maria Pizzato) | `og-charlotte-lingg.yaml` | true | 10.11.2026 (kommerzielle Lizenz, bestätigt durch Michel Gurnari) | |
+| 01 Portrait (Stefanie Frei, Aufnahme 28.10.2024) | `portrait-charlotte-lingg.yaml` | true | 10.11.2026 (Nutzungsrechte für die Website erteilt) | |
+| Blog «Zurück im Weltcup» (Stefanie Frei, Aufnahme 28.10.2024) | `blog-zurueck-im-weltcup.yaml` | true | 10.11.2026 (Nutzungsrechte für die Website erteilt) | |
 
 ## Daten (Freigabe durch Michel)
 

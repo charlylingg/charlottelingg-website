@@ -25,3 +25,11 @@ export async function getBild(id: string, locale: Locale): Promise<Bild | undefi
   if (entwurf && !SHOW_ENTWUERFE) return undefined;
   return { ...eintrag.data, alt: locale === 'fr' ? eintrag.data.alt_fr : eintrag.data.alt_de, entwurf };
 }
+
+/**
+ * Foto eines Blogbeitrags: Eintrag src/content/bilder/blog-<slug>.yaml,
+ * z. B. blog-zurueck-im-weltcup für src/content/blog/de/zurueck-im-weltcup.md (gilt für DE und FR).
+ */
+export function getBlogBild(slug: string, locale: Locale): Promise<Bild | undefined> {
+  return getBild(`blog-${slug}`, locale);
+}
