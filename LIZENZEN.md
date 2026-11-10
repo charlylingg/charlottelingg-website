@@ -4,12 +4,16 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 
 > **Achtung**
 > - Das imago-Bild **Weltcup Lech 2021** darf **nie** verwendet werden.
-> - Shooting **Stefanie Frei (12.2024)**: Nutzungsrechte **offen** – erst verwenden, wenn die Einwilligung hier eingetragen ist.
+> - Shooting **Stefanie Frei**: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe Fotos). Bildnachweis am Bild.
+
+## Fotos
 
 | Datei | Fotograf/Quelle | Lizenz/Einwilligung | gültig bis | Bemerkung |
 |-------|-----------------|---------------------|------------|-----------|
 | `public/bilder/hero-soelden-2026.webp`, `public/bilder/hero-soelden-2026.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Hero, Weltcup-Riesenslalom Sölden, 24.10.2026. Eintrag `src/content/bilder/hero-soelden-2026.yaml` mit `lizenz_geklaert: true`. |
 | `public/bilder/og-charlotte-lingg.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Eintrag `src/content/bilder/og-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/portrait-charlotte-lingg.webp`, `public/bilder/portrait-charlotte-lingg.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Sektion 01 Portrait, Aufnahme 28.10.2024. Eintrag `src/content/bilder/portrait-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/blog-zurueck-im-weltcup.webp`, `public/bilder/blog-zurueck-im-weltcup.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup» (Vorschau und Beitragsseite, DE und FR), Aufnahme 28.10.2024. Eintrag `src/content/bilder/blog-zurueck-im-weltcup.yaml` mit `lizenz_geklaert: true`. |
 
 Bilder mit `lizenz_geklaert: false` (in `src/content/bilder/`) werden nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` gezeigt. Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert. Sobald der Fotograf die Nutzung bestätigt: hier Lizenz und Datum eintragen und `lizenz_geklaert: true` setzen.
 

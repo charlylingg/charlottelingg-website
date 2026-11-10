@@ -1,7 +1,9 @@
 ---
 import Bildplatzhalter from '../Bildplatzhalter.astro';
 import EntwurfLabel from '../EntwurfLabel.astro';
+import Foto from '../Foto.astro';
 import { getText } from '../../lib/inhalte';
+import { getBild } from '../../lib/bilder';
 import type { Locale } from '../../i18n';
 
 interface Props {
@@ -10,6 +12,8 @@ interface Props {
 
 const { locale } = Astro.props;
 const text = await getText(locale, 'portrait');
+/** Portrait aus src/content/bilder. Ohne geklärte Lizenz (und ohne Entwürfe) bleibt der Platzhalter. */
+const bild = await getBild('portrait-charlotte-lingg', locale);
 ---
 
 {
@@ -22,7 +26,11 @@ const text = await getText(locale, 'portrait');
     >
       <div class="portrait__innen inhalt">
         <div class="portrait__bild">
-          <Bildplatzhalter stelle="Portrait" format="Hochformat 3:4" verhaeltnis="3 / 4" alt={text.data.bild_alt} />
+          {bild ? (
+            <Foto bild={bild} locale={locale} verhaeltnis="3 / 4" lang={text.lang !== locale ? locale : undefined} />
+          ) : (
+            <Bildplatzhalter stelle="Portrait" format="Hochformat 3:4" verhaeltnis="3 / 4" alt={text.data.bild_alt} />
+          )}
         </div>
         <div class="portrait__text">
           {text.entwurf && <EntwurfLabel locale={locale} />}
@@ -61,7 +69,8 @@ const text = await getText(locale, 'portrait');
     max-width: var(--mass-440);
   }
 
-  .portrait__bild :global(.bildplatzhalter) {
+  .portrait__bild :global(.bildplatzhalter),
+  .portrait__bild :global(.foto) {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
   }
 

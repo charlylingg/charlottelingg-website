@@ -56,4 +56,4 @@ Website von Charlotte Lingg, Skirennfahrerin im Nationalkader des Liechtensteini
 - Dateien in src/assets/instagram/ und src/data/instagram.json nie von Hand ändern, nur über das Skript bzw. den Workflow.
 
 ## Freigaben (zur Information)
-Michel gibt Layout, Tippfehler, Rennkalender und Resultate frei. Texte in Charlottes Namen, Bilder von ihr, Partner, Comeback/Gesundheit, Impressum und Datenschutz gibt Charlotte frei. Weise im Pull Request darauf hin, wenn eine Änderung Charlottes Freigabe braucht.
+Freigaben erteilt Michel Gurnari im Auftrag von Charlotte Lingg (Vereinbarung vom 10.11.2026): Layout, Tippfehler, Rennkalender und Resultate sowie Texte in Charlottes Namen, Bilder von ihr, Partner, Comeback/Gesundheit, Impressum und Datenschutz. Weise im Pull Request darauf hin, wenn eine Änderung eine Freigabe braucht.

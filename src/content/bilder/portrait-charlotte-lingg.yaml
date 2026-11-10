@@ -1,0 +1,12 @@
+# Sektion 01 Portrait (Hochformat 3:4). Shooting Stefanie Frei, Aufnahme 28.10.2024.
+# Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe LIZENZEN.md).
+datei: /bilder/portrait-charlotte-lingg.webp
+fallback: /bilder/portrait-charlotte-lingg.jpg
+breite: 1200
+hoehe: 1600
+alt_de: "Charlotte Lingg lächelnd im Rennanzug, mit Helm und Skibrille"
+alt_fr: "Charlotte Lingg souriante en combinaison de course, avec casque et masque de ski"
+fotograf: "Stefanie Frei"
+lizenz_geklaert: true
+# Gesicht und Helm bleiben sichtbar, falls das Bild im Layout zugeschnitten wird
+ausschnitt: "45% 30%"
