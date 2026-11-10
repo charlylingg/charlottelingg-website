@@ -50,6 +50,10 @@ Website von Charlotte Lingg, Skirennfahrerin im Nationalkader des Liechtensteini
 - Schriften lokal (Fontsource).
 - Hosting: Cloudflare Workers mit statischen Assets (Workers Builds), verbunden mit diesem Repository. Konfiguration in wrangler.jsonc, ausgeliefert wird der Ordner dist. Produktion = Branch main. Jeder andere Branch und jeder Pull Request erhält automatisch eine Vorschau-Adresse. Sicherheits-Header in public/_headers. Keine Netlify- oder Pages-spezifischen Dateien.
 - Formulare (später): eigene Route im Worker, Versand per E-Mail über Resend, keine Speicherung von Anfragen. Spam-Schutz mit Honeypot und Zeitprüfung.
+- Instagram-Feed (Sektion «Unterwegs»): Die sechs Kacheln zeigen die neuesten Beiträge von @charlotte_lingg. Quelle ist der öffentliche JSON-Feed von Behold (INSTAGRAM_FEED_URL in src/config.ts). Das Skript scripts/instagram-aktualisieren.mjs (npm run instagram) lädt die Vorschaubilder nach src/assets/instagram/ und schreibt src/data/instagram.json (nur id, Link, Datum, Typ, Bildmasse). Die Website liefert die Bilder selbst aus (astro:assets): Besucher laden nichts von Instagram, Meta oder Behold. Der Build hängt nie vom Netz ab; fehlt die Datei oder ist sie leer, erscheinen Platzhalter-Kacheln.
+- Der Workflow .github/workflows/instagram.yml («Instagram aktualisieren») läuft zweimal täglich und lässt sich manuell starten. Bei geänderten Beiträgen baut er zur Kontrolle und committet «Instagram-Feed aktualisiert» als github-actions[bot] direkt auf main. Diese Bot-Commits sind die einzige Ausnahme von «alles über Pull Requests».
+- Beitrag ausblenden: ID in INSTAGRAM_AUSBLENDEN (src/config.ts) eintragen, per Pull Request, danach den Workflow manuell starten.
+- Dateien in src/assets/instagram/ und src/data/instagram.json nie von Hand ändern, nur über das Skript bzw. den Workflow.
 
 ## Freigaben (zur Information)
 Michel gibt Layout, Tippfehler, Rennkalender und Resultate frei. Texte in Charlottes Namen, Bilder von ihr, Partner, Comeback/Gesundheit, Impressum und Datenschutz gibt Charlotte frei. Weise im Pull Request darauf hin, wenn eine Änderung Charlottes Freigabe braucht.

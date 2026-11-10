@@ -1,8 +1,16 @@
 ---
-/** Unterwegs: Hinweis auf Instagram. Nur ein Link, kein eingebetteter Feed, keine externen Skripte. */
+/**
+ * Unterwegs: Hinweis auf Instagram mit den sechs neuesten Beiträgen als Kacheln.
+ * Die Bilder liegen im Repository (src/assets/instagram/) und werden von der Website selbst ausgeliefert:
+ * kein eingebetteter Feed, keine externen Skripte, keine Bilder von Instagram, Meta oder Behold.
+ * Ohne Beiträge (src/data/instagram.json fehlt oder ist leer) erscheinen die Platzhalter-Kacheln.
+ */
+import { Picture } from 'astro:assets';
 import EntwurfLabel from '../EntwurfLabel.astro';
 import { getText } from '../../lib/inhalte';
-import { t, type Locale } from '../../i18n';
+import { getInstagramBeitraege } from '../../lib/instagram';
+import { datum } from '../../lib/format';
+import { t, tf, type Locale } from '../../i18n';
 
 interface Props {
   locale: Locale;
@@ -19,6 +27,12 @@ const kacheln = [
   { flaeche: 'hauch', zeichen: 'beere' },
   { flaeche: 'hauch-2', zeichen: 'beere' },
 ];
+const beitraege = getInstagramBeitraege().slice(0, kacheln.length);
+/** Hat der Feed weniger als 6 Beiträge, füllen Platzhalter das Raster auf */
+const fuellkacheln = kacheln.slice(beitraege.length);
+/** Kachelbreite: Desktop bis 216px, darunter ein Drittel der Inhaltsbreite */
+const kachelSizes = '(min-width: 1280px) 216px, (min-width: 868px) 17vw, 31vw';
+const kachelWidths = [120, 160, 240, 320, 440, 540];
 ---
 
 <svg width="0" height="0" class="visually-hidden" aria-hidden="true">
@@ -53,22 +67,61 @@ const kacheln = [
             <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
           </a>
         </div>
-        <a
-          class="kacheln"
-          href={text.data.instagram.url}
-          target="_blank"
-          rel="noopener"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          {kacheln.map((k) => (
-            <span class="kachel" style={`background: var(--color-${k.flaeche}); color: var(--color-${k.zeichen})`}>
-              <svg class="kachel__zeichen">
-                <use href="#instagram-zeichen" />
-              </svg>
-            </span>
-          ))}
-        </a>
+        {beitraege.length > 0 ? (
+          <div class="kacheln">
+            {beitraege.map((b) => (
+              <a
+                class="kachel kachel--beitrag"
+                href={b.permalink}
+                target="_blank"
+                rel="noopener"
+                aria-label={tf(locale, 'unterwegs.beitrag', { datum: datum(b.datum) })}
+                lang={text.lang !== locale ? locale : undefined}
+              >
+                <Picture
+                  class="kachel__bild"
+                  src={b.bildDaten}
+                  formats={['avif', 'webp']}
+                  widths={kachelWidths}
+                  sizes={kachelSizes}
+                  width={b.breite}
+                  height={b.hoehe}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            ))}
+            {fuellkacheln.map((k) => (
+              <span
+                class="kachel"
+                style={`background: var(--color-${k.flaeche}); color: var(--color-${k.zeichen})`}
+                aria-hidden="true"
+              >
+                <svg class="kachel__zeichen">
+                  <use href="#instagram-zeichen" />
+                </svg>
+              </span>
+            ))}
+          </div>
+        ) : (
+          <a
+            class="kacheln"
+            href={text.data.instagram.url}
+            target="_blank"
+            rel="noopener"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            {kacheln.map((k) => (
+              <span class="kachel" style={`background: var(--color-${k.flaeche}); color: var(--color-${k.zeichen})`}>
+                <svg class="kachel__zeichen">
+                  <use href="#instagram-zeichen" />
+                </svg>
+              </span>
+            ))}
+          </a>
+        )}
       </div>
     </section>
   )
@@ -132,5 +185,44 @@ const kacheln = [
 
   .kachel:hover {
     opacity: var(--deckkraft-75);
+  }
+
+  /* Kachel mit Instagram-Beitrag: Bild füllt das Quadrat, Mitte */
+  .kachel--beitrag {
+    display: block;
+    background: var(--color-papier);
+  }
+
+  .kachel--beitrag :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .kachel--beitrag:hover {
+    opacity: 1;
+  }
+
+  .kachel--beitrag :global(.kachel__bild) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Hover und Fokus: dezente Aufhellung (Fokusrahmen in beere aus global.css) */
+  .kachel--beitrag:hover :global(.kachel__bild),
+  .kachel--beitrag:focus-visible :global(.kachel__bild) {
+    opacity: var(--deckkraft-85);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .kachel--beitrag {
+      transition: none;
+    }
+
+    .kachel--beitrag :global(.kachel__bild) {
+      transition: opacity 0.2s;
+    }
   }
 </style>

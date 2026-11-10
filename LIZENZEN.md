@@ -32,6 +32,13 @@ Die Logos werden mit Zustimmung der Partner im Rahmen der Partnerschaft gezeigt.
 
 Noch ohne Logo (Platzhalter mit Namen): Monnier Immo, Head.
 
+## Instagram
+
+Die Bilder in `src/assets/instagram/` (Kacheln in der Sektion «Unterwegs») stammen aus Charlottes eigenem Instagram-Konto @charlotte_lingg und werden automatisch übernommen (siehe README, «Instagram-Feed»).
+
+- Eigene Bilder von Charlotte: Nutzung auf der Website durch Charlotte abgedeckt.
+- Fotos von Dritten (im Beitrag mit 📸 genannt): nur, wenn die Nutzung auf der Website mitabgedeckt ist. Sonst den Beitrag ausblenden (ID in `INSTAGRAM_AUSBLENDEN` in `src/config.ts`).
+
 ## Schriften
 
 Die Schriften Barlow und Barlow Condensed (Jeremy Tribby) stehen unter der SIL Open Font License 1.1 und werden lokal ausgeliefert (über Fontsource, keine Verbindung zu Google).

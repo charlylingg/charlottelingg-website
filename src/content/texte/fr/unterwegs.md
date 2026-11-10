@@ -1,6 +1,6 @@
 ---
 # NOCH NICHT ÜBERSETZT: deutscher Text als Vorlage. Solange uebersetzt: false gilt, zeigt die FR-Seite den deutschen Text.
-# Nur ein Link auf Instagram. Kein eingebetteter Feed, keine externen Skripte.
+# Kacheln: neueste Instagram-Beiträge, Bilder von der Website selbst ausgeliefert (siehe CLAUDE.md, Technik). Keine externen Skripte.
 sektion: unterwegs
 freigabe: true
 uebersetzt: false
