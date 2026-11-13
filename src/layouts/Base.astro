@@ -6,7 +6,7 @@ import '../styles/global.css';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import { getLocale, locales, localizePath, t } from '../i18n';
-import { SITE_INDEXABLE } from '../config';
+import { SHOW_ENTWUERFE, SITE_INDEXABLE } from '../config';
 import { BILD_TEILEN, getBild } from '../lib/bilder';
 import tokens from '../../design/tokens.json';
 
@@ -32,7 +32,8 @@ const {
   jsonLd,
 } = Astro.props;
 
-const robotsNoindex = noindex || !SITE_INDEXABLE;
+/** Vorschauen mit Entwürfen (freigabe: false, lizenz_geklaert: false) nie indexieren. */
+const robotsNoindex = noindex || !SITE_INDEXABLE || SHOW_ENTWUERFE;
 /** Beginnt der Titel bereits mit dem Namen (z. B. FR-Startseite), wird er unverändert übernommen. */
 const fullTitle = !title ? siteName : title.startsWith(siteName) ? title : `${title} – ${siteName}`;
 const site = Astro.site ?? new URL('https://charlottelingg.com');

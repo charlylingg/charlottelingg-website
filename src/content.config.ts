@@ -370,8 +370,10 @@ const blog = defineCollection({
   schema: z.object({
     beispiel,
     titel: z.string().min(1),
-    /** Monat ("2026-10"), genaues Datum (2026-10-24) oder Platzhalter [DATUM] */
-    datum: z.union([platzhalter, z.string().regex(/^\d{4}-\d{2}$/, 'Monat im Format 2026-10'), z.coerce.date()]),
+    /** Monat ("2026-10"), genaues Datum (2026-10-24) oder Platzhalter [DATUM]; bei Status «folgt» auch weglassen */
+    datum: z
+      .union([platzhalter, z.string().regex(/^\d{4}-\d{2}$/, 'Monat im Format 2026-10'), z.coerce.date()])
+      .optional(),
     kategorie: z.string().min(1),
     /** Ort, wird hinter der Kategorie angezeigt, z. B. «Saisonstart · Sölden, Oktober 2026» */
     ort: z.string().optional(),

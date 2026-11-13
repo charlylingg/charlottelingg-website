@@ -1,10 +1,11 @@
 /**
  * Globale Einstellungen der Website.
  *
- * SITE_INDEXABLE: Solange false, setzt jede Seite <meta name="robots" content="noindex">.
- * Erst beim Go-live auf true stellen (siehe README, «Go-live-Merkliste»).
+ * SITE_INDEXABLE: Bei false setzt jede Seite <meta name="robots" content="noindex">.
+ * Seit dem Go-live (13.11.2026) true. Vorschauen mit Entwürfen (PUBLIC_SHOW_ENTWUERFE=true)
+ * tragen trotzdem immer noindex (siehe src/layouts/Base.astro).
  */
-export const SITE_INDEXABLE = false;
+export const SITE_INDEXABLE = true;
 
 /**
  * SHOW_ENTWUERFE: Inhalte mit freigabe: false werden nur gebaut, wenn die Build-Variable

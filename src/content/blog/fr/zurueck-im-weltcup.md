@@ -1,6 +1,6 @@
 ---
 titel: "De retour en Coupe du monde"
-datum: "2026-10"
+datum: 2026-11-13
 kategorie: "Début de saison"
 ort: "Sölden"
 teaser: "Ma saison du retour commence. Ce que je me suis fixé pour cet hiver et ce qui me réjouit le plus."

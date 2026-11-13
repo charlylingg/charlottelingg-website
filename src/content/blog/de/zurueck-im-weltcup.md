@@ -1,6 +1,6 @@
 ---
 titel: "Zurück im Weltcup"
-datum: "2026-10"
+datum: 2026-11-13
 kategorie: "Saisonstart"
 ort: "Sölden"
 teaser: "Meine Comeback-Saison beginnt. Was ich mir für diesen Winter vornehme und worauf ich mich am meisten freue."

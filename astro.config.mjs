@@ -2,6 +2,7 @@
 import { readdirSync, readFileSync, rmdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
 
 /**
@@ -40,11 +41,47 @@ function bilderOhneLizenzEntfernen() {
   };
 }
 
+/**
+ * Pfade von Blogbeiträgen, die nicht in die Sitemap gehören:
+ * freigabe: false (in DE oder FR). Solche Beiträge werden nur in Vorschauen mit Entwürfen gebaut.
+ */
+function gesperrteBlogPfade() {
+  const pfade = new Set();
+  const ordner = new URL('./src/content/blog/', import.meta.url);
+  for (const sprache of ['de', 'fr']) {
+    for (const name of readdirSync(new URL(`${sprache}/`, ordner)).filter((n) => n.endsWith('.md'))) {
+      const md = readFileSync(new URL(`${sprache}/${name}`, ordner), 'utf8');
+      // Im Zweifel gilt der Beitrag als gesperrt.
+      if (/^freigabe:\s*true\s*(#.*)?$/m.test(md)) continue;
+      const slug = name.replace(/\.md$/, '');
+      pfade.add(`/blog/${slug}/`);
+      pfade.add(`/fr/blog/${slug}/`);
+    }
+  }
+  return pfade;
+}
+
+/** Sitemap: ohne 404-Seite und ohne gesperrte Blogbeiträge. */
+function inSitemap(/** @type {string} */ seite) {
+  const pfad = new URL(seite).pathname.replace(/\/?$/, '/');
+  if (/^\/(fr\/)?404\/$/.test(pfad)) return false;
+  return !gesperrteBlogPfade().has(pfad);
+}
+
 export default defineConfig({
   site: 'https://charlottelingg.com',
   output: 'static',
   trailingSlash: 'ignore',
-  integrations: [bilderOhneLizenzEntfernen()],
+  integrations: [
+    sitemap({
+      filter: inSitemap,
+      i18n: {
+        defaultLocale: 'de',
+        locales: { de: 'de', fr: 'fr' },
+      },
+    }),
+    bilderOhneLizenzEntfernen(),
+  ],
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'fr'],

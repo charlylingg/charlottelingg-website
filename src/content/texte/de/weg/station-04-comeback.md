@@ -1,8 +1,7 @@
 ---
-# ENTWURF: Fassung mit Diagnose. Erscheint nur in der Vorschau mit Entwürfen und ersetzt dort die Kurzfassung
-# (station-04-comeback-kurz.md, gleiche Position). Braucht Charlottes Freigabe.
+# Freigegeben am 13.11.2026 (Michel). Die Kurzfassung ohne Diagnose wurde entfernt.
 sektion: weg-station
-freigabe: false
+freigabe: true
 position: 4
 nummer: "04"
 titel: "Comeback"
