@@ -34,7 +34,7 @@ Logos in Originalfarben auf weissem Grund, ohne Filter. Pro Kategorie einheitlic
 |---------|-----------|-------|------|-------------|-------------|----------------------|
 | LGT | Kopfsponsoren | `src/content/partner/lgt.yaml` | `lgt.svg` | nein | nein | 110 px |
 | Kaiser AG | Kopfsponsoren | `src/content/partner/kaiser.yaml` | `kaiser.png` (238 × 52 px, höchstens 238 px breit; Vektordatei angefragt) | **ja** | **ja** (https://www.kaiser.li) | 52 px |
-| Monnier Immo | Mobilitätspartner | `src/content/partner/monnier-immo.yaml` | fehlt noch (Platzhalter mit Namen, verlinkt auf https://monnier-immo.ch/) | nein | nein | 80 px |
+| Monnier Immo | Mobilitätspartner | `src/content/partner/monnier-immo.yaml` | `monnier-immo.svg` | nein | nein | 96 px |
 | MBPI | Trinkflaschenpartner | `src/content/partner/mbpi.yaml` | `mbpi.png` | **ja** | nein | 80 px |
 | Liechtenstein Olympic Committee (LOC) | Anstellung | `src/content/partner/loc.yaml` | `loc.png` (höchstens 205 px breit) | nein | nein | 80 px |
 | Head | Ausrüster | `src/content/partner/head.yaml` | `head.svg` | nein | nein | 32 px |

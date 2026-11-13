@@ -34,8 +34,7 @@ Die Logos werden mit Zustimmung der Partner im Rahmen der Partnerschaft gezeigt.
 | `tc-zermatt.svg` | Tennisclub Zermatt | vom Partner geliefert | |
 | `hotel-albana-real.svg` | Hotel Albana Real | vom Partner geliefert | |
 | `head.svg` | Head | vom Partner geliefert (Vektordatei), 10.11.2026 | |
-
-Noch ohne Logo (Platzhalter mit Namen): Monnier Immo, Logo angefragt.
+| `monnier-immo.svg` | Monnier Immo | vom Partner geliefert (Bilddatei, als Vektor nachgezeichnet), 13.11.2026 | |
 
 ## Instagram
 

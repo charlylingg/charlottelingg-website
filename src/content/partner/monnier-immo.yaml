@@ -1,9 +1,10 @@
-# Logo folgt (bis dahin Platzhalter mit dem Namen).
 name: "Monnier Immo"
 kategorie: mobilitaetspartner
+# Logodatei: monnier-immo.svg (Vektor, vom Partner geliefert, als Vektor nachgezeichnet, Hochformat etwa 0.8 : 1)
+logo: /partner/monnier-immo.svg
 url: https://monnier-immo.ch/
 pflicht_logo: false
 pflicht_link: false
-# Höhe passend zu den anderen Kategorien (Kopfsponsoren dürfen grösser sein)
-logo_hoehe: 80
+# Hochformat: höher als Querformat-Logos, damit es gleich gewichtig wirkt (wie Chez Vrony)
+logo_hoehe: 96
 reihenfolge: 1
