@@ -1,5 +1,4 @@
-# Bis zum Go-live gesperrt. Beim Go-live ersetzen durch:
-#   User-agent: *
-#   Allow: /
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://charlottelingg.com/sitemap-index.xml

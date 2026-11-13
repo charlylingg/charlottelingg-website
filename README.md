@@ -78,11 +78,22 @@ Von Hand aktualisieren (lokal): `npm run instagram`.
 
 ## Go-live-Merkliste
 
-Bis zum Go-live ist die Website für Suchmaschinen gesperrt. Beim Go-live genau diese Stellen ändern:
+Im Repository erledigt (Pull Request «Go-live», 13.11.2026):
 
-1. `src/config.ts`: `SITE_INDEXABLE` auf `true` setzen (entfernt `<meta name="robots" content="noindex">`).
-2. `public/_headers`: die Zeile `X-Robots-Tag: noindex` löschen.
-3. `public/robots.txt`: `Disallow: /` ersetzen durch `Allow: /`.
-4. Die Stilprobe löschen: `src/pages/stilprobe.astro`.
-5. Datenschutzerklärung: Abschnitt Instagram (Bilder werden von der Website selbst ausgeliefert, keine Daten an Meta beim Seitenaufruf; erst der Klick auf eine Kachel führt zu Instagram).
-6. Datenschutzerklärung: Abschnitt Kontaktformular und E-Mail nennt Resend und Proton (erledigt).
+- [x] `src/config.ts`: `SITE_INDEXABLE` auf `true` (kein `<meta name="robots" content="noindex">` mehr; Vorschauen mit Entwürfen behalten `noindex`).
+- [x] `public/_headers`: `X-Robots-Tag: noindex` entfernt.
+- [x] `public/robots.txt`: `Allow: /` und Verweis auf die Sitemap.
+- [x] Sitemap (`@astrojs/sitemap`, `/sitemap-index.xml`) mit DE/FR-Verknüpfung, ohne 404 und ohne gesperrte Blogbeiträge.
+- [x] Stilprobe gelöscht.
+- [x] Alte Wix-Adressen weitergeleitet (`public/_redirects`, Status 301).
+- [x] Fanpost-Adresse freigegeben.
+- [x] Datenschutzerklärung: Abschnitt Instagram.
+- [x] Datenschutzerklärung: Abschnitt Kontaktformular und E-Mail nennt Resend und Proton.
+
+Offen, nach dem Merge durch Michel in Cloudflare bzw. bei den Diensten:
+
+- [ ] Custom Domain: charlottelingg.com (und www.charlottelingg.com) in Cloudflare an den Worker «charlottelingg» hängen.
+- [ ] Weiterleitungen: www.charlottelingg.com auf charlottelingg.com (Redirect Rule, 301).
+- [ ] Web Analytics: Cloudflare Web Analytics für die Domain einschalten (ohne Cookies).
+- [ ] Search Console: Domain bestätigen und `https://charlottelingg.com/sitemap-index.xml` einreichen.
+- [ ] Wix kündigen, sobald die neue Seite unter charlottelingg.com läuft.

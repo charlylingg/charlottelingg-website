@@ -1,7 +1,7 @@
 ---
-# ENTWURF: Postadresse für Fanpost. Braucht Charlottes Freigabe.
+# Postadresse für Fanpost. Freigegeben am 13.11.2026 (Michel), Zustimmung LSV liegt vor.
 sektion: fanpost-adresse
-freigabe: false
+freigabe: true
 name: "Charlotte Lingg"
 zeilen:
   - "c/o Liechtensteinischer Skiverband"

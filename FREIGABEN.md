@@ -41,7 +41,7 @@ Wer freigibt (gemäss CLAUDE.md): Texte in Charlottes Namen, Bilder von ihr, Par
 | 04 Partner (Texte; Partner selbst siehe unten) | `partner.md` | true | |
 | Sponsor werden | `partner-werden.md` | true | |
 | Fanpost (Text) | `fanpost.md` | true | |
-| **Fanpost-Adresse** | `fanpost-adresse.md` | **false** | |
+| Fanpost-Adresse (DE und FR) | `fanpost-adresse.md` | true | 13.11.2026 (Michel), Zustimmung LSV liegt vor |
 | Kontakt | `kontakt.md` | true | |
 | Impressum (nur Gerüst «Inhalt folgt.») | `impressum.md` | true | |
 | Datenschutz (nur Gerüst «Inhalt folgt.») | `datenschutz.md` | true | |
