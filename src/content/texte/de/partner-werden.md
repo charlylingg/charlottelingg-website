@@ -34,5 +34,5 @@ angebote:
 schluss: "Jede Partnerschaft stelle ich individuell zusammen. Melden Sie sich, ich schicke Ihnen gerne mein Sponsoringdossier."
 button:
   text: "Sponsoringdossier anfordern"
-  ziel: "#kontakt"
+  ziel: "mailto:sponsoring@charlottelingg.com?subject=Sponsoringdossier%20Charlotte%20Lingg"
 ---

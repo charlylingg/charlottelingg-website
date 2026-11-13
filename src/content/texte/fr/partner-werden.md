@@ -35,5 +35,5 @@ angebote:
 schluss: "Chaque partenariat est conçu sur mesure. Écrivez-moi, je vous envoie volontiers mon dossier de sponsoring."
 button:
   text: "Demander le dossier de sponsoring"
-  ziel: "#kontakt"
+  ziel: "mailto:sponsoring@charlottelingg.com?subject=Dossier%20de%20sponsoring%20Charlotte%20Lingg"
 ---

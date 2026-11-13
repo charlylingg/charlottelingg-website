@@ -40,10 +40,29 @@ npm install
 npm run dev    # lokale Vorschau
 npm run build  # statische Ausgabe nach dist/
 npm run check  # Typen und Astro-Dateien prüfen
+npm test       # Tests des Kontaktformulars (Worker)
 PUBLIC_SHOW_ENTWUERFE=true npm run build  # Build mit Entwürfen (nur für die Vorschau)
 ```
 
 Hosting: Cloudflare Workers mit statischen Assets (Workers Builds). Konfiguration in `wrangler.jsonc`, Header in `public/_headers`. Produktion ist der Branch `main`.
+
+Lokal mit Worker (Kontaktformular) testen: `npm run build`, dann `npx wrangler dev`. Für einen echten Versand den Resend-Schlüssel in eine Datei `.dev.vars` schreiben (`RESEND_API_KEY=...`). Diese Datei nie committen (steht in `.gitignore`).
+
+## Kontaktformular
+
+Das Formular in der Sektion Kontakt schickt Nachrichten über einen kleinen Worker (`worker/kontakt.ts`, Adresse `/api/kontakt`) und Resend (EU-Region) per E-Mail. Auf der Website wird nichts gespeichert. Anfragen zu «Sponsoring und Partnerschaft» gehen an `sponsoring@charlottelingg.com`, alle anderen an `contact@charlottelingg.com`.
+
+**Empfänger ändern**
+
+1. In `worker/kontakt.ts` die Konstanten `EMPFAENGER_KONTAKT` bzw. `EMPFAENGER_SPONSORING` anpassen (Auftrag an Claude Code genügt).
+2. Ändert sich die offizielle Adresse, auch `EMAIL_KONTAKT` in `src/config.ts` sowie Impressum und Datenschutz (`src/content/texte/de|fr/`) nachführen.
+
+**API-Schlüssel erneuern**
+
+1. Bei Resend anmelden, unter «API Keys» einen neuen Schlüssel erstellen (Berechtigung «Sending access» genügt).
+2. In Cloudflare: Workers & Pages → charlottelingg → Settings → Variables and Secrets → Secret `RESEND_API_KEY` bearbeiten und den neuen Schlüssel eintragen, speichern.
+3. Den alten Schlüssel bei Resend löschen.
+4. Auf der Website eine Testnachricht schicken.
 
 ## Instagram-Feed
 
@@ -66,3 +85,4 @@ Bis zum Go-live ist die Website für Suchmaschinen gesperrt. Beim Go-live genau 
 3. `public/robots.txt`: `Disallow: /` ersetzen durch `Allow: /`.
 4. Die Stilprobe löschen: `src/pages/stilprobe.astro`.
 5. Datenschutzerklärung: Abschnitt Instagram (Bilder werden von der Website selbst ausgeliefert, keine Daten an Meta beim Seitenaufruf; erst der Klick auf eine Kachel führt zu Instagram).
+6. Datenschutzerklärung: Abschnitt Kontaktformular und E-Mail nennt Resend und Proton (erledigt).

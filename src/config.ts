@@ -27,3 +27,9 @@ export const INSTAGRAM_FEED_URL = 'https://feeds.behold.so/C9qcvHSJvE77P3SS85GS'
  * Nach der Änderung den Workflow «Instagram aktualisieren» manuell starten (siehe README).
  */
 export const INSTAGRAM_AUSBLENDEN: string[] = [];
+
+/**
+ * E-Mail-Adressen auf der Website (Kontakt-Sektion, Meldungen des Formulars).
+ * Die Empfänger des Kontaktformulars stehen im Worker (worker/kontakt.ts), siehe README.
+ */
+export const EMAIL_KONTAKT = 'contact@charlottelingg.com';

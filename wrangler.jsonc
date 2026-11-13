@@ -1,13 +1,26 @@
 // Einzige hosting-spezifische Datei: Cloudflare Workers mit statischen Assets (Workers Builds).
 // Ausgeliefert wird der Ordner dist. Sicherheits-Header stehen in public/_headers.
+// Der Worker (worker/index.ts) bedient nur /api/* (Kontaktformular), alles andere sind statische Dateien.
+// Secret RESEND_API_KEY nicht hier eintragen: in Cloudflare als Secret hinterlegt (siehe README).
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "charlottelingg",
+  "main": "./worker/index.ts",
   "compatibility_date": "2026-11-09",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
   },
+  // Kontaktformular: höchstens 3 Anfragen pro 60 Sekunden pro IP-Adresse
+  "ratelimits": [
+    {
+      "name": "KONTAKT_LIMIT",
+      "namespace_id": "1101",
+      "simple": { "limit": 3, "period": 60 }
+    }
+  ],
   "workers_dev": true,
   "preview_urls": true,
   "previews": {}
