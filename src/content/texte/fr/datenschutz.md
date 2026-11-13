@@ -27,7 +27,7 @@ Le site utilise Cloudflare Web Analytics pour mesurer la fréquentation. Ce serv
 
 ## 5. Formulaire de contact et e-mail
 
-Si tu utilises le formulaire de contact, ton nom, ton adresse e-mail, l’objet et ton message sont envoyés par e-mail à <contact@charlottelingg.com>, ou à <sponsoring@charlottelingg.com> pour les demandes de sponsoring. L’envoi passe par Resend (Resend, Inc., États-Unis) et la boîte e-mail est hébergée chez Proton (Proton AG, Suisse). Rien n’est enregistré sur le site lui-même. Pour le transfert vers les États-Unis, Resend s’appuie sur le Data Privacy Framework ou sur des clauses contractuelles types.
+Si tu utilises le formulaire de contact, ton nom, ton adresse e-mail, l’objet et ton message sont envoyés par e-mail à <contact@charlottelingg.com>, ou à <sponsoring@charlottelingg.com> pour les demandes de sponsoring. L’envoi passe par Resend (Resend, Inc., États-Unis), via des serveurs situés dans l’UE (Irlande). La boîte e-mail est hébergée chez Proton (Proton AG, Suisse). Rien n’est enregistré sur le site lui-même. Pour le transfert vers les États-Unis, Resend s’appuie sur le Data Privacy Framework ou sur des clauses contractuelles types.
 
 Tes données servent uniquement à répondre à ta demande et ne sont pas transmises à des tiers. Elles sont supprimées dès qu’elles ne sont plus nécessaires, au plus tard après deux ans, sauf obligation légale de conservation. Il en va de même pour les e-mails envoyés directement. Base juridique selon le RGPD : demande ou mesures précontractuelles (art. 6, al. 1, let. b) et intérêt légitime à répondre (art. 6, al. 1, let. f).
 

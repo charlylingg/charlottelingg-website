@@ -26,7 +26,7 @@ Zur Auswertung der Besucherzahlen wird Cloudflare Web Analytics verwendet. Der D
 
 ## 5. Kontaktformular und E-Mail
 
-Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, Anliegen und Nachricht als E-Mail an <contact@charlottelingg.com> geschickt, bei Sponsoring-Anfragen an <sponsoring@charlottelingg.com>. Für den Versand wird Resend (Resend, Inc., USA) eingesetzt, das Postfach liegt bei Proton (Proton AG, Schweiz). Auf der Website selbst wird nichts gespeichert. Für die Übermittlung in die USA stützt sich Resend auf das Data Privacy Framework bzw. auf Standardvertragsklauseln.
+Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, Anliegen und Nachricht als E-Mail an <contact@charlottelingg.com> geschickt, bei Sponsoring-Anfragen an <sponsoring@charlottelingg.com>. Für den Versand wird Resend (Resend, Inc., USA) eingesetzt; die Nachrichten werden über Server in der EU (Irland) verschickt. Das Postfach liegt bei Proton (Proton AG, Schweiz). Auf der Website selbst wird nichts gespeichert. Für die Übermittlung in die USA stützt sich Resend auf das Data Privacy Framework bzw. auf Standardvertragsklauseln.
 
 Deine Angaben werden nur verwendet, um deine Anfrage zu beantworten, und nicht an Dritte weitergegeben. Sie werden gelöscht, sobald sie nicht mehr nötig sind, spätestens nach zwei Jahren, sofern keine gesetzliche Aufbewahrungspflicht besteht. Dasselbe gilt für E-Mails, die du direkt schickst. Rechtsgrundlage nach DSGVO: Anfrage bzw. Vertragsanbahnung (Art. 6 Abs. 1 lit. b) und berechtigtes Interesse an der Beantwortung (Art. 6 Abs. 1 lit. f).
 
