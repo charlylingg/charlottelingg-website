@@ -31,8 +31,9 @@ export function monatJahr(jahr: number, monat: number, locale: Locale): string {
   }).format(new Date(Date.UTC(jahr, monat - 1, 1)));
 }
 
-/** Datum eines Blogbeitrags: "2026-10" -> «Oktober 2026», Date -> «24.10.2026», Platzhalter -> undefined */
-export function blogDatum(wert: string | Date, locale: Locale): string | undefined {
+/** Datum eines Blogbeitrags: "2026-10" -> «Oktober 2026», Date -> «24.10.2026», Platzhalter oder leer -> undefined */
+export function blogDatum(wert: string | Date | undefined, locale: Locale): string | undefined {
+  if (wert === undefined) return undefined;
   if (wert instanceof Date) return datum(wert);
   const monat = wert.match(/^(\d{4})-(\d{2})$/);
   return monat ? monatJahr(Number(monat[1]), Number(monat[2]), locale) : undefined;

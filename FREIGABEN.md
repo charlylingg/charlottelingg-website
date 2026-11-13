@@ -27,14 +27,13 @@ Wer freigibt (gemäss CLAUDE.md): Texte in Charlottes Namen, Bilder von ihr, Par
 | Station 01 Zermatt und Wallis | `weg/station-01-zermatt.md` | true | |
 | Station 02 Liechtenstein | `weg/station-02-liechtenstein.md` | true | |
 | Station 03 Europacup und WM | `weg/station-03-europacup.md` | true | |
-| Station 04 Comeback, **Fassung mit Diagnose** («Drei Kreuzbandrisse …») | `weg/station-04-comeback.md` | **false** | |
-| Station 04 Comeback, Kurzfassung ohne Diagnose («Drei Verletzungen …») | `weg/station-04-comeback-kurz.md` | true | |
+| Station 04 Comeback («Drei Kreuzbandrisse, dreimal zurück …») | `weg/station-04-comeback.md` | true | 13.11.2026 |
 | Station Ziel Olympia 2030 | `weg/station-05-ziel.md` | true | |
 | Geschichte: Wo alles begann | `weg/geschichte-01-wo-alles-begann.md` | true | |
 | Geschichte: Meine Jahre im Wallis | `weg/geschichte-02-wallis.md` | true | |
 | Geschichte: Ein neuer Anfang | `weg/geschichte-03-neuer-anfang.md` | true | |
 | Geschichte: Meine schönsten Resultate | `weg/geschichte-04-resultate.md` | true | |
-| Geschichte: **Rückschläge, die mich stärker gemacht haben** (Jahre, Orte, Hergang der Verletzungen) | `weg/geschichte-05-rueckschlaege.md` | **false** | |
+| Geschichte: **Rückschläge, die mich stärker gemacht haben** (Jahre, Orte, Hergang der Verletzungen) | `weg/geschichte-05-rueckschlaege.md` | **false** | nicht freigegeben, Entscheid 13.11.2026 |
 | Geschichte: Bereit für diese Saison | `weg/geschichte-06-bereit.md` | true | |
 | Unterwegs (Instagram-Hinweis) | `unterwegs.md` | true | |
 | Blog (Überschrift) | `blog.md` | true | |
@@ -46,15 +45,15 @@ Wer freigibt (gemäss CLAUDE.md): Texte in Charlottes Namen, Bilder von ihr, Par
 | Impressum (nur Gerüst «Inhalt folgt.») | `impressum.md` | true | |
 | Datenschutz (nur Gerüst «Inhalt folgt.») | `datenschutz.md` | true | |
 
-Zur Station 04: Es gibt zwei Fassungen mit derselben Position. Solange die Fassung mit Diagnose `freigabe: false` hat, zeigt die Website die Kurzfassung. In der Vorschau mit Entwürfen ersetzt die Fassung mit Diagnose die Kurzfassung. Gibt Charlotte die Fassung mit Diagnose frei, die Kurzfassung löschen.
+Zur Station 04: Seit dem Entscheid vom 13.11.2026 gibt es nur noch die Fassung «Drei Kreuzbandrisse …». Die Kurzfassung («Drei Verletzungen …», `station-04-comeback-kurz.md`) wurde gelöscht.
 
 ## Blogbeiträge (`src/content/blog/de/`)
 
 | Beitrag | Datei | Status | freigabe | Freigegeben am (Michel) |
 |---------|-------|--------|----------|-------------------------|
-| Zurück im Weltcup | `zurueck-im-weltcup.md` | veroeffentlicht | true | |
-| **Drei Kreuzbandrisse, drei Comebacks** (ganzer Beitrag) | `drei-kreuzbandrisse-drei-comebacks.md` | veroeffentlicht | **false** | |
-| Qualität statt Quantität | `qualitaet-statt-quantitaet.md` | folgt | true | |
+| Zurück im Weltcup (Datum 13.11.2026) | `zurueck-im-weltcup.md` | veroeffentlicht | true | 13.11.2026 |
+| **Drei Kreuzbandrisse, drei Comebacks** (ganzer Beitrag) | `drei-kreuzbandrisse-drei-comebacks.md` | veroeffentlicht | **false** | nicht freigegeben, Entscheid 13.11.2026 |
+| Qualität statt Quantität (ohne Datum) | `qualitaet-statt-quantitaet.md` | folgt | true | |
 
 ## Bilder (`src/content/bilder/`)
 
