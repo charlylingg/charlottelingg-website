@@ -1,9 +1,13 @@
 ---
-/** Gerüst für Impressum und Datenschutz. Inhalt folgt in einem eigenen Auftrag. */
-import { render } from 'astro:content';
+/**
+ * Impressum und Datenschutz. Texte in src/content/texte/<sprache>/impressum.md bzw. datenschutz.md.
+ * Die Zeile <!-- bildnachweise --> im Text wird durch die Liste der Fotos ersetzt,
+ * die auf der Website im Einsatz sind (src/content/bilder, siehe getBildnachweise).
+ */
 import Base from '../layouts/Base.astro';
 import EntwurfLabel from './EntwurfLabel.astro';
 import { getText } from '../lib/inhalte';
+import { getBildnachweise } from '../lib/bilder';
 import type { Locale } from '../i18n';
 
 interface Props {
@@ -13,18 +17,32 @@ interface Props {
 
 const { locale, seite } = Astro.props;
 const text = await getText(locale, seite);
-const Inhalt = text ? (await render(text.eintrag)).Content : undefined;
+
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+let html = text?.eintrag.rendered?.html ?? '';
+const MARKE = '<!-- bildnachweise -->';
+if (html.includes(MARKE)) {
+  const nachweise = await getBildnachweise(text!.lang);
+  const liste = nachweise.length
+    ? `<ul class="rechtsseite__bildnachweise" role="list">${nachweise.map((z) => `<li>${escapeHtml(z)}</li>`).join('')}</ul>`
+    : '';
+  html = html.replace(MARKE, liste);
+}
+/* Hinweise für die Bearbeitung (HTML-Kommentare) nicht ausliefern */
+html = html.replace(/<!--[\s\S]*?-->\n?/g, '');
 ---
 
 <Base title={text?.data.titel} description={text?.data.seo_beschreibung}>
   {
-    text && Inhalt && (
+    text && (
       <section class="rechtsseite sektion" lang={text.lang !== locale ? text.lang : undefined}>
         <div class="rechtsseite__innen inhalt">
           {text.entwurf && <EntwurfLabel locale={locale} />}
           <h1 class="t-titel">{text.data.titel}</h1>
           <div class="rechtsseite__text">
-            <Inhalt />
+            <Fragment set:html={html} />
           </div>
         </div>
       </section>
@@ -33,16 +51,42 @@ const Inhalt = text ? (await render(text.eintrag)).Content : undefined;
 </Base>
 
 <style>
+  /* Lesebreite wie bei den Blogbeiträgen */
   .rechtsseite__innen {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: var(--space-20);
+    max-width: calc(var(--mass-760) + 2 * var(--space-32));
   }
 
   .rechtsseite__text {
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
-    max-width: var(--mass-760);
+    gap: var(--space-14);
+    width: 100%;
+    font-size: var(--size-16);
+    line-height: var(--line-160);
+    overflow-wrap: break-word;
+  }
+
+  .rechtsseite__text :global(h2) {
+    margin-top: var(--space-24);
+    font-size: var(--size-28);
+    line-height: var(--line-105);
+    text-transform: uppercase;
+    overflow-wrap: normal;
+  }
+
+  .rechtsseite__text :global(address) {
+    font-style: normal;
+  }
+
+  .rechtsseite__text :global(.rechtsseite__bildnachweise) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
   }
 </style>
