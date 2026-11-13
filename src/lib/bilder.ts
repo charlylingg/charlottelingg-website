@@ -6,7 +6,13 @@
  */
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { SHOW_ENTWUERFE } from '../config';
-import type { Locale } from '../i18n';
+import { tf, type Locale } from '../i18n';
+import { getBlog } from './inhalte';
+
+/** Einträge in src/content/bilder für die festen Bildstellen der Website */
+export const BILD_HERO = 'hero-soelden-2026';
+export const BILD_PORTRAIT = 'portrait-charlotte-lingg';
+export const BILD_TEILEN = 'og-charlotte-lingg';
 
 type BildDaten = CollectionEntry<'bilder'>['data'];
 
@@ -43,4 +49,25 @@ export async function getBild(id: string, locale: Locale): Promise<Bild | undefi
  */
 export function getBlogBild(slug: string, locale: Locale): Promise<Bild | undefined> {
   return getBild(`blog-${slug}`, locale);
+}
+
+/**
+ * Bildnachweise für das Impressum: alle Fotos, die auf der Website sichtbar im Einsatz sind
+ * (Hero, Portrait, Blogbeiträge mit Foto), nach demselben Mechanismus wie auf den Seiten selbst.
+ * Kommt ein neues Foto dazu oder ersetzt eines ein anderes, stimmt die Liste automatisch.
+ * Das Vorschaubild beim Teilen (BILD_TEILEN) erscheint auf der Website nicht und fehlt deshalb hier.
+ * Format: «Foto <Verwendung>: <Fotograf>» (Texte in src/i18n, bildnachweis.*).
+ */
+export async function getBildnachweise(locale: Locale): Promise<string[]> {
+  const zeilen: string[] = [];
+  const hero = await getBild(BILD_HERO, locale);
+  if (hero) zeilen.push(tf(locale, 'bildnachweis.hero', { name: hero.fotograf }));
+  const portrait = await getBild(BILD_PORTRAIT, locale);
+  if (portrait) zeilen.push(tf(locale, 'bildnachweis.portrait', { name: portrait.fotograf }));
+  for (const beitrag of await getBlog(locale)) {
+    if (!beitrag.data.bild) continue;
+    const foto = await getBlogBild(beitrag.slug, locale);
+    if (foto) zeilen.push(tf(locale, 'bildnachweis.blog', { titel: beitrag.data.titel, name: foto.fotograf }));
+  }
+  return zeilen;
 }

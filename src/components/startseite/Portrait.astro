@@ -3,7 +3,7 @@ import Bildplatzhalter from '../Bildplatzhalter.astro';
 import EntwurfLabel from '../EntwurfLabel.astro';
 import Foto from '../Foto.astro';
 import { getText } from '../../lib/inhalte';
-import { getBild } from '../../lib/bilder';
+import { BILD_PORTRAIT, getBild } from '../../lib/bilder';
 import type { Locale } from '../../i18n';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 const { locale } = Astro.props;
 const text = await getText(locale, 'portrait');
 /** Portrait aus src/content/bilder. Ohne geklärte Lizenz (und ohne Entwürfe) bleibt der Platzhalter. */
-const bild = await getBild('portrait-charlotte-lingg', locale);
+const bild = await getBild(BILD_PORTRAIT, locale);
 ---
 
 {
