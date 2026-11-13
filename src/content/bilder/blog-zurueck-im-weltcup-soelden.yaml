@@ -1,0 +1,16 @@
+# Blogbeitrag «Zurück im Weltcup» (Querformat 16:10): Vorschaukarte auf der Startseite und Beitragsseite, DE und FR.
+# Fotograf Marco Büchel, Sölden, Aufnahme 23.10.2026.
+# Lizenz geklärt, bestätigt durch Michel Gurnari am 13.11.2026 (siehe LIZENZEN.md).
+# Ersetzt das Schwarzweissbild von Stefanie Frei (blog-zurueck-im-weltcup). Mit lizenz_geklaert: false erscheint
+# es nur in der Vorschau mit Entwürfen, sonst bleibt das Bild von Stefanie Frei.
+datei: /bilder/blog-zurueck-im-weltcup-soelden.webp
+fallback: /bilder/blog-zurueck-im-weltcup-soelden.jpg
+breite: 1600
+hoehe: 1000
+alt_de: "Charlotte Lingg im Profil mit Helm und Skibrille in Sölden"
+alt_fr: "Charlotte Lingg de profil avec casque et masque de ski à Sölden"
+fotograf: "Marco Büchel"
+lizenz_geklaert: true
+# Kaiser-Logo (Sponsorenpflicht), Head und Brille bleiben sichtbar
+ausschnitt: "45% 20%"
+ersetzt: blog-zurueck-im-weltcup

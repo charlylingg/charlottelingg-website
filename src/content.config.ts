@@ -172,6 +172,12 @@ const bilder = defineCollection({
       ausschnitt: z.string().regex(/^\d{1,3}% \d{1,3}%$/, 'Ausschnitt wie «60% 45%»').optional(),
       /** Bildausschnitt ab 1100 px Breite (Hero: Bild links, Textfeld rechts), z. B. «62% 45%». Fehlt er, gilt «ausschnitt». */
       ausschnitt_breit: z.string().regex(/^\d{1,3}% \d{1,3}%$/, 'Ausschnitt wie «62% 45%»').optional(),
+      /**
+       * Name eines anderen Eintrags, den dieses Bild ersetzt, z. B. «portrait-charlotte-lingg».
+       * Ist dieses Bild freigegeben (oder Vorschau mit Entwürfen), erscheint es an dessen Stelle.
+       * Sonst bleibt das ersetzte Bild (Fallback, solange die Lizenz offen ist).
+       */
+      ersetzt: z.string().regex(/^[a-z0-9-]+$/, 'Name eines Eintrags in src/content/bilder, z. B. portrait-charlotte-lingg').optional(),
     })
     .superRefine((b, ctx) => {
       for (const feld of ['datei', 'fallback'] as const) {
