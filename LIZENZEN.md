@@ -5,6 +5,7 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 > **Achtung**
 > - Das imago-Bild **Weltcup Lech 2021** darf **nie** verwendet werden.
 > - Shooting **Stefanie Frei**: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe Fotos). Bildnachweis am Bild.
+> - Fotos **Marco Büchel** (Sölden, 23.10.2026): Lizenz geklärt, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild.
 
 ## Fotos
 
@@ -12,8 +13,10 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 |-------|-----------------|---------------------|------------|-----------|
 | `public/bilder/hero-soelden-2026.webp`, `public/bilder/hero-soelden-2026.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Hero, Weltcup-Riesenslalom Sölden, 24.10.2026. Eintrag `src/content/bilder/hero-soelden-2026.yaml` mit `lizenz_geklaert: true`. |
 | `public/bilder/og-charlotte-lingg.jpg` | Giovanni Maria Pizzato | Kommerzielle Lizenz vorhanden, Fotograf Giovanni Maria Pizzato, bestätigt durch Michel Gurnari am 10.11.2026 | – | Vorschaubild beim Teilen (Open Graph, Twitter Card), DE und FR. Eintrag `src/content/bilder/og-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
-| `public/bilder/portrait-charlotte-lingg.webp`, `public/bilder/portrait-charlotte-lingg.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Sektion 01 Portrait, Aufnahme 28.10.2024. Eintrag `src/content/bilder/portrait-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
-| `public/bilder/blog-zurueck-im-weltcup.webp`, `public/bilder/blog-zurueck-im-weltcup.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup» (Vorschau und Beitragsseite, DE und FR), Aufnahme 28.10.2024. Eintrag `src/content/bilder/blog-zurueck-im-weltcup.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/portrait-charlotte-lingg.webp`, `public/bilder/portrait-charlotte-lingg.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Sektion 01 Portrait, Aufnahme 28.10.2024. Derzeit nicht im Einsatz (ersetzt durch das Portrait von Marco Büchel; Fallback, solange Lizenz Büchel offen). Eintrag `src/content/bilder/portrait-charlotte-lingg.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/blog-zurueck-im-weltcup.webp`, `public/bilder/blog-zurueck-im-weltcup.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup», Aufnahme 28.10.2024. Derzeit nicht im Einsatz (ersetzt durch das Bild von Marco Büchel; Fallback, solange Lizenz Büchel offen). Eintrag `src/content/bilder/blog-zurueck-im-weltcup.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/portrait-charlotte-lingg-soelden.webp`, `public/bilder/portrait-charlotte-lingg-soelden.jpg` | Marco Büchel | Lizenz geklärt, Fotograf Marco Büchel, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild. | – | Sektion 01 Portrait, Training Sölden, Aufnahme 23.10.2026. Eintrag `src/content/bilder/portrait-charlotte-lingg-soelden.yaml` mit `lizenz_geklaert: true`. |
+| `public/bilder/blog-zurueck-im-weltcup-soelden.webp`, `public/bilder/blog-zurueck-im-weltcup-soelden.jpg` | Marco Büchel | Lizenz geklärt, Fotograf Marco Büchel, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup» (Vorschau und Beitragsseite, DE und FR), Sölden, Aufnahme 23.10.2026. Eintrag `src/content/bilder/blog-zurueck-im-weltcup-soelden.yaml` mit `lizenz_geklaert: true`. |
 
 Bilder mit `lizenz_geklaert: false` (in `src/content/bilder/`) werden nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` gezeigt. Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert. Sobald der Fotograf die Nutzung bestätigt: hier Lizenz und Datum eintragen und `lizenz_geklaert: true` setzen.
 

@@ -1,6 +1,8 @@
 # Blogbeitrag «Zurück im Weltcup» (Querformat 16:10): Vorschaukarte auf der Startseite und Beitragsseite, DE und FR.
 # Zuordnung über den Namen: blog-<Dateiname des Beitrags>. Shooting Stefanie Frei, Aufnahme 28.10.2024.
 # Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe LIZENZEN.md).
+# Derzeit nicht im Einsatz: ersetzt durch blog-zurueck-im-weltcup-soelden (Marco Büchel).
+# Bleibt als Fallback erhalten (erscheint wieder, falls dort lizenz_geklaert: false steht) und für spätere Verwendung.
 datei: /bilder/blog-zurueck-im-weltcup.webp
 fallback: /bilder/blog-zurueck-im-weltcup.jpg
 breite: 1600

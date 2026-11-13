@@ -1,5 +1,7 @@
 # Sektion 01 Portrait (Hochformat 3:4). Shooting Stefanie Frei, Aufnahme 28.10.2024.
 # Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe LIZENZEN.md).
+# Derzeit nicht im Einsatz: ersetzt durch portrait-charlotte-lingg-soelden (Marco Büchel).
+# Bleibt als Fallback erhalten (erscheint wieder, falls dort lizenz_geklaert: false steht) und für spätere Verwendung.
 datei: /bilder/portrait-charlotte-lingg.webp
 fallback: /bilder/portrait-charlotte-lingg.jpg
 breite: 1200
