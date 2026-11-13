@@ -14,7 +14,7 @@ Landstrasse 81<br>
 Liechtenstein
 </address>
 
-E-Mail: <kontakt@charlottelingg.com>
+E-Mail: <contact@charlottelingg.com>
 
 ## Bildnachweise
 

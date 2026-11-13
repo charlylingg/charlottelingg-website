@@ -1,13 +1,16 @@
 ---
 /**
- * Kontakt mit Formular – nur die Oberfläche. Der Versand folgt in einem eigenen Auftrag.
- * Bis dahin ist der Senden-Knopf deaktiviert. Das Formular wird nirgends hingeschickt.
- * Fehlermeldungen erscheinen ohne JavaScript, sobald ein Feld nach der Eingabe ungültig ist (:user-invalid).
- * Honeypot-Feld «website» ist für Menschen unsichtbar (visually-hidden, Spam-Schutz für später).
+ * Kontakt mit Formular. Versand über den Worker (POST /api/kontakt, siehe worker/kontakt.ts).
+ * Mit JavaScript wird per fetch gesendet, ohne JavaScript als normaler Post; der Worker leitet dann
+ * zurück auf /?gesendet=1#kontakt-gesendet bzw. /?fehler=1#kontakt-fehler, die Meldung erscheint über :target.
+ * Fehlermeldungen der Felder erscheinen ohne JavaScript, sobald ein Feld nach der Eingabe ungültig ist (:user-invalid).
+ * Spam-Schutz: Honeypot-Feld «website» (für Menschen unsichtbar) und Feld «zeit» (Zeitstempel beim Laden, per JavaScript).
+ * Die Prüfungen (Pflichtfelder, Längen) entsprechen denen im Worker.
  */
 import EntwurfLabel from '../EntwurfLabel.astro';
 import { getText } from '../../lib/inhalte';
-import { t, type Locale } from '../../i18n';
+import { localizePath, t, type Locale } from '../../i18n';
+import { EMAIL_KONTAKT } from '../../config';
 
 interface Props {
   locale: Locale;
@@ -15,7 +18,19 @@ interface Props {
 
 const { locale } = Astro.props;
 const text = await getText(locale, 'kontakt');
-const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map((a) => t(locale, `form.anliegen.${a}`));
+const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map((a) => ({
+  wert: a,
+  text: t(locale, `form.anliegen.${a}`),
+}));
+/** Text mit Platzhalter {name} in den Teil davor und danach zerlegen */
+const teile = (text: string, name: string) => {
+  const [vor = '', nach = ''] = text.split(`{${name}}`);
+  return { vor, nach };
+};
+const direkt = teile(t(locale, 'form.direkt'), 'email');
+const fehlerSenden = teile(t(locale, 'form.fehler.senden'), 'email');
+const datenschutz = teile(t(locale, 'form.datenschutz'), 'link');
+const mailto = `mailto:${EMAIL_KONTAKT}`;
 ---
 
 {
@@ -35,7 +50,14 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
           <p class="kontakt__einleitung">{text.data.text}</p>
         </div>
 
-        <form class="formular" aria-label={t(locale, 'form.label')} lang={locale}>
+        <form
+          class="formular"
+          aria-label={t(locale, 'form.label')}
+          lang={locale}
+          action="/api/kontakt"
+          method="post"
+          data-kontakt-formular
+        >
           <p class="formular__legende">{t(locale, 'form.pflicht_legende')}</p>
           <div class="formular__reihe">
             <div class="feld">
@@ -48,6 +70,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
                 type="text"
                 autocomplete="name"
                 required
+                maxlength="100"
                 aria-describedby="kontakt-name-fehler"
               />
               <p id="kontakt-name-fehler" class="feld__fehler">
@@ -65,6 +88,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
                 autocomplete="email"
                 inputmode="email"
                 required
+                maxlength="200"
                 aria-describedby="kontakt-email-fehler"
               />
               <p id="kontakt-email-fehler" class="feld__fehler">
@@ -78,7 +102,7 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
             </label>
             <select id="kontakt-anliegen" name="anliegen" required>
               {anliegen.map((a) => (
-                <option>{a}</option>
+                <option value={a.wert}>{a.text}</option>
               ))}
             </select>
           </div>
@@ -86,7 +110,15 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
             <label for="kontakt-nachricht">
               {t(locale, 'form.nachricht')} <span aria-hidden="true">*</span>
             </label>
-            <textarea id="kontakt-nachricht" name="nachricht" rows="4" required aria-describedby="kontakt-nachricht-fehler" />
+            <textarea
+              id="kontakt-nachricht"
+              name="nachricht"
+              rows="4"
+              required
+              minlength="10"
+              maxlength="5000"
+              aria-describedby="kontakt-nachricht-fehler"
+            />
             <p id="kontakt-nachricht-fehler" class="feld__fehler">
               {t(locale, 'form.fehler.nachricht')}
             </p>
@@ -96,15 +128,35 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
             <label for="kontakt-website">{t(locale, 'form.honeypot')}</label>
             <input id="kontakt-website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
+          <input type="hidden" name="sprache" value={locale} />
+          <input type="hidden" name="zeit" value="" />
 
           <div class="formular__senden">
-            <button class="knopf knopf--beere t-knopf formular__knopf" type="submit" disabled aria-describedby="kontakt-inaktiv">
+            <button
+              class="knopf knopf--beere t-knopf formular__knopf"
+              type="submit"
+              data-text-senden={t(locale, 'form.senden')}
+              data-text-laeuft={t(locale, 'form.senden_laeuft')}
+            >
               {t(locale, 'form.senden')}
             </button>
-            <p id="kontakt-inaktiv" class="formular__hinweis">
-              {t(locale, 'form.inaktiv')}
+            <p class="formular__hinweis">
+              {direkt.vor}<a href={mailto}>{EMAIL_KONTAKT}</a>{direkt.nach}
             </p>
           </div>
+
+          <div class="formular__meldungen" aria-live="polite">
+            <p id="kontakt-gesendet" class="formular__meldung" tabindex="-1">
+              {t(locale, 'form.gesendet')}
+            </p>
+            <p id="kontakt-fehler" class="formular__meldung" tabindex="-1">
+              {fehlerSenden.vor}<a href={mailto}>{EMAIL_KONTAKT}</a>{fehlerSenden.nach}
+            </p>
+          </div>
+
+          <p class="formular__datenschutz">
+            {datenschutz.vor}<a href={localizePath('/datenschutz/', locale)}>{t(locale, 'form.datenschutz_link')}</a>{datenschutz.nach}
+          </p>
         </form>
       </div>
     </section>
@@ -215,14 +267,108 @@ const anliegen = (['sponsoring', 'medien', 'anlass', 'allgemein'] as const).map(
     padding-inline: var(--space-28);
   }
 
-  /* Deaktiviert, bis der Versand gebaut ist: helle Fläche, Schrift bleibt lesbar (5.9:1) */
+  /* Hover/Fokus wie die übrigen Buttons auf aubergine Flächen */
+  .formular__knopf:not(:disabled):hover,
+  .formular__knopf:not(:disabled):focus-visible {
+    background: var(--color-aubergine);
+    color: var(--color-papier);
+    outline: var(--linie-2) solid var(--color-papier);
+    outline-offset: calc(-1 * var(--space-4));
+  }
+
+  /* Während des Sendens deaktiviert: helle Fläche, Schrift bleibt lesbar (5.9:1) */
   .formular__knopf:disabled {
     background: var(--color-hauch-2);
     color: var(--color-tinte-soft);
     cursor: not-allowed;
   }
 
-  .formular__hinweis {
+  .formular__hinweis,
+  .formular__datenschutz {
     font-size: var(--size-14);
   }
+
+  .formular__hinweis a,
+  .formular__meldung a {
+    overflow-wrap: anywhere;
+  }
+
+  /* Meldung nach dem Senden: mit JavaScript über die Klasse, ohne JavaScript über den Anker (:target) */
+  .formular__meldung {
+    display: none;
+    padding-left: var(--space-8);
+    border-left: var(--linie-6) solid var(--color-rosa);
+    /* Anker-Sprung (ohne JavaScript) landet unter dem fixierten Kopf */
+    scroll-margin-top: var(--space-92);
+  }
+
+  .formular__meldung:target,
+  .formular__meldung.ist-sichtbar {
+    display: block;
+  }
+
+  .formular__meldung:focus {
+    outline: none;
+  }
+
+  .formular__meldung:focus-visible {
+    outline: var(--fokus) solid var(--color-papier);
+    outline-offset: var(--space-2);
+  }
 </style>
+
+<script>
+  /**
+   * Progressive Verbesserung: Senden per fetch, Meldung in der aria-live-Region, Fokus auf die Meldung.
+   * Ohne JavaScript funktioniert das Formular als normaler Post (der Worker leitet zurück).
+   */
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-kontakt-formular]')) {
+    const zeit = form.querySelector<HTMLInputElement>('input[name="zeit"]');
+    const knopf = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const gesendet = form.querySelector<HTMLElement>('#kontakt-gesendet');
+    const fehler = form.querySelector<HTMLElement>('#kontakt-fehler');
+    const zeitSetzen = () => {
+      if (zeit) zeit.value = String(Date.now());
+    };
+    zeitSetzen();
+
+    const zeigen = (meldung: HTMLElement | null) => {
+      for (const m of [gesendet, fehler]) m?.classList.toggle('ist-sichtbar', m === meldung);
+      meldung?.focus();
+    };
+
+    // Rückkehr nach einem Post ohne fetch: Meldung zeigen, Adresse aufräumen
+    const parameter = new URLSearchParams(location.search);
+    if (parameter.has('gesendet') || parameter.has('fehler')) {
+      zeigen(parameter.has('gesendet') ? gesendet : fehler);
+      history.replaceState(null, '', location.pathname + '#kontakt');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!knopf || knopf.disabled) return;
+      zeigen(null);
+      knopf.disabled = true;
+      knopf.textContent = knopf.dataset.textLaeuft ?? '';
+      let ok = false;
+      try {
+        const antwort = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const daten = (await antwort.json()) as { ok?: boolean };
+        ok = antwort.ok && daten.ok === true;
+      } catch {
+        ok = false;
+      }
+      knopf.disabled = false;
+      knopf.textContent = knopf.dataset.textSenden ?? '';
+      if (ok) {
+        form.reset();
+        zeitSetzen();
+      }
+      zeigen(ok ? gesendet : fehler);
+    });
+  }
+</script>

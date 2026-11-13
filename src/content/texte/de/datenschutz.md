@@ -4,11 +4,11 @@ freigabe: true
 titel: "Datenschutz"
 ---
 
-Stand: [DATUM]
+Stand: 13.11.2026
 
 ## 1. Verantwortliche Person
 
-Charlotte Lingg, c/o Liechtensteinischer Skiverband, Landstrasse 81, 9494 Schaan, Liechtenstein, <kontakt@charlottelingg.com>
+Charlotte Lingg, c/o Liechtensteinischer Skiverband, Landstrasse 81, 9494 Schaan, Liechtenstein, <contact@charlottelingg.com>
 
 Diese Erklärung richtet sich nach dem Schweizer Datenschutzgesetz (DSG) und, soweit anwendbar, nach der Datenschutz-Grundverordnung (DSGVO), die auch in Liechtenstein gilt.
 
@@ -26,7 +26,7 @@ Zur Auswertung der Besucherzahlen wird Cloudflare Web Analytics verwendet. Der D
 
 ## 5. Kontaktformular und E-Mail
 
-Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, Anliegen und Nachricht als E-Mail an <kontakt@charlottelingg.com> geschickt. Für den Versand wird Resend (Resend, Inc., USA) eingesetzt, das Postfach liegt bei Proton (Proton AG, Schweiz). Auf der Website selbst wird nichts gespeichert. Für die Übermittlung in die USA stützt sich Resend auf das Data Privacy Framework bzw. auf Standardvertragsklauseln.
+Wenn du das Kontaktformular nutzt, werden Name, E-Mail-Adresse, Anliegen und Nachricht als E-Mail an <contact@charlottelingg.com> geschickt, bei Sponsoring-Anfragen an <sponsoring@charlottelingg.com>. Für den Versand wird Resend (Resend, Inc., USA) eingesetzt, das Postfach liegt bei Proton (Proton AG, Schweiz). Auf der Website selbst wird nichts gespeichert. Für die Übermittlung in die USA stützt sich Resend auf das Data Privacy Framework bzw. auf Standardvertragsklauseln.
 
 Deine Angaben werden nur verwendet, um deine Anfrage zu beantworten, und nicht an Dritte weitergegeben. Sie werden gelöscht, sobald sie nicht mehr nötig sind, spätestens nach zwei Jahren, sofern keine gesetzliche Aufbewahrungspflicht besteht. Dasselbe gilt für E-Mails, die du direkt schickst. Rechtsgrundlage nach DSGVO: Anfrage bzw. Vertragsanbahnung (Art. 6 Abs. 1 lit. b) und berechtigtes Interesse an der Beantwortung (Art. 6 Abs. 1 lit. f).
 
@@ -40,7 +40,7 @@ Diese Website enthält Links zu Partnern, zur FIS und zu weiteren Seiten. Für d
 
 ## 8. Deine Rechte
 
-Du kannst jederzeit Auskunft über deine gespeicherten Daten verlangen sowie deren Berichtigung, Löschung oder Herausgabe. Nach DSGVO hast du zudem das Recht auf Einschränkung der Bearbeitung und auf Widerspruch. Eine kurze E-Mail an <kontakt@charlottelingg.com> genügt.
+Du kannst jederzeit Auskunft über deine gespeicherten Daten verlangen sowie deren Berichtigung, Löschung oder Herausgabe. Nach DSGVO hast du zudem das Recht auf Einschränkung der Bearbeitung und auf Widerspruch. Eine kurze E-Mail an <contact@charlottelingg.com> genügt.
 
 Du kannst dich ausserdem bei einer Aufsichtsbehörde beschweren: in der Schweiz beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB), in Liechtenstein bei der Datenschutzstelle Liechtenstein.
 

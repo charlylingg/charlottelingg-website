@@ -5,11 +5,11 @@ uebersetzt: true
 titel: "Protection des données"
 ---
 
-État au : [DATUM]
+État au : 13.11.2026
 
 ## 1. Responsable
 
-Charlotte Lingg, c/o Liechtensteinischer Skiverband, Landstrasse 81, 9494 Schaan, Liechtenstein, <kontakt@charlottelingg.com>
+Charlotte Lingg, c/o Liechtensteinischer Skiverband, Landstrasse 81, 9494 Schaan, Liechtenstein, <contact@charlottelingg.com>
 
 La présente déclaration se fonde sur la loi suisse sur la protection des données (LPD) et, dans la mesure où il s’applique, sur le Règlement général sur la protection des données (RGPD), également en vigueur au Liechtenstein.
 
@@ -27,7 +27,7 @@ Le site utilise Cloudflare Web Analytics pour mesurer la fréquentation. Ce serv
 
 ## 5. Formulaire de contact et e-mail
 
-Si tu utilises le formulaire de contact, ton nom, ton adresse e-mail, l’objet et ton message sont envoyés par e-mail à <kontakt@charlottelingg.com>. L’envoi passe par Resend (Resend, Inc., États-Unis) et la boîte e-mail est hébergée chez Proton (Proton AG, Suisse). Rien n’est enregistré sur le site lui-même. Pour le transfert vers les États-Unis, Resend s’appuie sur le Data Privacy Framework ou sur des clauses contractuelles types.
+Si tu utilises le formulaire de contact, ton nom, ton adresse e-mail, l’objet et ton message sont envoyés par e-mail à <contact@charlottelingg.com>, ou à <sponsoring@charlottelingg.com> pour les demandes de sponsoring. L’envoi passe par Resend (Resend, Inc., États-Unis) et la boîte e-mail est hébergée chez Proton (Proton AG, Suisse). Rien n’est enregistré sur le site lui-même. Pour le transfert vers les États-Unis, Resend s’appuie sur le Data Privacy Framework ou sur des clauses contractuelles types.
 
 Tes données servent uniquement à répondre à ta demande et ne sont pas transmises à des tiers. Elles sont supprimées dès qu’elles ne sont plus nécessaires, au plus tard après deux ans, sauf obligation légale de conservation. Il en va de même pour les e-mails envoyés directement. Base juridique selon le RGPD : demande ou mesures précontractuelles (art. 6, al. 1, let. b) et intérêt légitime à répondre (art. 6, al. 1, let. f).
 
@@ -41,7 +41,7 @@ Ce site contient des liens vers des partenaires, la FIS et d’autres sites. Leu
 
 ## 8. Tes droits
 
-Tu peux à tout moment demander des informations sur les données te concernant, ainsi que leur rectification, leur suppression ou leur remise. Selon le RGPD, tu as également le droit à la limitation du traitement et le droit d’opposition. Un simple e-mail à <kontakt@charlottelingg.com> suffit.
+Tu peux à tout moment demander des informations sur les données te concernant, ainsi que leur rectification, leur suppression ou leur remise. Selon le RGPD, tu as également le droit à la limitation du traitement et le droit d’opposition. Un simple e-mail à <contact@charlottelingg.com> suffit.
 
 Tu peux aussi déposer une plainte auprès d’une autorité de contrôle : en Suisse auprès du Préposé fédéral à la protection des données et à la transparence (PFPDT), au Liechtenstein auprès de la Datenschutzstelle Liechtenstein.
 
