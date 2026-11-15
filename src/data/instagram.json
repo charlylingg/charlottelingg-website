@@ -1,6 +1,15 @@
 {
-  "aktualisiert": "2026-11-10T11:46:18.633Z",
+  "aktualisiert": "2026-11-15T17:44:08.673Z",
   "beitraege": [
+    {
+      "id": "17972228100186702",
+      "permalink": "https://www.instagram.com/p/DfvGJWtkYCW/",
+      "datum": "2026-11-14",
+      "typ": "CAROUSEL_ALBUM",
+      "bild": "17972228100186702.jpg",
+      "breite": 700,
+      "hoehe": 466
+    },
     {
       "id": "18218403706357752",
       "permalink": "https://www.instagram.com/p/De7CI_PAo9y/",
@@ -43,15 +52,6 @@
       "datum": "2026-07-20",
       "typ": "CAROUSEL_ALBUM",
       "bild": "18098291840205445.jpg",
-      "breite": 525,
-      "hoehe": 700
-    },
-    {
-      "id": "17947314321243892",
-      "permalink": "https://www.instagram.com/p/DavU0RcgsUN/",
-      "datum": "2026-07-13",
-      "typ": "CAROUSEL_ALBUM",
-      "bild": "17947314321243892.jpg",
       "breite": 525,
       "hoehe": 700
     }
