@@ -64,6 +64,8 @@ const resultate = defineCollection({
       rang: z.union([z.number().int().positive(), z.enum(['DNF', 'DNS', 'DSQ', 'DNQ'])]),
       /** Quelle bei der FIS – Pflichtfeld. [FIS-LINK] nur solange geprueft: false */
       fis_link: fisLink,
+      /** false = bleibt in den Daten, erscheint aber nicht als Kachel in der Sektion Resultate */
+      kachel: z.boolean().default(true),
     })
     .superRefine(ohnePlatzhalterWennGeprueft(['datum', 'saison', 'disziplin', 'land', 'fis_link'])),
 });
@@ -91,8 +93,25 @@ const rennen = defineCollection({
       hinweis: z.enum(['weltcuppunkte', 'sieg']).optional(),
       /** Quelle bei der FIS. [FIS-LINK] nur solange geprueft: false */
       fis_link: fisLink,
+      /** Resultat nach dem Rennen, kurz (z. B. «Rang 21» / «21e place»). Ein Rennen mit Resultat gilt als gefahren. */
+      resultat_de: z.string().min(1).optional(),
+      resultat_fr: z.string().min(1).optional(),
+      /** Link auf die FIS-Rangliste des Rennens */
+      resultat_link: z.url().optional(),
     })
-    .superRefine(ohnePlatzhalterWennGeprueft(['land', 'fis_link'])),
+    .superRefine(ohnePlatzhalterWennGeprueft(['land', 'fis_link']))
+    .superRefine((r, ctx) => {
+      const felder = ['resultat_de', 'resultat_fr', 'resultat_link'] as const;
+      const gesetzt = felder.filter((f) => r[f] !== undefined);
+      if (gesetzt.length === 0 || gesetzt.length === felder.length) return;
+      for (const feld of felder.filter((f) => r[f] === undefined)) {
+        ctx.addIssue({
+          code: 'custom',
+          path: [feld],
+          message: 'Resultat bitte vollständig eintragen: resultat_de, resultat_fr und resultat_link.',
+        });
+      }
+    }),
 });
 
 /** Partner-Kategorien in der Reihenfolge der Website. Bezeichnungen in src/i18n (partner.kategorie.*) */

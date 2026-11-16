@@ -27,8 +27,11 @@ const podest = [2, 1, 3].map((rang) => ({
 }));
 
 const stufenReihenfolge = ['Weltcup', 'WM'];
+/** Neueste Saison in den Daten: Kacheln aus dieser Saison zeigen das Jahr und verlinken auf die FIS-Rangliste */
+const saisons = resultate.map((r) => r.data.saison).filter((s) => !istPlatzhalter(s)).sort();
+const neuesteSaison = saisons.at(-1);
 const hoehepunkte = resultate
-  .filter((r) => stufenReihenfolge.includes(r.data.stufe))
+  .filter((r) => stufenReihenfolge.includes(r.data.stufe) && r.data.kachel)
   .sort((a, b) => stufenReihenfolge.indexOf(a.data.stufe) - stufenReihenfolge.indexOf(b.data.stufe) || nachOrt(a, b))
   .map((r) => ({
     rang: typeof r.data.rang === 'number' ? `${r.data.rang}.` : r.data.rang,
@@ -40,7 +43,13 @@ const hoehepunkte = resultate
     ]
       .filter(Boolean)
       .join(' '),
-    zeile2: r.data.ort,
+    ...(() => {
+      const aktuell = r.data.saison === neuesteSaison && r.data.datum instanceof Date;
+      return {
+        zeile2: aktuell ? `${r.data.ort} ${(r.data.datum as Date).getUTCFullYear()}` : r.data.ort,
+        link: aktuell && r.data.fis_link.startsWith('http') ? r.data.fis_link : undefined,
+      };
+    })(),
   }));
 
 const disziplinName = (d: string) => (istPlatzhalter(d) ? undefined : tSchluessel(locale, `disziplin.${d}`, d));
@@ -126,12 +135,26 @@ const medaille: Record<number, string> = { 1: 'gold', 2: 'silber', 3: 'bronze' }
         <ul role="list" class="hoehepunkte">
           {hoehepunkte.map((h, i) => (
             <li class="hoehepunkt">
-              <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rosa']}>{h.rang}</span>
-              <span class="hoehepunkt__text">
-                {h.zeile1}
-                <br />
-                {h.zeile2}
-              </span>
+              {h.link ? (
+                <a class="hoehepunkt hoehepunkt__link" href={h.link} target="_blank" rel="noopener">
+                  <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rosa']}>{h.rang}</span>
+                  <span class="hoehepunkt__text">
+                    {h.zeile1}
+                    <br />
+                    {h.zeile2}
+                    <span class="visually-hidden">{t(locale, 'link.neues_fenster')}</span>
+                  </span>
+                </a>
+              ) : (
+                <>
+                  <span class:list={['hoehepunkt__zahl', i % 2 === 1 && 'hoehepunkt__zahl--rosa']}>{h.rang}</span>
+                  <span class="hoehepunkt__text">
+                    {h.zeile1}
+                    <br />
+                    {h.zeile2}
+                  </span>
+                </>
+              )}
             </li>
           ))}
           <li class="hoehepunkt">
@@ -354,6 +377,18 @@ const medaille: Record<number, string> = { 1: 'gold', 2: 'silber', 3: 'bronze' }
     display: flex;
     align-items: baseline;
     gap: var(--space-14);
+  }
+
+  /* Kachel mit Link auf die FIS-Rangliste: sieht aus wie die übrigen Kacheln, Unterstrich erst bei Hover/Fokus */
+  .hoehepunkt__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hoehepunkt__link:hover .hoehepunkt__text,
+  .hoehepunkt__link:focus-visible .hoehepunkt__text {
+    color: var(--color-beere);
+    text-decoration: underline;
   }
 
   .hoehepunkt__zahl {

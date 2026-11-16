@@ -32,6 +32,22 @@ Einträge mit `beispiel: true` sind Vorlagen und erscheinen nicht auf der Websit
 
 Freigaben: Inhalte mit `freigabe: false` erscheinen nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` (als Entwurf markiert). Übersicht in `FREIGABEN.md`. Bildstellen und gesuchte Bilder: `BILDER.md`. Design-Referenz der Startseite: `design/referenz/startseite.dc.html`.
 
+## Nach einem Rennen
+
+1. **Resultat beim Rennen eintragen.** In `src/content/rennen/<saison>/` die Datei des Rennens öffnen und drei Zeilen ergänzen:
+
+   ```yaml
+   resultat_de: "Rang 21"
+   resultat_fr: "21e place"
+   resultat_link: https://www.fis-ski.com/DB/general/results.html?sectorcode=AL&raceid=...
+   ```
+
+   `resultat_link` ist die Rangliste des Rennens auf fis-ski.com. Es braucht immer alle drei Zeilen. Sobald sie eingetragen sind, gilt das Rennen als gefahren: Es erscheint im Rennkalender oben unter «Saison bisher» mit dem Resultat als Link, und der Knopf «Alle … weiteren Rennen» zählt es nicht mehr mit.
+2. **Bei einem besseren Resultat zusätzlich in die Resultate.** Ist es ein Podestplatz im Europacup oder ein neues bestes Resultat im Weltcup, in `src/content/resultate/` eine neue Datei anlegen (Vorlage: `beispiel.yaml`, mit Rang und FIS-Link). Soll ein älteres Resultat nicht mehr als Kachel erscheinen, dort `kachel: false` eintragen. Es bleibt in den Daten.
+3. **Pull Request prüfen** wie unter «Wie Änderungen laufen».
+
+Resultate nur gemäss offizieller FIS-Rangliste eintragen.
+
 ## Für Entwickler
 
 ```bash

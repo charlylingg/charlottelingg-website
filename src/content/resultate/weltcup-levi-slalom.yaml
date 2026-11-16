@@ -8,3 +8,5 @@ ort: "Levi"
 land: FIN
 rang: 29
 fis_link: https://www.fis-ski.com/DB/general/results.html?sectorcode=AL&raceid=118334
+# Bleibt in den Daten, erscheint aber nicht mehr als Kachel (Kachel zeigt Levi 2026)
+kachel: false
