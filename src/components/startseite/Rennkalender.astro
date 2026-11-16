@@ -3,6 +3,7 @@
  * Rennkalender: Weltcup und Europacup getrennt. Oben je ein kompakter Block «Saison bisher»
  * mit den gefahrenen Rennen (Rennen mit Resultat), darunter die kommenden Rennen:
  * die ersten zwei sichtbar, der Rest aufklappbar (details/summary, ohne JavaScript).
+ * Rennen mit ohne_start: true werden nicht angezeigt.
  * Daten aus src/content/rennen, Texte aus src/content/texte/<sprache>/rennkalender.md.
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -20,7 +21,8 @@ const SICHTBAR = 2;
 
 const { locale } = Astro.props;
 const text = await getText(locale, 'rennkalender');
-const rennen = (await getCollection('rennen', (r) => !r.data.beispiel)).sort(
+/** Rennen ohne Start (ohne_start: true) erscheinen nicht im Kalender und zählen nicht zu den weiteren Rennen */
+const rennen = (await getCollection('rennen', (r) => !r.data.beispiel && !r.data.ohne_start)).sort(
   (a, b) => a.data.datum.getTime() - b.data.datum.getTime(),
 );
 

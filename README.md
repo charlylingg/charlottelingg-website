@@ -46,6 +46,8 @@ Freigaben: Inhalte mit `freigabe: false` erscheinen nur in einem Build mit `PUBL
 2. **Bei einem besseren Resultat zusätzlich in die Resultate.** Ist es ein Podestplatz im Europacup oder ein neues bestes Resultat im Weltcup, in `src/content/resultate/` eine neue Datei anlegen (Vorlage: `beispiel.yaml`, mit Rang und FIS-Link). Soll ein älteres Resultat nicht mehr als Kachel erscheinen, dort `kachel: false` eintragen. Es bleibt in den Daten.
 3. **Pull Request prüfen** wie unter «Wie Änderungen laufen».
 
+Fährt Charlotte ein Rennen nicht, beim Rennen `ohne_start: true` setzen. Es verschwindet dann aus dem Kalender.
+
 Resultate nur gemäss offizieller FIS-Rangliste eintragen.
 
 ## Für Entwickler
