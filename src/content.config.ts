@@ -89,6 +89,8 @@ const rennen = defineCollection({
       ort: z.string().min(1),
       land,
       status: z.enum(['geplant', 'abgesagt', 'gefahren']),
+      /** true = Charlotte fährt dieses Rennen nicht: bleibt in den Daten, erscheint aber nicht im Rennkalender */
+      ohne_start: z.boolean().default(false),
       /** Kurzer Hinweis unter dem Ort. Texte stehen in src/i18n (rennen.hinweis.*) */
       hinweis: z.enum(['weltcuppunkte', 'sieg']).optional(),
       /** Quelle bei der FIS. [FIS-LINK] nur solange geprueft: false */

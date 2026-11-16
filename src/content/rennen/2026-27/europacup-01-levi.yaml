@@ -7,4 +7,6 @@ disziplinen: [Slalom, Slalom]
 ort: "Levi"
 land: FIN
 status: geplant
+# Charlotte startet nicht (Entscheid Michel Gurnari, 16.11.2026)
+ohne_start: true
 fis_link: https://www.fis-ski.com/DB/general/event-details.html?sectorcode=AL&eventid=62979
