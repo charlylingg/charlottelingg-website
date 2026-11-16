@@ -1,7 +1,9 @@
 # BEISPIEL – kein echtes Rennen. Vorlage für den Rennkalender.
 # disziplinen: ein Eintrag pro Rennen, z. B. [Slalom, Slalom] wird als «2× SL» angezeigt.
-# datum_bis nur bei mehrtägigen Rennen. finale: true zeigt «Finale» statt der Disziplinen.
-# hinweis (optional): weltcuppunkte oder sieg
+# datum_bis nur bei mehrtägigen Rennen. finale: true zeigt «Finale» (mit Disziplinen: «RS, SL · Finale»).
+# hinweis (optional): weltcuppunkte oder sieg (wird bei gefahrenen Rennen nicht angezeigt)
+# Nach dem Rennen (optional, immer alle drei): resultat_de, resultat_fr, resultat_link (FIS-Rangliste).
+# Ein Rennen mit Resultat gilt als gefahren und erscheint unter «Saison bisher».
 beispiel: true
 geprueft: false
 datum: 2000-01-01

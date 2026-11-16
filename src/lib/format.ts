@@ -45,11 +45,18 @@ export function landName(code: string, locale: Locale): string | undefined {
   return tSchluessel(locale, `land.${code}`, code);
 }
 
-/** Rennen-Kürzel: [Slalom, Slalom] -> «2× SL», [Riesenslalom, Slalom] -> «RS, SL», finale -> «Finale» */
+/**
+ * Rennen-Kürzel: [Slalom, Slalom] -> «2× SL», [Riesenslalom, Slalom] -> «RS, SL»,
+ * finale ohne Disziplinen -> «Finale», finale mit Disziplinen -> «RS, SL · Finale»
+ */
 export function rennenKuerzel(disziplinen: string[], finale: boolean, locale: Locale): string {
-  if (finale) return t(locale, 'rennen.finale');
   const kurz = (d: string) => tSchluessel(locale, `disziplin_kurz.${d}`, d);
   const verschiedene = [...new Set(disziplinen)];
-  if (verschiedene.length === 1 && disziplinen.length > 1) return `${disziplinen.length}× ${kurz(verschiedene[0])}`;
-  return disziplinen.map(kurz).join(', ');
+  const liste =
+    verschiedene.length === 1 && disziplinen.length > 1
+      ? `${disziplinen.length}× ${kurz(verschiedene[0])}`
+      : disziplinen.map(kurz).join(', ');
+  if (!finale) return liste;
+  const finaleText = t(locale, 'rennen.finale');
+  return liste ? `${liste} · ${finaleText}` : finaleText;
 }

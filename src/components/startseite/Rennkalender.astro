@@ -1,7 +1,8 @@
 ---
 /**
- * Rennkalender: Weltcup und Europacup getrennt, je die ersten zwei Rennen sichtbar,
- * der Rest aufklappbar (details/summary, ohne JavaScript).
+ * Rennkalender: Weltcup und Europacup getrennt. Oben je ein kompakter Block «Saison bisher»
+ * mit den gefahrenen Rennen (Rennen mit Resultat), darunter die kommenden Rennen:
+ * die ersten zwei sichtbar, der Rest aufklappbar (details/summary, ohne JavaScript).
  * Daten aus src/content/rennen, Texte aus src/content/texte/<sprache>/rennkalender.md.
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -23,23 +24,32 @@ const rennen = (await getCollection('rennen', (r) => !r.data.beispiel)).sort(
   (a, b) => a.data.datum.getTime() - b.data.datum.getTime(),
 );
 
+type Rennen = CollectionEntry<'rennen'>;
+/** Ein Rennen mit Resultat gilt als gefahren */
+const istGefahren = (r: Rennen) => Boolean(r.data.resultat_link);
+
 const gruppen = (['Weltcup', 'Europacup'] as const).map((stufe, i) => {
   const liste = rennen.filter((r) => r.data.stufe === stufe);
+  const kommend = liste.filter((r) => !istGefahren(r));
   return {
     stufe,
     titel: tSchluessel(locale, `stufe.${stufe}`, stufe),
     farbe: i === 0 ? ('rosa' as const) : ('beere' as const),
-    sichtbar: liste.slice(0, SICHTBAR),
-    weitere: liste.slice(SICHTBAR),
+    gefahren: liste.filter(istGefahren),
+    sichtbar: kommend.slice(0, SICHTBAR),
+    weitere: kommend.slice(SICHTBAR),
   };
 });
 
-type Rennen = CollectionEntry<'rennen'>;
 const zeile = (r: Rennen) => ({
   datum: datumsbereich(r.data.datum, r.data.datum_bis),
   ort: r.data.ort,
   land: landName(r.data.land, locale),
-  hinweis: r.data.hinweis ? tSchluessel(locale, `rennen.hinweis.${r.data.hinweis}`, '') : undefined,
+  /** Bei gefahrenen Rennen kein Hinweis: das Resultat sagt es */
+  hinweis:
+    r.data.hinweis && !istGefahren(r) ? tSchluessel(locale, `rennen.hinweis.${r.data.hinweis}`, '') : undefined,
+  resultat: locale === 'fr' ? r.data.resultat_fr : r.data.resultat_de,
+  resultatLink: r.data.resultat_link,
   kuerzel: rennenKuerzel(r.data.disziplinen, r.data.finale, locale),
   abgesagt: r.data.status === 'abgesagt',
   /** Link auf die FIS-Event-Seite, nur wenn eine echte Adresse eingetragen ist (kein Platzhalter) */
@@ -72,6 +82,30 @@ const zeile = (r: Rennen) => ({
                 <Torflagge farbe={g.farbe} breite={12} hoehe={28} />
                 {g.titel}
               </h3>
+              {g.gefahren.length > 0 && (
+                <div class="bisher">
+                  <h4 class="bisher__titel t-label">{t(locale, 'rennen.saison_bisher')}</h4>
+                  <ol role="list" class="bisher__liste">
+                    {g.gefahren.map((r) => {
+                      const z = zeile(r);
+                      return (
+                        <li class="bisher-zeile">
+                          <span class="bisher-zeile__datum">{z.datum}</span>
+                          <span class="bisher-zeile__ort">
+                            {z.ort} <span class="bisher-zeile__kuerzel">{z.kuerzel}</span>
+                          </span>
+                          <a class="bisher-zeile__resultat" href={z.resultatLink} target="_blank" rel="noopener">
+                            {z.resultat}
+                            <span class="visually-hidden">
+                              {' '}– {t(locale, 'rennen.resultat_link')} {t(locale, 'link.neues_fenster')}
+                            </span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+              )}
               <ol role="list" class="rennliste">
                 {g.sichtbar.map((r) => {
                   const z = zeile(r);
@@ -186,6 +220,57 @@ const zeile = (r: Rennen) => ({
     text-transform: uppercase;
   }
 
+  /* Saison bisher: kompakt und zurückhaltender als die kommenden Rennen (tinte-soft auf hauch 6.7:1, beere auf hauch 6.8:1) */
+  .bisher {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  .bisher__titel {
+    color: var(--color-tinte-soft);
+  }
+
+  .bisher-zeile {
+    display: grid;
+    grid-template-columns: var(--mass-150) minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: var(--space-4) var(--space-20);
+    padding-block: var(--space-8);
+    border-top: var(--linie-1) solid var(--color-linie-soft);
+    font-size: var(--size-15);
+    color: var(--color-tinte-soft);
+  }
+
+  .bisher-zeile__datum {
+    font-family: var(--font-display);
+    font-weight: var(--weight-600);
+  }
+
+  .bisher-zeile__ort {
+    font-family: var(--font-display);
+    font-weight: var(--weight-600);
+    text-transform: uppercase;
+  }
+
+  .bisher-zeile__kuerzel {
+    margin-left: var(--space-6);
+    font-weight: var(--weight-500);
+  }
+
+  .bisher-zeile__resultat {
+    justify-self: end;
+    text-align: right;
+    color: var(--color-beere);
+    font-weight: var(--weight-500);
+  }
+
+  .bisher-zeile__resultat:hover,
+  .bisher-zeile__resultat:focus-visible {
+    color: var(--color-aubergine);
+  }
+
   .rennliste {
     border-bottom: var(--linie-1) solid var(--color-linie-soft);
   }
@@ -268,6 +353,16 @@ const zeile = (r: Rennen) => ({
 
     .renn-zeile__datum {
       grid-column: 1 / -1;
+    }
+
+    .bisher-zeile {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .bisher-zeile__resultat {
+      grid-column: 1 / -1;
+      justify-self: start;
+      text-align: left;
     }
   }
 
