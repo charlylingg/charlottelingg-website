@@ -2,6 +2,7 @@
 /**
  * Blog: Vorschau der Beiträge. Jeder veröffentlichte Beitrag hat eine eigene Seite /blog/<slug>.
  * Beiträge mit Status «folgt» erscheinen nur als Vorschau mit «Beitrag folgt».
+ * Die Startseite zeigt höchstens BLOG_VORSCHAU_MAX Karten (wie im Design), die neuesten zuerst (reihenfolge).
  */
 import Torflagge from '../Torflagge.astro';
 import Bildplatzhalter from '../Bildplatzhalter.astro';
@@ -17,9 +18,10 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const BLOG_VORSCHAU_MAX = 3;
 const text = await getText(locale, 'blog');
 const beitraege = await Promise.all(
-  (await getBlog(locale)).map(async (b) => {
+  (await getBlog(locale)).slice(0, BLOG_VORSCHAU_MAX).map(async (b) => {
     const datum = blogDatum(b.data.datum, b.lang);
     const ortUndDatum = [b.data.ort, datum].filter(Boolean).join(', ');
     return {
