@@ -1,7 +1,7 @@
 # Blogbeitrag «Erstes Slalomrennen, erste Punkte» (Querformat 16:10): Vorschaukarte und Beitragsseite, DE und FR.
 # Weltcup-Slalom Levi, 14.11.2026, Startnummer 56. Geliefert von Michel Gurnari am 19.11.2026.
-# Bildnachweis «Foto: FIS» (Angabe Michel Gurnari, 19.11.2026). Lizenz noch offen (siehe LIZENZEN.md).
-# Solange lizenz_geklaert: false, erscheint das Bild nur in der Vorschau mit Entwürfen, sonst der Platzhalter.
+# Bildnachweis «Foto: FIS». Lizenz geklärt: Athletinnen und Athleten dürfen Bilder der FIS verwenden,
+# bestätigt durch Michel Gurnari am 19.11.2026 (siehe LIZENZEN.md).
 datei: /bilder/blog-erstes-slalomrennen.webp
 fallback: /bilder/blog-erstes-slalomrennen.jpg
 breite: 1600
@@ -9,6 +9,6 @@ hoehe: 1000
 alt_de: "Charlotte Lingg mit Startnummer 56 zwischen den Slalomstangen beim Weltcup in Levi"
 alt_fr: "Charlotte Lingg avec le dossard 56 entre les piquets de slalom lors de la Coupe du monde de Levi"
 fotograf: "FIS"
-lizenz_geklaert: false
+lizenz_geklaert: true
 # Bild bereits auf 16:10 zugeschnitten: Charlotte, Helm (LGT) und Startnummer ganz sichtbar
 ausschnitt: "50% 50%"

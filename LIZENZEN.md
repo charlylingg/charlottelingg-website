@@ -6,6 +6,7 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 > - Das imago-Bild **Weltcup Lech 2021** darf **nie** verwendet werden.
 > - Shooting **Stefanie Frei**: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026 (siehe Fotos). Bildnachweis am Bild.
 > - Fotos **Marco Büchel** (Sölden, 23.10.2026): Lizenz geklärt, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild.
+> - Bilder der **FIS**: Athletinnen und Athleten dürfen sie verwenden, bestätigt durch Michel Gurnari am 19.11.2026. Bildnachweis «Foto: FIS».
 
 ## Fotos
 
@@ -17,7 +18,7 @@ Jedes Bild, Logo und jede fremde Datei auf der Website braucht hier einen Eintra
 | `public/bilder/blog-zurueck-im-weltcup.webp`, `public/bilder/blog-zurueck-im-weltcup.jpg` | Stefanie Frei | Stefanie Frei: Nutzungsrechte für die Website erteilt, bestätigt am 10.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup», Aufnahme 28.10.2024. Derzeit nicht im Einsatz (ersetzt durch das Bild von Marco Büchel; Fallback, solange Lizenz Büchel offen). Eintrag `src/content/bilder/blog-zurueck-im-weltcup.yaml` mit `lizenz_geklaert: true`. |
 | `public/bilder/portrait-charlotte-lingg-soelden.webp`, `public/bilder/portrait-charlotte-lingg-soelden.jpg` | Marco Büchel | Lizenz geklärt, Fotograf Marco Büchel, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild. | – | Sektion 01 Portrait, Training Sölden, Aufnahme 23.10.2026. Eintrag `src/content/bilder/portrait-charlotte-lingg-soelden.yaml` mit `lizenz_geklaert: true`. |
 | `public/bilder/blog-zurueck-im-weltcup-soelden.webp`, `public/bilder/blog-zurueck-im-weltcup-soelden.jpg` | Marco Büchel | Lizenz geklärt, Fotograf Marco Büchel, bestätigt durch Michel Gurnari am 13.11.2026. Bildnachweis am Bild. | – | Blog «Zurück im Weltcup» (Vorschau und Beitragsseite, DE und FR), Sölden, Aufnahme 23.10.2026. Eintrag `src/content/bilder/blog-zurueck-im-weltcup-soelden.yaml` mit `lizenz_geklaert: true`. |
-| `public/bilder/blog-erstes-slalomrennen.webp`, `public/bilder/blog-erstes-slalomrennen.jpg` | FIS | **offen**: Quelle FIS (Angabe Michel Gurnari, 19.11.2026), Nutzungsrecht für die Website noch nicht bestätigt | – | Blog «Erstes Slalomrennen, erste Punkte» (Vorschau und Beitragsseite, DE und FR), Weltcup-Slalom Levi, 14.11.2026. Eintrag `src/content/bilder/blog-erstes-slalomrennen-erste-punkte.yaml` mit `lizenz_geklaert: false`: nur in der Vorschau mit Entwürfen sichtbar. |
+| `public/bilder/blog-erstes-slalomrennen.webp`, `public/bilder/blog-erstes-slalomrennen.jpg` | FIS | Lizenz geklärt: Athletinnen und Athleten dürfen Bilder der FIS verwenden, bestätigt durch Michel Gurnari am 19.11.2026. Bildnachweis am Bild. | – | Blog «Erstes Slalomrennen, erste Punkte» (Vorschau und Beitragsseite, DE und FR), Weltcup-Slalom Levi, 14.11.2026. Eintrag `src/content/bilder/blog-erstes-slalomrennen-erste-punkte.yaml` mit `lizenz_geklaert: true`. |
 
 Bilder mit `lizenz_geklaert: false` (in `src/content/bilder/`) werden nur in einem Build mit `PUBLIC_SHOW_ENTWUERFE=true` gezeigt. Sonst bleibt der Platzhalter, und die Datei wird nicht ausgeliefert. Sobald der Fotograf die Nutzung bestätigt: hier Lizenz und Datum eintragen und `lizenz_geklaert: true` setzen.
 
